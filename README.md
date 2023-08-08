@@ -7,8 +7,10 @@
 
 
 <p align="center">
-   <a href="https://chat.xlang.ai" target="_blank">🤖️ Online Demo </a> |
-   <a href="https://xlang.ai" target="_blank">🧪 XLang Lab </a>
+   <a href="https://chat.xlang.ai" target="_blank">🥑 Online Demo </a> |
+   <a href="https://xlang.ai" target="_blank">🧪 XLang Lab </a> |
+   <a href="https://docs.xlang.ai" target="_blank">📖 User Manual </a> |
+   <a href="https://docs.xlang.ai/category/use-cases" target="_blank">🎞 Use Cases </a>
 </p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
