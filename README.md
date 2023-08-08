@@ -17,14 +17,13 @@
 
 ## 🔥 News:
 - **[2023, Aug 8]** We've released our online demo [XLang Agents](https://chat.xlang.ai), which supports 3 different LLM-powered agents & integrates 4 LLMs, and is free to use! Check [tutorials](https://docs.xlang.ai/category/user-manual) and [use cases](https://docs.xlang.ai/category/use-cases)!
----
+
 
 ## 💻 Open-sourcing:
 
 We are pushing forward to make our framework fully open-sourced. Please stay tuned! 🚀🚀
 
 
---- 
 ## 🥑 XLang Agents:
 
 We built three real-world agents with chat-based web-UI (check [XLang Agents demo](https://chat.xlang.ai)). Here is a brief overview of our XLang Agents framework. You can find more details about concepts & designs in our [documentation](https://docs.xlang.ai). 
@@ -45,14 +44,13 @@ Web Agent harnesses the power of a chrome extension to navigate and explore webs
 <img src="pics/web_agent.png" width=512/>
 
 
----
 
 ## 📖 Documentation:
 
 Please check [here](https://docs.xlang.ai) for full documentation, which will be updated to stay in pace with the demo changes and the code release.
 
 
----
+
 ## 👏 Contributing:
 
 We hope Executable Language Grounding, i.e., XLang, can thus serve as a bridge, transforming natural language instructions into code or actions executable within real-world environments.
