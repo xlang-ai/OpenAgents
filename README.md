@@ -16,12 +16,34 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/XLangAI)](https://twitter.com/XLangAI)
 
 ## 🔥 News:
-- **[2023, Aug 8]** We've released our online demo [XLang Agents](https://chat.xlang.ai), which supports 3 different LLM-powered agents & integrates 4 LLMs, and is free to use!
+- **[2023, Aug 8]** We've released our online demo [XLang Agents](https://chat.xlang.ai), which supports 3 different LLM-powered agents & integrates 4 LLMs, and is free to use! Check [tutorials](https://docs.xlang.ai/category/user-manual) and [use cases](https://docs.xlang.ai/category/use-cases)!
 ---
 
 ## 💻 Open-sourcing:
 
 We are pushing forward to make our framework fully open-sourced. Please stay tuned! 🚀🚀
+
+
+--- 
+## 🥑 XLang Agents:
+
+We built three real-world agents with chat-based web-UI (check [XLang Agents demo](https://chat.xlang.ai)). Here is a brief overview of our XLang Agents framework. You can find more details about concepts & designs in our [documentation](https://docs.xlang.ai). 
+### Data Agent
+Data Agent is equipped with data-related tools, allowing it to efficiently search, handle and manipulate and visualize data. It is proficient in writing and executing code, enabling various data-related tasks.
+
+<img src="pics/data_agent.png" width=512/>
+
+### Plugins Agent
+Plugins Agent boasts integration with over 200 plugins from third-party sources. These plugins are carefully selected to cater to various aspects of your daily life scenarios. By leveraging these plugins, the agent can assist you with a wide range of tasks and activities.
+
+<img src="pics/plugins_agent.png" width=512/>
+
+
+### Web Agent
+Web Agent harnesses the power of a chrome extension to navigate and explore websites automatically. This agent streamlines the web browsing experience, making it easier for you to find relevant information, access desired resources, and so on.
+
+<img src="pics/web_agent.png" width=512/>
+
 
 ---
 
