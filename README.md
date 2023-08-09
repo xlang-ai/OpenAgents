@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="pics/xlang.png" width="70%">
+  <img src="pics/xlang.png" width="45%">
 </p>
 
 
@@ -15,7 +15,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Open Issues](https://img.shields.io/github/issues-raw/xlang-ai/xlang)](https://github.com/xlang-ai/xlang/issues)
-[![Twitter Follow](https://img.shields.io/twitter/follow/XLangAI)](https://twitter.com/XLangAI)
+[![Twitter Follow](https://img.shields.io/twitter/follow/XLangAILabs)](https://twitter.com/XLangAILabs)
 
 ## 🔥 News:
 - **[2023, Aug 8]** We've released our online demo [XLang Agents](https://chat.xlang.ai), which supports 3 different LLM-powered agents & integrates 4 LLMs, and is free to use! Check [tutorials](https://docs.xlang.ai/category/user-manual) and [use cases](https://docs.xlang.ai/category/use-cases)!
