@@ -24,8 +24,8 @@
    <a href="https://join.slack.com/t/xlanggroup/shared_invite/zt-20zb8hxas-eKSGJrbzHiPmrADCDX3_rQ" target="_blank">
       <img alt="Join Slack" src="https://img.shields.io/badge/Slack-join-blueviolet?logo=slack&amp" />
    </a>
-   <a href="https://discord.gg/sNURNAQs" target="_blank">
-      <img alt="Discord" src="https://dcbadge.vercel.app/api/server/sNURNAQs?compact=true&style=flat" />
+   <a href="https://discord.gg/qyEh479F" target="_blank">
+      <img alt="Discord" src="https://dcbadge.vercel.app/api/server/qyEh479F?compact=true&style=flat" />
    </a>
 <div align="center">
     <img src="pics/xlang_overview.png"/>
