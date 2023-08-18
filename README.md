@@ -15,6 +15,9 @@
  <a href="https://opensource.org/licenses/MIT" target="_blank">
       <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
    </a>
+   <a href="https://github.com/xlang-ai/xlang" target="_blank">
+      <img alt="Twitter Follow" src="https://img.shields.io/github/stars/xlang-ai/xlang?style=social" />
+   </a>
    <a href="https://github.com/xlang-ai/xlang/issues" target="_blank">
       <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/xlang-ai/xlang" />
    </a>
