@@ -1,0 +1,423 @@
+---
+openapi: 3.0.2
+info:
+  title: Xweather OpenAI Plugin
+  description: XWeather gives weather information for a location. Ask for the current
+    weather, a 5-day forecast, or a radar image.
+  version: 0.2.0
+paths:
+  "/weather/summary/{location}":
+    get:
+      summary: Weather Conditions
+      description: Get the current weather conditions, air quality, and active weather
+        alerts. Requires a user-provided location.
+      operationId: get_summary_weather_summary__location__get
+      parameters:
+      - description: A Valid AerisWeather API Location. The location may be a 'city
+          name, state', 'city name, country', 'latitude, longitude', 'zip code', or
+          'airport code'
+        required: true
+        schema:
+          title: Location
+          type: string
+          description: A Valid AerisWeather API Location. The location may be a 'city
+            name, state', 'city name, country', 'latitude, longitude', 'zip code',
+            or 'airport code'
+        name: location
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/WeatherConditionsOutput"
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/NotFoundError"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/weather/forecast/{location}":
+    get:
+      summary: Weather Forecast for the next 4 days
+      description: Get the weather forecast, including warnings, for the next 4 days.
+        Requires a user-provided location.
+      operationId: get_forecast_weather_forecast__location__get
+      parameters:
+      - description: The location must be a 'city name, state', 'city name, country',
+          'latitude, longitude', 'zip code', or 'airport code'
+        required: true
+        schema:
+          title: Location
+          type: string
+          description: The location must be a 'city name, state', 'city name, country',
+            'latitude, longitude', 'zip code', or 'airport code'
+        name: location
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/WeatherForecastsOutput"
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/NotFoundError"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/radar/{location}":
+    get:
+      summary: Precipitation Radar
+      description: Returns markdown for current weather radar image.  Requires a user-provided
+        location.
+      operationId: get_radar_radar__location__get
+      parameters:
+      - description: A Valid AerisWeather API Location. The location may be a 'city
+          name, state', 'city name, country', 'latitude, longitude', 'zip code', or
+          'airport code'
+        required: true
+        schema:
+          title: Location
+          type: string
+          description: A Valid AerisWeather API Location. The location may be a 'city
+            name, state', 'city name, country', 'latitude, longitude', 'zip code',
+            or 'airport code'
+        name: location
+        in: path
+      - description: A map zoom level between 0 and 15. The default is 7.
+        required: false
+        schema:
+          title: Zoom
+          type: integer
+          description: A map zoom level between 0 and 15. The default is 7.
+          default: 7
+        name: zoom
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/WeatherRadar"
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/NotFoundError"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/version":
+    get:
+      summary: Version
+      operationId: version_version_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  "/":
+    get:
+      summary: Heartbeat
+      operationId: heartbeat__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    NotFoundError:
+      title: NotFoundError
+      required:
+      - code
+      - detail
+      type: object
+      properties:
+        code:
+          title: Code
+          type: string
+        detail:
+          title: Detail
+          type: string
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    WeatherAlerts:
+      title: WeatherAlerts
+      required:
+      - name
+      - beginDateTime
+      - expireDateTIme
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          description: The name of the alert
+        beginDateTime:
+          title: Begindatetime
+          type: string
+          description: The date and time that the alert begins in ISO 8601 format
+        expireDateTIme:
+          title: Expiredatetime
+          type: string
+          description: The date and time that the alert expires in ISO 8601 format
+    WeatherConditions:
+      title: WeatherConditions
+      required:
+      - dateTimeISO
+      - tempC
+      - tempF
+      - feelsLikeC
+      - feelsLikeF
+      - windDir
+      - windSpeedMPH
+      - windSpeedKPH
+      - windGustMPH
+      - windGustKPH
+      - precipRateMM
+      - precipRateIN
+      - weather
+      - uvi
+      - aqi
+      - aqiCategory
+      - aqiDominantPollutant
+      type: object
+      properties:
+        dateTimeISO:
+          title: Datetimeiso
+          type: string
+          description: The date and time of the forecast in ISO 8601 format
+        tempC:
+          title: Tempc
+          type: number
+          description: The temperature in degrees Celsius
+        tempF:
+          title: Tempf
+          type: number
+          description: The temperature in degrees Fahrenheit
+        feelsLikeC:
+          title: Feelslikec
+          type: number
+          description: The temperature that it feels like in degrees Celsius
+        feelsLikeF:
+          title: Feelslikef
+          type: number
+          description: The temperature that it feels like in degrees Fahrenheit
+        windDir:
+          title: Winddir
+          type: string
+          description: The direction of the wind in degrees
+        windSpeedMPH:
+          title: Windspeedmph
+          type: number
+          description: The wind speed in miles per hour
+        windSpeedKPH:
+          title: Windspeedkph
+          type: number
+          description: The wind speed in kilometers per hour
+        windGustMPH:
+          title: Windgustmph
+          type: number
+          description: The wind gust speed in miles per hour
+        windGustKPH:
+          title: Windgustkph
+          type: number
+          description: The wind gust speed in kilometers per hour
+        precipRateMM:
+          title: Precipratemm
+          type: number
+          description: The precipitation rate in millimeters per hour
+        precipRateIN:
+          title: Precipratein
+          type: number
+          description: The precipitation rate in inches per hour
+        weather:
+          title: Weather
+          type: string
+          description: The weather conditions
+        uvi:
+          title: Uvi
+          type: integer
+          description: The UV index
+        aqi:
+          title: Aqi
+          type: integer
+          description: The Air Quality index
+        aqiCategory:
+          title: Aqicategory
+          type: string
+          description: The Air Quality index AirNow Category
+        aqiDominantPollutant:
+          title: Aqidominantpollutant
+          type: string
+          description: The Air Quality index primary pollutant
+    WeatherConditionsOutput:
+      title: WeatherConditionsOutput
+      required:
+      - alerts
+      - conditions
+      type: object
+      properties:
+        alerts:
+          title: Alerts
+          type: array
+          items:
+            "$ref": "#/components/schemas/WeatherAlerts"
+          description: A list of active weather warnings, watches and advisories.
+        conditions:
+          title: Conditions
+          allOf:
+          - "$ref": "#/components/schemas/WeatherConditions"
+          description: The current weather conditions
+    WeatherForecast:
+      title: WeatherForecast
+      required:
+      - dateTimeISO
+      - maxTempC
+      - maxTempF
+      - minTempC
+      - minTempF
+      - windDir
+      - windSpeedKPH
+      - windSpeedMPH
+      - precipMM
+      - precipIN
+      - snowCM
+      - snowIN
+      - weather
+      - uvi
+      type: object
+      properties:
+        dateTimeISO:
+          title: Datetimeiso
+          type: string
+          description: The date and time of the forecast in ISO 8601 format
+        maxTempC:
+          title: Maxtempc
+          type: integer
+          description: The maximum temperature in degrees Celsius
+        maxTempF:
+          title: Maxtempf
+          type: integer
+          description: The maximum temperature in degrees Fahrenheit
+        minTempC:
+          title: Mintempc
+          type: integer
+          description: The minimum temperature in degrees Celsius
+        minTempF:
+          title: Mintempf
+          type: integer
+          description: The minimum temperature in degrees Fahrenheit
+        windDir:
+          title: Winddir
+          type: string
+          description: The direction of the wind in degrees
+        windSpeedKPH:
+          title: Windspeedkph
+          type: integer
+          description: The wind speed in kilometers per hour
+        windSpeedMPH:
+          title: Windspeedmph
+          type: integer
+          description: The wind speed in miles per hour
+        precipMM:
+          title: Precipmm
+          type: number
+          description: The amount of precipitation in millimeters
+        precipIN:
+          title: Precipin
+          type: number
+          description: The amount of precipitation in inches
+        snowCM:
+          title: Snowcm
+          type: number
+          description: The amount of snow in centimeters
+        snowIN:
+          title: Snowin
+          type: number
+          description: The amount of snow in inches
+        weather:
+          title: Weather
+          type: string
+          description: The weather conditions
+        uvi:
+          title: Uvi
+          type: integer
+          description: The UV index
+    WeatherForecastsOutput:
+      title: WeatherForecastsOutput
+      required:
+      - forecasts
+      type: object
+      properties:
+        forecasts:
+          title: Forecasts
+          type: array
+          items:
+            "$ref": "#/components/schemas/WeatherForecast"
+    WeatherRadar:
+      title: WeatherRadar
+      required:
+      - radar
+      - zoom
+      type: object
+      properties:
+        radar:
+          title: Radar
+          type: string
+          description: The URL of the radar image
+        zoom:
+          title: Zoom
+          type: integer
+          description: The map zoom level of the radar image

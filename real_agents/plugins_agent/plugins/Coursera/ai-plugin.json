@@ -1,0 +1,34 @@
+{
+    "id": "plugin-398dee1f-c5e0-4146-ad34-b3f641c689ad",
+    "domain": "coursera.org",
+    "namespace": "Coursera",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Coursera",
+        "name_for_human": "Coursera",
+        "description_for_model": "Find recommendation for courses, specializations, and degrees on Coursera.",
+        "description_for_human": "Find recommendation for courses, specializations, and degrees on Coursera.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://www.coursera.org/api/rest/v1/search/openapi.yaml"
+        },
+        "logo_url": "http://www.coursera.org/api/rest/v1/search/logo.png",
+        "contact_email": "legal@coursera.org",
+        "legal_info_url": "http://coursera.org/about/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

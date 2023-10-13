@@ -1,0 +1,276 @@
+---
+openapi: 3.0.2
+info:
+  title: Show Me
+  version: 0.1.0
+  description: Create and edit diagrams directly in chat.
+paths:
+  "/render":
+    get:
+      operationId: get__MermaidRoute
+      tags:
+      - Diagram
+      summary: Taking a diagram, renders it and returns a link to the rendered image.
+        Always request the diagram guidelines endpoint before requesting this endpoint
+      parameters:
+      - required: false
+        schema:
+          type: string
+          description: Version of the OpenAPI schema
+          default: '1.0'
+          enum:
+          - '1.0'
+        name: openApiSchemaVersion
+        in: query
+      - required: false
+        schema:
+          type: string
+          description: Language of the diagram
+          default: mermaid
+          enum:
+          - blockdiag
+          - bpmn
+          - bytefield
+          - seqdiag
+          - actdiag
+          - nwdiag
+          - packetdiag
+          - rackdiag
+          - c4-with-plantuml
+          - d2
+          - dbml
+          - ditaa
+          - erd
+          - excalidraw
+          - graphviz
+          - mermaid
+          - nomnoml
+          - pikchr
+          - plantuml
+          - structurizr
+          - svgbob
+          - umlet
+          - vega
+          - vegalite
+          - wavedrom
+          - wireviz
+        name: diagramLanguage
+        in: query
+      - required: false
+        schema:
+          type: string
+          description: Type of the diagram
+          default: graph
+          enum:
+          - sequence
+          - use-case
+          - class
+          - object
+          - activity
+          - component
+          - deployment
+          - state
+          - timing
+          - graph
+          - entity-relationship
+          - user-journey
+          - gantt
+          - pie-chart
+          - requirement
+          - gitgraph
+          - mindmap
+          - timeline
+          - block
+          - network
+          - json
+          - yaml
+          - salt-wireframe
+          - rack
+          - grid
+          - dbml
+          - ascii
+          - digital-timing
+          - line-chart
+          - bar-chart
+          - histogram
+        name: diagramType
+        in: query
+      - required: false
+        schema:
+          type: string
+          description: Topic of the diagram
+          example: Software
+        name: topic
+        in: query
+      - required: false
+        schema:
+          type: string
+          description: Theme for d2 diagram
+          example: neutral-grey_sketch
+        name: d2Theme
+        in: query
+      - required: false
+        schema:
+          type: string
+          description: Diagram to render. Avoid using a multiline string, instead
+            use explicit newline characters.
+          example: graph TB\n  U[\"User\"] -- \"File Operations\" --> FO[\"File Operations\"]\n  U
+            -- \"Code Editor\" --> CE[\"Code Editor\"]\n  FO -- \"Manipulation of
+            Files\" --> FS[\"FileSystem\"]\n  FS -- \"Write/Read\" --> D[\"Disk\"]\n  FS
+            -- \"Compress/Decompress\" --> ZL[\"ZipLib\"]\n  FS -- \"Read\" --> IP[\"INIParser\"]\n  CE
+            -- \"Create/Display/Edit\" --> WV[\"Webview\"]\n  CE -- \"Language/Code
+            Analysis\" --> VCA[\"VSCodeAPI\"]\n  VCA -- \"Talks to\" --> VE[\"ValidationEngine\"]\n  WV
+            -- \"Render UI\" --> HC[\"HTMLCSS\"]\n  VE -- \"Decorate Errors\" -->
+            ED[\"ErrorDecoration\"]\n  VE -- \"Analyze Document\" --> TD[\"TextDocument\"]\n
+        name: diagram
+        in: query
+      - required: false
+        schema:
+          type: string
+          description: Legacy parameter. Only use if you don't now how to use the
+            diagram parameter (its not in your plugin prompt)
+          example: graph TB\n  U -> B
+        name: mermaid
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        image:
+                          type: string
+                          description: URL to the rendered image
+                        errorMessage:
+                          type: string
+                          description: Error message if there was an error
+                        editDiagramOnline:
+                          type: string
+                          description: URL to the editor where the diagram can be
+                            edited
+                        contributeToOpenSourceProject:
+                          type: string
+                          description: GitHub URL to the open source project for this
+                            project
+                      required:
+                      - contributeToOpenSourceProject
+                required:
+                - results
+  "/diagram-guidelines":
+    get:
+      operationId: get_DiagramGuidelinesRoute
+      tags:
+      - Diagram Guidelines
+      - Diagram Themes
+      summary: Diagram guidelines and themes to help rendering more effective diagrams
+      parameters:
+      - required: true
+        schema:
+          type: string
+          description: Guidelines and syntax for a type of diagram
+          enum:
+          - mermaid_graph
+          - mermaid_sequence
+          - mermaid_class
+          - mermaid_state
+          - mermaid_entity-relationship
+          - mermaid_user-journey
+          - mermaid_gantt
+          - mermaid_pie-chart
+          - mermaid_requirement
+          - mermaid_gitgraph
+          - mermaid_mindmap
+          - mermaid_timeline
+          - plantuml_sequence
+          - plantuml_use-case
+          - plantuml_class
+          - plantuml_object
+          - plantuml_activity
+          - plantuml_component
+          - plantuml_deployment
+          - plantuml_state
+          - plantuml_timing
+          - plantuml_entity-relationship
+          - plantuml_gantt
+          - plantuml_mindmap
+          - plantuml_network
+          - plantuml_json
+          - plantuml_yaml
+          - plantuml_salt-wireframe
+          - d2_sequence
+          - d2_class
+          - d2_graph
+          - d2_entity-relationship
+          - d2_grid
+          - nomnoml_class
+          - nomnoml_activity
+          - nomnoml_graph
+          - nomnoml_entity-relationship
+          - graphviz_graph
+          - graphviz_entity-relationship
+          - graphviz_mindmap
+          - actdiag_activity
+          - blockdiag_block
+          - nwdiag_network
+          - rackdiag_rack
+          - dbml_dbml
+          - erd_entity-relationship
+          - ditaa_ascii
+          - svgbob_ascii
+          - wavedrom_digital-timing
+          - vegalite_bar-chart
+          - vegalite_histogram
+          - vegalite_line-chart
+          - vegalite_pie-chart
+        name: diagramGuidelines
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  diagramGuidelines:
+                    type: string
+                    description: The requested diagram guidelines. Make sure to follow
+                      the guidelines before rendering a diagram
+                  diagramThemes:
+                    type: string
+                    description: Diagram themes to change the style of the diagram.
+                      The themes are specific to the diagram language. Don't render
+                      a diagram using a theme unless the user asks for it
+                  additionalInstructions:
+                    type: string
+                    description: Additional instructions to help rendering the diagram
+  "/show-carousel":
+    get:
+      operationId: get_ShowCarouselRoute
+      summary: show the carousel of diagram images
+      parameters:
+      - required: true
+        schema:
+          type: string
+          enum:
+          - 'yes'
+        name: showCarousel
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  showCarousel:
+                    type: string
+                    description: Show carousel, do not use this information

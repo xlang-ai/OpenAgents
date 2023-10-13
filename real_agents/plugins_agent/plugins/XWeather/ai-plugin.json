@@ -1,0 +1,34 @@
+{
+    "id": "plugin-b5dab58c-ac27-4154-a0b5-c134eea6ddd4",
+    "domain": "openai-plugin.xweather.com",
+    "namespace": "XWeather",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "XWeather",
+        "name_for_human": "Xweather",
+        "description_for_model": "This API provides the endpoints, /version, /weather/summary/{location}, /weather/forecast/{location}, and /radar/{location}. {location} is required and must be user specified - ask the user for a location if they haven't specified one.\nValid location formats include 'city name, state', 'city name, country','latitude, longitude', 'zip code', or 'airport code'. Never provide a default location of New York.\nOutput local units: If the user specified location is in the United States, show only fahrenheit, inches and MPH. If the location is in the UK, show only celsius, mm, and MPH. If the location is in any other country, use celsius, mm, and KPH. Do not show units in other formats unless requested by the user.\n\n /weather/summary/{location} returns the current weather for the user specified location\n\nThe reply for /weather/summary is the current weather, including the following information: date, temperature, what the temperature feels like to a person (feelsLike), wind direction, wind speed, maximum gust wind speed, precipitation, snow, weather conditions, active weather alerts, and UV index. If the user hasn't specified an output format, return the data as in the style of a newspaper weather report.\n  /weather/forecast/{location} returns the next 4 days of weather forecasts for the user specified location\n  The reply for /weather/forecast includes the following information: date, maximum temperature, minimum temperature, wind direction, wind speed, precipitation, snow, weather conditions, warnings, and UV index. If the user asks for more than 4 days, return the next 4 days with a message showing that's all that's available. By default, return 4 days of weather forecast in the style of a newspaper weather forecast.\n\n/radar/{location} returns a weather radar image, as markdown, for the user specified location. Provide the image in Markdown format so the user can see it. Do not add links, only images.",
+        "description_for_human": "XWeather gives weather information for a location.  Ask for the current weather, a 5-day forecast, or a radar image.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://openai-plugin.xweather.com/openapi.json"
+        },
+        "logo_url": "https://openai-plugin.xweather.com/logo.svg",
+        "contact_email": "support@aerisweather.com",
+        "legal_info_url": "https://xweather.com/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

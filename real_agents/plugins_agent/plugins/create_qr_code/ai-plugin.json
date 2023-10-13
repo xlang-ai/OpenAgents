@@ -1,0 +1,34 @@
+{
+    "id": "plugin-eb92808d-d625-45d8-ab43-f083e4d5d512",
+    "domain": "create-qr-code.modelxy.com",
+    "namespace": "create_qr_code",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "create_qr_code",
+        "name_for_human": "Create a QR code",
+        "description_for_model": "Create a QR Code For Any Text or url.",
+        "description_for_human": "Create a QR code for any text or url.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://create-qr-code.modelxy.com/openapi.yaml"
+        },
+        "logo_url": "https://create-qr-code.modelxy.com/qr-logo.png",
+        "contact_email": "hi@michaelerasm.us",
+        "legal_info_url": "https://create-qr-code.modelxy.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

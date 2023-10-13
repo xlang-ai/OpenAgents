@@ -1,0 +1,352 @@
+---
+openapi: 3.0.2
+info:
+  title: Zapier Natural Language Actions (NLA) API (Dynamic) - Beta
+  version: 1.0.0
+  description: 'Zapier can talk to any of 20k+ actions the user has exposed. Actions are single tasks (EG: add a lead, find a doc), Zaps are workflows of actions. Start new chat to refresh actions. Markdown links are relative to https://zapier.com/.'
+servers:
+- url: https://nla.zapier.com
+paths:
+  "/api/v1/search/actions/":
+    get:
+      operationId: search_all_actions
+      summary: List Directory Actions
+      parameters:
+      - in: query
+        name: query
+        schema:
+          title: Query
+          type: string
+        required: false
+      - in: query
+        name: include_exposed
+        schema:
+          title: Include Exposed
+          default: false
+          type: boolean
+        required: false
+      - in: query
+        name: count
+        schema:
+          title: Count
+          default: 10
+          type: integer
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GenericResults_ActionSchema_"
+      description: |-
+        Search through all actions Zapier supports, even if they are not exposed.
+
+        Because new actions may have been added by the user, you should call this
+        endpoint with `include_exposed=true` to get the latest list of exposed actions.
+      security:
+      - SessionAuth: []
+      - AccessPointApiKeyHeader: []
+      - AccessPointApiKeyQuery: []
+      - AccessPointOAuth: []
+  "/api/v1/preview-a-zap/":
+    post:
+      operationId: preview_a_zap
+      summary: Preview A Zap
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GenericResult_dict_"
+      description: "(Beta!) Given a natural language description of a multistep Zap,
+        return a possible definition of the Zap."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PreviewAZapSchema"
+        required: true
+      security:
+      - SessionAuth: []
+      - AccessPointApiKeyHeader: []
+      - AccessPointApiKeyQuery: []
+      - AccessPointOAuth: []
+  "/api/v1/configuration-link/":
+    get:
+      operationId: get_configuration_link
+      summary: Get Configuration Link
+      parameters: []
+      responses:
+        '200':
+          description: OK
+      description: Provides a link to configure more actions. Alternatively, searching
+        through apps and actions will provide more specific configuration links.
+      security:
+      - SessionAuth: []
+      - AccessPointApiKeyHeader: []
+      - AccessPointApiKeyQuery: []
+      - AccessPointOAuth: []
+  "/api/v1/exposed/":
+    get:
+      operationId: list_exposed_actions
+      summary: List Exposed Actions
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ExposedActionResponseSchema"
+      description: List all the currently exposed actions for the given account.
+      security:
+      - SessionAuth: []
+      - AccessPointApiKeyHeader: []
+      - AccessPointApiKeyQuery: []
+      - AccessPointOAuth: []
+  "/api/v1/execution-log/{execution_log_id}/":
+    get:
+      operationId: get_execution_log_endpoint
+      summary: Get Execution Log Endpoint
+      parameters:
+      - in: path
+        name: execution_log_id
+        schema:
+          type: string
+          description: An example could be '01ARZ3NDEKTSV4RRFFQ69G5FAV'. It should be a string consisting of 26 alphanumeric characters.
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ExecuteResponse"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+      description: Get the execution log for a given execution log id.
+      security:
+      - SessionAuth: []
+      - AccessPointApiKeyHeader: []
+      - AccessPointApiKeyQuery: []
+      - AccessPointOAuth: []
+components:
+  schemas:
+    AppSchema:
+      title: AppSchema
+      type: object
+      properties:
+        selected_api:
+          title: Selected Api
+          type: string
+        name:
+          title: Name
+          type: string
+        logo_url:
+          title: Logo Url
+          type: string
+      required:
+      - selected_api
+      - name
+      - logo_url
+    ActionSchema:
+      title: ActionSchema
+      type: object
+      properties:
+        key:
+          title: Key
+          type: string
+        type:
+          title: Type
+          type: string
+        name:
+          title: Name
+          type: string
+        app:
+          "$ref": "#/components/schemas/AppSchema"
+        configuration_link:
+          title: Configuration Link
+          description: URL to configure and expose this action.
+          type: string
+        score:
+          title: Score
+          description: Score of this action for the given query.
+          type: number
+      required:
+      - key
+      - type
+      - name
+      - app
+      - score
+    GenericResults_ActionSchema_:
+      title: GenericResults[ActionSchema]
+      type: object
+      properties:
+        results:
+          title: Results
+          type: array
+          items:
+            "$ref": "#/components/schemas/ActionSchema"
+      required:
+      - results
+    GenericResult_dict_:
+      title: GenericResult[dict]
+      type: object
+      properties:
+        result:
+          title: Result
+          type: object
+      required:
+      - result
+    PreviewAZapSchema:
+      title: PreviewAZapSchema
+      type: object
+      properties:
+        description_of_zap:
+          title: Description Of Zap
+          description: 'A detailed description of the multi-step Zap the user wants
+            to make. Eg: ''When I get a Typeform response for ''Support Form'', create
+            a new row in my ''Inbound Support'' Google Sheet.'''
+          type: string
+      required:
+      - description_of_zap
+    ExposedActionSchema:
+      title: ExposedActionSchema
+      type: object
+      properties:
+        id:
+          title: Id
+          description: The unique ID of the exposed action.
+          type: string
+        operation_id:
+          title: Operation Id
+          description: The operation ID of the exposed action.
+          type: string
+        description:
+          title: Description
+          description: Description of the action.
+          type: string
+        params:
+          title: Params
+          description: Available hint fields for the action.
+          type: object
+      required:
+      - id
+      - operation_id
+      - description
+      - params
+    ExposedActionResponseSchema:
+      title: ExposedActionResponseSchema
+      type: object
+      properties:
+        results:
+          title: Results
+          type: array
+          items:
+            "$ref": "#/components/schemas/ExposedActionSchema"
+        configuration_link:
+          title: Configuration Link
+          description: URL to configure and expose more actions.
+          type: string
+      required:
+      - results
+      - configuration_link
+    ExecuteResponse:
+      title: ExecuteResponse
+      description: This is a summary of the results given the action that was executed.
+      type: object
+      properties:
+        id:
+          title: Id
+          description: The id of the execution log.
+          type: string
+        action_used:
+          title: Action Used
+          description: The name of the action that was executed.
+          type: string
+        input_params:
+          title: Input Params
+          description: The params we used / will use to execute the action.
+          type: object
+        review_url:
+          title: Review Url
+          description: The URL to run the action or review the AI choices the AI made
+            for input_params given instructions.
+          type: string
+        result:
+          title: Result
+          description: A trimmed down result of the first item of the full results.
+            Ideal for humans and language models!
+          type: object
+        additional_results:
+          title: Additional Results
+          description: The rest of the full results. Always returns an array of objects
+          type: array
+          items:
+            type: object
+        result_field_labels:
+          title: Result Field Labels
+          description: Human readable labels for some of the keys in the result.
+          type: object
+        status:
+          title: Status
+          description: The status of the execution.
+          default: success
+          enum:
+          - success
+          - error
+          - empty
+          - preview
+          type: string
+        error:
+          title: Error
+          description: The error message if the execution failed.
+          type: string
+        assistant_hint:
+          title: Assistant Hint
+          description: A hint for the assistant on what to do next.
+          type: string
+      required:
+      - id
+      - action_used
+      - input_params
+      - review_url
+      - additional_results
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      properties:
+        error:
+          title: Error
+          description: Error message.
+          type: string
+      required:
+      - error
+  securitySchemes:
+    SessionAuth:
+      type: apiKey
+      in: cookie
+      name: nlasession
+    AccessPointApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    AccessPointApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+    AccessPointOAuth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: "/oauth/authorize/"
+          tokenUrl: "/oauth/token/"
+          scopes:
+            nla:exposed_actions:execute: Execute exposed actions

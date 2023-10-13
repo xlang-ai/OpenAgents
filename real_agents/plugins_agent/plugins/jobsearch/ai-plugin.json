@@ -1,0 +1,34 @@
+{
+    "id": "plugin-e9bb3578-85dd-4041-b9a9-1c7f7cf30d89",
+    "domain": "jobsearch.vencio.de",
+    "namespace": "jobsearch",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "jobsearch",
+        "name_for_human": "Jobsearch",
+        "description_for_model": "Ask the user to describe the job the user is looking for. Give hints on how to search for a job.",
+        "description_for_human": "This is a job search service. For now only for jobs in Germany.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://jobsearch.vencio.de/openapi.yaml"
+        },
+        "logo_url": "https://jobsearch.vencio.de/logo.png",
+        "contact_email": "info@vencio.de",
+        "legal_info_url": "https://jobsearch.vencio.de/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

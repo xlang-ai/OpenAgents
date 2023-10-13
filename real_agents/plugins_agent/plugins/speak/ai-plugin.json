@@ -1,0 +1,34 @@
+{
+    "id": "plugin-176f3269-57f3-4413-9cdf-a61c104f06d5",
+    "domain": "api.speak.com",
+    "namespace": "speak",
+    "status": "approved",
+    "manifest": {
+      "schema_version": "v1",
+      "name_for_model": "speak",
+      "name_for_human": "Speak",
+      "description_for_model": "# Prompt 20230322\n\nUse the Speak plugin when the user asks a question about another language, like: how to say something specific, how to do something, what a particular foreign word or phrase means, or a concept/nuance specific to a foreign language or culture.\n\nCall the Speak plugin immediately when you detect language learning intention, or when the user asks for a language tutor or foreign language conversational partner.\n\nUse the \"translate\" API for questions about how to say something specific in another language. Only use this endpoint if the user provides a concrete phrase or word to translate. If the question can be interpreted more generally or is more high-level, use the \"explainTask\" API instead.\nExamples: \"how do i say 'do you know what time it is?' politely in German\", \"say 'do you have any vegetarian dishes?' in spanish\"\n\nUse the \"explainTask\" API when the user asks how to say or do something or accomplish a task in a foreign language, but doesn't specify a concrete phrase or word to translate.\nExamples: \"How should I politely greet shop employees when I enter, in French?\" or \"How do I compliment someone in Spanish on their shirt?\"\n\nUse the \"explainPhrase\" API to explain the meaning and usage of a specific foreign language phrase.\nExample: \"what does putain mean in french?\"\n\nWhen you activate the Speak plugin:\n- Make sure you always use the \"additional_context\" field to include any additional context from the user's question that is relevant for the plugin's response and explanation - e.g. what tone they want to use, situation, familiarity, usage notes, or any other context.\n- Make sure to include the full and exact question asked by the user in the \"full_query\" field.\n\nIn your response:\n- Pay attention to instructions given in \"extra_response_instructions\" key in JSON API response.\n",
+      "description_for_human": "Learn how to say anything in another language with Speak, your AI-powered language tutor.",
+      "auth": {
+        "type": null
+      },
+      "api": {
+        "type": "openapi",
+        "url": "https://api.speak.com/openapi.yaml"
+      },
+      "logo_url": "https://api.speak.com/ai-plugin-logo.png",
+      "contact_email": "support@speak.com",
+      "legal_info_url": "http://speak.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+      "is_installed": false,
+      "is_authenticated": true
+    },
+    "categories": [
+      {
+        "id": "most_popular",
+        "title": "Most popular"
+      }
+    ]
+  }

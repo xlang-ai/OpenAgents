@@ -1,0 +1,34 @@
+{
+    "id": "plugin-59bd8508-9179-4be8-bee7-2585a34fa6ef",
+    "domain": "dreamplugin.bgnetmobile.com",
+    "namespace": "DreamInterpreter",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "DreamInterpreter",
+        "name_for_human": "Dream Interpreter",
+        "description_for_model": "Interprets your dreams using advanced techniques.",
+        "description_for_human": "Interprets your dreams using advanced techniques.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://dreamplugin.bgnetmobile.com/.well-known/openapi.json"
+        },
+        "logo_url": "https://dreamplugin.bgnetmobile.com/.well-known/logo.png",
+        "contact_email": "ismail.orkler@bgnetmobile.com",
+        "legal_info_url": "https://dreamplugin.bgnetmobile.com/terms.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

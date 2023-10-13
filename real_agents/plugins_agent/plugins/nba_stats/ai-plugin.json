@@ -1,0 +1,34 @@
+{
+    "id": "plugin-cab8bf73-fc7a-4156-8d0a-aa5acefbd03c",
+    "domain": "nba-gpt-prod.onrender.com",
+    "namespace": "nba_stats",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "nba_stats",
+        "name_for_human": "Basketball Stats",
+        "description_for_model": "Retrieve NBA stats. Use it whenever player or team stats are needed.",
+        "description_for_human": "Find and analyze basketball stats from various databases of games, players, teams, and play-by-plays.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://nba-gpt-prod.onrender.com/openapi.yaml"
+        },
+        "logo_url": "https://nba-gpt-prod.onrender.com/logo.png",
+        "contact_email": "team@caesarhq.com",
+        "legal_info_url": "https://basketballstatsai.com/tos"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

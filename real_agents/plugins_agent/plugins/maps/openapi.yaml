@@ -1,0 +1,37 @@
+---
+openapi: 3.0.1
+info:
+  title: Maps
+  description: A Maps app that takes latitude and longitude coordinates and generates a map with a marker on the given spot.
+  version: v1.0
+servers:
+- url: https://maps.smoothplugins.com
+paths:
+  "/":
+    get:
+      operationId: generate_map
+      summary: Generates a map with a marker on a given latitude and longitude coordinates
+      description: Generates a map with a marker on a given latitude and longitude
+        coordinates
+      parameters:
+      - name: latlng
+        in: query
+        description: The latitude and longitude coordinates to generate a map for
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/generate_map_response"
+components:
+  schemas:
+    generate_map_response:
+      type: object
+      properties:
+        result:
+          type: string
+          description: An output image of a map with a marker on the given spot

@@ -1,0 +1,42 @@
+{
+  "id": "plugin-815c4f73-adf7-48d7-b1bb-26144004ca36",
+  "domain": "zapier.com",
+  "namespace": "Zapier",
+  "status": "approved",
+  "manifest": {
+    "schema_version": "v1",
+    "name_for_model": "Zapier",
+    "name_for_human": "Zapier",
+    "description_for_model": "Zapier can talk to any of 20k+ actions the user has exposed. Actions are single tasks (EG: add a lead, find a doc), Zaps are workflows of actions. Start new chat to refresh actions. Markdown links are relative to https://zapier.com/.",
+    "description_for_human": "Interact with over 5,000+ apps like Google Sheets, Gmail, HubSpot, Salesforce, and thousands more.",
+    "auth": {
+      "type": "oauth",
+      "instructions": "",
+      "client_url": "https: //nla.zapier.com/oauth/authorize/",
+      "scope": "nla:exposed_actions:execute",
+      "authorization_url": "https://nla.zapier.com/oauth/token/",
+      "authorization_content_type": "application/x-www-form-urlencoded",
+      "verification_tokens": {
+        "openai": "0422a043f09d411a88c93fe681a2d37b"
+      }
+    },
+    "api": {
+      "type": "openapi",
+      "url": "https://nla.zapier.com/api/v1/dynamic/openapi.json"
+    },
+    "logo_url": "https://cdn.zappy.app/8f853364f9b383d65b44e184e04689ed.png",
+    "contact_email": "nla@zapier.com",
+    "legal_info_url": "https://zapier.com/legal"
+  },
+  "oauth_client_id": "nla-N9tKkxgiCXY8VlD5ukyqyIpBCMWHhuhtT7H0",
+  "user_settings": {
+    "is_installed": true,
+    "is_authenticated": true
+  },
+  "categories": [
+    {
+      "id": "most_popular",
+      "title": "Most popular"
+    }
+  ]
+}

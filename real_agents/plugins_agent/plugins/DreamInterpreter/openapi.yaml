@@ -1,0 +1,104 @@
+---
+openapi: 3.0.1
+info:
+  title: BGNET Dream Interpreter
+  description: Interprets your dreams using advanced techniques.
+  contact:
+    name: ISMAIL TURAN ORKLER
+    email: ismail.orkler@bgnetmobile.com
+  version: v1
+servers:
+- url: https://dreamplugin.bgnetmobile.com
+paths:
+  "/":
+    get:
+      tags:
+      - Dream App Endpoints
+      summary: Legal info page.
+      operationId: mainPage
+      responses:
+        '200':
+          description: OK
+  "/getDream/{DreamText}":
+    get:
+      tags:
+      - Dream App Endpoints
+      summary: This endpoint interprets your dreams in the best way.
+      description: This endpoint provides the best possible interpretation of a dream
+        when a dream input is provided. In interpreting the dream, it utilizes sources
+        including ancient texts, prophet's dreams, and books of all dream interpreters
+        to interpret the dream as best as possible..
+      operationId: getDream
+      parameters:
+      - name: DreamText
+        in: path
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+  "/terms.html":
+    get:
+      tags:
+      - Dream App Endpoints
+      summary: Terms of Use
+      operationId: getTermsOfUse
+      responses:
+        '200':
+          description: OK
+  "/.well-known/logo.png":
+    get:
+      tags:
+      - Dream App Endpoints
+      summary: Returns Logo
+      operationId: getLogo
+      responses:
+        '200':
+          description: OK
+  "/.well-known/ai-plugin.json":
+    get:
+      tags:
+      - Dream App Endpoints
+      summary: Returns ai-plugin.json
+      operationId: getAIPlugin
+      responses:
+        '200':
+          description: OK
+  "/.well-known/openapi.json":
+    get:
+      tags:
+      - Dream App Endpoints
+      summary: Returns openapi.json
+      operationId: getOpenApiJson
+      responses:
+        '200':
+          description: OK
+  "/api/data":
+    post:
+      tags:
+      - Dream App Endpoints
+      summary: Tester
+      operationId: apiTest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Date"
+        required: true
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    Date:
+      type: object
+      properties:
+        date:
+          type: string
+          description: Date
+          format: date-time
+      additionalProperties: false
