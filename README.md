@@ -4,7 +4,7 @@
     <img alt="Online Demos" src="https://img.shields.io/badge/🥑-Online_Demos-blue" />
  </a>
  <a href="https://xlang.ai" target="_blank">
-    <img alt="XLang Lab" src="https://img.shields.io/badge/🧪-XLang_Lab-blue" />
+    <img alt="XLangNLPLab" src="https://img.shields.io/badge/🧪-XLang_Lab-blue" />
  </a>
  <a href="https://docs.xlang.ai" target="_blank">
     <img alt="User Manual" src="https://img.shields.io/badge/📖-User_Manual-blue" />
@@ -21,8 +21,8 @@
    <a href="https://github.com/xlang-ai/OpenAgents/issues" target="_blank">
       <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/xlang-ai/OpenAgents" />
    </a>
-   <a href="https://twitter.com/XLangAI" target="_blank">
-      <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/XLangAI" />
+   <a href="https://twitter.com/XLangNLP" target="_blank">
+      <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/XLang NLP Lab" />
    </a>
    <a href="https://join.slack.com/t/xlanggroup/shared_invite/zt-20zb8hxas-eKSGJrbzHiPmrADCDX3_rQ" target="_blank">
       <img alt="Join Slack" src="https://img.shields.io/badge/Slack-join-blueviolet?logo=slack&amp" />
@@ -31,18 +31,33 @@
       <img alt="Discord" src="https://dcbadge.vercel.app/api/server/4Gnw7eTEZR?compact=true&style=flat" />
    </a>
 <div align="center">
-    <img src="pics/xlang_overview.png"/>
+    <img src="pics/openagents_overview.png"/>
 </div>
+
+Current language agent frameworks aim to facilitate the construction of proof-of-concept language agents while neglecting the non-expert user access to agents and paying little attention to application-level designs.
+We built OpenAgents, an open platform for using and hosting language agents in the wild of everyday life.
+
+Inspired by OpenAI ChatGPT Plus products, we have now implemented three agents in OpenAgents, and we host them on [demo](https://chat.xlang.ai) for free use!
+1. Data Agent for data analysis with Python/SQL and data tools; 
+2. Plugins Agent with 200+ daily tools; 
+3. Web Agent for autonomous web browsing.
+OpenAgents enables general users to interact with agent functionalities through a web UI optimized for swift responses and common failures, while offering developers and researchers a seamless deployment experience on local setups, providing a foundation for crafting innovative language agents and facilitating real-world evaluations.
+We elucidate both the challenges and promising opportunities, aspiring to set a foundation for future research and development of real-world language agents.
 
 ## 🔥 News
 
 - **[2023, Oct 13]** We've released OpenAgents platform code for all three agents, server backend and frontend! Feel free to setup your localhost one, and play with OpenAgents!
 - **[2023, Aug 17]** Our platform has officially reached 500 users! 🚀
-- **[2023, Aug 8]** We've released [XLang Agent demos](https://chat.xlang.ai), including Data, Plugins, and Web agents! Check [tutorials](https://docs.xlang.ai/category/user-manual) and [use cases](https://docs.xlang.ai/category/use-cases)!
+- **[2023, Aug 8]** We've released [OpenAgents demos](https://chat.xlang.ai), including Data, Plugins, and Web agents! Check [tutorials](https://docs.xlang.ai/category/user-manual) and [use cases](https://docs.xlang.ai/category/use-cases)!
 
-## 💻 Open-sourcing
+## 💻 Localhost Deployment
 
 We've released the OpenAgents platform code. Feel free to deploy on your own localhost!
+
+Here is a brief system design of OpenAgents:
+<div align="center">
+    <img src="pics/system_design.png"/>
+</div>
 
 Please check the following folders and README files to set up & localhost:
 
@@ -51,7 +66,7 @@ Please check the following folders and README files to set up & localhost:
 
 ## 🥑 OpenAgents
 
-We built three real-world agents with chat-based web UI (check [XLang Agent demos](https://chat.xlang.ai)). Here is a brief overview of our OpenAgents framework. You can find more details about concepts & designs in our [documentation](https://docs.xlang.ai).
+We built three real-world agents with chat-based web UI (check [OpenAgents demos](https://chat.xlang.ai)). Here is a brief overview of our OpenAgents framework. You can find more details about concepts & designs in our [documentation](https://docs.xlang.ai).
 
 ### Data Agent
 
@@ -65,8 +80,16 @@ We built three real-world agents with chat-based web UI (check [XLang Agent demo
 With its proficiency in writing and executing code, Data Agent simplifies a wide range of data-centric tasks. Discover its potential through various [use cases](https://docs.xlang.ai/use-cases/data-agent).
 
 <div align="center">
-    <img src="pics/data_agent.png" width="512"/>
+    <img src="pics/data_agent.png" width="784"/>
 </div>
+
+<details>
+  <summary>Click to see more use case screenshots</summary>
+<div align="center">
+    <img src="pics/data_agent_demo.png" width="784"/>
+</div>
+
+</details>
 
 ### Plugins Agent
 
@@ -89,8 +112,16 @@ Simplify your choices with our **Auto Plugin Selection** feature. Let the agent 
 Dive into more [use cases](https://docs.xlang.ai/use-cases/plugins-agent) to see Plugins Agent in action.
 
 <div align="center">
-  <img src="pics/plugins_agent.png" width=512/>
+  <img src="pics/plugins_agent.png" width="784"/>
 </div>
+
+<details>
+  <summary>Click to see more use case screenshots</summary>
+<div align="center">
+    <img src="pics/plugins_agent_demo.png" width="784"/>
+</div>
+
+</details>
 
 ### Web Agent
 
@@ -105,8 +136,16 @@ Dive into more [use cases](https://docs.xlang.ai/use-cases/plugins-agent) to see
 Witness the full potential of Web Agent in these [use cases](https://docs.xlang.ai/use-cases/web-agent).
 
 <div align="center">
-  <img src="pics/web_agent.png" width=512/>
+  <img src="pics/web_agent.png" width="784"/>
 </div>
+
+<details>
+  <summary>Click to see more use case screenshots</summary>
+<div align="center">
+    <img src="pics/web_agent_demo.png" width="784"/>
+</div>
+
+</details>
 
 ## 📖 Documentation
 
@@ -120,7 +159,7 @@ We welcome contributions and suggestions, together we move further to make it be
 
 - 🐛 Post an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you encounter any problems during your experience, or if you want to add any additional features.
 - 🕹 Directly contribute to our repo by creating a [Pull Request](https://github.com/xlang-ai/OpenAgents/pulls). Together we can make XLang better!
-- ⭐ Give us a star, follow us on [Twitter](https://twitter.com/XLangAI), share your own examples, and share with your friends!
+- ⭐ Give us a star, follow us on [Twitter](https://twitter.com/XLangNLP), share your own examples, and share with your friends!
 
 For detailed information on how to contribute, see [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md).
 
