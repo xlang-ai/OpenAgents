@@ -1901,8 +1901,8 @@ const Home = ({
       }}
     >
       <Head>
-        <title>XLang Agents</title>
-        <meta name="description" content="XLang Agents" />
+        <title>OpenAgents</title>
+        <meta name="description" content="OpenAgents" />
         <meta
           name="viewport"
           content="height=device-height ,width=device-width, initial-scale=1, user-scalable=no"

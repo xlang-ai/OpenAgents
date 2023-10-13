@@ -1,6 +1,6 @@
-# Contributing to XLang Agents
+# Contributing to OpenAgents
 
-Welcome and thank you for considering a contribution to XLang Agents! As an evolving open-source project, 
+Welcome and thank you for considering a contribution to OpenAgents! As an evolving open-source project, 
 we truly value all forms of contribution – whether it's adding new features, 
 refining our infrastructure, enhancing documentation, or resolving bugs.
 
@@ -24,6 +24,6 @@ refining our infrastructure, enhancing documentation, or resolving bugs.
 
 ## 🚀 Quick Setup
 
-- **Frontend**: Get started with the frontend by following the guidelines [here](https://github.com/xlang-ai/xlang_agents/blob/main/frontend/README.md).
-- **Backend**: Set up the backend using instructions available [here](https://github.com/xlang-ai/xlang_agents/blob/main/backend/README.md).
+- **Frontend**: Get started with the frontend by following the guidelines [here](https://github.com/xlang-ai/OpenAgents/blob/main/frontend/README.md).
+- **Backend**: Set up the backend using instructions available [here](https://github.com/xlang-ai/OpenAgents/blob/main/backend/README.md).
 
