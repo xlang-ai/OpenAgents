@@ -1,4 +1,4 @@
-# XLang: An Open-Source Framework for Building Language Model Agents via Executable Language Grounding
+# OpenAgents: An Open Platform for Language Agents in the Wild
 
  <a href="https://chat.xlang.ai" target="_blank">
     <img alt="Online Demos" src="https://img.shields.io/badge/🥑-Online_Demos-blue" />
@@ -15,11 +15,11 @@
  <a href="https://opensource.org/licenses/MIT" target="_blank">
       <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
    </a>
-   <a href="https://github.com/xlang-ai/xlang" target="_blank">
-      <img alt="Twitter Follow" src="https://img.shields.io/github/stars/xlang-ai/xlang?style=social" />
+   <a href="https://github.com/xlang-ai/OpenAgents" target="_blank">
+      <img alt="GitHub Stars" src="https://img.shields.io/github/stars/xlang-ai/OpenAgents?style=social" />
    </a>
-   <a href="https://github.com/xlang-ai/xlang/issues" target="_blank">
-      <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/xlang-ai/xlang" />
+   <a href="https://github.com/xlang-ai/OpenAgents/issues" target="_blank">
+      <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/xlang-ai/OpenAgents" />
    </a>
    <a href="https://twitter.com/XLangAI" target="_blank">
       <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/XLangAI" />
@@ -34,81 +34,143 @@
     <img src="pics/xlang_overview.png"/>
 </div>
 
-## 🔥 News:
-- **[2023, Aug 17]** Our demo has officially reached 500 users! 🚀
+## 🔥 News
+
+- **[2023, Oct 13]** We've released OpenAgents platform code for all three agents, server backend and frontend! Feel free to setup your localhost one, and play with OpenAgents!
+- **[2023, Aug 17]** Our platform has officially reached 500 users! 🚀
 - **[2023, Aug 8]** We've released [XLang Agent demos](https://chat.xlang.ai), including Data, Plugins, and Web agents! Check [tutorials](https://docs.xlang.ai/category/user-manual) and [use cases](https://docs.xlang.ai/category/use-cases)!
 
+## 💻 Open-sourcing
 
-## 💻 Open-sourcing:
+We've released the OpenAgents platform code. Feel free to deploy on your own localhost!
 
-We are pushing forward to open-source our framework, models, demos, code, benchmarks, and beyond. Please stay tuned! 🚀🚀
+Please check the following folders and README files to set up & localhost:
 
+1. [**backend**](backend/README.md): the flask backend to host our three agents.
+2. [**frontend**](frontend/README.md): the frontend UI and webbot chrome extension.
 
-## 🥑 XLang Agents:
+## 🥑 OpenAgents
 
-We built three real-world agents with chat-based web UI (check [XLang Agent demos](https://chat.xlang.ai)). Here is a brief overview of our XLang Agents framework. You can find more details about concepts & designs in our [documentation](https://docs.xlang.ai). 
+We built three real-world agents with chat-based web UI (check [XLang Agent demos](https://chat.xlang.ai)). Here is a brief overview of our OpenAgents framework. You can find more details about concepts & designs in our [documentation](https://docs.xlang.ai).
+
 ### Data Agent
-Data Agent is equipped with data-related tools, allowing it to search, handle, manipulate, and visualize data efficiently. It is proficient in writing and executing code, enabling various data-related tasks.
+
+[Data Agent](https://github.com/xlang-ai/OpenAgents/tree/main/real_agents/data_agent) is a comprehensive toolkit designed for efficient data operations. It provides capabilities to:
+
+- 🔍 **Search**: Quickly locate the data you need.
+- 🛠️ **Handle**: Streamline data acquisition and processing.
+- 🔄 **Manipulate**: Modify data to suit specific requirements.
+- 📊 **Visualize**: Represent data in a clear and insightful manner.
+
+With its proficiency in writing and executing code, Data Agent simplifies a wide range of data-centric tasks. Discover its potential through various [use cases](https://docs.xlang.ai/use-cases/data-agent).
 
 <div align="center">
     <img src="pics/data_agent.png" width="512"/>
 </div>
 
 ### Plugins Agent
-Plugins Agent boasts integration with over 200 plugins from third-party sources. These plugins are carefully selected to cater to various aspects of your daily life scenarios. By leveraging these plugins, the agent can assist you with a wide range of tasks and activities.
+
+[Plugins Agent](https://github.com/xlang-ai/OpenAgents/tree/main/real_agents/plugins_agent) seamlessly integrates with over 200 third-party plugins, each handpicked to enrich various facets of your daily life. With these plugins at its disposal, the agent empowers you to tackle a wide range of tasks and activities more efficiently.
+
+🔌 **Sample Plugins Include**:
+
+- 🛍️ **Shopping**: Klarna Shopping
+- ☁️ **Weather**: XWeather
+- 🔬 **Scientific Exploration**: Wolfram Alpha
+
+#### Combined Plugin Usage
+
+Harness the power of synergy! Plugins Agent supports the concurrent use of multiple plugins. Planning a trip? Seamlessly integrate functionalities from Klook, Currency converter, and WeatherViz.
+
+#### Auto Plugin Selection
+
+Simplify your choices with our **Auto Plugin Selection** feature. Let the agent intuitively search and suggest the best plugins tailored to your needs.
+
+Dive into more [use cases](https://docs.xlang.ai/use-cases/plugins-agent) to see Plugins Agent in action.
 
 <div align="center">
   <img src="pics/plugins_agent.png" width=512/>
 </div>
 
 ### Web Agent
-Web Agent harnesses the power of a Chrome extension to navigate and explore websites automatically. This agent streamlines the web browsing experience, making it easier to find relevant information, access desired resources, and so on.
+
+[Web Agent](https://github.com/xlang-ai/OpenAgents/tree/main/real_agents/web_agent) harnesses the power of a Chrome extension to navigate and explore websites automatically. This agent streamlines the web browsing experience, making it easier to find relevant information, access desired resources, and so on.
+
+**Examples of What Web Agent Can Do**:
+
+- 📍 **Google Maps Navigation**: Planning a journey? Simply relay your starting point and destination to Web Agent. It will navigate Google Maps for you and present the best routes.
+- 🐦 **Twitter Postings**: Engage in a conversation with Web Agent and wish to share something on Twitter? Mention the content, and Web Agent will handle your tweet effortlessly.
+- 📝 **Google Form Assistance**: Need to sign up for an event or activity? Share the Google Form link and the required details. Web Agent will populate the form for you.
+
+Witness the full potential of Web Agent in these [use cases](https://docs.xlang.ai/use-cases/web-agent).
 
 <div align="center">
   <img src="pics/web_agent.png" width=512/>
 </div>
 
-
-## 📖 Documentation:
+## 📖 Documentation
 
 Please check [here](https://docs.xlang.ai) for full documentation, which will be updated to stay in pace with the demo changes and the code release.
 
+## 👏 Contributing
 
-
-## 👏 Contributing:
 Thanks to open-sourced communities’ efforts, such as [LangChain](https://github.com/langchain-ai/langchain), [ChatBot UI](https://github.com/mckaywrigley/chatbot-ui), [Taxy.ai browser extension](https://github.com/TaxyAI/browser-extension) and others. We are able to build our interface prototype much more conveniently and efficiently.
 
 We welcome contributions and suggestions, together we move further to make it better!
 
-- 🐛 Post an [issue](https://github.com/xlang-ai/xlang/issues) if you encounter any problems during your experience, or if you want to add any additional features.
-- 🕹 Directly contribute to our repo by creating a [Pull Request](https://github.com/xlang-ai/xlang/pulls). Together we can make XLang better!
+- 🐛 Post an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you encounter any problems during your experience, or if you want to add any additional features.
+- 🕹 Directly contribute to our repo by creating a [Pull Request](https://github.com/xlang-ai/OpenAgents/pulls). Together we can make XLang better!
 - ⭐ Give us a star, follow us on [Twitter](https://twitter.com/XLangAI), share your own examples, and share with your friends!
 
+For detailed information on how to contribute, see [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md).
 
 ## 🧙‍Participants
-### Tech Lead:
+
+### Tech Lead
+
 <a href="https://github.com/Impavidity"><img src="https://avatars.githubusercontent.com/u/9245607?v=4"  width="50" /></a>
 
-### Co-Lead Contributors:
-<a href="https://github.com/BlankCheng"><img src="https://avatars.githubusercontent.com/u/34505296?v=4"  width="50" /></a> 
+### Co-Lead Contributors
+
+<a href="https://github.com/BlankCheng"><img src="https://avatars.githubusercontent.com/u/34505296?v=4"  width="50" /></a>
 <a href="https://github.com/koalazf99"><img src="https://avatars.githubusercontent.com/u/37338733?v=4"  width="50" /></a>
 <a href="https://github.com/Timothyxxx"><img src="https://avatars.githubusercontent.com/u/47296835?v=4"  width="50" /></a>
 
-### Key Contributors:
+### Key Contributors
+
 <a href="https://github.com/taogoddd"><img src="https://avatars.githubusercontent.com/u/98326623?v=4"  width="50" /></a>
 <a href="https://github.com/WhiteWolf82"><img src="https://avatars.githubusercontent.com/u/48792453?v=4"  width="50" /></a>
 <a href="https://github.com/ztjhz"><img src="https://avatars.githubusercontent.com/u/59118459?v=4"  width="50" /></a>
 
-### Valuable Contributors:
+### Valuable Contributors
+
 <a href="https://github.com/BillStark001"><img src="https://avatars.githubusercontent.com/u/31788509?v=4"  width="50" /></a>
 <a href="https://github.com/SivilTaram"><img src="https://avatars.githubusercontent.com/u/10275209?v=4"  width="50" /></a>
-<a href="https://github.com/che330"><img src="https://avatars.githubusercontent.com/u/122778503?v=4"  width="50" /></a> 
-<a href="https://github.com/leo-liuzy"><img src="https://avatars.githubusercontent.com/u/11146950?v=4"  width="50" /></a> 
-<a href="https://github.com/ranpox"><img src="https://avatars.githubusercontent.com/u/25601999?v=4"  width="50" /></a> 
-<a href="https://github.com/hongjin-su"><img src="https://avatars.githubusercontent.com/u/114016954?v=4"  width="50" /></a> 
+<a href="https://github.com/che330"><img src="https://avatars.githubusercontent.com/u/122778503?v=4"  width="50" /></a>
+<a href="https://github.com/leo-liuzy"><img src="https://avatars.githubusercontent.com/u/11146950?v=4"  width="50" /></a>
+<a href="https://github.com/ranpox"><img src="https://avatars.githubusercontent.com/u/25601999?v=4"  width="50" /></a>
+<a href="https://github.com/hongjin-su"><img src="https://avatars.githubusercontent.com/u/114016954?v=4"  width="50" /></a>
 <a href="https://github.com/QIN2DIM"><img src="https://avatars.githubusercontent.com/u/62018067?v=4"  width="50" /></a>
-<a href="https://github.com/xJQx"><img src="https://avatars.githubusercontent.com/u/47933193?v=4"  width="50" /></a> 
-<a href="https://github.com/thomasshin"><img src="https://avatars.githubusercontent.com/u/76890354?v=4"  width="50" /></a> 
+<a href="https://github.com/xJQx"><img src="https://avatars.githubusercontent.com/u/47933193?v=4"  width="50" /></a>
+<a href="https://github.com/thomasshin"><img src="https://avatars.githubusercontent.com/u/76890354?v=4"  width="50" /></a>
 
-### Acknowledgements (beyond code):
-Heartfelt appreciation to [Ziyi Huang](https://www.joanna-ziyi-huang.com/), [Roxy Rong](https://www.linkedin.com/in/roxyrong/), [Jansen Wong](https://www.linkedin.com/in/jansenwong/), and [Chen Wu](https://chenwu.io/) for their valuable contributions to the XLang Agents demo. Their expertise and insights were instrumental in bringing this project to fruition!
+### Acknowledgements (beyond code)
+
+Heartfelt appreciation to [Ziyi Huang](https://www.joanna-ziyi-huang.com/), [Roxy Rong](https://www.linkedin.com/in/roxyrong/), [Jansen Wong](https://www.linkedin.com/in/jansenwong/), and [Chen Wu](https://chenwu.io/) for their valuable contributions to the OpenAgents. Their expertise and insights were instrumental in bringing this project to fruition!
+
+### Open Source Contributors
+
+Thanks to all the contributors!
+
+<a href="https://github.com/xlang-ai/OpenAgents/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=xlang-ai/OpenAgents" />
+</a>
+
+## ⭐️ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=xlang-ai/OpenAgents&type=Date)](https://github.com/xlang-ai/OpenAgents/stargazers)
+
+<h3 align="center">
+A ⭐️ to <b>OpenAgents</b> is to make it shine brighter and benefit more people.
+</h3>
+
