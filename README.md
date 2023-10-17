@@ -46,6 +46,7 @@ We elucidate both the challenges and promising opportunities, aspiring to set a 
 
 ## 🔥 News
 
+- **[2023, Oct 17]** We've released OpenAgents tech report, check it out 🤗 [here](https://huggingface.co/papers/2310.10634)!
 - **[2023, Oct 13]** We've released OpenAgents platform code for all three agents, server backend and frontend! Feel free to setup your localhost one, and play with OpenAgents!
 - **[2023, Aug 17]** Our platform has officially reached 500 users! 🚀
 - **[2023, Aug 8]** We've released [OpenAgents demos](https://chat.xlang.ai), including Data, Plugins, and Web agents! Check [tutorials](https://docs.xlang.ai/category/user-manual) and [use cases](https://docs.xlang.ai/category/use-cases)!
@@ -195,7 +196,7 @@ For detailed information on how to contribute, see [here](https://github.com/xla
 
 ### Acknowledgements (beyond code)
 
-Heartfelt appreciation to [Ziyi Huang](https://www.joanna-ziyi-huang.com/), [Roxy Rong](https://www.linkedin.com/in/roxyrong/), [Jansen Wong](https://www.linkedin.com/in/jansenwong/), and [Chen Wu](https://chenwu.io/) for their valuable contributions to the OpenAgents. Their expertise and insights were instrumental in bringing this project to fruition!
+Heartfelt appreciation to [Ziyi Huang](https://www.joanna-ziyi-huang.com/), [Roxy Rong](https://www.linkedin.com/in/roxyrong/), [Jansen Wong](https://www.linkedin.com/in/jansenwong/), and [Chen Henry Wu](https://chenwu.io/) for their valuable contributions to the OpenAgents. Their expertise and insights were instrumental in bringing this project to fruition!
 
 ### Open Source Contributors
 
