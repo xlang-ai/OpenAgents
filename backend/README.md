@@ -1,6 +1,16 @@
 # Backend Environment Setup
 
-We recommend you to using conda virtual environments and install the dependencies:
+The backend requires several setup steps, including the conda environment for running, database for storage, and environment variables for configuration.
+
+But don't worry, we have provided a one-click setup script for you to get started quickly, you can simply run:
+```bash
+backend/setup_script.sh
+```
+which setups most of the things for you (work for both mac and linux). And then continue from [4. LLM Setup](#llm-setup) for further setup if needed.
+
+Or you can follow README below to setup manually because there may be unexpected errors when running the script, and you can fix them manually step by step.
+
+We recommend you to use conda virtual environments and install the dependencies:
 
 ```bash
 conda create -n openagents python=3.10
@@ -19,24 +29,27 @@ As a systematic demo including backend and frontend, we need persistent data man
         </h2>
     </summary>
 
-For the mac environment, following the instructions below to install MongoDB.
+For the mac environment, follow the instructions below to install MongoDB.
 Assume you have [brew](https://brew.sh) installed in your mac.
 
 ```bash
 brew tap mongodb/brew
 brew update
 brew install mongodb-community@6.0
-```
-
-
-Start the mongodb
-
-```bash
 brew services start mongodb-community@6.0
 ```
 
+For the linux environment, install like this:
 
-Create collections.
+```bash
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo systemctl start mongod
+```
+
+Then create collections in mongodb, ready for coming data!
 ```bash
 mongosh
 > use xlang
@@ -72,13 +85,13 @@ sudo apt-get install redis
 ```
 
 To start redis:
-For Linux environment:
-```bash
-systemctl start redis-server &
-```
 For Mac environment:
 ```bash
 brew services start redis
+```
+For Linux environment:
+```bash
+systemctl start redis-server &
 ```
 </details>
 
@@ -104,7 +117,7 @@ export JUPYTER_KERNEL_MEMORY_MANAGER_BACKEND=database
 
 <details>
     <summary>
-        <h2>
+        <h2 id="llm-setup">
             4. LLM Setup
         </h2>
     </summary>
