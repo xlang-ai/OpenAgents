@@ -12,8 +12,8 @@
  <a href="https://docs.xlang.ai" target="_blank">
     <img alt="User Manual" src="https://img.shields.io/badge/📖-User_Manual-blue" />
  </a>
- <a href="https://opensource.org/licenses/MIT" target="_blank">
-      <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+ <a href="https://opensource.org/license/apache-2-0" target="_blank">
+      <img alt="License: apache-2-0" src="https://img.shields.io/github/license/saltstack/salt" />
    </a>
    <a href="https://github.com/xlang-ai/OpenAgents" target="_blank">
       <img alt="GitHub Stars" src="https://img.shields.io/github/stars/xlang-ai/OpenAgents?style=social" />
@@ -218,7 +218,7 @@ Thanks to all the contributors!
 ## Citation
 If you find our work helpful, please cite us:
 ```
-@misc{xie2023openagents,
+@misc{OpenAgents,
       title={OpenAgents: An Open Platform for Language Agents in the Wild}, 
       author={Tianbao Xie and Fan Zhou and Zhoujun Cheng and Peng Shi and Luoxuan Weng and Yitao Liu and Toh Jing Hua and Junning Zhao and Qian Liu and Che Liu and Leo Z. Liu and Yiheng Xu and Hongjin Su and Dongchan Shin and Caiming Xiong and Tao Yu},
       year={2023},
