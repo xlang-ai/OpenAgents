@@ -7,7 +7,7 @@
     <img alt="Online Demos" src="https://img.shields.io/badge/🥑-Online_Demos-blue" />
  </a>
  <a href="https://xlang.ai" target="_blank">
-    <img alt="XLangNLPLab" src="https://img.shields.io/badge/🧪-XLang_Lab-blue" />
+    <img alt="XLangNLPLab" src="https://img.shields.io/badge/🧪-XLANG_NLP_Lab-blue" />
  </a>
  <a href="https://docs.xlang.ai" target="_blank">
     <img alt="User Manual" src="https://img.shields.io/badge/📖-User_Manual-blue" />
@@ -22,7 +22,7 @@
       <img alt="Open Issues" src="https://img.shields.io/github/issues-raw/xlang-ai/OpenAgents" />
    </a>
    <a href="https://twitter.com/XLangNLP" target="_blank">
-      <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/XLang NLP Lab" />
+      <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/XLANG NLP Lab" />
    </a>
    <a href="https://join.slack.com/t/xlanggroup/shared_invite/zt-20zb8hxas-eKSGJrbzHiPmrADCDX3_rQ" target="_blank">
       <img alt="Join Slack" src="https://img.shields.io/badge/Slack-join-blueviolet?logo=slack&amp" />
