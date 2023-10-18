@@ -203,6 +203,18 @@ For detailed information on how to contribute, see [here](https://github.com/xla
 <a href="https://github.com/xJQx"><img src="https://avatars.githubusercontent.com/u/47933193?v=4"  width="50" /></a>
 <a href="https://github.com/thomasshin"><img src="https://avatars.githubusercontent.com/u/76890354?v=4"  width="50" /></a>
 
+### Acknowledgements (beyond code)
+
+Heartfelt appreciation to [Ziyi Huang](https://www.joanna-ziyi-huang.com/), [Roxy Rong](https://www.linkedin.com/in/roxyrong/), [Jansen Wong](https://www.linkedin.com/in/jansenwong/), and [Chen Henry Wu](https://chenwu.io/) for their valuable contributions to the OpenAgents. Their expertise and insights were instrumental in bringing this project to fruition!
+
+### Open Source Contributors
+
+Thanks to all the contributors!
+
+<a href="https://github.com/xlang-ai/OpenAgents/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=xlang-ai/OpenAgents" />
+</a>
+
 ## Citation
 If you find our work helpful, please cite us:
 ```
@@ -215,19 +227,6 @@ If you find our work helpful, please cite us:
       primaryClass={cs.CL}
 }
 ```
-
-
-### Acknowledgements (beyond code)
-
-Heartfelt appreciation to [Ziyi Huang](https://www.joanna-ziyi-huang.com/), [Roxy Rong](https://www.linkedin.com/in/roxyrong/), [Jansen Wong](https://www.linkedin.com/in/jansenwong/), and [Chen Henry Wu](https://chenwu.io/) for their valuable contributions to the OpenAgents. Their expertise and insights were instrumental in bringing this project to fruition!
-
-### Open Source Contributors
-
-Thanks to all the contributors!
-
-<a href="https://github.com/xlang-ai/OpenAgents/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=xlang-ai/OpenAgents" />
-</a>
 
 ## ⭐️ Star History
 
