@@ -1,5 +1,8 @@
-# OpenAgents: An Open Platform for Language Agents in the Wild
+# [OpenAgents: An Open Platform for Language Agents in the Wild](https://arxiv.org/abs/2310.10634)
 
+ <a href="https://arxiv.org/abs/2310.10634" target="_blank">
+    <img alt="OpenAgents Paper" src="https://img.shields.io/badge/📑-OpenAgents_Paper-blue" />
+ </a>
  <a href="https://chat.xlang.ai" target="_blank">
     <img alt="Online Demos" src="https://img.shields.io/badge/🥑-Online_Demos-blue" />
  </a>
@@ -8,9 +11,6 @@
  </a>
  <a href="https://docs.xlang.ai" target="_blank">
     <img alt="User Manual" src="https://img.shields.io/badge/📖-User_Manual-blue" />
- </a>
- <a href="https://docs.xlang.ai/category/use-cases" target="_blank">
-    <img alt="Use Cases" src="https://img.shields.io/badge/🎞-Use_Cases-blue" />
  </a>
  <a href="https://opensource.org/licenses/MIT" target="_blank">
       <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
@@ -37,16 +37,25 @@
 Current language agent frameworks aim to facilitate the construction of proof-of-concept language agents while neglecting the non-expert user access to agents and paying little attention to application-level designs.
 We built OpenAgents, an open platform for using and hosting language agents in the wild of everyday life.
 
-Inspired by OpenAI ChatGPT Plus products, we have now implemented three agents in OpenAgents, and we host them on [demo](https://chat.xlang.ai) for free use!
+We have now implemented three agents in OpenAgents, and we host them on [demo](https://chat.xlang.ai) for free use!
 1. Data Agent for data analysis with Python/SQL and data tools; 
 2. Plugins Agent with 200+ daily tools; 
 3. Web Agent for autonomous web browsing.
+
+OpenAgents can analyze data, call plugins, control your browser as ChatGPT Plus, but with OPEN Code for
+1. Easy deployment
+2. Full stack
+3. Chat Web UI
+4. Agent methods
+5. …
+   
 OpenAgents enables general users to interact with agent functionalities through a web UI optimized for swift responses and common failures, while offering developers and researchers a seamless deployment experience on local setups, providing a foundation for crafting innovative language agents and facilitating real-world evaluations.
 We elucidate both the challenges and promising opportunities, aspiring to set a foundation for future research and development of real-world language agents.
 
 ## 🔥 News
 
-- **[2023, Oct 17]** We've released OpenAgents tech report, check it out 🤗 [here](https://huggingface.co/papers/2310.10634)!
+- **[2023, Oct 18]** Try out [our Lemur](https://github.com/OpenLemur/Lemur), the SOTA and open-sourced foundation models for language agents, matching ChatGPT on 15 agent tasks!
+- **[2023, Oct 17]** Check out the OpenAgents paper [here](https://arxiv.org/abs/2310.10634)!
 - **[2023, Oct 13]** We've released OpenAgents platform code for all three agents, server backend and frontend! Feel free to setup your localhost one, and play with OpenAgents!
 - **[2023, Aug 17]** Our platform has officially reached 500 users! 🚀
 - **[2023, Aug 8]** We've released [OpenAgents demos](https://chat.xlang.ai), including Data, Plugins, and Web agents! Check [tutorials](https://docs.xlang.ai/category/user-manual) and [use cases](https://docs.xlang.ai/category/use-cases)!
@@ -159,7 +168,7 @@ Thanks to open-sourced communities’ efforts, such as [LangChain](https://githu
 We welcome contributions and suggestions, together we move further to make it better!
 
 - 🐛 Post an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you encounter any problems during your experience, or if you want to add any additional features.
-- 🕹 Directly contribute to our repo by creating a [Pull Request](https://github.com/xlang-ai/OpenAgents/pulls). Together we can make XLang better!
+- 🕹 Directly contribute to our repo by creating a [Pull Request](https://github.com/xlang-ai/OpenAgents/pulls). Together we can make OpenAgents better!
 - ⭐ Give us a star, follow us on [Twitter](https://twitter.com/XLangNLP), share your own examples, and share with your friends!
 
 For detailed information on how to contribute, see [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md).
@@ -193,6 +202,20 @@ For detailed information on how to contribute, see [here](https://github.com/xla
 <a href="https://github.com/QIN2DIM"><img src="https://avatars.githubusercontent.com/u/62018067?v=4"  width="50" /></a>
 <a href="https://github.com/xJQx"><img src="https://avatars.githubusercontent.com/u/47933193?v=4"  width="50" /></a>
 <a href="https://github.com/thomasshin"><img src="https://avatars.githubusercontent.com/u/76890354?v=4"  width="50" /></a>
+
+## Citation
+If you find our work helpful, please cite us:
+```
+@misc{xie2023openagents,
+      title={OpenAgents: An Open Platform for Language Agents in the Wild}, 
+      author={Tianbao Xie and Fan Zhou and Zhoujun Cheng and Peng Shi and Luoxuan Weng and Yitao Liu and Toh Jing Hua and Junning Zhao and Qian Liu and Che Liu and Leo Z. Liu and Yiheng Xu and Hongjin Su and Dongchan Shin and Caiming Xiong and Tao Yu},
+      year={2023},
+      eprint={2310.10634},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
+
 
 ### Acknowledgements (beyond code)
 
