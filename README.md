@@ -228,6 +228,33 @@ If you find our work helpful, please cite us:
 }
 ```
 
+## Acknowledgements
+
+We would like to thank Google Research, Amazon AWS, and Salesforce Research for their research gift funds to this open-source effort!
+
+<div align="center">
+
+<img src="pics/transparent.png" width="20" style="pointer-events: none;">
+
+<a href="https://www.salesforceairesearch.com/">
+    <img src="pics/salesforce.webp" alt="Salesforce Research" height = 30/>
+</a>
+
+<img src="pics/transparent.png" width="20" style="pointer-events: none;">
+
+<a href="https://research.google/">
+    <img src="pics/google_research.svg" alt="Google Research" height = 30/>
+</a>
+
+<img src="pics/transparent.png" width="25" style="pointer-events: none;">
+
+<a href="https://www.amazon.science/" style="display: inline-block; margin-bottom: -100px;">
+    <img src="pics/amazon.svg" alt="Amazon AWS" height = 20 />
+</a>
+
+
+</div>
+
 ## ⭐️ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=xlang-ai/OpenAgents&type=Date)](https://github.com/xlang-ai/OpenAgents/stargazers)
