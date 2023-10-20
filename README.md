@@ -205,7 +205,7 @@ For detailed information on how to contribute, see [here](https://github.com/xla
 
 ### Acknowledgements (beyond code)
 
-Heartfelt appreciation to [Ziyi Huang](https://www.joanna-ziyi-huang.com/), [Roxy Rong](https://www.linkedin.com/in/roxyrong/), [Jansen Wong](https://www.linkedin.com/in/jansenwong/), and [Chen Henry Wu](https://chenwu.io/) for their valuable contributions to the OpenAgents. Their expertise and insights were instrumental in bringing this project to fruition!
+Heartfelt appreciation to [Ziyi Huang](https://www.joanna-ziyi-huang.com/), [Roxy Rong](https://www.linkedin.com/in/roxyrong/), [Haotian Li](https://haotian-li.com/), [Xingbo Wang](https://andy-xingbowang.com/), [Jansen Wong](https://www.linkedin.com/in/jansenwong/), and [Chen Henry Wu](https://chenwu.io/) for their valuable contributions to the OpenAgents. Their expertise and insights were instrumental in bringing this project to fruition!
 
 ### Open Source Contributors
 
