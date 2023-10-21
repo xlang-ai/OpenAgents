@@ -34,6 +34,11 @@
     <img src="pics/openagents_overview.png"/>
 </div>
 
+<p align="center">
+    <a>English</a> •
+    <a href="README_ZH.md">中文</a>
+</p>
+
 Current language agent frameworks aim to facilitate the construction of proof-of-concept language agents while neglecting the non-expert user access to agents and paying little attention to application-level designs.
 We built OpenAgents, an open platform for using and hosting language agents in the wild of everyday life.
 
@@ -72,7 +77,7 @@ Here is a brief system design of OpenAgents:
 Please check the following folders and README files to set up & localhost:
 
 1. [**backend**](backend/README.md): the flask backend to host our three agents.
-2. [**frontend**](frontend/README.md): the frontend UI and webbot chrome extension.
+2. [**frontend**](frontend/README.md): the frontend UI and WeBot Chrome extension.
 
 ## 🥑 OpenAgents
 
