@@ -228,7 +228,7 @@ If you find our work helpful, please cite us:
 }
 ```
 
-## Acknowledgements
+## Acknowledgments
 
 We would like to thank Google Research, Amazon AWS, and Salesforce Research for their research gift funds to this open-source effort!
 
