@@ -159,7 +159,7 @@ Witness the full potential of Web Agent in these [use cases](https://docs.xlang.
 
 ## 📖 Documentation
 
-Please check [here](https://docs.xlang.ai) for full documentation, which will be updated to stay in pace with the demo changes and the code release.
+Please check [here](https://docs.xlang.ai) for full documentation, which will be updated to stay on pace with the demo changes and the code release.
 
 ## 👏 Contributing
 
@@ -203,7 +203,7 @@ For detailed information on how to contribute, see [here](https://github.com/xla
 <a href="https://github.com/xJQx"><img src="https://avatars.githubusercontent.com/u/47933193?v=4"  width="50" /></a>
 <a href="https://github.com/thomasshin"><img src="https://avatars.githubusercontent.com/u/76890354?v=4"  width="50" /></a>
 
-### Acknowledgements (beyond code)
+### Acknowledgments (beyond code)
 
 Heartfelt appreciation to [Ziyi Huang](https://www.joanna-ziyi-huang.com/), [Roxy Rong](https://www.linkedin.com/in/roxyrong/), [Haotian Li](https://haotian-li.com/), [Xingbo Wang](https://andy-xingbowang.com/), [Jansen Wong](https://www.linkedin.com/in/jansenwong/), and [Chen Henry Wu](https://chenwu.io/) for their valuable contributions to the OpenAgents. Their expertise and insights were instrumental in bringing this project to fruition!
 
