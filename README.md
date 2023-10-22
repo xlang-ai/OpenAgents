@@ -36,7 +36,8 @@
 
 <p align="center">
     <a>English</a> •
-    <a href="README_ZH.md">中文</a>
+    <a href="README_ZH.md">中文</a> •
+    <a href="README_JA.md">日本語</a>
 </p>
 
 Current language agent frameworks aim to facilitate the construction of proof-of-concept language agents while neglecting the non-expert user access to agents and paying little attention to application-level designs.
