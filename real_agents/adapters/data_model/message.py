@@ -146,7 +146,7 @@ class MessageDataModel:
 
     @classmethod
     def extract_action_for_llm(cls, text, max_token: int = 500) -> str:
-        """Since Action should be fully inputed into an Agent, so we do not perform truncation here."""
+        """Since Action should be fully inputted into an Agent, so we do not perform truncation here."""
         action_format = ACTION_FORMAT
         cleaned_output = text.strip()
         try:
