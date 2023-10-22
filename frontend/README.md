@@ -34,4 +34,4 @@ The extension named `XLang Web Agent` will be available on your Chrome now.
 
 ## One Click Deploy With Vercel
 
-[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fxlang-ai%2Fxlang_agents%2Ftree%2Fmain%2Ffrontend)
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fxlang-ai%2FOpenAgents%2Ftree%2Fmain%2Ffrontend)
