@@ -37,7 +37,7 @@ def process_one_property(name: str, value_dict: Dict[str, Any]) -> str:
     description = value_dict.get("description", None)
     required = value_dict.get("required", None)
 
-    type = value_dict.get("type", "UnkownType")
+    type = value_dict.get("type", "UnknownType")
     value_choices = value_dict.get("enum", [])
 
     ret = (
