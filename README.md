@@ -218,7 +218,7 @@ Heartfelt appreciation to [Ziyi Huang](https://www.joanna-ziyi-huang.com/), [Rox
 Thanks to all the contributors!
 
 <a href="https://github.com/xlang-ai/OpenAgents/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=xlang-ai/OpenAgents" />
+  <img src="https://contrib.rocks/image?repo=xlang-ai/OpenAgents" alt="Contributors chart" />
 </a>
 
 ## Citation
