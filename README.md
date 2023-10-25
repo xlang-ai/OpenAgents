@@ -77,8 +77,8 @@ Here is a brief system design of OpenAgents:
 
 Please check the following folders and README files to set up & localhost:
 
-1. [**backend**](backend/README.md): the flask backend to host our three agents.
-2. [**frontend**](frontend/README.md): the frontend UI and WeBot Chrome extension.
+1. [**Backend**](backend/README.md): the flask backend to host our three agents.
+2. [**Frontend**](frontend/README.md): the frontend UI and WeBot Chrome extension.
 
 ## 🥑 OpenAgents
 
@@ -171,13 +171,14 @@ Please check [here](https://docs.xlang.ai) for full documentation, which will be
 
 Thanks to open-sourced communities’ efforts, such as [LangChain](https://github.com/langchain-ai/langchain), [ChatBot UI](https://github.com/mckaywrigley/chatbot-ui), [Taxy.ai browser extension](https://github.com/TaxyAI/browser-extension) and others. We are able to build our interface prototype much more conveniently and efficiently.
 
-We welcome contributions and suggestions, together we move further to make it better!
+We welcome contributions and suggestions, together we move further to make it better! Following the steps will be well-received:
 
-- 🐛 Post an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you encounter any problems during your experience, or if you want to add any additional features.
-- 🕹 Directly contribute to our repo by creating a [Pull Request](https://github.com/xlang-ai/OpenAgents/pulls). Together we can make OpenAgents better!
-- ⭐ Give us a star, follow us on [Twitter](https://twitter.com/XLangNLP), share your own examples, and share with your friends!
+- **Step1:** Post an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you want to add any additional features, enhancements, or encounter any problems during your experience. The issues will be discussed and assigned there.
+- **Step2:** Whenever an issue is assigned, you can contribute by creating a [Pull Request](https://github.com/xlang-ai/OpenAgents/pulls) by following the PR template [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md). You can also claim for any open issues. Together we can make OpenAgents better!
+- **Step3:** PR will be merged or iterated after review and discussion. Thanks for your contribution!
 
-For detailed information on how to contribute, see [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md).
+For detailed information on how to contribute, we recommend checking [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md) before contribution.
+
 
 ## 🧙‍Participants
 

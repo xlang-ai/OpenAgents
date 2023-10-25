@@ -77,8 +77,8 @@ OpenAgents使普通用户通过为快速响应和常见失败进行优化的web 
 
 请查看下面的文件和README文件来设置和启动localhost：
 
-1. [**backend**](backend/README.md): 我们的三个代理的 Flask 后端。
-2. [**frontend**](frontend/README.md): 前端 UI 和 WeBot Chrome 扩展程序。
+1. [**Backend**](backend/README.md): 我们的三个代理的 Flask 后端。
+2. [**Frontend**](frontend/README.md): 前端 UI 和 WeBot Chrome 扩展程序。
 
 ## 🥑 OpenAgents
 
