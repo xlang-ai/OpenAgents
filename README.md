@@ -48,9 +48,9 @@ We have now implemented three agents in OpenAgents, and we host them on [demo](h
 2. Plugins Agent with 200+ daily tools; 
 3. Web Agent for autonomous web browsing.
 
-OpenAgents can analyze data, call plugins, control your browser as ChatGPT Plus, but with OPEN Code for
+OpenAgents can analyze data, call plugins, and control your browser as ChatGPT Plus, but with OPEN Code for
 1. Easy deployment
-2. Full stack
+2. Full-stack
 3. Chat Web UI
 4. Agent methods
 5. …
@@ -62,7 +62,7 @@ We elucidate both the challenges and promising opportunities, aspiring to set a 
 
 - **[2023, Oct 18]** Try out [our Lemur](https://github.com/OpenLemur/Lemur), the SOTA and open-sourced foundation models for language agents, matching ChatGPT on 15 agent tasks!
 - **[2023, Oct 17]** Check out the OpenAgents paper [here](https://arxiv.org/abs/2310.10634)!
-- **[2023, Oct 13]** We've released OpenAgents platform code for all three agents, server backend and frontend! Feel free to setup your localhost one, and play with OpenAgents!
+- **[2023, Oct 13]** We've released the OpenAgents platform code for all three agents, server backend and frontend! Feel free to set up your localhost one, and play with OpenAgents!
 - **[2023, Aug 17]** Our platform has officially reached 500 users! 🚀
 - **[2023, Aug 8]** We've released [OpenAgents demos](https://chat.xlang.ai), including Data, Plugins, and Web agents! Check [tutorials](https://docs.xlang.ai/category/user-manual) and [use cases](https://docs.xlang.ai/category/use-cases)!
 
@@ -75,7 +75,7 @@ Here is a brief system design of OpenAgents:
     <img src="pics/system_design.png"/>
 </div>
 
-Please check the following folders and README files to set up & localhost:
+Please check the following folders and README files to set up & local host:
 
 1. [**Backend**](backend/README.md): the flask backend to host our three agents.
 2. [**Frontend**](frontend/README.md): the frontend UI and WeBot Chrome extension.
@@ -146,7 +146,7 @@ Dive into more [use cases](https://docs.xlang.ai/use-cases/plugins-agent) to see
 **Examples of What Web Agent Can Do**:
 
 - 📍 **Google Maps Navigation**: Planning a journey? Simply relay your starting point and destination to Web Agent. It will navigate Google Maps for you and present the best routes.
-- 🐦 **Twitter Postings**: Engage in a conversation with Web Agent and wish to share something on Twitter? Mention the content, and Web Agent will handle your tweet effortlessly.
+- 🐦 **Twitter Postings**: Engage in a conversation with a Web Agent and wish to share something on Twitter? Mention the content and the Web Agent will handle your tweet effortlessly.
 - 📝 **Google Form Assistance**: Need to sign up for an event or activity? Share the Google Form link and the required details. Web Agent will populate the form for you.
 
 Witness the full potential of Web Agent in these [use cases](https://docs.xlang.ai/use-cases/web-agent).
@@ -173,7 +173,7 @@ Thanks to open-sourced communities’ efforts, such as [LangChain](https://githu
 
 We welcome contributions and suggestions, together we move further to make it better! Following the steps will be well-received:
 
-- **Step1:** Post an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you want to add any additional features, enhancements, or encounter any problems during your experience. The issues will be discussed and assigned there.
+- **Step1:** Post an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you want to add any additional features, or enhancements, or encounter any problems during your experience. The issues will be discussed and assigned there.
 - **Step2:** Whenever an issue is assigned, you can contribute by creating a [Pull Request](https://github.com/xlang-ai/OpenAgents/pulls) by following the PR template [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md). You can also claim for any open issues. Together we can make OpenAgents better!
 - **Step3:** PR will be merged or iterated after review and discussion. Thanks for your contribution!
 
