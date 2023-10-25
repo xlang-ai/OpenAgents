@@ -48,7 +48,7 @@ We have now implemented three agents in OpenAgents, and we host them on [demo](h
 2. Plugins Agent with 200+ daily tools; 
 3. Web Agent for autonomous web browsing.
 
-OpenAgents can analyze data, call plugins, control your browser as ChatGPT Plus, but with OPEN Code for
+OpenAgents can analyze data, call plugins, and  control your browser as ChatGPT Plus, but with OPEN Code for
 1. Easy deployment
 2. Full stack
 3. Chat Web UI
@@ -68,7 +68,7 @@ We elucidate both the challenges and promising opportunities, aspiring to set a 
 
 ## 💻 Localhost Deployment
 
-We've released the OpenAgents platform code. Feel free to deploy on your own localhost!
+We've released the OpenAgents platform code. Feel free to deploy it on your localhost!
 
 Here is a brief system design of OpenAgents:
 <div align="center">
@@ -100,7 +100,7 @@ With its proficiency in writing and executing code, Data Agent simplifies a wide
 </div>
 
 <details>
-  <summary>Click to see more use case screenshots</summary>
+  <summary>Click here see more use case screenshots</summary>
 <div align="center">
     <img src="pics/data_agent_demo.png" width="784"/>
 </div>
