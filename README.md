@@ -53,7 +53,7 @@ OpenAgents can analyze data, call plugins, control your browser as ChatGPT Plus,
 2. Full stack
 3. Chat Web UI
 4. Agent methods
-5. …
+
    
 OpenAgents enables general users to interact with agent functionalities through a web UI optimized for swift responses and common failures, while offering developers and researchers a seamless deployment experience on local setups, providing a foundation for crafting innovative language agents and facilitating real-world evaluations.
 We elucidate both the challenges and promising opportunities, aspiring to set a foundation for future research and development of real-world language agents.
