@@ -77,8 +77,8 @@ OpenAgents プラットフォームのコードをリリースしました。ご
 
 以下のフォルダと README ファイルをチェックして、localhost をセットアップしてください:
 
-1. [**backend**](backend/README.md): flask バックエンドは 3 つのエージェントをホストします。
-2. [**frontend**](frontend/README.md): フロントエンド UI と WeBot Chrome 拡張機能。
+1. [**Backend**](backend/README.md): flask バックエンドは 3 つのエージェントをホストします。
+2. [**Frontend**](frontend/README.md): フロントエンド UI と WeBot Chrome 拡張機能。
 
 ## 🥑 OpenAgents
 
