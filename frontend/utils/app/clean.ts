@@ -1,16 +1,16 @@
 import { Conversation } from '@/types/chat';
-import { OpenAIModelID, OpenAIModels } from '@/types/openai';
+import { OpenAgentID, OpenAgents } from '@/types/agent';
 
 import { DEFAULT_SYSTEM_PROMPT, DEFAULT_TEMPERATURE } from './const';
 
 export const cleanSelectedConversation = (conversation: Conversation) => {
   let updatedConversation = conversation;
 
-  // check for model on each conversation
-  if (!updatedConversation.model) {
+  // check for agent on each conversation
+  if (!updatedConversation.agent) {
     updatedConversation = {
       ...updatedConversation,
-      model: updatedConversation.model || OpenAIModels[OpenAIModelID.XLANG_DATACOPILOT],
+      agent: updatedConversation.agent || OpenAgents[OpenAgentID.DATA_AGENT],
     };
   }
 

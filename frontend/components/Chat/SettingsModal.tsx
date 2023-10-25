@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { ModelSelect } from './ModelSelect';
+import { AgentSelect } from './AgentSelect';
 
 interface SettingsModalProps {
   setIsSettingsModalOpen: (isSettingsModalOpen: boolean) => void;
@@ -25,7 +25,7 @@ export const SettingsModal = (props: SettingsModalProps) => {
             <div className="relative py-8 px-5 md:px-10 bg-[#202123] shadow-md rounded max-w-full">
               <div className="text-neutral-400 text-lg">Settings</div>
               <div className="pt-12">
-                <ModelSelect />
+                <AgentSelect />
               </div>
               <div className="mt-12"></div>
 

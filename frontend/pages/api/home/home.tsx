@@ -52,7 +52,7 @@ import {
 } from '@/types/chat';
 import { KeyValuePair } from '@/types/data';
 import { FolderInterface, FolderType } from '@/types/folder';
-import { LLM, OpenAIModelID, OpenAIModels, fallbackModelID } from '@/types/openai';
+import { LLM, OpenAgentID, OpenAgents, fallbackModelID } from '@/types/agent';
 
 import { Navbar } from '@/components/Mobile/Navbar';
 
@@ -73,13 +73,13 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 interface Props {
   serverSideApiKeyIsSet: boolean;
   serverSidePluginKeysSet: boolean;
-  defaultModelId: OpenAIModelID;
+  defaultAgentId: OpenAgentID;
 }
 
 const Home = ({
   serverSideApiKeyIsSet,
   serverSidePluginKeysSet,
-  defaultModelId,
+  defaultAgentId,
 }: Props) => {
   const { t } = useTranslation('chat');
   const [selectedNode, setSelectedNode] = useState<FileItem | undefined>(undefined);
@@ -103,7 +103,7 @@ const Home = ({
       isStopMessageStreaming,
       isStreamingError,
       defaultSelectedCodeInterpreterPlugins,
-      models,
+      agents,
       cachedConversations,
       defaultLLMId,
       showTerms,
@@ -113,7 +113,6 @@ const Home = ({
 
   const stopConversationRef = useRef<boolean>(false);
 
-  // FETCH MODELS ----------------------------------------------
 
   const handleSend = async (
       message: Message,
@@ -157,7 +156,7 @@ const Home = ({
         dispatch({ field: 'loading', value: true });
         dispatch({ field: 'messageIsStreaming', value: true });
         const chatBody: ChatBody = {
-          model: updatedConversation.model,
+          agent: updatedConversation.agent,
           key: apiKey,
           messages: updatedConversation.messages,
           prompt: updatedConversation.prompt,
@@ -172,7 +171,7 @@ const Home = ({
           id: null,
           name: t('New Conversation'),
           messages: [],
-          model: OpenAIModels[defaultModelId],
+          agent: OpenAgents[defaultAgentId],
           prompt: DEFAULT_SYSTEM_PROMPT,
           temperature: DEFAULT_TEMPERATURE,
           folderId: null,
@@ -205,7 +204,7 @@ const Home = ({
             }
         }
 
-        const endpoint = getEndpoint(chatBody.model);
+        const endpoint = getEndpoint(chatBody.agent);
         let body;
         let user_intent = ""
         let parent_message_id: number | null = -1;
@@ -240,7 +239,7 @@ const Home = ({
                 parent_message_id: parent_message_id
               }} : apiCall,
             is_regenerate: isRegenerate,
-            llm_name: updatedConversation.model?.llm?.name,
+            llm_name: updatedConversation.agent?.llm?.name,
             temperature: updatedConversation.temperature,
             api_key: apiKey,
           });
@@ -732,7 +731,7 @@ const Home = ({
                 const body = JSON.stringify({
                   user_intent: message.content,
                   chat_id: updatedConversation.id,
-                  llm_name: updatedConversation?.model?.llm?.name,
+                  llm_name: updatedConversation?.agent?.llm?.name,
                   temperature: updatedConversation?.temperature,
                   parent_message_id: parent_message_id,
                   api_key: apiKey,
@@ -957,12 +956,12 @@ const Home = ({
       id: null,
       name: t('New Conversation'),
       messages: [],
-      model: {
-        id: OpenAIModels[defaultModelId].id,
-        name: OpenAIModels[defaultModelId].name,
-        maxLength: OpenAIModels[defaultModelId].maxLength,
-        tokenLimit: OpenAIModels[defaultModelId].tokenLimit,
-        llm: OpenAIModels[defaultModelId].llm,
+      agent: {
+        id: OpenAgents[defaultAgentId].id,
+        name: OpenAgents[defaultAgentId].name,
+        maxLength: OpenAgents[defaultAgentId].maxLength,
+        tokenLimit: OpenAgents[defaultAgentId].tokenLimit,
+        llm: OpenAgents[defaultAgentId].llm,
       },
       prompt: DEFAULT_SYSTEM_PROMPT,
       temperature: selectedConversation?.temperature ?? DEFAULT_TEMPERATURE,
@@ -1456,8 +1455,8 @@ const Home = ({
   }, [selectedConversation, selectedConversation?.messages]);
 
   useEffect(() => {
-    defaultModelId &&
-      dispatch({ field: 'defaultModelId', value: defaultModelId });
+    defaultAgentId &&
+      dispatch({ field: 'defaultAgentId', value: defaultAgentId });
     serverSideApiKeyIsSet &&
       dispatch({
         field: 'serverSideApiKeyIsSet',
@@ -1468,7 +1467,7 @@ const Home = ({
         field: 'serverSidePluginKeysSet',
         value: serverSidePluginKeysSet,
       });
-  }, [defaultModelId, serverSideApiKeyIsSet, serverSidePluginKeysSet]);
+  }, [defaultAgentId, serverSideApiKeyIsSet, serverSidePluginKeysSet]);
 
   useEffect(() => {
     // fetch 1st page of conversation name list on load
@@ -1585,7 +1584,7 @@ const Home = ({
           id: null,
           name: t('New Conversation'),
           messages: [],
-          model: OpenAIModels[defaultModelId],
+          agent: OpenAgents[defaultAgentId],
           prompt: DEFAULT_SYSTEM_PROMPT,
           temperature: DEFAULT_TEMPERATURE,
           folderId: null,
@@ -1599,7 +1598,7 @@ const Home = ({
       })();
     }
   }, [
-    defaultModelId,
+    defaultAgentId,
     dispatch,
     serverSideApiKeyIsSet,
     serverSidePluginKeysSet,
@@ -1748,9 +1747,9 @@ const Home = ({
       dispatch({ field: 'llmList', value: Object.values(llmList) });
       dispatch({ field: 'defaultLLM', value: defaultLLM });
       
-      // update models
-      models.forEach(model => {
-        model.llm = defaultLLM;
+      // update agents
+      agents.forEach(agent => {
+        agent.llm = defaultLLM;
       })
     };
     handleGetLLMList();
@@ -1975,12 +1974,12 @@ const Home = ({
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
-  const defaultModelId =
-    (process.env.DEFAULT_MODEL &&
-      Object.values(OpenAIModelID).includes(
-        process.env.DEFAULT_MODEL as OpenAIModelID,
+  const defaultAgentId =
+    (process.env.DEFAULT_AGENT &&
+      Object.values(OpenAgentID).includes(
+        process.env.DEFAULT_AGENT as OpenAgentID,
       ) &&
-      process.env.DEFAULT_MODEL) ||
+      process.env.DEFAULT_AGENT) ||
     fallbackModelID;
 
   let serverSidePluginKeysSet = false;
@@ -1995,7 +1994,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   return {
     props: {
       serverSideApiKeyIsSet: !!process.env.OPENAI_API_KEY,
-      defaultModelId,
+      defaultAgentId,
       serverSidePluginKeysSet,
       ...(await serverSideTranslations('en', [
         'common',

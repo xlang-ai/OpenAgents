@@ -17,7 +17,7 @@ import { exportData } from '@/utils/app/export';
 import { saveFolders } from '@/utils/app/folders';
 
 import { Conversation, ConversationNameListItem } from '@/types/chat';
-import { OpenAIModels } from '@/types/openai';
+import { OpenAgent, OpenAgents } from '@/types/agent';
 import { PluginKey } from '@/types/plugin';
 
 import HomeContext from '@/pages/api/home/home.context';
@@ -40,7 +40,7 @@ export const Chatbar = () => {
   const {
     state: {
       showChatbar,
-      defaultModelId,
+      defaultAgentId,
       folders,
       pluginKeys,
       conversationNameList,
@@ -116,13 +116,13 @@ export const Chatbar = () => {
     }
 
     // update local storage
-    if (defaultModelId) {
+    if (defaultAgentId) {
       (async () => {
         const newConversation: Conversation = {
           id: null,
           name: t('New Conversation'),
           messages: [],
-          model: OpenAIModels[defaultModelId],
+          agent: OpenAgents[defaultAgentId],
           prompt: DEFAULT_SYSTEM_PROMPT,
           temperature: DEFAULT_TEMPERATURE,
           folderId: null,
@@ -183,13 +183,13 @@ export const Chatbar = () => {
         return;
       }
     } else {
-      if (defaultModelId) {
+      if (defaultAgentId) {
         (async () => {
           const newConversation: Conversation = {
             id: null,
             name: t('New Conversation'),
             messages: [],
-            model: OpenAIModels[defaultModelId],
+            agent: OpenAgents[defaultAgentId],
             prompt: DEFAULT_SYSTEM_PROMPT,
             temperature: DEFAULT_TEMPERATURE,
             folderId: null,

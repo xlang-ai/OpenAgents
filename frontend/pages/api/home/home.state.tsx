@@ -9,10 +9,10 @@ import { ExternalDataFile, FileItem } from '@/types/files';
 import { FolderInterface } from '@/types/folder';
 import {
   LLM,
-  OpenAIModel,
-  OpenAIModelID,
-  OpenAIModelList,
-} from '@/types/openai';
+  OpenAgentID,
+  OpenAgent,
+  OpenAgentList,
+} from '@/types/agent';
 import { PluginKey } from '@/types/plugin';
 import { Plugin } from '@/types/plugin';
 
@@ -29,13 +29,13 @@ export interface HomeInitialState {
   apiKeyUploading: boolean;
   followUpLoading: boolean;
   modelError: ErrorMessage | null;
-  models: OpenAIModel[];
+  agents: OpenAgent[];
   llmList: LLM[];
   folders: FolderInterface[];
   conversationNameList: ConversationNameListItem[];
   selectedConversation: Conversation | undefined;
   showChatbar: boolean;
-  defaultModelId: OpenAIModelID | undefined;
+  defaultAgentId: OpenAgentID | undefined;
   defaultLLM: LLM | undefined;
   defaultLLMId: string;
   serverSideApiKeyIsSet: boolean;
@@ -80,13 +80,13 @@ export const initialState: HomeInitialState = {
   messageIsStreaming: false,
   followUpLoading: false,
   modelError: null,
-  models: OpenAIModelList,
+  agents: OpenAgentList,
   llmList: [],
   folders: [],
   conversationNameList: [],
   selectedConversation: undefined,
   showChatbar: true,
-  defaultModelId: undefined,
+  defaultAgentId: undefined,
   defaultLLM: undefined,
   defaultLLMId: 'gpt-3.5-turbo-16k',
   serverSideApiKeyIsSet: false,

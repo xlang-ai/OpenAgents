@@ -464,7 +464,7 @@ export const ChatMessage: FC<Props> = memo(
 
               {/* render card info (output by specific plugins) */}
               <div className="flex overflow-x-auto overflow-y-hidden">
-                {selectedConversation?.model.id == 'xlang-plugins' &&
+                {selectedConversation?.agent.id == 'plugins-agent' &&
                   message.type === 'rich_message' &&
                   message.richContent &&
                   message.richContent.finalAnswer?.length > 0 &&

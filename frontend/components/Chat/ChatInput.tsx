@@ -12,7 +12,7 @@ import { useTranslation } from 'next-i18next';
 import { stopConversation } from '@/utils/app/conversation';
 
 import { Message } from '@/types/chat';
-import { LLM, OpenAIModel } from '@/types/openai';
+import { LLM, OpenAgent } from '@/types/agent';
 import { Plugin } from '@/types/plugin';
 
 import HomeContext from '@/pages/api/home/home.context';
@@ -59,7 +59,7 @@ export const ChatInput = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
-    const maxLength = selectedConversation?.model.maxLength;
+    const maxLength = selectedConversation?.agent.maxLength;
 
     if (maxLength && value.length > maxLength) {
       alert(
@@ -112,7 +112,7 @@ export const ChatInput = ({
   const handleChangeLLM = async (e: any) => {
     if (!selectedConversation) return;
     const newLLM = llmList.find((llm) => llm.name === e.target.value) as LLM;
-    const curModel = selectedConversation.model as OpenAIModel;
+    const curModel = selectedConversation.agent as OpenAgent;
     const updateModel = {
       ...curModel,
       llm: newLLM,
@@ -120,7 +120,7 @@ export const ChatInput = ({
     handleUpdateConversation(
       selectedConversation,
       {
-        key: 'model',
+        key: 'agent',
         value: updateModel,
       },
       false,
@@ -174,7 +174,7 @@ export const ChatInput = ({
               >
                 <Select
                   className="w-full p-2 h-8 font-[Montserrat] bg-white rounded-xl"
-                  value={selectedConversation?.model?.llm?.id || defaultLLMId}
+                  value={selectedConversation?.agent?.llm?.id || defaultLLMId}
                   onChange={handleChangeLLM}
                   MenuProps={{
                     anchorOrigin: {

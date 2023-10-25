@@ -1,6 +1,6 @@
 import { OPENAI_API_TYPE } from '../utils/app/const';
 
-export interface OpenAIModel {
+export interface OpenAgent {
   id: string;
   name: string;
   maxLength: number; // maximum length of a message
@@ -14,32 +14,32 @@ export interface LLM {
   // TODO: other args
 }
 
-export enum OpenAIModelID {
-  XLANG_DATACOPILOT = 'xlang-datacopilot',
-  XLANG_PLUGIN = 'xlang-plugins',
-  XLANG_WEBOT = 'xlang-webot',
+export enum OpenAgentID {
+  DATA_AGENT = 'data-agent',
+  PLUGINS_AGENT = 'plugins-agent',
+  WEB_AGENT = 'web-agent',
 }
 
 // in case the `DEFAULT_MODEL` environment variable is not set or set to an unsupported model
-export const fallbackModelID = OpenAIModelID.XLANG_DATACOPILOT;
+export const fallbackModelID = OpenAgentID.DATA_AGENT;
 
-export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
-  [OpenAIModelID.XLANG_DATACOPILOT]: {
-    id: OpenAIModelID.XLANG_DATACOPILOT,
+export const OpenAgents: Record<OpenAgentID, OpenAgent> = {
+  [OpenAgentID.DATA_AGENT]: {
+    id: OpenAgentID.DATA_AGENT,
     name: 'Data Agent',
     maxLength: 12000,
     tokenLimit: 4000,
     llm: undefined,
   },
-  [OpenAIModelID.XLANG_PLUGIN]: {
-    id: OpenAIModelID.XLANG_PLUGIN,
+  [OpenAgentID.PLUGINS_AGENT]: {
+    id: OpenAgentID.PLUGINS_AGENT,
     name: 'Plugins Agent',
     maxLength: 1024,
     tokenLimit: 4000,
     llm: undefined,
   },
-  [OpenAIModelID.XLANG_WEBOT]: {
-    id: OpenAIModelID.XLANG_WEBOT,
+  [OpenAgentID.WEB_AGENT]: {
+    id: OpenAgentID.WEB_AGENT,
     name: 'Web Agent',
     maxLength: 1024,
     tokenLimit: 4000,
@@ -47,4 +47,4 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
   },
 };
 
-export const OpenAIModelList = Object.values(OpenAIModels);
+export const OpenAgentList = Object.values(OpenAgents);
