@@ -48,7 +48,7 @@ We have now implemented three agents in OpenAgents, and we host them on [demo](h
 2. Plugins Agent with 200+ daily tools; 
 3. Web Agent for autonomous web browsing.
 
-OpenAgents can analyze data, call plugins, and  control your browser as ChatGPT Plus, but with OPEN Code for
+OpenAgents can analyze data, call plugins, and control your browser as ChatGPT Plus, but with OPEN Code for
 1. Easy deployment
 2. Full stack
 3. Chat Web UI
