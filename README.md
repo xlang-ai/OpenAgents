@@ -100,7 +100,7 @@ With its proficiency in writing and executing code, Data Agent simplifies a wide
 </div>
 
 <details>
-  <summary>Click here see more use case screenshots</summary>
+  <summary>Click here to see more use case screenshots</summary>
 <div align="center">
     <img src="pics/data_agent_demo.png" width="784"/>
 </div>
