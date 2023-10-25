@@ -66,23 +66,10 @@ We elucidate both the challenges and promising opportunities, aspiring to set a 
 - **[2023, Aug 17]** Our platform has officially reached 500 users! 🚀
 - **[2023, Aug 8]** We've released [OpenAgents demos](https://chat.xlang.ai), including Data, Plugins, and Web agents! Check [tutorials](https://docs.xlang.ai/category/user-manual) and [use cases](https://docs.xlang.ai/category/use-cases)!
 
-## 💻 Localhost Deployment
-
-We've released the OpenAgents platform code. Feel free to deploy on your own localhost!
-
-Here is a brief system design of OpenAgents:
-<div align="center">
-    <img src="pics/system_design.png"/>
-</div>
-
-Please check the following folders and README files to set up & localhost:
-
-1. [**Backend**](backend/README.md): the flask backend to host our three agents.
-2. [**Frontend**](frontend/README.md): the frontend UI and WeBot Chrome extension.
 
 ## 🥑 OpenAgents
 
-We built three real-world agents with chat-based web UI (check [OpenAgents demos](https://chat.xlang.ai)). Here is a brief overview of our OpenAgents framework. You can find more details about concepts & designs in our [documentation](https://docs.xlang.ai).
+We built three real-world agents with chat-based web UI as demonstration(check [OpenAgents demos](https://chat.xlang.ai)). Here is a brief overview of our OpenAgents platform. You can find more details about concepts & designs in our [documentation](https://docs.xlang.ai).
 
 ### Data Agent
 
@@ -163,9 +150,90 @@ Witness the full potential of Web Agent in these [use cases](https://docs.xlang.
 
 </details>
 
-## 📖 Documentation
 
-Please check [here](https://docs.xlang.ai) for full documentation, which will be updated to stay on pace with the demo changes and the code release.
+## 💻 Localhost Deployment
+
+We've released the OpenAgents platform code. Feel free to deploy on your own localhost!
+
+Here is a brief system design of OpenAgents:
+<div align="center">
+    <img src="pics/system_design.png"/>
+</div>
+
+Please check the following folders and README files to set up & localhost:
+
+1. [**Backend**](backend/README.md): the flask backend to host our three agents.
+2. [**Frontend**](frontend/README.md): the frontend UI and WeBot Chrome extension.
+
+
+## 📜 Tutorial on Extending OpenAgents
+### Code Structure
+Before we dive into how to extend OpenAgents, let's first take a glance at the code structure for better understanding. 
+The code structure of OpenAgents is shown below:
+```bash
+├── backend  # backend code
+│   ├── README.md  # backend README for setup
+│   ├── api  # RESTful APIs, to be called by the frontend
+│   ├── app.py  # main flask app
+│   ├── display_streaming.py  # rendering the streaming response
+│   ├── kernel_publisher.py  # queue for code execution
+│   ├── main.py  # main entry for the backend
+│   ├── memory.py  # memory(storage) for the backend
+│   ├── schemas.py  # constant definitions
+│   ├── setup_script.sh  # one-click setup script for the backend
+│   ├── static  # static files, e.g., cache and figs
+│   └── utils  # utilities
+├── frontend  # frontend code
+│   ├── README.md  # frontend README for setup
+│   ├── components
+│   ├── hooks
+│   ├── icons
+│   ├── next-env.d.ts
+│   ├── next-i18next.config.js
+│   ├── next.config.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── pages
+│   ├── postcss.config.js
+│   ├── prettier.config.js
+│   ├── public
+│   ├── styles
+│   ├── tailwind.config.js
+│   ├── tsconfig.json
+│   ├── types
+│   ├── utils
+│   ├── vitest.config.ts
+│   └── webot_extension.zip
+└── real_agents  # language agents
+    ├── adapters  # shared components for the three agents to adapt to the backend
+    ├── data_agent  # data agent implementation
+    ├── plugins_agent  # plugins agent implementation
+    └── web_agent  # web agent implementation
+```
+As shown, `backend/` and `frontend/` are self-contained and directly deployable (see [here](#localhost-deployment)).
+It does not mean they cannot be modified.
+Instead, you can just follow the conventional *client-server* architecture to extend the backend and frontend as you wish.
+For `real_agents/`, we design it to be "one agent, one folder", so that it is easy to extend a new agent. 
+It is worth noting that we name it "real agents" because not only the conceptual language agent part is included, but also the gaps between the language agent and the backend are filled here.
+For example, `adapters/` contains the shared adapter components like stream parsing, data model, memory, callbacks, etc.
+We refer interested readers to our [paper](https://arxiv.org/abs/2310.10634) for concepts and implementation designs.
+And we thank [LangChain](https://github.com/langchain-ai/langchain) as we base on their code to build real agents.
+
+### Extend A New Agent
+- Refer to the `real_agents/` folder to see how previous agents are implemented, and create a new folder for your agent.
+- Implement the agent logic in the new folder. Use the components under `adapters/` folder when needed.
+- Add a `chat_<new_agent>.py` file under `backend/api/` folder to define the chat API for the new agent, which will be called by the frontend.
+- Register new constants in `backend/schemas.py` if needed.
+- (Frontend todo)
+- Run localhost script and test your new agent.
+Note, if new data types, i.e., beyond text, image, table, and echarts json, you may need to implement its parsing logic in `backend/display_streaming.py` and add new data models.
+
+### Extend A New Model
+
+
+### Extend A New Tool
+
+
 
 ## 👏 Contributing
 
@@ -178,6 +246,11 @@ We welcome contributions and suggestions, together we move further to make it be
 - **Step3:** PR will be merged or iterated after review and discussion. Thanks for your contribution!
 
 For detailed information on how to contribute, we recommend checking [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md) before contribution.
+
+
+## 📖 Documentation
+
+Please check [here](https://docs.xlang.ai) for full documentation, which will be updated to stay on pace with the demo changes and the code release.
 
 
 ## 🧙‍Participants
