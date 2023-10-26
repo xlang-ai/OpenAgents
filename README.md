@@ -60,6 +60,7 @@ We elucidate both the challenges and promising opportunities, aspiring to set a 
 
 ## 🔥 News
 
+- **[2023, Oct 26]** We've reached 3,000 users! 🚀 Heartfelt thanks to all our users and contributors! 🙏 Please bear with us as we navigate through unexpectedly high traffic on our servers. We appreciate your patience and ready to assist as soon as possible!
 - **[2023, Oct 18]** Try out [our Lemur](https://github.com/OpenLemur/Lemur), the SOTA and open-sourced foundation models for language agents, matching ChatGPT on 15 agent tasks!
 - **[2023, Oct 17]** Check out the OpenAgents paper [here](https://arxiv.org/abs/2310.10634)!
 - **[2023, Oct 13]** We've released OpenAgents platform code for all three agents, server backend and frontend! Feel free to setup your localhost one, and play with OpenAgents!
