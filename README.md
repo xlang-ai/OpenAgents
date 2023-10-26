@@ -58,6 +58,8 @@ OpenAgents can analyze data, call plugins, control your browser as ChatGPT Plus,
 OpenAgents enables general users to interact with agent functionalities through a web UI optimized for swift responses and common failures, while offering developers and researchers a seamless deployment experience on local setups, providing a foundation for crafting innovative language agents and facilitating real-world evaluations.
 We elucidate both the challenges and promising opportunities, aspiring to set a foundation for future research and development of real-world language agents.
 
+We welcome contributions from everyone. Before you start, please take a moment to read our [CONTRIBUTING.md](./CONTRIBUTING.md) guidelines for issues and PRs. This will help ensure that your contribution process is smooth and consistent with the project’s standards.
+
 ## 🔥 News
 
 - **[2023, Oct 26]** We've reached 3,000 users! 🚀 Heartfelt thanks to all our users and contributors! 🙏 Please bear with us as we navigate through unexpectedly high traffic on our servers. We appreciate your patience and ready to assist as soon as possible!
@@ -250,11 +252,11 @@ Thanks to open-sourced communities’ efforts, such as [LangChain](https://githu
 
 We welcome contributions and suggestions, together we move further to make it better! Following the steps will be well-received:
 
-- **Step1:** Post an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you want to add any additional features, enhancements, or encounter any problems during your experience. The issues will be discussed and assigned there.
-- **Step2:** Whenever an issue is assigned, you can contribute by creating a [Pull Request](https://github.com/xlang-ai/OpenAgents/pulls) by following the PR template [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md). You can also claim for any open issues. Together we can make OpenAgents better!
+- **Step1:** Post an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you want to add any additional features, enhancements, or encounter any problems during your experience. We would appreciate it if you follow the [issue template](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md). The issues will be discussed and assigned there.
+- **Step2:** Whenever an issue is assigned, you can contribute by creating a [Pull Request](https://github.com/xlang-ai/OpenAgents/pulls) by following the [PR template](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md). You can also claim for any open issues. Together we can make OpenAgents better!
 - **Step3:** PR will be merged or iterated after review and discussion. Thanks for your contribution!
 
-For detailed information on how to contribute, we recommend checking [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md) before contribution.
+Before you start, we highly recommend taking a moment to check [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md) before contribution.
 
 
 ## 📖 Documentation
