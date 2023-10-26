@@ -58,31 +58,24 @@ OpenAgents can analyze data, call plugins, control your browser as ChatGPT Plus,
 OpenAgents enables general users to interact with agent functionalities through a web UI optimized for swift responses and common failures, while offering developers and researchers a seamless deployment experience on local setups, providing a foundation for crafting innovative language agents and facilitating real-world evaluations.
 We elucidate both the challenges and promising opportunities, aspiring to set a foundation for future research and development of real-world language agents.
 
+We welcome contributions from everyone. Before you start, please take a moment to read our [CONTRIBUTING.md](./CONTRIBUTING.md) guidelines for issues and PRs. This will help ensure that your contribution process is smooth and consistent with the project’s standards.
+
+## 🔫 Trouble Shooting
+Join our Discord for help if you encounter any issues with our [online demo](https://chat.xlang.ai) or local deployment. Alternatively, create an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you have trouble with features or code.
+
 ## 🔥 News
 
+- **[2023, Oct 26]** We've reached 3,000 users! 🚀 Heartfelt thanks to all our users and contributors! 🙏 Please bear with us as we navigate through unexpectedly high traffic on our servers. We appreciate your patience and ready to assist as soon as possible!
 - **[2023, Oct 18]** Try out [our Lemur](https://github.com/OpenLemur/Lemur), the SOTA and open-sourced foundation models for language agents, matching ChatGPT on 15 agent tasks!
 - **[2023, Oct 17]** Check out the OpenAgents paper [here](https://arxiv.org/abs/2310.10634)!
 - **[2023, Oct 13]** We've released OpenAgents platform code for all three agents, server backend and frontend! Feel free to setup your localhost one, and play with OpenAgents!
 - **[2023, Aug 17]** Our platform has officially reached 500 users! 🚀
 - **[2023, Aug 8]** We've released [OpenAgents demos](https://chat.xlang.ai), including Data, Plugins, and Web agents! Check [tutorials](https://docs.xlang.ai/category/user-manual) and [use cases](https://docs.xlang.ai/category/use-cases)!
 
-## 💻 Localhost Deployment
-
-We've released the OpenAgents platform code. Feel free to deploy on your own localhost!
-
-Here is a brief system design of OpenAgents:
-<div align="center">
-    <img src="pics/system_design.png"/>
-</div>
-
-Please check the following folders and README files to set up & localhost:
-
-1. [**Backend**](backend/README.md): the flask backend to host our three agents.
-2. [**Frontend**](frontend/README.md): the frontend UI and WeBot Chrome extension.
 
 ## 🥑 OpenAgents
 
-We built three real-world agents with chat-based web UI (check [OpenAgents demos](https://chat.xlang.ai)). Here is a brief overview of our OpenAgents framework. You can find more details about concepts & designs in our [documentation](https://docs.xlang.ai).
+We built three real-world agents with chat-based web UI as demonstration(check [OpenAgents demos](https://chat.xlang.ai)). Here is a brief overview of our OpenAgents platform. You can find more details about concepts & designs in our [documentation](https://docs.xlang.ai).
 
 ### Data Agent
 
@@ -163,9 +156,100 @@ Witness the full potential of Web Agent in these [use cases](https://docs.xlang.
 
 </details>
 
-## 📖 Documentation
 
-Please check [here](https://docs.xlang.ai) for full documentation, which will be updated to stay on pace with the demo changes and the code release.
+## 💻 Localhost Deployment
+
+We've released the OpenAgents platform code. Feel free to deploy on your own localhost!
+
+Here is a brief system design of OpenAgents:
+<div align="center">
+    <img src="pics/system_design.png"/>
+</div>
+
+Please check the following folders and README files to set up & localhost:
+
+1. [**Backend**](backend/README.md): the flask backend to host our three agents.
+2. [**Frontend**](frontend/README.md): the frontend UI and WeBot Chrome extension.
+
+p.s.: We have renamed some arguments in code for better readability. If you have pulled the code before 10/26/2023, just a reminder that if you want to you pull the latest code, previous local chat history will be lost because of different key names.
+
+## 📜 Tutorial on Extending OpenAgents
+### Code Structure
+Before we dive into how to extend OpenAgents, let's first take a glance at the code structure for better understanding. 
+The code structure of OpenAgents is shown below:
+```bash
+├── backend  # backend code
+│   ├── README.md  # backend README for setup
+│   ├── api  # RESTful APIs, to be called by the frontend
+│   ├── app.py  # main flask app
+│   ├── display_streaming.py  # rendering the streaming response
+│   ├── kernel_publisher.py  # queue for code execution
+│   ├── main.py  # main entry for the backend
+│   ├── memory.py  # memory(storage) for the backend
+│   ├── schemas.py  # constant definitions
+│   ├── setup_script.sh  # one-click setup script for the backend
+│   ├── static  # static files, e.g., cache and figs
+│   └── utils  # utilities
+├── frontend  # frontend code
+│   ├── README.md  # frontend README for setup
+│   ├── components  # React components
+│   ├── hooks  # custom React hooks
+│   ├── icons  # icon assets
+│   ├── next-env.d.ts  # TypeScript declarations for Next.js environment variables
+│   ├── next-i18next.config.js  # configuration settings for internationalization
+│   ├── next.config.js  # configuration settings for Next.js
+│   ├── package-lock.json  # generated by npm that describes the exact dependency tree
+│   ├── package.json  # manifest file that describes the dependencies
+│   ├── pages  # Next.js pages
+│   ├── postcss.config.js  # configuration settings for PostCSS
+│   ├── prettier.config.js  # configuration settings for Prettier
+│   ├── public  # static assets
+│   ├── styles  # global styles
+│   ├── tailwind.config.js  # configuration settings for Tailwind CSS
+│   ├── tsconfig.json  # configuration settings for TypeScript
+│   ├── types  # type declarations
+│   ├── utils  # utilities or helper functions
+│   ├── vitest.config.ts  # configuration settings for ViTest
+│   └── webot_extension.zip  # Chrome extension for Web Agent
+└── real_agents  # language agents
+    ├── adapters  # shared components for the three agents to adapt to the backend
+    ├── data_agent  # data agent implementation
+    ├── plugins_agent  # plugins agent implementation
+    └── web_agent  # web agent implementation
+```
+As shown, `backend/` and `frontend/` are self-contained and directly deployable (see [here](#localhost-deployment)).
+It does not mean they cannot be modified.
+Instead, you can just follow the conventional *client-server* architecture to extend the backend and frontend as you wish.
+For `real_agents/`, we design it to be "one agent, one folder", so that it is easy to extend a new agent. 
+It is worth noting that we name it "real agents" because not only the conceptual language agent part is included, but also the gaps between the language agent and the backend are filled here.
+For example, `adapters/` contains the shared adapter components like stream parsing, data model, memory, callbacks, etc.
+We refer interested readers to our [paper](https://arxiv.org/abs/2310.10634) for concepts and implementation designs.
+And we thank [LangChain](https://github.com/langchain-ai/langchain) as we base on their code to build real agents.
+
+### Extend A New Agent
+If you want to build a new agent beyond the three agents we provide, you can follow the steps below:
+- Refer to the `real_agents/` folder to see how previous agents are implemented, and create a new folder for your agent.
+- Implement the agent logic in the new folder. Use the components under `adapters/` folder when needed.
+- Add a `chat_<new_agent>.py` file under `backend/api/` folder to define the chat API for the new agent, which will be called by the frontend.
+- Register new constants in `backend/schemas.py` if needed.
+- Add a new `OpenAgentID` in `frontend/types/agent.ts` and the corresponding API in `frontend/utils/app/api.ts` and `frontend/utils/app/const.ts`.
+- Implement the agent UI in `frontend/components/Chat/Chat.tsx` and `frontend/components/Chat/ChatMessage.tsx` when needed.
+- Run localhost script and test your new agent.
+
+Note, if new data types, i.e., beyond text, image, table, and json, you may need to implement its parsing logic in `backend/display_streaming.py` and add new data models.
+
+### Extend A New LLM
+Extending a new LLM as the agent backbone is simpler if the LLM is already hosted and can be called via API.
+Just register your new model in `backend/api/language_model.py`. Just refer to lemur-chat as a template.
+
+If the LLM is not hosted yet, we have a tutorial on how to deploy a new LLM and expose it as an API [here]() (LLM hosting to todo).
+
+### Extend A New Tool
+If you want to extend a new tool in Plugins Agent, you can follow the steps below:
+- Refer to the already built plugins in `real_agents/plugins_agent/plugins/`, and create a new folder for your tool.
+- Implement the tool logic in the new folder. Note that `ai-plugin.json` and `openapi.yaml` are essential for the tool to be recognized(which can be generated by LLM following the others rather than manually written). And the `paths/` are for the actual tool API call.
+- Register the new tool name in `real_agents/plugins_agent/plugin_names.py`.
+
 
 ## 👏 Contributing
 
@@ -173,11 +257,16 @@ Thanks to open-sourced communities’ efforts, such as [LangChain](https://githu
 
 We welcome contributions and suggestions, together we move further to make it better! Following the steps will be well-received:
 
-- **Step1:** Post an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you want to add any additional features, enhancements, or encounter any problems during your experience. The issues will be discussed and assigned there.
-- **Step2:** Whenever an issue is assigned, you can contribute by creating a [Pull Request](https://github.com/xlang-ai/OpenAgents/pulls) by following the PR template [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md). You can also claim for any open issues. Together we can make OpenAgents better!
+- **Step1:** Post an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you want to add any additional features, enhancements, or encounter any problems during your experience. We would appreciate it if you follow the [issue template](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md). The issues will be discussed and assigned there.
+- **Step2:** Whenever an issue is assigned, you can contribute by creating a [Pull Request](https://github.com/xlang-ai/OpenAgents/pulls) by following the [PR template](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md). You can also claim for any open issues. Together we can make OpenAgents better!
 - **Step3:** PR will be merged or iterated after review and discussion. Thanks for your contribution!
 
-For detailed information on how to contribute, we recommend checking [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md) before contribution.
+Before you start, we highly recommend taking a moment to check [here](https://github.com/xlang-ai/OpenAgents/blob/main/CONTRIBUTING.md) before contribution.
+
+
+## 📖 Documentation
+
+Please check [here](https://docs.xlang.ai) for full documentation, which will be updated to stay on pace with the demo changes and the code release.
 
 
 ## 🧙‍Participants
