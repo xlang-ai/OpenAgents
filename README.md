@@ -60,6 +60,9 @@ We elucidate both the challenges and promising opportunities, aspiring to set a 
 
 We welcome contributions from everyone. Before you start, please take a moment to read our [CONTRIBUTING.md](./CONTRIBUTING.md) guidelines for issues and PRs. This will help ensure that your contribution process is smooth and consistent with the project’s standards.
 
+## 🔫 Trouble Shooting
+Join our Discord for help if you encounter any issues with our [online demo](https://chat.xlang.ai) or local deployment. Alternatively, create an [issue](https://github.com/xlang-ai/OpenAgents/issues) if you have trouble with features or code.
+
 ## 🔥 News
 
 - **[2023, Oct 26]** We've reached 3,000 users! 🚀 Heartfelt thanks to all our users and contributors! 🙏 Please bear with us as we navigate through unexpectedly high traffic on our servers. We appreciate your patience and ready to assist as soon as possible!
