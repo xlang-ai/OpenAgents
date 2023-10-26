@@ -1,19 +1,16 @@
 import { Plugin, PluginID } from '@/types/plugin';
 
 import { API_CHAT, API_RECOMMEND, API_CHAT_XLANG, API_CHAT_XLANG_PLUGIN , API_CHAT_XLANG_WEBOT} from './const';
-import { OpenAIModel, OpenAIModelID } from '@/types/openai';
+import { OpenAgent, OpenAgentID } from '@/types/agent';
 
-export const getEndpoint = (model: OpenAIModel) => {
-  if (model.id === OpenAIModelID.XLANG_DATACOPILOT) {
+export const getEndpoint = (agent: OpenAgent) => {
+  if (agent.id === OpenAgentID.DATA_AGENT) {
     return API_CHAT;
   }
-  // if (model.id === OpenAIModelID.XLANG_CHAT) {
-  //   return API_CHAT_XLANG;
-  // }
-  if (model.id === OpenAIModelID.XLANG_PLUGIN) {
+  if (agent.id === OpenAgentID.PLUGINS_AGENT) {
     return API_CHAT_XLANG_PLUGIN;
   }
-  if (model.id === OpenAIModelID.XLANG_WEBOT) {
+  if (agent.id === OpenAgentID.WEB_AGENT) {
     return API_CHAT_XLANG_WEBOT;
   }
   return ''

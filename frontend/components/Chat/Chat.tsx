@@ -26,7 +26,7 @@ import { ChatLoader } from './ChatLoader';
 import { ChatMessage } from './ChatMessage';
 import { CodeInterpreterPluginSelect } from './CodeInterpreterPluginSelect';
 import { ErrorMessageDiv } from './ErrorMessageDiv';
-import { ModelSelect } from './ModelSelect';
+import { AgentSelect } from './AgentSelect';
 import { PluginSelect } from './PluginSelect';
 import { QuestionSuggestion } from './QuestionSuggestion';
 import { SettingsModal } from './SettingsModal';
@@ -82,9 +82,9 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
 
   const tooltips = {
     Agent:
-      'XLang Agent empowers you to transform your human Lang(uage) into X(utable) actions, and help you with real-world tasks, e.g., data-related.',
+      'OpenAgents empowers you to transform your human Lang(uage) into X(utable) actions, and help you with real-world tasks, e.g., data-related.',
     Plugins:
-      'Plugins are tools designed to help XLang agents access up-to-date information, run computations, or use third-party services.',
+      'Plugins are tools designed to help OpenAgents access up-to-date information, run computations, or use third-party services.',
     Temperature:
       'Temperature controls randomness. Lowering it results in less random completions. As it approaches zero, the model will become deterministic and repetitive.',
   };
@@ -137,7 +137,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   const pollingWebotStatus = async () => {
     if (
       messageIsStreaming == true &&
-      selectedConversation?.model.id == 'xlang-webot' &&
+      selectedConversation?.agent.id == 'web_agent' &&
       !pollingExists
     ) {
       const startTime = Date.now();
@@ -357,7 +357,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           <HelpOutlineOutlined />
                         </Tooltip>
                         <div className="absolute left-[10rem] top-[-4px]">
-                          <ModelSelect />
+                          <AgentSelect />
                         </div>
                       </div>
                       <div className="flex relative z-[999]">
@@ -373,18 +373,18 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         >
                           <HelpOutlineOutlined />
                         </Tooltip>
-                        {selectedConversation.model.id == 'xlang-plugins' && (
+                        {selectedConversation.agent.id == 'plugins-agent' && (
                           <div className="absolute left-[10rem] top-[-4px]">
                             <PluginSelect />
                           </div>
                         )}
-                        {selectedConversation.model.id ==
-                          'xlang-datacopilot' && (
+                        {selectedConversation.agent.id ==
+                          'data-agent' && (
                           <div className="absolute left-[10rem] top-[-4px]">
                             <CodeInterpreterPluginSelect />
                           </div>
                         )}
-                        {selectedConversation.model.id == 'xlang-webot' && (
+                        {selectedConversation.agent.id == 'web-agent' && (
                           <div className="absolute left-[10rem]">
                             Please follow the instructions{' '}
                             <a
@@ -434,19 +434,19 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                   <div>
                     <span className="font-[600]">{t('Agent')}:</span>
                     <span className="ml-2">
-                      {selectedConversation?.model.name}
+                      {selectedConversation?.agent.name}
                     </span>
                   </div>
                   <div>
                     <span className="font-[600]">{t('Base LLM')}:</span>
                     <span className="ml-2">
-                      {selectedConversation?.model?.llm?.name}
+                      {selectedConversation?.agent?.llm?.name}
                     </span>
                   </div>
                   <div className="flex items-center justify-center">
                     <span className="font-[600]">{t('Enabled Plugins')}:</span>
                     <div className="ml-2 flex space-x-1">
-                      {selectedConversation?.model.id == 'xlang-datacopilot' &&
+                      {selectedConversation?.agent.id == 'data-agent' &&
                         selectedConversation.selectedCodeInterpreterPlugins.map(
                           (plugin) =>
                             plugin.icon ? (
@@ -459,7 +459,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                               <ExtensionOutlinedIcon className="h-6" />
                             ),
                         )}
-                      {selectedConversation?.model.id == 'xlang-plugins' &&
+                      {selectedConversation?.agent.id == 'plugins-agent' &&
                         selectedConversation.selectedPlugins.map((plugin) =>
                           plugin.icon ? (
                             <img

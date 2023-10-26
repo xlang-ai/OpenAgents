@@ -10,8 +10,6 @@ export const BACKEND_ENDPOINT =
   ('http://localhost:8000' as const);
 export const API_ENDPOINT = `${BACKEND_ENDPOINT}/api` as const;
 
-export const API_RUN_CELL = `${API_ENDPOINT}/run_cell` as const;
-export const API_MODEL = `${API_ENDPOINT}/models` as const;
 export const API_UPLOAD = `${API_ENDPOINT}/upload` as const;
 export const API_CHAT = `${API_ENDPOINT}/chat` as const;
 export const API_CHAT_XLANG = `${API_ENDPOINT}/chat_xlang` as const;

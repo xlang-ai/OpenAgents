@@ -2,30 +2,30 @@ import { useContext } from 'react';
 
 import { useTranslation } from 'next-i18next';
 
-import { OpenAIModel } from '@/types/openai';
+import { OpenAgent } from '@/types/agent';
 
 import HomeContext from '@/pages/api/home/home.context';
 
 import { MenuItem, Select } from '@mui/material';
 
-export const ModelSelect = () => {
+export const AgentSelect = () => {
   const { t } = useTranslation('chat');
 
   const {
-    state: { selectedConversation, models, defaultModelId },
+    state: { selectedConversation, agents, defaultAgentId },
     handleUpdateConversation,
   } = useContext(HomeContext);
 
   const handleChange = (e: any) => {
     if (!selectedConversation) return;
-    const newModel = models.find(
-      (model) => model.id === e.target.value,
-    ) as OpenAIModel;
+    const newAgent = agents.find(
+      (agent) => agent.id === e.target.value,
+    ) as OpenAgent;
     handleUpdateConversation(
       selectedConversation,
       {
-        key: 'model',
-        value: newModel,
+        key: 'agent',
+        value: newAgent,
       },
       false,
     );
@@ -37,8 +37,8 @@ export const ModelSelect = () => {
         <div className="w-full rounded-lg bg-transparent text-neutral-900">
           <Select
             className="rounded-xl font-[Montserrat] w-[16rem] h-8 mt-[1px] bg-transparent"
-            placeholder={t('Select a model') || ''}
-            value={selectedConversation?.model?.id || defaultModelId}
+            placeholder={t('Select an agent') || ''}
+            value={selectedConversation?.agent?.id || defaultAgentId}
             onChange={handleChange}
             MenuProps={{
               PaperProps: {
@@ -51,9 +51,9 @@ export const ModelSelect = () => {
               },
             }}
           >
-            {models.map((model) => (
-              <MenuItem key={model.id} value={model.id} className="rounded-xl">
-                {model.name}
+            {agents.map((agent) => (
+              <MenuItem key={agent.id} value={agent.id} className="rounded-xl">
+                {agent.name}
               </MenuItem>
             ))}
           </Select>

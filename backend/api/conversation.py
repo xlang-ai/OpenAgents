@@ -134,7 +134,7 @@ def get_conversation_content() -> Response:
                 "id": conversation_id,
                 "name": conversation["name"],
                 "messages": messages,
-                "model": conversation["model"],
+                "agent": conversation["agent"],
                 "prompt": conversation["prompt"],
                 "temperature": conversation["temperature"],
                 "folderId": conversation["folder_id"],
@@ -235,7 +235,7 @@ def register_conversation() -> Response:
                     {"_id": ObjectId(conversation_id)}):
                 updates = {
                     "name": conversation["name"],
-                    "model": conversation["model"],
+                    "agent": conversation["agent"],
                     "prompt": conversation["prompt"],
                     "temperature": conversation["temperature"],
                     "folder_id": conversation["folderId"],
@@ -251,7 +251,7 @@ def register_conversation() -> Response:
                 conversation = db.conversation.insert_one(
                     {
                         "name": conversation["name"],
-                        "model": conversation["model"],
+                        "agent": conversation["agent"],
                         "prompt": conversation["prompt"],
                         "temperature": conversation["temperature"],
                         "folder_id": conversation["folderId"],
