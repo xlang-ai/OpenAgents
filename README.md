@@ -171,6 +171,7 @@ Please check the following folders and README files to set up & localhost:
 1. [**Backend**](backend/README.md): the flask backend to host our three agents.
 2. [**Frontend**](frontend/README.md): the frontend UI and WeBot Chrome extension.
 
+p.s.: We have renamed some arguments in code for better readability. If you have pulled the code before 10/26/2023, just a reminder that if you want to you pull the latest code, previous local chat history will be lost because of different key names.
 
 ## 📜 Tutorial on Extending OpenAgents
 ### Code Structure

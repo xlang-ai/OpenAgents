@@ -168,6 +168,7 @@ OpenAgents使普通用户通过为快速响应和常见失败进行优化的web 
 1. [**Backend**](backend/README.md): 我们的三个代理的 Flask 后端。
 2. [**Frontend**](frontend/README.md): 前端 UI 和 WeBot Chrome 扩展程序。
 
+P.S.：我们为了提升代码的可读性，对一些参数进行了重命名。如果你在2023年10月26日之前已经拉取了代码，这里提醒你，如果你想拉取最新的代码，由于部分key name的不同，之前的本地聊天记录将会丢失。
 
 ## 📜 拓展OpenAgents的教程
 ### 代码结构
