@@ -54,4 +54,4 @@ export VARIABLE_REGISTER_BACKEND=redis
 export MESSAGE_MEMORY_MANAGER_BACKEND=database
 export JUPYTER_KERNEL_MEMORY_MANAGER_BACKEND=database
 
-echo "Deployment complete!"
+echo "Deployment complete\!"
