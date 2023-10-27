@@ -32,7 +32,7 @@ services:
       - redis
       - mongodb
     environment:
-      - OPENAI_API_KEY=""
+      - OPENAI_API_KEY= #need your key here
       # - KAGGLE_USER=
       # - KAGGLE_KEY=
       # - OPENAI_API_BASE=
