@@ -48,7 +48,7 @@ We have now implemented three agents in OpenAgents, and we host them on [demo](h
 2. Plugins Agent with 200+ daily tools; 
 3. Web Agent for autonomous web browsing.
 
-OpenAgents can analyze data, call plugins, control your browser as ChatGPT Plus, but with OPEN Code for
+OpenAgents can analyze data, call plugins and control your browser as ChatGPT Plus, but with OPEN Code for
 1. Easy deployment
 2. Full stack
 3. Chat Web UI
@@ -65,7 +65,7 @@ Join our Discord for help if you encounter any issues with our [online demo](htt
 
 ## 🔥 News
 
-- **[2023, Oct 26]** We've reached 3,000 users! 🚀 Heartfelt thanks to all our users and contributors! 🙏 Please bear with us as we navigate through unexpectedly high traffic on our servers. We appreciate your patience and ready to assist as soon as possible!
+- **[2023, Oct 26]** We've reached 3,000 users! 🚀 Heartfelt thanks to all our users and contributors! 🙏 Please bear with us as we navigate through unexpectedly high traffic on our servers. We appreciate your patience and are ready to assist as soon as possible!
 - **[2023, Oct 18]** Try out [our Lemur](https://github.com/OpenLemur/Lemur), the SOTA and open-sourced foundation models for language agents, matching ChatGPT on 15 agent tasks!
 - **[2023, Oct 17]** Check out the OpenAgents paper [here](https://arxiv.org/abs/2310.10634)!
 - **[2023, Oct 13]** We've released OpenAgents platform code for all three agents, server backend and frontend! Feel free to setup your localhost one, and play with OpenAgents!
@@ -75,7 +75,7 @@ Join our Discord for help if you encounter any issues with our [online demo](htt
 
 ## 🥑 OpenAgents
 
-We built three real-world agents with chat-based web UI as demonstration(check [OpenAgents demos](https://chat.xlang.ai)). Here is a brief overview of our OpenAgents platform. You can find more details about concepts & designs in our [documentation](https://docs.xlang.ai).
+We built three real-world agents with chat-based web UI as a demonstration(check [OpenAgents demos](https://chat.xlang.ai)). Here is a brief overview of our OpenAgents platform. You can find more details about concepts & designs in our [documentation](https://docs.xlang.ai).
 
 ### Data Agent
 
