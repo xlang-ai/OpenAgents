@@ -67,7 +67,7 @@ class PythonEvaluator:
 
     name = "Python Evaluator"
     base_url = "http://localhost:8100"
-    r: redis.Redis = redis.Redis(host="localhost", port=6379, decode_responses=True)
+    r: redis.Redis = redis.Redis(host=os.getenv("REDIS_SERVER"), port=6379, decode_responses=True)
 
     def __init__(self, code_execution_mode: str = "local", jupyter_kernel_pool: Optional[Any] = None):
         self.code_execution_mode = code_execution_mode

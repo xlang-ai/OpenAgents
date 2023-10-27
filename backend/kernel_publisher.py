@@ -2,8 +2,9 @@ import redis
 from typing import Any
 
 from backend.utils.utils import logger
+import os
 
-r = redis.Redis(host="localhost", port=6379, decode_responses=True)
+r = redis.Redis(host=os.getenv("REDIS_SERVER"), port=6379, decode_responses=True)
 
 
 # Set the queue and pending key
