@@ -37,7 +37,8 @@
 <p align="center">
     <a href="README.md">English</a> •
     <a>中文</a> •
-    <a href="README_JA.md">日本語</a>
+    <a href="README_JA.md">日本語</a> •
+    <a href="README_KO.md">한국어</a>
 </p>
 
 当前的语言代理框架旨在促进构建概念证明语言智能体（Language Agent）的搭建，但是同时忽视了非专家用户的使用，对应用级设计也关注较少。
