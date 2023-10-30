@@ -7,11 +7,10 @@ ENV CODE_EXECUTION_MODE="docker" \
     VARIABLE_REGISTER_BACKEND=redis \
     MESSAGE_MEMORY_MANAGER_BACKEND=database \
     JUPYTER_KERNEL_MEMORY_MANAGER_BACKEND=database \
-    FLASK_APP=backend.main.py \
-    KAGGLE_USER="" \
-    KAGGLE_KEY="" \
-    REDIS_SERVER="redis" \
-    MONGO_SERVER="mongodb"
+    FLASK_APP=backend.main.py
+# it is important to use kaggle dataset
+ENV KAGGLE_USER="" \
+    KAGGLE_KEY="" 
 RUN mkdir /root/.kaggle && \
     echo "{\"username\":\"$KAGGLE_USER\",\"key\":\"$KAGGLE_KEY\"}" > /root/.kaggle/kaggle.json && \
     chmod 600 /root/.kaggle/kaggle.json

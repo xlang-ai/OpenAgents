@@ -7,7 +7,7 @@ services:
     image: mongo:7.0.2
     restart: on-failure
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongo --quiet | grep 1
+      test: echo 'db.state().ok' | mongosh localhost:27017/test --quiet
       interval: 10s
       timeout: 10s
       retries: 5
@@ -15,8 +15,6 @@ services:
   frontend:
     build: ./frontend
     image: openagents-frontend
-    volumes:
-      - "frontend-data:/app/data"
     ports:
       - 3000:3000
     depends_on:
@@ -31,12 +29,14 @@ services:
     depends_on:
       - redis
       - mongodb
+    volumes:
+      - "backend-data:/app/backend/data"
     environment:
       - OPENAI_API_KEY= #need your key here
-      # - KAGGLE_USER=
-      # - KAGGLE_KEY=
       # - OPENAI_API_BASE=
+      - REDIS_SERVER=redis
+      - MONGO_SERVER=mongodb
 volumes:
-  frontend-data:
+  backend-data:
     driver: local
 
