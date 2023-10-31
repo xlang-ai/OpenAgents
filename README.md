@@ -166,12 +166,31 @@ Here is a brief system design of OpenAgents:
     <img src="pics/system_design.png"/>
 </div>
 
+### From Source Code
+
 Please check the following folders and README files to set up & localhost:
 
 1. [**Backend**](backend/README.md): the flask backend to host our three agents.
 2. [**Frontend**](frontend/README.md): the frontend UI and WeBot Chrome extension.
 
 p.s.: We have renamed some arguments in code for better readability. If you have pulled the code before 10/26/2023, just a reminder that if you want to you pull the latest code, previous local chat history will be lost because of different key names.
+
+### Docker
+
+We recommend using docker compose to run the project.
+1. If you want to use kaggle's dataset, you must modify the information in the [Dockerfile](Dockerfile#L12) to your correct information.
+```
+ENV KAGGLE_USER="" \
+    KAGGLE_KEY="" 
+```
+2. If you are not running locally, you need to modify the accessible IP to the backend service in [frontend/Dockerfile](frontend/Dockerfile#L15)
+```
+ENV NEXT_PUBLIC_BACKEND_ENDPOINT http://x.x.x.x:8000
+``` 
+3. Run the `docker compose build` command in the project root directory.
+4. If you use openai unofficial services, such as [FastChat](https://github.com/lm-sys/FastChat), you need to modify `OPENAI_API_BASE` in [docker-compose.yml](docker-compose.yml#L36);otherwise you only to put your `OPENAI_API_KEY`  in [docker-compose.yml](docker-compose.yml#L36)
+5. After completing the above steps, you can run `docker compose up -d` to start all services.
+
 
 ## 📜 Tutorial on Extending OpenAgents
 ### Code Structure

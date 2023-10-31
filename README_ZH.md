@@ -163,12 +163,28 @@ OpenAgents使普通用户通过为快速响应和常见失败进行优化的web 
     <img src="pics/system_design.png"/>
 </div>
 
+### 源码部署
 请查看下面的文件和README文件来设置和启动localhost：
 
 1. [**Backend**](backend/README.md): 我们的三个代理的 Flask 后端。
 2. [**Frontend**](frontend/README.md): 前端 UI 和 WeBot Chrome 扩展程序。
 
 P.S.：我们为了提升代码的可读性，对一些参数进行了重命名。如果你在2023年10月26日之前已经拉取了代码，这里提醒你，如果你想拉取最新的代码，由于部分key name的不同，之前的本地聊天记录将会丢失。
+
+### Docker部署
+我们推荐使用docker compose来运行项目
+1. 如果想使用kaggle的数据集，需要修改[Dockerfile](Dockerfile#L12) 为你的正确信息。
+```
+ENV KAGGLE_USER="" \
+    KAGGLE_KEY="" 
+```
+2. 如果不是部署在本地机器，需要修改[frontend/Dockerfile](frontend/Dockerfile#L15)为可访问的IP。
+```
+ENV NEXT_PUBLIC_BACKEND_ENDPOINT http://x.x.x.x:8000
+``` 
+3. 在项目根目录中运行`docker compose build`
+4. 如果不是使用openai的官方接口,比如[FastChat](https://github.com/lm-sys/FastChat), 你需要修改[docker-compose.yml](docker-compose.yml#L36)文件中的 `OPENAI_API_BASE`;直接使用openai官方接口只需要修改[docker-compose.yml](docker-compose.yml#L36)中的 `OPENAI_API_KEY` 即可。
+5. 以上步骤完成后，运行`docker compose up -d`即可启动所有服务。
 
 ## 📜 拓展OpenAgents的教程
 ### 代码结构

@@ -3,6 +3,7 @@ services:
   redis:
     image: redis:7.2.2-alpine
     restart: on-failure
+
   mongodb:
     image: mongo:7.0.2
     restart: on-failure
@@ -21,6 +22,19 @@ services:
       - redis
       - mongodb
       - backend
+
+# Necessary if you want the code executed in sandbox
+  # code_interpreter:
+  #   image: xlanglab/xlang-code-interpreter-python
+  #   env_file:
+  #     - ./real_agents/data_agent/.code_interpreter_docker_env
+  #   volumes:
+  #     - backend-data:/home
+  #   cap_add:
+  #     - SYS_RESOURCE
+  #     - SYS_PTRACE
+  #     - NET_ADMIN
+
   backend:
     build: ./
     image: openagents-backend
@@ -36,7 +50,9 @@ services:
       # - OPENAI_API_BASE=
       - REDIS_SERVER=redis
       - MONGO_SERVER=mongodb
+      - CODE_INTER_SERVER=code_interpreter
+      - CODE_EXECUTION_MODE=local #if code_interpreter running set docker,else local
+
 volumes:
   backend-data:
     driver: local
-
