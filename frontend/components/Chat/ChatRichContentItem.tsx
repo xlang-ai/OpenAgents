@@ -5,9 +5,6 @@ import {
   IconHeartFilled,
 } from '@tabler/icons-react';
 import { FC, memo, useContext, useEffect, useMemo, useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
 
 import Image from 'next/image';
 
@@ -30,8 +27,6 @@ import { isEqual } from 'lodash';
 import rehypeMathjax from 'rehype-mathjax';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 interface Props {
   item: RichContentItem;
@@ -140,95 +135,6 @@ export const ChatRichContentItemBody: FC<ChatRichContentItemBodyProps> = memo(
           <div className="max-w-full mt-[-5px]">
             <XLangTable content={item.content} />
           </div>
-        );
-      case 'pdf':
-        const {
-          state: { chat_id },
-          handleFetchData,
-        } = useContext(HomeContext);
-
-        const [numPages, setNumPages] = useState<number>(0);
-        const [pageNumber, setPageNumber] = useState<number>(1);
-        const [pdfURL, setPdfURL] = useState<string>();
-
-        const nextPage = () => {
-          setPageNumber(pageNumber + 1);
-        };
-
-        const prevPage = () => {
-          setPageNumber(pageNumber - 1);
-        };
-
-        useEffect(() => {
-          (async () => {
-            const url = await handleFetchData(chat_id, item.content);
-            setPdfURL(url);
-          })();
-        }, []);
-
-        const parentDivStyle = {
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          /* Additional styles for the parent div */
-        };
-
-        return useMemoDeep(
-          () => (
-            <div style={parentDivStyle}>
-              <div>
-                {pdfURL ? (
-                  <>
-                    <Document
-                      file={{ url: pdfURL }}
-                      onLoadSuccess={(pdf) => setNumPages(pdf.numPages)}
-                      onLoadError={(error) => {
-                        console.error('Load error');
-                        console.error(error);
-                        // debugger
-                      }}
-                      onSourceSuccess={() => {
-                        console.log('Source success');
-                        // debugger
-                      }}
-                      onSourceError={(error) => {
-                        console.error('Source error');
-                        console.error(error);
-                        // debugger
-                      }}
-                    >
-                      <Page pageNumber={pageNumber} />
-                    </Document>
-
-                    <div className="flex gap-2 item-center mt-3">
-                      <div className="text-sm mr-4">
-                        Page {pageNumber} of {numPages}
-                      </div>
-                      {pageNumber !== 1 && (
-                        <div
-                          className="rounded border border-gray-600 px-2 py-1 cursor-pointer text-xs font-medium hover:bg-gray-700/80"
-                          onClick={prevPage}
-                        >
-                          Prev
-                        </div>
-                      )}
-                      {pageNumber !== numPages && (
-                        <div
-                          className="rounded border border-gray-600 px-2 py-1 cursor-pointer text-xs font-medium hover:bg-gray-700/80"
-                          onClick={nextPage}
-                        >
-                          Next
-                        </div>
-                      )}
-                    </div>
-                  </>
-                ) : (
-                  <div>Loading...</div>
-                )}
-              </div>
-            </div>
-          ),
-          [pdfURL, pageNumber, numPages],
         );
       default:
         return (
