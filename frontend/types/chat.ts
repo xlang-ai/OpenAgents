@@ -36,7 +36,6 @@ export type RichContentItemType =
   | 'echarts'
   | 'evaluation_result'
   | 'image'
-  | 'pdf'
   | 'table'
   | 'file_upload_result'
   | 'kaggle_connect'

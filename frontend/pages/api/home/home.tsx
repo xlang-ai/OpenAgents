@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import { pdfjs } from 'react-pdf';
 import 'react-reflex/styles.css';
 import { GetServerSideProps } from 'next';
 import { useTranslation } from 'next-i18next';
@@ -67,8 +66,6 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Chatbar } from '@/components/Chatbar/Chatbar';
 import { Chat } from '@/components/Chat/Chat';
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 interface Props {
   serverSideApiKeyIsSet: boolean;
