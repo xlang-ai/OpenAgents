@@ -164,12 +164,31 @@ OpenAgents使普通用户通过为快速响应和常见失败进行优化的web 
     <img src="pics/system_design.png"/>
 </div>
 
+### 源码部署
 请查看下面的文件和README文件来设置和启动localhost：
 
 1. [**Backend**](backend/README.md): 我们的三个代理的 Flask 后端。
 2. [**Frontend**](frontend/README.md): 前端 UI 和 WeBot Chrome 扩展程序。
 
 P.S.：我们为了提升代码的可读性，对一些参数进行了重命名。如果你在2023年10月26日之前已经拉取了代码，这里提醒你，如果你想拉取最新的代码，由于部分key name的不同，之前的本地聊天记录将会丢失。
+
+### Docker部署
+请按照以下步骤使用docker-compose来部署OpenAgents平台。
+
+注意： docker仍在开发中，因此可能会有一些功能无法正常工作，响应也可能较慢。如果您有任何问题，请随时提出issue。如果您需要一个更稳定的版本，我们目前建议您从源代码部署。
+
+1. 如果您想要使用kaggle的数据集，您必须修改Dockerfile中的信息为您的正确信息。
+```
+ENV KAGGLE_USER="" \
+    KAGGLE_KEY="" 
+```
+2. 如果您不是在本地运行，您需要修改frontend/Dockerfile中的后端服务可访问的IP地址
+```
+ENV NEXT_PUBLIC_BACKEND_ENDPOINT http://x.x.x.x:8000
+```
+3. 在项目根目录运行docker compose build命令。
+4. 如果您使用openai非官方服务，如FastChat，您需要在docker-compose.yml中修改OPENAI_API_BASE；否则您只需在docker-compose.yml中放置您的OPENAI_API_KEY。
+5. 完成以上步骤后，您可以运行docker compose up -d以启动所有服务。
 
 ## 📜 拓展OpenAgents的教程
 ### 代码结构
@@ -246,7 +265,7 @@ OpenAgents的代码结构如下所示：
 如果您想在插件智能体中扩展一个新工具，可以按照以下步骤操作：
 - 参考在 `real_agents/plugins_agent/plugins/` 中已经构建的插件，并为您的工具创建一个新文件夹。
 - 在新文件夹中实现工具逻辑。请注意，`ai-plugin.json` 和 `openapi.yaml` 对于工具被识别是必要的（可以由LLM生成，跟随其他工具，而不是手动编写）。而 `paths/` 是用于实际的工具API调用。
-- 在 `real_agents/plugins_agent/plugin_names.py` 中注册新工具的名称。
+- 在 `real_agents/plugins_agent/plugins/plugin_names.py` 中注册新工具的名称。
 
 
 ## 👏 贡献

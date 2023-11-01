@@ -6,6 +6,7 @@ import pickle
 import traceback
 from flask import Response, request, stream_with_context
 from typing import Dict, Union
+import os
 
 from langchain.schema import HumanMessage, SystemMessage
 
@@ -24,7 +25,7 @@ from real_agents.adapters.data_model import DataModel, JsonDataModel
 from real_agents.adapters.interactive_executor import initialize_webot_agent
 from real_agents.web_agent import WebBrowsingExecutor, WebotExecutor
 
-r = redis.Redis(host='localhost', port=6379, db=0)  # adjust host/port/db as needed
+r = redis.Redis(host=os.getenv("REDIS_SERVER"), port=6379, db=0)  # adjust host/port/db as needed
 
 
 # here webot and webot_status are stored in redis since the two global variable can not be modified and accessed normally in multiprocess
