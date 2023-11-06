@@ -13,7 +13,7 @@ def get_tool_list() -> Response:
     return value:
     [{
         id: id of a plugin,
-        name: name pf a plugin,
+        name: name of a plugin,
         description: description of the plugin,
         icon: icon of the plugin,
         require_api_key: whether the plugin requires api_key,
