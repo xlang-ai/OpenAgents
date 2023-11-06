@@ -110,6 +110,7 @@ Redis serves as cache, the persistent data will be stored in MongoDB and will be
 export VARIABLE_REGISTER_BACKEND=redis
 export MESSAGE_MEMORY_MANAGER_BACKEND=database
 export JUPYTER_KERNEL_MEMORY_MANAGER_BACKEND=database
+export MONGO_SERVER=127.0.0.1
 ```
 
 </details>
