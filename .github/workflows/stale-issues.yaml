@@ -1,0 +1,23 @@
+name: 'Close stale issues and PRs'
+on:
+  schedule:
+    - cron: '30 1 * * *'
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v8
+        with:
+          stale-issue-message: 'This issue is stale because it has been open 3 days with no activity. Remove stale label or comment or this will be closed in 4 days.'
+          stale-pr-message: 'This PR is stale because it has been open 3 days with no activity.'
+          close-issue-message: 'This issue was closed because it has been stalled for 4 days with no activity.'
+          days-before-issue-stale: 3
+          days-before-pr-stale: 3
+          days-before-issue-close: 4
+          days-before-pr-close: -1
+          exempt-issue-labels: 'enhancement'
