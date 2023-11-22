@@ -2,8 +2,23 @@ FROM python:3.10.4-slim
 WORKDIR /app
 COPY backend ./backend
 COPY real_agents ./real_agents
-RUN pip install --no-cache-dir -r backend/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple &&\
-    pip install pyecharts -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN set -eux; \
+    pip install --no-cache-dir -r backend/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple; \
+    pip install --no-cache-dir pyecharts -i https://pypi.tuna.tsinghua.edu.cn/simple; \
+    savedAptMark="$(apt-mark showmanual)"; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends git; \
+    git clone https://github.com/xlang-ai/instructor-embedding ; \
+    cd instructor-embedding ;\
+    pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple; \
+    pip install --no-cache-dir InstructorEmbedding; \
+    cd .. ;\
+    rm -rf instructor-embedding;\
+    apt-mark auto '.*' > /dev/null; \
+	[ -z "$savedAptMark" ] || apt-mark manual $savedAptMark > /dev/null; \
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	rm -rf /var/lib/apt/lists/*
+
 ENV VARIABLE_REGISTER_BACKEND=redis \
     MESSAGE_MEMORY_MANAGER_BACKEND=database \
     JUPYTER_KERNEL_MEMORY_MANAGER_BACKEND=database \
