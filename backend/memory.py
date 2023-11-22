@@ -100,7 +100,7 @@ class ChatMemoryManager:
     # memory_pool:
     # {user_id: {chat_id: [
     #                           {"message_id": the id of this pair of messages,
-    #                            "parent_message_id": the message of the parent message,
+    #                            "parent_message_id": the id of the parent message,
     #                            "message_type": type of the message, possible values: human_message / ai_message
     #                            "message_content": content of the message
     #                           }
