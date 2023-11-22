@@ -233,7 +233,7 @@ def chat_xlang_plugin() -> Dict:
                                                                    user_intent)
                 selected_plugins = tool_selector.select_tools(query=query, top_k=5)
             else:
-                selected_plugins = random.sample(plugins, 5)
+                selected_plugins = [_plugin['id'] for _plugin in random.sample(plugins, 5)]
 
         # Build executor and run chat
         stream_handler = AgentStreamingStdOutCallbackHandler()
