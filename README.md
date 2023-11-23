@@ -195,6 +195,11 @@ ENV NEXT_PUBLIC_BACKEND_ENDPOINT http://x.x.x.x:8000
 4. If you use openai unofficial services, such as [FastChat](https://github.com/lm-sys/FastChat), you need to modify `OPENAI_API_BASE` in [docker-compose.yml](docker-compose.yml#L36);otherwise you only to put your `OPENAI_API_KEY`  in [docker-compose.yml](docker-compose.yml#L36)
 5. After completing the above steps, you can run `docker compose up -d` to start all services.
 
+**Notice**:
+1. If you want to use GPU, you need install [Nvidia Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html),and uncomment the the [docker-compose.yml](docker-compose.yml#L56-L62) Lines 56-62.
+2. Use Auto Plugin will download the weight file from huggingface. In some areas, connection timeout may occur. Please solve the network problem by yourself.
+
+
 
 ## 📜 Tutorial on Extending OpenAgents
 ### Code Structure

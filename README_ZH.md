@@ -190,6 +190,10 @@ ENV NEXT_PUBLIC_BACKEND_ENDPOINT http://x.x.x.x:8000
 4. 如果您使用openai非官方服务，如FastChat，您需要在docker-compose.yml中修改OPENAI_API_BASE；否则您只需在docker-compose.yml中放置您的OPENAI_API_KEY。
 5. 完成以上步骤后，您可以运行docker compose up -d以启动所有服务。
 
+**注意**：
+1. 如果你想要使用GPU，你需要先安装[Nvidia Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html),然后去掉[docker-compose.yml](docker-compose.yml#L56-L62)56-62行的注释。
+2. 使用Auto plugin 将会从huggingface下载权重文件，在有些地区可能会出现连接超时，请自行解决网络问题。
+
 ## 📜 拓展OpenAgents的教程
 ### 代码结构
 在我们深入探讨如何扩展OpenAgents之前，首先让我们简要了解一下代码结构以便更好地理解。
