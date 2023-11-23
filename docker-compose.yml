@@ -52,6 +52,14 @@ services:
       - MONGO_SERVER=mongodb
       - CODE_INTER_SERVER=code_interpreter
       - CODE_EXECUTION_MODE=local #if code_interpreter running set docker,else local
+    # if you want to use gpu, uncomment the following lines
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #       - driver: nvidia
+    #         device_ids: ['0']
+    #         capabilities: [gpu]
 
 volumes:
   backend-data:
