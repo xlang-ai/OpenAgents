@@ -6,6 +6,7 @@ from real_agents.adapters.data_model.message import MessageDataModel
 from real_agents.adapters.data_model.kaggle import KaggleDataModel
 from real_agents.adapters.data_model.plugin import APIYamlModel, SpecModel
 from real_agents.adapters.data_model.table import TableDataModel
+from real_agents.adapters.data_model.document import DocumentDataModel
 
 __all__ = [
     "DataModel",
