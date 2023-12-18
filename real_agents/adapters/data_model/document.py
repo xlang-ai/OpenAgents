@@ -1,13 +1,6 @@
 from typing import Any, List
 
 from real_agents.adapters.data_model.base import DataModel
-from real_agents.data_agent.executors.data_summary_executor import DocumentSummaryExecutor
-from langchain.base_language import BaseLanguageModel
-from langchain.chains.combine_documents.stuff import StuffDocumentsChain
-# from langchain.chains import ReduceDocumentsChain
-from langchain.chains.combine_documents.map_reduce import MapReduceDocumentsChain
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-
 
 
 class DocumentDataModel(DataModel):
@@ -17,7 +10,7 @@ class DocumentDataModel(DataModel):
         return self.raw_data
 
     def get_llm_side_data(self, 
-                          max_tokens: int = 5000, 
+                          max_tokens: int = 2000,
                           chunk_size: int = 1000, 
                           chunk_overlap: int = 200
                           ) -> Any:
