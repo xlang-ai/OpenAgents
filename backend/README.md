@@ -127,6 +127,14 @@ Set your OpenAI key (if you use OpenAI API):
 ```bash
 export OPENAI_API_KEY=<OPENAI_API_KEY>
 ```
+**Note** if you are using [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview) Service, you should choose:
+```bash
+export OPENAI_API_TYPE=azure
+export OPENAI_API_BASE=<AZURE_API_BASE>
+export OPENAI_API_VERSION=<AZURE_API_VERSION>
+export OPENAI_API_KEY=<AZURE_API_KEY>
+```
+If you are starting your backend in docker, you should add these environment variables in `docker-compose.yml` as well.
 
 Set your Anthropic key (if you use Anthropic API):
 ```bash
