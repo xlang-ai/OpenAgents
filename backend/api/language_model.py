@@ -1,7 +1,7 @@
 import os
 
 from backend.app import app
-from real_agents.adapters.models import ChatOpenAI, ChatAnthropic
+from real_agents.adapters.models import ChatOpenAI, ChatAnthropic, AzureChatOpenAI
 from real_agents.adapters.llm import BaseLanguageModel
 
 LLAMA_DIR = "PATH_TO_LLAMA_DIR"
@@ -24,8 +24,14 @@ def get_llm_list():
 def get_llm(llm_name: str, **kwargs) -> BaseLanguageModel:
     """Gets the llm model by its name."""
     if llm_name in ["gpt-3.5-turbo-16k", "gpt-4"]:
-        return ChatOpenAI(
-            model_name=llm_name,
+        openai_api_type = os.getenv("OPENAI_API_TYPE", "open_ai")
+        if openai_api_type == "open_ai":
+            chat_openai = ChatOpenAI
+            kwargs.update({"model_name": llm_name})
+        elif openai_api_type == "azure":
+            chat_openai = AzureChatOpenAI
+            kwargs.update({"deployment_name": llm_name})
+        return chat_openai(
             streaming=True,
             verbose=True,
             **kwargs
