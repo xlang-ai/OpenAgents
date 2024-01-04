@@ -5,7 +5,12 @@ from langchain.base_language import BaseLanguageModel
 from langchain import PromptTemplate
 
 from real_agents.adapters.callbacks.executor_streaming import ExecutorStreamingChainHandler
-from real_agents.adapters.data_model import DatabaseDataModel, TableDataModel, ImageDataModel
+from real_agents.adapters.data_model import (
+    DatabaseDataModel, 
+    TableDataModel, 
+    ImageDataModel, 
+    DocumentDataModel
+)
 from real_agents.adapters.llm import LLMChain
 
 
@@ -167,6 +172,99 @@ Begin.
         method = LLMChain(llm=llm, prompt=summary_prompt_template)
         result = method.run({"img_info": grounding_source.get_llm_side_data(), "num_insights": num_insights})
         return result
+
+    def _parse_output(self, content: str) -> Tuple[str, str]:
+        """Parse the output of the LLM to get the data summary."""
+        from bs4 import BeautifulSoup
+
+        # Using 'html.parser' to parse the content
+        soup = BeautifulSoup(content, "html.parser")
+        # Parsing the tag and summary contents
+        try:
+            table_summary = soup.find("summary").text
+        except Exception:
+            import traceback
+
+            traceback.print_exc()
+            table_summary = ""
+
+        lines = content.split("\n")
+        # Initialize an empty list to hold the parsed bullet points
+        bullet_points = []
+        # Loop through each line
+        bullet_point_id = 1
+        for line in lines:
+            # If the line starts with '+', it is a bullet point
+            if line.startswith("+"):
+                # Remove the '+ ' from the start of the line and add it to the list
+                bullet_points.append(f"{bullet_point_id}. " + line[1:].strip().strip('"'))
+                bullet_point_id += 1
+        return table_summary, "\n".join(bullet_points)
+
+
+class DocumentSummaryExecutor(DataSummaryExecutor):
+    SUMMARY_PROMPT_TEMPLATE = """
+    {img_info}
+
+    Provide a succinct summary of the uploaded file with less than 20 words. Please ensure your summary is a complete sentence and include it within <summary></summary> tags."
+    Then provide {num_insights} very simple and basic suggestions in natural language about further processing with the data. The final results should be markdown '+' bullet point list, e.g., + The first suggestion."
+
+    Begin.
+    """
+    stream_handler = ExecutorStreamingChainHandler()
+
+    def run(
+        self,
+        grounding_source: DocumentDataModel,
+        llm: BaseLanguageModel,
+        use_intelligent_summary: bool = True,
+        num_insights: int = 3,
+    ) -> Dict[str, Any]:
+        summary = ""
+        if isinstance(grounding_source, DocumentDataModel):
+            # Basic summary
+            summary += (
+                        f"Your document **{grounding_source.raw_data['metadata']['title']}** created by "
+                        f"{grounding_source.raw_data['metadata']['author']} at "
+                        f"{grounding_source.raw_data['metadata']['year']} year. \n"
+            )
+
+            # Intelligent summary
+            if use_intelligent_summary:
+                intelligent_summary = self._intelligent_summary(
+                    grounding_source,
+                    num_insights=num_insights,
+                    llm=llm,
+                )
+                _, suggestions = self._parse_output(intelligent_summary)
+                summary += "\n" + suggestions
+
+            for stream_token in summary.split(" "):
+                self.stream_handler.on_llm_new_token(stream_token)
+        else:
+            raise ValueError(f"Unsupported data summary for grounding source type: {type(grounding_source)}")
+        return summary
+
+    def _intelligent_summary(self, grounding_source: DocumentDataModel, num_insights: int, llm: BaseLanguageModel) -> str:
+        """Use LLM to generate data summary."""
+        summary_prompt_template = PromptTemplate(
+            input_variables=["img_info", "num_insights"],
+            template=self.SUMMARY_PROMPT_TEMPLATE,
+        )
+        method = LLMChain(llm=llm, prompt=summary_prompt_template)
+        result = method.run({"img_info": grounding_source.get_llm_side_data(), "num_insights": num_insights})
+        return result
+    
+    @staticmethod
+    def text_summary(llm: BaseLanguageModel, reduce_template: str) -> str:
+        reduce_prompt = PromptTemplate.from_template(reduce_template)
+        map_prompt = PromptTemplate.from_template(reduce_prompt)
+        map_chain = LLMChain(llm=llm, prompt=map_prompt)
+        # Run chain
+        reduce_chain = LLMChain(llm=llm, prompt=reduce_prompt)
+        
+        return reduce_chain, map_chain   
+
 
     def _parse_output(self, content: str) -> Tuple[str, str]:
         """Parse the output of the LLM to get the data summary."""

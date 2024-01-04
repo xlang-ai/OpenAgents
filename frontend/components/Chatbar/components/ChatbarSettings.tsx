@@ -233,7 +233,7 @@ export const ChatbarSettings = <T,>({
             className="sr-only"
             tabIndex={-1}
             type="file"
-            accept=".csv, .tsv, .xslx, .db, .sqlite, .png, .jpg, .jpeg"
+            accept=".csv, .tsv, .xslx, .db, .sqlite, .png, .jpg, .jpeg, .pdf"
             ref={fileInputRef}
             onChange={handleUpload}
           />
