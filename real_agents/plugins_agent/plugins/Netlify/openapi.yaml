@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: Netlify Drop
+  description: Deploy simple webpages on the internet to be served by Netlify at a canonical resource, and claim these sites as your own.
+  version: "1.0"
+servers:
+  - url: "https://dropgpt.netlify.app"
+paths:
+  /api/drop:
+    post:
+      operationId: deployToNetlify
+      summary: Deploys the files to Netlify, where it will be hosted and served.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                files:
+                  description: The file paths and file content to deploy to Netlify.
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      path:
+                        description: The path of the file
+                        type: string
+                      content:
+                        description: The file content
+                        type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Deploy"
+components:
+  schemas:
+    Deploy:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL of the deployed production site.
+        claim_url:
+          type: string
+          description: The URL where users can claim the site as their own. The URL must contain the token inside the hash for it to work. Once they claim it, they can download the source as a .zip file, assign a custom domain, and generally configure it further. If they do not claim it, the site will get deleted after one hour.

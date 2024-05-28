@@ -1,0 +1,34 @@
+{
+    "id": "plugin-9172506a-13c0-403c-9bff-5a2b7d6b3dea",
+    "domain": "plugin1.findwritersonline.com",
+    "namespace": "MyWritingCompanion",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "MyWritingCompanion",
+        "name_for_human": "My Writing Companion",
+        "description_for_model": "Tool that helps you to hire and manage remote human writers, the best way to ensure your content is engaging, accurate, and error-free.",
+        "description_for_human": "Find, hire, and manage remote human writers, the best way to ensure your content is engaging, accurate, and error-free.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://plugin1.findwritersonline.com/swagger/v1/swagger.yaml"
+        },
+        "logo_url": "https://plugin1.findwritersonline.com/.well-known/logo.png",
+        "contact_email": "support@findwritersonline.com",
+        "legal_info_url": "https://www.findwritersonline.com/TermsAndConditions"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

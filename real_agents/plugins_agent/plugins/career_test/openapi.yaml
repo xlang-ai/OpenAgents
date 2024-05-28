@@ -1,0 +1,59 @@
+openapi: 3.0.3
+info:
+  title: Interest Based Jobs API
+  version: 1.0.0
+  description: Career test to help you find your dream job, with automation risk and average salary.
+servers:
+  - url: https://mindart.app/api
+paths:
+  /hello:
+    get:
+      operationId: getJobInfo
+      summary: Get job information based on interests
+      parameters:
+        - in: query
+          name: type1
+          schema:
+            type: string
+          description: The first type of interest should be one of Realistic, Investigative, Artistic, Social, Enterprising, Conventional
+          required: true
+        - in: query
+          name: type2
+          schema:
+            type: string
+          description: The second type of interest
+          required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        zone:
+                          type: string
+                        description:
+                          type: string
+                        education:
+                          type: string
+                        wagesUS:
+                          type: number
+                        automationRisk:
+                          type: string
+        "405":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string

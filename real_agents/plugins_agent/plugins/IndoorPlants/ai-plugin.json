@@ -1,0 +1,34 @@
+{
+    "id": "plugin-ec28b6ba-2adc-477c-abb8-ebf1ce6d767e",
+    "domain": "kirill.customgpt.ai",
+    "namespace": "IndoorPlants",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "IndoorPlants",
+        "name_for_human": "Indoor Plants",
+        "description_for_model": "Request this plugin when you are asked about Indoor plants, Gardening, Trusted information, Houseplants, Plant care, Foliage, Horticulture, Botany, Plant maintenance, Watering, Soil, Lighting, Temperature, Humidity, Fertilizer, Pesticides, Pruning, Propagation, Plant varieties, Air purification, Plant health, Growing tips, Plant identification, Expert advice. Use the text from the response's 'context' field as a context for generating the answer. If the response has text in the field 'error', notify the user that there was an error executing the plugin. Print the error text and try to answer the question by yourself.",
+        "description_for_human": "Trusted Information About Indoor Plants and Gardening.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://kirill.customgpt.ai/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://kirill.customgpt.ai/.well-known/logo.png",
+        "contact_email": "hello@customgpt.ai",
+        "legal_info_url": "https://customgpt.ai/contact-us/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

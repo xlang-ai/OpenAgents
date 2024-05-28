@@ -1,0 +1,50 @@
+info:
+  title: FundsDB TypeSense Search API
+  version: 1.0.0
+  description: Discover funding opportunities in UK and India on FundsDB. Type in your query in any language or /help for assistance.
+openapi: 3.0.1
+paths:
+  /search:
+    post:
+      operationId: postSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                filterby:
+                  default: ''
+                  type: string
+                page:
+                  default: 3
+                  type: integer
+                query:
+                  type: string
+                region:
+                  enum:
+                  - uk
+                  - india
+                  type: string
+                sortby:
+                  default: maximum_finance:desc
+                  type: string
+              required:
+              - query
+              - region
+              type: object
+        required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    items:
+                      type: object
+                    type: array
+                type: object
+          description: Successful operation
+      summary: Search for funds related to the given query
+servers:
+- url: https://fundsdbsearch.azurewebsites.net

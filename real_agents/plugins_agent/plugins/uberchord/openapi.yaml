@@ -1,0 +1,43 @@
+openapi: 3.0.1
+info:
+  title: Uberchord
+  description: Find guitar chord diagrams by specifying the chord name.
+  version: 'v1'
+servers:
+  - url: https://guitarchords.pluginboost.com
+paths:
+  /chord-formatted:
+    get:
+      operationId: getChordDiagramImage
+      summary: Get an image displaying the chord diagram
+      parameters:
+        - name: chord
+          in: query
+          description: The chord name (e.g. 'Fmaj7').
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getChordDiagramImageResponse'
+components:
+  schemas:
+    getChordDiagramImageResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Indicates whether the request was successful.
+        message:
+          type: string
+          description: A message providing additional information about the request.
+        image_url:
+          type: string
+          description: The image of the chord diagram.
+        url:
+          type: string
+          description: The URL associated with the chord diagram.

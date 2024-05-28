@@ -1,0 +1,34 @@
+{
+    "id": "plugin-b8bb9fff-fd6b-4cb4-bd0f-7430c73d6406",
+    "domain": "gift.pluginbuilders.repl.co",
+    "namespace": "findagift",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "findagift",
+        "name_for_human": "AI Gift Finder",
+        "description_for_model": "API for finding the perfect gift. There are two endpoints in this API that you will call, GiftInterview and search. Upon asking for gift or product or shopping recommendations, GiftInterview will inject a prompt to better aid the user in narrowing down his or her options. Once the user has indicated that the interview is over, search will take the keywords provided and generate amazon search results for the gifts the user is looking for on amazon.com.",
+        "description_for_human": "Use the power of AI to find the perfect gift.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://gift.pluginbuilders.repl.co/openapi.yaml"
+        },
+        "logo_url": "https://gift.pluginbuilders.repl.co/logo.png",
+        "contact_email": "info@@eAIBusinessSolutions.AI",
+        "legal_info_url": "https://gift.pluginbuilders.repl.co/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

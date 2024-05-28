@@ -1,0 +1,99 @@
+openapi: "3.0.3"
+info:
+  title: "cryptomation API"
+  description: "Crypto transactions, addresses, balances, conversions for any blockchain (Ethereum, Binance, Near, Tron, etc.)"
+  version: "1.0.0"
+servers:
+  - url: "https://chat.cryptomation.com"
+paths:
+  /api/balance/{address}:
+    get:
+      operationId: "getAccountBalance"
+      description: "Search balance of address on any crypto chain (eth, bsc, polygon, etc and e.t.c)"
+      parameters:
+        - name: "address"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AccountBalanceResponse"
+        "500":
+          description: "Internal Server Error"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/InternalErrorResponse"
+  /api/validation:
+    post:
+      operationId: "getValidation"
+      description: "Search balance of address on any chain (eth, bsc, polygon, etc)"
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/AccountBalanceRequest"
+        required: true
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/ValidationResponse"
+        "500":
+          description: "Internal Server Error"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/InternalErrorResponse"
+components:
+  schemas:
+    Asset:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        symbol:
+          type: "string"
+        balance:
+          type: "string"
+        inDollar:
+          type: "string"
+    AccountBalanceResponse:
+      type: "object"
+      properties:
+        address:
+          type: "string"
+        assets:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Asset"
+        summary:
+          type: "string"
+        informationAboutSourceData:
+          type: "string"
+    AccountBalanceRequest:
+      type: "object"
+      properties:
+        address:
+          type: "string"
+    ValidationResponse:
+      type: "object"
+      properties:
+        address:
+          type: "string"
+        summary:
+          type: "string"
+        informationAboutSourceData:
+          type: "string"
+    InternalErrorResponse:
+      type: "object"
+      properties:
+        msg:
+          type: "string"

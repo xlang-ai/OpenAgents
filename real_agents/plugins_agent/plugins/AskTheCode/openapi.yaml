@@ -1,0 +1,115 @@
+openapi: 3.0.1
+info:
+  title: AskTheCode Plugin
+  description: Provide a GitHub repository URL with the C# project and ask about any aspect of the code.
+  version: v1
+paths:
+  /api/chatgpt-plugins/askthecode/structure:
+    post:
+      tags:
+        - AskTheCodePlugin
+      summary: Retrieves the github repository file structure to analyze it and be able to query only relevant files
+      operationId: QueryGithubRepositoryStructure
+      parameters:
+        - name: repositoryUrl
+          in: query
+          description: Github repository URL
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns the github repository structure
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StructureResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StructureResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/StructureResponse'
+  /api/chatgpt-plugins/askthecode/query:
+    post:
+      tags:
+        - AskTheCodePlugin
+      summary: 'Retrieves github repository file contents, possibly filtered by names'
+      operationId: QueryGithubRepositoryFileContents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        '200':
+          description: Returns the contents of the requested files
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+components:
+  schemas:
+    GithubFile:
+      type: object
+      properties:
+        path:
+          type: string
+          nullable: true
+        content:
+          type: string
+          nullable: true
+      additionalProperties: false
+    QueryRequest:
+      required:
+        - filePaths
+        - repositoryUrl
+      type: object
+      properties:
+        repositoryUrl:
+          minLength: 1
+          type: string
+          description: Github repository URL
+        filePaths:
+          type: array
+          items:
+            type: string
+          description: Files to query the content of
+      additionalProperties: false
+    QueryResponse:
+      type: object
+      properties:
+        assistantHint:
+          type: string
+          nullable: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/GithubFile'
+          nullable: true
+      additionalProperties: false
+    StructureResponse:
+      type: object
+      properties:
+        assistantHint:
+          type: string
+          nullable: true
+        files:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false

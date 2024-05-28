@@ -1,0 +1,34 @@
+{
+    "id": "plugin-36366eab-b241-4347-b373-b3596c73a8cd",
+    "domain": "traders-insight.vercel.app",
+    "namespace": "tradersinsight",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "tradersinsight",
+        "name_for_human": "Traders Insight",
+        "description_for_model": "Get and Decode the latest technical analysis ideas for stocks and bitcoin from top traders.",
+        "description_for_human": "Decode the latest technical analysis ideas for stocks and bitcoin from top traders.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://traders-insight.vercel.app/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://traders-insight.vercel.app/imgs/logo.png",
+        "contact_email": "support@aiagentslab.com",
+        "legal_info_url": "https://www.aiagentslab.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

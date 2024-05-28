@@ -1,0 +1,29 @@
+{
+    "id": "plugin-5d4d9681-6562-4e39-931f-bb296cabf66a",
+    "domain": "api.gamebase.chat",
+    "namespace": "game_info_fetcher",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "game_info_fetcher",
+        "name_for_human": "GameBase",
+        "description_for_model": "Use the GameBase plugin for anything related to game searching and discovery. This plugin will assist users in finding relevant results from the finest game information\u3001strategy\u3001related videos worldwide. To use it most effectively, begin by asking clarifying questions about the kind of game the user is looking for. Do not assume the user's age or gender. Do not guess. Ask questions anytime you are uncertain. If the search results are empty, do not fabricate games and use web query to get results. Do not make up details about game information or game price.If you think the result is not good enough, you MUST use web query to google it!",
+        "description_for_human": "Chat and get game info, database is based on the latest gaming information in 2023, supports multiple platforms.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://api.gamebase.chat/v3/api-docs"
+        },
+        "logo_url": "https://raw.githubusercontent.com/zichanghu/Nap/main/game-center-chatgptplugin-colorful.png",
+        "contact_email": "heicarbook@gmail.com",
+        "legal_info_url": "https://raw.githubusercontent.com/zichanghu/Game-Base-ChatGPT-plugin/main/legal_info_Game%20Base%20ChatGPT%20plugin.md"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": []
+}

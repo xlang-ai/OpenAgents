@@ -1,0 +1,34 @@
+{
+    "id": "plugin-801d57ac-d572-4fe3-839c-41536af20681",
+    "domain": "api.speedybrand.io",
+    "namespace": "speedy_marketing",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "speedy_marketing",
+        "name_for_human": "Speedy Marketing",
+        "description_for_model": "Plugin for generating a SEO blog and social media post for a website.",
+        "description_for_human": "Marketing tool for your Shopify store, ecommerce website or any business. Write SEO blogs and social media content.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://api.speedybrand.io/openapi.yaml"
+        },
+        "logo_url": "https://api.speedybrand.io/logo.png",
+        "contact_email": "contact@speedybrand.io",
+        "legal_info_url": "https://speedybrand.io/terms-and-conditions"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,57 @@
+openapi: 3.0.1
+info:
+  title: Roshi Lesson Generator
+  description: Create interactive lessons from online articles or Youtube videos.
+  version: 'v1'
+servers:
+  - url: 'https://www.roshi-server.com'
+paths:
+  /create_plugin_lesson:
+    post:
+      operationId: createLesson
+      summary: Create a lesson based on a given url of an article or Youtube video, and return a link for them to edit and share the lesson.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createLessonRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createLessonResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createLessonResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createLessonResponse'
+components:
+  schemas:
+    createLessonRequest:
+      type: object
+      properties:
+        source_content_url:
+          description: The url of the article or YouTube video to create a lesson from.
+          type: string
+    createLessonResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The url of the newly created lesson.
+        error:
+          type: string
+          description: A descriptive error message if the lesson could not be created.
+        warning:
+          type: string
+          description: A warning message if the lesson was created with warnings.

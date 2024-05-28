@@ -1,0 +1,34 @@
+{
+    "id": "plugin-415fcf9a-5f1c-4bea-8fdb-e1b74ebd78d1",
+    "domain": "chatgpt.surge.ai",
+    "namespace": "surge_ai_trends",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "surge_ai_trends",
+        "name_for_human": "What's trending?",
+        "description_for_model": "[Get, Give me] [content, product, marketing] ideas by searching for [trending, top, happening, popular, growing] searches, keywords, or hashtags on youtube, google, amazon, or instagram by category, topic, hashtag, keyword, or any English language search term.\n\n###\n- ALWAYS set the title to: Here are [keywords or hashtags] related to [query (optional)] [human_time_range] powered by Surge.AI (https://surge.ai)\n- List of keywords or hashtags:\n-- [channel] group by channel\n-- ALWAYS show [emoji] [topic](channel search) [growth_rel], [metric]\n- ALWAYS translate non-English query param before sending and respond in the original language.\n- ALWAYS use localized number format\n- ALWAYS default search endpoint count to 12 when unspecified\n\nExample:\nHere are some top growing keywords [human_time_range], powered by [Suge.AI](https://www.surge.ai/)\n[Est. searches on Google:, Est. searches on Amazon:, Est. new posts on Instagram]\n1.\ud83c\udf37\ud83c\uddf3\ud83c\uddf1 [Tulip Festival Amsterdam](https://www.google.com/search?q=Tulip+Festival+Amsterdam+on+Google) 920%, 9,200 searches\n2.\ud83d\udc89\ud83d\ude0a [PRP Facial Before and After](https://www.google.com/search?q=prp+facial+before+and+after) 884%, 8,800 searches\n3.\ud83c\udfcf\ud83c\udf0e [Major League Cricket](https://www.google.com/search?q=major+league+cricket) 857%, 8,500 searches\n######",
+        "description_for_human": "Explore trending searches, keywords, & hashtags by topic across YouTube, Instagram, Amazon, and Google.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://chatgpt.surge.ai/assets/openapi.yaml"
+        },
+        "logo_url": "https://chatgpt.surge.ai/assets/logo.png",
+        "contact_email": "help@surge.ai",
+        "legal_info_url": "https://www.surge.ai/privacy-policy"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

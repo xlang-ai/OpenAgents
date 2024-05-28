@@ -1,0 +1,43 @@
+openapi: 3.0.1
+info:
+  title: Video Summary Plugin API
+  description: Summarize YouTube video highlights. Generate summaries from YouTube video URLs.
+  version: "v1.1.0"
+servers:
+  - url: https://glarity.app
+paths:
+  /api/youtube:
+    get:
+      operationId: GetVideoSummaryTranscribeVideo
+      summary: Get YouTube video transcriptions
+      parameters:
+        - in: query
+          name: url
+          schema:
+            type: string
+          required: true
+          description: YouTube video URL
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getYoutubeTranscriptResponse"
+        "500":
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+components:
+  schemas:
+    getYoutubeTranscriptResponse:
+      type: object
+      properties:
+        transcript:
+          type: string
+          description: YouTube video transcription text.

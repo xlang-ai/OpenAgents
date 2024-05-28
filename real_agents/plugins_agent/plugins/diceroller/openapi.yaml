@@ -1,0 +1,85 @@
+openapi: 3.0.1
+info:
+  title: DM Tool Kit
+  description: An app that allows the user to roll dice using either the d20 system or the Fate system.
+  version: 'v1'
+servers:
+  - url: https://dmtoolkit.magejosh.repl.co
+paths:
+  /roll:
+    post:
+      operationId: roll
+      summary: Roll dice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                expression:
+                  type: string
+                  description: >
+                    The dice roll expression. Can be in the format of the d20 system (e.g., "4d6") or the Fate system (e.g., "4dF").
+                    The d20 system supports complex dice roll expressions, including:
+                    - Basic rolls, like "4d6" (roll 4 six-sided dice).
+                    - Dice roll modifiers, like "1d20+4" (roll a twenty-sided die and add 4).
+                    - Advantage and disadvantage rolls, like "1d20adv" (roll two twenty-sided dice and take the higher result).
+                    - Dice roll expressions with multiple parts, like "2d6+1d4" (roll two six-sided dice and one four-sided die and add the results).
+                    - Dropping the highest/lowest roll, like "4d6dl1" (roll four six-sided dice and drop the lowest roll) is the wrong syntax. The correct syntax for rolling 4 six-sided dice and dropping the lowest roll is "4d6kh3". This stands for "roll 4 six-sided dice, keep the highest 3".
+                    - Sending "help" as the expression will return a list of available dice roll expression types and the URL to the plugin's help page.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: number
+                    description: The total result of the dice roll.
+                  detailed_result:
+                    type: string
+                    description: A detailed description of the dice roll, including the results of each individual dice roll.
+                  help:
+                    type: array
+                    items:
+                      type: string
+                    description: A list of available dice roll expression types, returned when "help" is the expression.
+                  url:
+                    type: string
+                    description: The URL to the app's help page, returned when "help" is the expression.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message, if there was an error rolling the dice.
+  /legal.html:
+    get:
+      operationId: getLegalPage
+      summary: Serve legal page
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
+  /help:
+    get:
+      operationId: getHelpPage
+      summary: Serve help page
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
+

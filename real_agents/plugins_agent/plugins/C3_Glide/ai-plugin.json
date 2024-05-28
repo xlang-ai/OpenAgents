@@ -1,0 +1,34 @@
+{
+    "id": "plugin-daefe64e-a304-4ddb-ab0b-943625d7d4c3",
+    "domain": "c3glide-d9g5.boldstratus.com",
+    "namespace": "C3_Glide",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "C3_Glide",
+        "name_for_human": "C3 Glide",
+        "description_for_model": "C3 Glide retrieves live aviation data including METARs, TAFs, and NOTAMs for pilots. \n\nC3 Glide can retrieve METARs. METAR reports are surface observations for a particular airfield or other reporting station location. \n\nC3 Glide can retrieve TAFs. TAF reports are predictive atmospheric conditions for an area within five nautical miles of a particular airfield or other reporting station location. \n\nC3 Glide can retrieve NOTAMs. NOTAMs are reports detailing special events or conditions affecting airport and flight operations. These can include, but are not limited to runway closures, lack of radar services, rocket launches, hazard locations, airspace restrictions, construction updates, and unusual aircraft activity. \n\nThe user provides one or more geographic locations, or reporting stations to retrieve the relevant live aviation data products. The geographic location(s), or reporting station(s) must be represented by ICAO airport codes (KJFK, EGLL, PHNL), IATA airport codes (MIA, LGA, HNL), and/or latitude and longitude coordinates (30.35,-81.013). Combined they can be represented as such: LEX;KATL;30.2,-82.1;KMCO. If the user provides a latitude and longitude coordinate, C3 Glide is able to find live aviation data from nearby aerodromes or reporting stations. \n\nThe type(s) of live aviation data products best suited to the user\u2019s requests are retrieved, including one or more of the following: METARs, TAFs, and/or NOTAMs. If NOTAMs are fetched, the NOTAM code must be specified as one of the following letters depending on the user query: \n\n'X' for All NOTAMs. \n\n'A' for Airspace, Control Zones, ADIZ, Air Traffic Procedures, SID, STARs, Air Traffic Services, Airspace Restrictions, VOLMET Services, Navigation Warnings, Terminal and Enroute Navigation Facilities, Navigation Beacons, Volcanic Activity, Unmanned Aircraft, and GNSS Services. \n\n'C' for Communications, SELCAL, Radar, and Surveillance. \n\n'F' for Facilities, Services, Firefighting Services, Fuel, Runways, Runway Surface Conditions, Aprons, Parking Areas, Taxiways, Lighting, Movement and Landing Areas. \n\n'I' for Instrument Approach Procedures, and Minimums. \n\n'O' for Obstacles, and Cranes. \n\nThe user can supply a date and/or time for their request, which must be converted to UTC using the following format: 2021-12-07T16:37:00Z. The user date and/or time is captured as a period with a start, and end value. If a date and/or time is not supplied, the current UTC date and time is used.",
+        "description_for_human": "Get live aviation data for pilots. Ask questions about METARs, TAFs, NOTAMs for flight planning.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://c3glide-d9g5.boldstratus.com/c3glide-api/apiPluginSpec.yaml"
+        },
+        "logo_url": "https://c3glide-d9g5.boldstratus.com/c3glide-api/assets/BoldStratus+Purple+Icon.png",
+        "contact_email": "hello@boldstratus.com",
+        "legal_info_url": "https://boldstratus.com/privacy"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

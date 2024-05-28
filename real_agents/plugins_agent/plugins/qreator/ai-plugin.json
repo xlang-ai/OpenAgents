@@ -1,0 +1,34 @@
+{
+    "id": "plugin-fb2ef084-84fa-45ed-9eb8-ed4d1d741274",
+    "domain": "letai.help",
+    "namespace": "qreator",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "qreator",
+        "name_for_human": "QR Generator",
+        "description_for_model": "Generate QR code in seconds.",
+        "description_for_human": "Generate QR code in seconds.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://letai.help/qreator/openapi.yaml"
+        },
+        "logo_url": "https://letai.help/qreator/logo.png",
+        "contact_email": "support@dreampunk.ai",
+        "legal_info_url": "https://letai.help/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-dd622258-9a08-4287-b6bc-ca12b6b1ba73",
+    "domain": "assistant.wanted.co.kr",
+    "namespace": "wanted_job_search",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "wanted_job_search",
+        "name_for_human": "Wanted Job Search",
+        "description_for_model": "Explore and inquire about global job opportunities, and dive into the details of worldwide positions with precision.",
+        "description_for_human": "Explore and inquire about global job opportunities, and dive into the details of worldwide positions with precision.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://assistant.wanted.co.kr/openapi.yaml"
+        },
+        "logo_url": "https://assistant.wanted.co.kr/logo.png",
+        "contact_email": "jinjoong.kim@wantedlab.com",
+        "legal_info_url": "https://www.wanted.co.kr/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

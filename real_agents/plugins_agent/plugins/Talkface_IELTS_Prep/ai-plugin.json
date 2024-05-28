@@ -1,0 +1,34 @@
+{
+    "id": "plugin-4faaeb9e-b9bd-4ae6-be7f-bdf7d162ae1f",
+    "domain": "talkface.ai",
+    "namespace": "Talkface_IELTS_Prep",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Talkface_IELTS_Prep",
+        "name_for_human": "Talkface IELTS Prep",
+        "description_for_model": "Use the latest IELTS Speaking exam questions to prep your IELTS speaking with Talkface.",
+        "description_for_human": "Use the latest IELTS Speaking exam questions to prep your IELTS speaking with Talkface.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://talkface.ai/ai-plugin/openapi.yaml"
+        },
+        "logo_url": "https://talkface.ai/icon_512w.png",
+        "contact_email": "help@talkface.ai",
+        "legal_info_url": "https://talkface.ai/terms_of_service.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

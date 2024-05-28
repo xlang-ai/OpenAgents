@@ -1,0 +1,70 @@
+---
+openapi: 3.0.1
+info:
+  title: ChatGPT Tabor Senior living
+  description: A plugin that allows you to get senior living facilities information
+    for a given city
+  version: v1
+servers:
+- url: https://plugin.tabor.ai
+paths:
+  "/api/Prompt":
+    get:
+      tags:
+      - Prompt
+      operationId: GetPrompt
+      parameters:
+      - name: question
+        in: query
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PromptResponse"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProblemDetails"
+        '500':
+          description: Server Error
+components:
+  schemas:
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    PromptResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          nullable: true
+        additionalInfo:
+          type: string
+          nullable: true
+        isSuccessful:
+          type: boolean
+      additionalProperties: false

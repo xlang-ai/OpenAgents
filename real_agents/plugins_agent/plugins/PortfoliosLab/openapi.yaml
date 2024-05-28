@@ -1,0 +1,200 @@
+openapi: 3.0.0
+info:
+  title: PortfoliosLab API
+  description: "Stocks, ETFs, funds, crypto analysis: historical performance, volatility, risk metrics, Sharpe ratio, drawdowns, etc."
+  version: 1.0.0
+servers:
+  - url: https://portfolioslab.com/api
+paths:
+  /symbol/{symbol}:
+    get:
+      operationId: getSymbol
+      summary: Get information about a specific symbol.
+      description: Retrieves detailed information about the ETF, stock, mutual fund, index, or crypto currency specified by its symbol name.
+      parameters:
+        - in: path
+          name: symbol
+          schema:
+            type: string
+          required: true
+          description: The symbol name (e.g., VTI, AAPL, BTC-USD).
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Symbol'
+components:
+  schemas:
+    Symbol:
+      type: object
+      properties:
+        cusip:
+          type: string
+          example: '922908769'
+        created:
+          type: string
+          format: date-time
+          example: '2022-06-07T07:56:40.798Z'
+        description:
+          type: string
+          example: 'VTI is an exchange-traded fund (ETF) that tracks the performance of the CRSP US Total Market Index. ...'
+        type:
+          type: string
+          example: 'ETF'
+        indicators:
+          $ref: '#/components/schemas/Indicators'
+        full_name:
+          type: string
+          example: 'Vanguard Total Stock Market ETF'
+        name:
+          type: string
+          example: 'VTI'
+        alternatives:
+          type: array
+          items:
+            type: string
+          example: ['SPY', 'VT', 'VOO', 'ITOT', 'SPHD', 'SPTM', 'VWO', 'VXUS']
+        currency:
+          type: string
+          example: 'USD'
+        exchange:
+          type: string
+          nullable: true
+        updated:
+          type: string
+          format: date-time
+          example: '2023-05-03T10:32:37.717737'
+        isin:
+          type: string
+          example: 'US9229087690'
+        info:
+          $ref: '#/components/schemas/Info'
+    Indicators:
+      type: object
+      properties:
+        return5Y:
+          type: number
+          format: float
+          example: 0.1033
+          description: The 5-year annualized return of the symbol.
+        return10Y:
+          type: number
+          format: float
+          example: 0.1139
+          description: The 10-year annualized return of the symbol.
+        maxDrawdown:
+          type: number
+          format: float
+          example: -0.5545
+          description: The maximum drawdown of the symbol.
+        return1Y:
+          type: number
+          format: float
+          example: 0.0015
+          description: The 1-year annualized return of the symbol.
+        dividendYield:
+          type: number
+          format: float
+          example: 0.0195
+          description: The dividend yield of the symbol.
+        volatility10Y:
+          type: number
+          format: float
+          example: 0.1786
+          description: The 10-year annualized volatility of the symbol.
+        volatility1Y:
+          type: number
+          format: float
+          example: 0.2298
+          description: The 1-year annualized volatility of the symbol.
+        returnYTD:
+          type: number
+          format: float
+          example: 0.0696
+          description: The year-to-date return of the symbol.
+        volatility5Y:
+          type: number
+          format: float
+          example: 0.219
+          description: The 5-year annualized volatility of the symbol.
+        sharpe:
+          type: number
+          format: float
+          example: 0.0063
+          description: The Sharpe ratio of the symbol.
+        ulcerIndex:
+          type: number
+          format: float
+          example: 0.0861
+          description: The Ulcer Index of the symbol.
+        calmar:
+          type: number
+          format: float
+          example: 0.0087
+          description: The Calmar ratio of the symbol.
+        omega:
+          type: number
+          format: float
+          example: 1.0023
+          description: The Omega ratio of the symbol.
+        sortino:
+          type: number
+          format: float
+          example: 0.0198
+          description: The Sortino ratio of the symbol.
+
+    Info:
+      type: object
+      properties:
+        asset_class:
+          type: string
+          example: 'Equity'
+        inception:
+          type: string
+          format: date
+          example: '2001-05-24'
+        asset_class_style:
+          type: string
+          example: 'Blend'
+        issuer:
+          type: string
+          example: 'Vanguard'
+        structure:
+          type: string
+          example: 'ETF'
+        asset_class_size:
+          type: string
+          example: 'Large-Cap'
+        home_page:
+          type: string
+          example: 'https://advisors.vanguard.com/investments/products/VTI'
+        issuer_slug:
+          type: string
+          example: 'vanguard'
+        expense_ratio:
+          type: string
+          example: '0.03'
+        region_general:
+          type: string
+          example: 'North America'
+        asset_class_slug:
+          type: string
+          example: 'equity'
+        index_tracked:
+          type: string
+          example: 'CRSP US Total Market Index'
+        region_specific:
+          type: string
+          example: 'U.S.'
+        category:
+          type: array
+          items:
+            type: string
+          example: ['Large Cap Growth Equities']
+        category_slug:
+          type: array
+          items:
+            type: string
+          example: ['large-cap-growth-equities']

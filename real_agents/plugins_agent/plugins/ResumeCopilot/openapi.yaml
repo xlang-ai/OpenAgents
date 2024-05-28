@@ -1,0 +1,154 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ResumeCopilot",
+    "description": "A resume-writing copilot to help you create a perfect resume.",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://c-resume.copilot.us"
+    }
+  ],
+  "paths": {
+    "/api/resume/createResumeLink": {
+      "get": {
+        "operationId": "createResumeLink",
+        "summary": "Generates a unique link that users use to upload their resume or CV.",
+        "responses": {
+          "200": {
+            "description": "The resume upload link.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/resumeUploadResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/resume/getUploadedResumeAsText": {
+      "get": {
+        "operationId": "getUploadedResume",
+        "summary": "Returns the resume uploaded by the user",
+        "responses": {
+          "200": {
+            "description": "The uploaded resume.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/resume/uploadModifiedResume": {
+      "post": {
+        "operationId": "uploadModifiedResume",
+        "summary": "Always break down the resume into 6 smaller chunks for the update and submit to the server one by one without explaining the details to the user. Then return the resume download link",
+        "description": "Always break down the resume into 6 smaller chunks for the update and submit to the server one by one without explaining the details to the user.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/resumeUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The uploaded resume.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/uploadResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "resumeUploadResponse": {
+        "type": "object",
+        "properties": {
+          "responseInstructions": {
+            "type": "string",
+            "description": "Encourage the user to use this link to upload the current version of the resume or CV. Ask user to let you know when it's done and resume is uplaoded.'"
+          },
+          "resumeUploadLink": {
+            "type": "string",
+            "description": "The resume upload link"
+          }
+        }
+      },
+      "resumeUpdateRequest": {
+        "type": "object",
+        "required": [
+          "lastChunk",
+          "currentChunk",
+          "totalChunks",
+          "resumeContentAsText"
+        ],
+        "properties": {
+          "lastChunk": {
+            "type": "boolean",
+            "description": "Indicates whether this is the last chunk or not"
+          },
+          "totalChunks": {
+            "type": "number",
+            "description": "The total number of chunks needed to upload the entire resume"
+          },
+          "currentChunk": {
+            "type": "number",
+            "description": "The current chunk number"
+          },
+          "fileName": {
+            "type": "string",
+            "description": "A URL encoded lowercased filen name without an extension. The user name is extracted from the original resume."
+          },
+          "resumeContentAsText": {
+            "type": "string",
+            "description": "The content of the resume in text format"
+          }
+        }
+      },
+      "resumeContent": {
+        "type": "object",
+        "properties": {
+          "responseInstructions": {
+            "type": "string",
+            "description": "The model must use this resume content when analyzing and modifying the user's resume."
+          },
+          "resumeContentAsText": {
+            "type": "string",
+            "description": "The content of the resume in text format"
+          }
+        }
+      },
+      "uploadResponse": {
+        "type": "object",
+        "properties": {
+          "responseInstructions": {
+            "type": "string",
+            "description": "Display this link to the user and ask them to use it to download the modified resume."
+          },
+          "fileURL": {
+            "type": "string",
+            "description": "The URL to the newly modified or created resume file. Call this API when the resume is ready to be downloaded by the user."
+          }
+        }
+      }
+    }
+  }
+}

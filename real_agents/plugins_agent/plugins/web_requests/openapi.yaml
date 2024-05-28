@@ -1,0 +1,374 @@
+---
+openapi: 3.0.0
+info:
+  title: Web Requests
+  version: 1.1.1
+  description: A versatile plugin for accessing content on the web, parsing that content
+    in different ways, overcoming GPT's infamous "Knowledge Cutoff!"
+paths:
+  "/scrape_url":
+    post:
+      summary: Browse the web via URL to load web page, or raw text file. Including
+        HTML, PDF, JSON, XML, CSV, images, and if provided search terms instead of
+        a URL it will perform a Google search.
+      operationId: scrape_url
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: "(Required) The URL to scrape or perform a Google search
+                    if 'is_search' is set to true. When is_search is set to true,
+                    the 'url' parameter will be treated as a search query for Google."
+                page:
+                  type: integer
+                  description: The page number (of data chunks, not web pages) to
+                    retrieve, based on the page_size that was chosen. To request subsequent
+                    pages, increment the value of the 'page' parameter, and be sure
+                    to send job_id for which you are paginating. For example, to request
+                    the second page, set 'page' to 2.
+                  default: 1
+                page_size:
+                  type: integer
+                  description: The maximum number of characters of content that will
+                    be returned with the subsequent response. Defaults to 10000, can
+                    go higher. It's important to keep in mind the relationship between
+                    'page_size' and 'page_context'. For example, if you set page_size
+                    to 10000 and 'page_context' returns '1/3', you're looking at the
+                    first 10000 characters of up to 30000 (three total pages at 10000
+                    per page). If you then request the same URL and 'job_id' to page=2,
+                    you will receive the second 10000 characters of the content.
+                  default: 10000
+                is_search:
+                  type: boolean
+                  description: "(Optional) Indicates whether the request is a search
+                    query. If set to true, the 'url' parameter will be treated as
+                    a search query for Google."
+                  default: false
+                num_results_to_scrape:
+                  type: integer
+                  description: "(Optional) Only relevant when 'is_search' is true.
+                    The number of search results to return. Default is 3."
+                job_id:
+                  type: string
+                  description: Job ID's are generated server-side and represent a
+                    "job." A job can be a single request, or a series of different
+                    requests. Job ID's combined with URL's are what allow us to cache
+                    your content for pagination. It is **highly recommended** to include
+                    the job_id we assigned from prior successful responses when paginating
+                    through large amounts of response content, for instance, or when
+                    organizing a set of requests into a single conceptual job is useful
+                    for your conversation.
+                refresh_cache:
+                  type: boolean
+                  description: "(Optional) Indicates whether to refresh the cache
+                    for the content at the URL in this request. If set to true, a
+                    new request to the URL will be made and the cache will be updated.
+                    This is useful if you're requesting an endpoint that is frequently
+                    updated. Default is false."
+                  default: false
+                no_strip:
+                  type: boolean
+                  description: "(Optional) Indicates whether to skip the stripping
+                    of HTML tags and clutter. Use this flag if you want to preserve
+                    the original HTML structure, such as when specifically looking
+                    for something in source code. When 'no_strip' is set to false
+                    (by default), HTML content will be sanitized and certain tags
+                    (e.g., script and style tags) may be removed for security reasons."
+                  default: false
+              required:
+              - url
+      responses:
+        '200':
+          description: Request returned a response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Indicates whether the Request/Response was successful
+                      on our end of the exchange.
+                  content:
+                    type: object
+                    description: "The content from the URL or search results in various
+                      formats. In-general, it is a more rich experience to strive
+                      to format responses with Markdown, including ![](\U0001F5BC)
+                      mages and [](\U0001F517) hyperlinks!"
+                  error:
+                    type: string
+                    description: 'An error message, if any. Possible error messages
+                      include ''Invalid URL'', ''Invalid page or page_size'', ''Invalid
+                      num_results_to_scrape'', ''Unsupported content type: {content_type}'',
+                      and ''Failed to fetch the content''. Often times adjusting paramters
+                      resolves these issues.'
+                  has_more:
+                    type: boolean
+                    description: Indicates whether there are more chunks/pages available
+                      for pagination after the current chunk. Increment previous 'page'
+                      number and include corresponding 'job_id' to request the next
+                      chunk.
+                  job_id:
+                    type: string
+                    description: Job ID's are generated server-side and represent
+                      a "job." A job can be a single request, or a series of different
+                      requests. Job ID's combined with URL's are what allow us to
+                      cache your content for pagination. It is **highly recommended**
+                      to include the job_id we assigned from prior successful responses
+                      when paginating through large amounts of response content, for
+                      instance, or when organizing a set of requests into a single
+                      conceptual job is useful for your conversation.
+                  cache_age:
+                    type: integer
+                    description: The response may have been retrieved from an in-memory
+                      cache to improve performance. Particularly useful when paginating
+                      through large content. The 'cache_age' property indicates the
+                      age of the cache in seconds since the content was originally
+                      fetched.
+                  page_context:
+                    type: string
+                    description: The context of the current page (chunk) in relation
+                      to the total number of pages (chunks) of response data for a
+                      given job. For example, '2/3' means this is the 2nd chunk out
+                      of a total of 3 chunks. It is HIGHLY RECOMMENDED to paginate
+                      through at least 2 or 3 pages of multi-page responses. It is
+                      often times hard to fully understand the context of just the
+                      first page of a multi-page response.
+                  notice:
+                    type: string
+                    description: This notice is a system message meant to convey some
+                      additional, potentially important context that may help instruct
+                      and inform subsequent actions, and should be observed and considered.
+                  alert:
+                    type: string
+                    description: This alert is an IMPORTANT system message, meant
+                      to convey important nuance or information that should be observed
+                      and retained in memory until fulfilled.
+  "/rest_api_call":
+    post:
+      summary: Make a POST or GET http API call with optional headers and body. The
+        /rest_api_call endpoint is a more advanced tool when /scrape_url can't cut
+        it. You can send payload telling Web Requests what kind of API call to make
+        on your behalf.
+      operationId: rest_api_call
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: "(Required) The HTTP/HTTPS endpoint to which the API
+                    call payload will be sent. This should be a fully qualified URL,
+                    including the protocol (e.g., 'https://') and any necessary path
+                    or query parameters. NOTE: It is NOT necessary to include the
+                    URL again when paginating chunks. You can just send req_id and
+                    the requested chunk number."
+                http_method:
+                  type: string
+                  description: "(Required) The HTTP method to use for the request.
+                    This should be either 'POST' or 'GET'. Default is 'POST'. This
+                    isn't to be confused with this plugin's web_requests.rest_api_call
+                    endpoint itself, which is always a POST request."
+                  default: POST
+                chunk:
+                  type: integer
+                  description: The chunk of the response to return. This is useful
+                    for paginating through large responses. The default is 1, which
+                    returns the first chunk of the response. If the response has more
+                    than one chunk, the response will include a 'has_more' property,
+                    which indicates whether there are more chunks available for pagination
+                    after the current chunk. Increment previous 'chunk' number and
+                    include corresponding 'req_id' that should have been included
+                    in the previous response to request the next chunk.
+                req_id:
+                  type: string
+                  description: The unique request ID of a prior request. The request
+                    ID is used to paginate through addiitonal chunks of data from
+                    an endpoint that has been recently called. It is recommended to
+                    include the same request ID when requesting subsequent chunks
+                    from the same URL to retrieve content from the cached snapshot
+                    of the original request.
+                payload_headers:
+                  type: string
+                  description: A string that represents the headers to be included
+                    in the API call that web_requests will be making on its backend.
+                    Each key-value pair should still be written hierarchicacly as
+                    if a JSON representing a header name and its corresponding value.
+                    This is optional and can be omitted if no custom headers are needed.
+                    But any authentication headers should be included, web_requests
+                    will not fill in its own bearer tokens.
+                payload_body:
+                  type: string
+                  description: A string that represents the body of the API request
+                    which web_requests will be sending. This will be included in the
+                    API call web_requests will make as the payload. The structure
+                    of this object will depend on the requirements of the API or service
+                    to which you are making the request. This is optional and can
+                    be omitted if no body is needed for the request.
+              required:
+              - url
+              - http_method
+      responses:
+        '200':
+          description: The HTTP status code and response body that were returned by
+            the API request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: A boolean value that indicates whether the API call
+                      was successful. This will be true if the request was made without
+                      any errors and false otherwise.
+                  content:
+                    type: object
+                    description: The body of the response from the API request. The
+                      structure of this object will depend on the response from the
+                      API or service to which the request was made.
+                  chunk:
+                    type: string
+                    description: The chunk number of the response. This will be 1/1
+                      if the entire response was returned in a single chunk. If the
+                      response was paginated, this will be 1/4, perhaps, indicating
+                      that this is the first chunk of four chunks of the response,
+                      whch shuld be queried by following-up with the 'req_id' and
+                      'chunk' parameters.
+                  has_more:
+                    type: boolean
+                    description: Indicates whether there are more chunks available
+                      for pagination after the current chunk. Increment previous 'chunk'
+                      number and include corresponding 'req_id' to request the next
+                      chunk.
+                  req_id:
+                    type: string
+                    description: The unique request ID for this request. The request
+                      ID is used to ensure consistency when paginating chunks of a
+                      rest_api response. If not provided, a new request ID will be
+                      generated. It is necessary to include the same request ID in
+                      each subsequent request to this endpoint when requesting the
+                      additional chunks from the same rest_api_call last called.
+                  alert:
+                    type: string
+                    description: This alert is an IMPORTANT system message, meant
+                      to convey important nuance or information that should be observed
+                      and retained in memory until fulfilled.
+                  error:
+                    type: string
+                    description: A string that contains an error message, if any errors
+                      occurred while making the API call. If no errors occurred, this
+                      field will be null or omitted.
+  "/get_wallet_profile":
+    post:
+      tags:
+      - Wallet
+      summary: Retrieve a comprehensive summary of an Ethereum wallet's key stats
+        using the Etherscan API. User must provide their own API Key, it can be found
+        in their Account Settings on Etherscan.io -- it's FREE!
+      operationId: get_wallet_profile
+      requestBody:
+        description: Etherscan API key and Ethereum address are required. Optional
+          req_id and chunk for pagination.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                etherscan_api_key:
+                  type: string
+                  description: The API key provided by Etherscan for accessing their
+                    service. They can be found in your Account Settings on Etherscan.io
+                    -- it's FREE!
+                ethereum_address:
+                  type: string
+                  description: The Ethereum address of the wallet for which the profile
+                    is being requested.
+                req_id:
+                  type: string
+                  description: The unique request ID of a prior request. The request
+                    ID is used to paginate through additional chunks of data from
+                    a wallet profile that has been recently fetched. It is recommended
+                    to include the same request ID when requesting subsequent chunks
+                    from the same wallet profile to retrieve content from the cached
+                    snapshot of the original request.
+                  nullable: true
+                chunk:
+                  type: integer
+                  description: The chunk number of the response to return. This is
+                    useful for paginating through large responses. The default is
+                    1, which returns the first chunk of the response. If the response
+                    has more than one chunk, the 'has_more' property will indicate
+                    if there are more chunks available for pagination after the current
+                    chunk.
+                  nullable: true
+              required:
+              - etherscan_api_key
+              - ethereum_address
+      responses:
+        '200':
+          description: The profile / summary data of the specified Ethereum wallet.
+            You can either work with the data, or print a formatted summary report
+            for the user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Indicates whether the Request/Response was successful
+                      on our end of the exchange.
+                  alert:
+                    type: string
+                    description: This alert is an IMPORTANT system message, meant
+                      to convey important nuance or information that should be observed
+                      and retained in memory until fulfilled.
+                  content:
+                    type: object
+                    description: The profile data of the Ethereum wallet. The structure
+                      of this object will depend on the response from the Etherscan
+                      API. It may be a chunked String, or a JSON / Dict.
+                  req_id:
+                    type: string
+                    description: The unique request ID for this request. The request
+                      ID is used to ensure consistency when paginating chunks of a
+                      wallet profile response. If not provided, a new request ID will
+                      be generated. It is necessary to include the same request ID
+                      in each subsequent request to this endpoint when requesting
+                      the additional chunks from the same wallet profile last fetched.
+                  chunk:
+                    type: string
+                    description: The context of the current chunk in relation to the
+                      total number of chunks of response data for a given job. For
+                      example, '2/3' means this is the 2nd chunk out of a total of
+                      3 chunks. It is HIGHLY RECOMMENDED to paginate through at least
+                      2 or 3 chunks of multi-chunk responses. It is often times hard
+                      to fully understand the context of just the first chunk of a
+                      multi-chunk response.
+                  cache_age:
+                    type: integer
+                    description: 'The content was retrieved from an in-memory cache
+                      to improve performance. Particularly useful when paginating
+                      through large content. The ''cache_age'' property indicates
+                      the age of the cache in seconds since the content was originally
+                      fetched. NOTE: Content only loads from a cache when ''req_id''
+                      is provided in original Request.'
+                  has_more:
+                    type: boolean
+                    description: Indicates whether there are more chunks available
+                      for pagination after the current chunk. Increment previous 'chunk'
+                      number and include corresponding 'req_id' to request the next
+                      chunk.
+                  error:
+                    type: string
+                    description: A string that contains an error message, if any errors
+                      occurred while building the wallet profile. You should try to
+                      adjust your strategy based on this error message.

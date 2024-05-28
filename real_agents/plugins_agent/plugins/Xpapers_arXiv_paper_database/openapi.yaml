@@ -1,0 +1,226 @@
+openapi: 3.0.1
+info:
+  title: Academic Plugin
+  description: Effortlessly find real academic papers on arXiv. Dive into abstracts, references, and access public PDF URLs.
+    
+  version: 'v2'
+servers:
+  - url:  https://xapi.lihaorui.com
+paths:
+  /legal:
+    get:
+      summary: Get legal, contact and donate information
+      responses:
+        '200':
+          description: A text containing legal, contact and donate information
+          content:
+            text/plain:
+              schema:
+                type: string
+  /search:
+    post:
+      operationId: search_papers
+      summary: Search for academic papers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Paper'
+        "500":
+          description: Internal Server Error
+  /search/pdf:
+    post:
+      operationId: search_papers_with_pdf
+      summary: Search for academic papers with PDF links
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Paper'
+        "500":
+          description: Internal Server Error
+  /search/id:
+    post:
+      operationId: search_papers_by_id
+      summary: Search for academic papers by id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchByIdRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Paper'
+        "500":
+          description: Internal Server Error
+  /search/date:
+    post:
+      operationId: search_papers_by_date
+      summary: Search for academic papers by date
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: >
+                    The search query. Use atomic conditions and boolean assembly to refine your search. 
+                    Each article is divided up into a number of fields that can individually be searched. 
+                    Here are the field prefixes you can use in your search queries: 'ti' for Title, 'au' for Author, 
+                    'abs' for Abstract, 'co' for Comment, 'jr' for Journal Reference, 'cat' for Subject Category, 
+                    'rn' for Report Number, 'id' for Id (use id_list instead), 'all' for all of the above. 
+                    You can also use boolean operators like AND, OR, ANDNOT in your queries. 
+                    For example, 'au:del_maestro+AND+ti:checkerboard' will return papers by the author Del Maestro 
+                    with 'checkerboard' in the title. You can also group your queries using parentheses and double quotes. 
+                    For example, 'au:del_maestro+AND+ti:%22quantum+criticality%22' will return papers by the author Del Maestro 
+                    with 'quantum criticality' in the title.
+                max_results:
+                  type: integer
+                  description: The maximum number of search results to return.
+                start_date:
+                  type: string
+                  format: date
+                  description: The start date of the search range in 'YYYY-MM-DD' format.
+                end_date:
+                  type: string
+                  format: date
+                  description: The end date of the search range in 'YYYY-MM-DD' format.
+              required:
+                - query
+                - max_results
+                - start_date
+                - end_date
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Paper'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+components:
+  schemas:
+    SearchRequest:
+      type: object
+      required:
+      - query
+      - max_results
+      properties:
+        query:
+          type: string
+          description: >
+            The search query. Use atomic conditions and boolean assembly to refine your search. 
+            Each article is divided up into a number of fields that can individually be searched. 
+            Here are the field prefixes you can use in your search queries: 'ti' for Title, 'au' for Author, 
+            'abs' for Abstract, 'co' for Comment, 'jr' for Journal Reference, 'cat' for Subject Category, 
+            'rn' for Report Number, 'id' for Id (use id_list instead), 'all' for all of the above. 
+            You can also use boolean operators like AND, OR, ANDNOT in your queries. 
+            For example, 'au:del_maestro+AND+ti:checkerboard' will return papers by the author Del Maestro 
+            with 'checkerboard' in the title. You can also group your queries using parentheses and double quotes. 
+            For example, 'au:del_maestro+AND+ti:%22quantum+criticality%22' will return papers by the author Del Maestro 
+            with 'quantum criticality' in the title.
+        max_results:
+          type: integer
+          description: The maximum number of search results to return. Should not bigger than 50.
+    SearchByIdRequest:
+      type: object
+      required:
+      - id_list
+      - max_results
+      properties:
+        id_list:
+          type: array
+          items:
+            type: string
+          description: The list of ids to search for.
+        max_results:
+          type: integer
+          description: The maximum number of search results to return.
+    Paper:
+      type: object
+      properties:
+        entry_id:
+          type: string
+        updated:
+          type: string
+        published:
+          type: string
+        title:
+          type: string
+        authors:
+          type: array
+          items:
+            type: string
+        summary:
+          type: string
+        comment:
+          type: string
+        journal_ref:
+          type: string
+        doi:
+          type: string
+        primary_category:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+        links:
+          type: array
+          items:
+            type: string
+        pdf_url:
+          type: string

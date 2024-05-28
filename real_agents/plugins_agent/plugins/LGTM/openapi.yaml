@@ -1,0 +1,41 @@
+openapi: 3.0.1
+info:
+  title: LGTM
+  description: Search for LGTM Markdown.
+  version: 'v1'
+servers:
+  - url: https://lgtm.lol
+paths:
+  /chatgpt:
+    get:
+      operationId: getLGTM
+      summary: Get an LGTM image and markdown code.
+      parameters:
+      - in: query
+        name: query
+        schema:
+            type: string
+        required: true
+        description: The query to search for.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getLGTMResponse'
+
+components:
+  schemas:
+    getLGTMResponse:
+      type: object
+      properties:
+        markdown_code:
+          type: string
+          description: This markdown code is returned in the beginning of the response.
+        image_url:
+          type: string
+          description: The image URL.
+        web_url:
+          type: string
+          description: The web site URL.

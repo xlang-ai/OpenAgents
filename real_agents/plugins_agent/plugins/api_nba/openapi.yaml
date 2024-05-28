@@ -1,0 +1,127 @@
+openapi: 3.0.0
+info:
+  title: NBA API
+  version: 1.0.0
+  description: All NBA Stats DATA, Games, Livescore, Standings, Statistics, Teams, Players, Seasons, Leagues.
+servers:
+- url: https://api-nba-v1.p.rapidapi.com
+  description: RapidAPI Server
+paths:
+  /seasons:
+    get:
+      summary: Get Seasons
+      responses:
+        '200':
+          description: Successful response
+  /leagues:
+      get:
+        summary: Get Leagues
+        responses:
+          '200':
+            description: Successful response
+  /teams:
+    get:
+      summary: Search Teams
+      parameters:
+        - name: id
+          in: query
+          description: The team ID
+          required: false
+          schema:
+            type: number
+        - name: name
+          in: query
+          description: The team name
+          required: false
+          schema:
+            type: string
+        - name: code
+          in: query
+          description: The team code
+          required: false
+          schema:
+            type: string
+        - name: league
+          in: query
+          description: The league name
+          required: false
+          schema:
+            type: string
+        - name: conference
+          in: query
+          description: The conference name
+          required: false
+          schema:
+            type: string
+        - name: division
+          in: query
+          description: The division name
+          required: false
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: The search term
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized
+        '429':
+          description: Too Many Requests
+  /players:
+    get:
+      summary: Search a player by lastname.
+      parameters:
+        - name: id
+          in: query
+          description: The id of the player, The player id are unique in the API and players keep it among all seasons.
+          required: false
+          schema:
+            type: number
+        - name: name
+          in: query
+          description: The name of the player
+          required: false
+          schema:
+            type: string
+        - name: team
+          in: query
+          description: The team ID
+          required: false
+          schema:
+            type: number
+        - name: season
+          in: query
+          description: The season ID
+          required: false
+          schema:
+            type: number
+        - name: country
+          in: query
+          description: The player's country
+          required: false
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: search by last name.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized
+        '429':
+          description: Too Many Requests
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-RapidAPI-Key

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-141c8da4-79e0-4c41-896f-1a483612f398",
+    "domain": "chat.jopilot.net",
+    "namespace": "jopilot",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "jopilot",
+        "name_for_human": "JoPilot",
+        "description_for_model": "You are a helpful, proactive assistant known as JoPilot. You assist job seekers in the US with their job search. As their assistant, you guide the candidates on a journey where you gather important information that might be helpful for an efficient job search. This information includes job title keywords, job location (cities, zip codes), employer names, commute distance in miles, salary range (min and max), and last job update date. You can also hide jobs by employer name, city name and keywords. You ask a series of questions to collect this information either in a step-by-step manner or all at once. Furthermore, users might want to limit the number of jobs in their search results.After gathering answers to these essential questions, you use the JoPilot to look up jobs and find the most relevant suggestions for the candidate.It is important to note that as an assistant, you do not search the jopilot.net website directly. Instead, you consistently utilize the JoPilot to find the latest and most relevant jobs.",
+        "description_for_human": "Search for US jobs by keywords, locations, employers, salaries, and commute time.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://chat.jopilot.net/.well-known/openapi.json"
+        },
+        "logo_url": "https://botmakers.blob.core.windows.net/temp/jopilot_dark.svg",
+        "contact_email": "plugin@jopilot.net",
+        "legal_info_url": "https://jopilot.net/home/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

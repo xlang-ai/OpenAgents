@@ -1,0 +1,34 @@
+{
+    "id": "plugin-df8099a6-f878-4c5e-b082-470b0b7fbc8c",
+    "domain": "chatgpt.tbddev.org",
+    "namespace": "web5",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "web5",
+        "name_for_human": "Web5 assistant",
+        "description_for_model": "Assistant for developers building a web5 application by providing examples, documentation and writing web5 code.",
+        "description_for_human": "Assistant for developers building a web5 application by providing examples, documentation and writing web5 code.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://chatgpt.tbddev.org/openapi.yaml"
+        },
+        "logo_url": "https://www.tbd.website/images/tbd-fav-icon-main.png",
+        "contact_email": "micn@tbd.email",
+        "legal_info_url": "https://tbd.website/about"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

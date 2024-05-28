@@ -1,0 +1,34 @@
+{
+    "id": "plugin-935ab9cd-d6bb-4f12-a197-3000b0881f3f",
+    "domain": "crafty-clues.jeevnayak.repl.co",
+    "namespace": "crafty_clues",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "crafty_clues",
+        "name_for_human": "Crafty Clues",
+        "description_for_model": "Play a game of Crafty Clues (a word guessing game) with the user. Instructions:\n1. Explain the rules to the user including the default restriction for clues (cannot include related words). Ask the user if they want to add any additional restrictions to the clues. Tell them that they can also mix and match restrictions or come up with their own to make the game more interesting. Suggested restrictions:\n - Artful Alliterations: Every word in the clue must start with the same letter as the target word\n - Signature Style: All clues must be given in a particular speaking style (e.g. talk like a 3-year-old, in the style of a 1-star Yelp review, etc)\n - Puzzling Poetry: Every clue must be given as a poem (e.g. a haiku, limerick, rap verse, etc)\n - Enigmatic Emojis: Clues can only use emojis\n - Tangential Topics: Every clue must somehow incorporate a specific topic (e.g. penguins, Pok\u00e9mon, etc)\n - Cryptic Code: Every clue must be written as a logical Python function\n2. Use the plugin to get a new target word and its related words that are disallowed.\n3. Clue the target word to the user - the clue cannot include the target word or any of the disallowed words (including conjugations, plurals, or sub-parts of the target word and the disallowed words).\n4. The user gets one guess. Score 1 point if they get it and 0 if they don't. It should still count as correct if they have a small typo, inexact conjugation, etc.\n5. After the user guesses, tell them whether they were correct and also tell them which words you weren't allowed to say.\n6. Use the plugin again to get the next word.\n7. Play 5 rounds total. At the end, report the final score.\nREMEMBER: THE MOST IMPORTANT RULE TO FOLLOW IS TO NOT USE THE TARGET WORD (including conjugations, plurals, or sub-parts) OR DISALLOWED WORDS (including conjugations, plurals, or sub-parts).",
+        "description_for_human": "Guess the words that the AI craftily clues for you. Add restrictions to make the game more interesting!",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://crafty-clues.jeevnayak.repl.co/openapi.yaml"
+        },
+        "logo_url": "https://crafty-clues.jeevnayak.repl.co/static/logo.png",
+        "contact_email": "",
+        "legal_info_url": ""
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

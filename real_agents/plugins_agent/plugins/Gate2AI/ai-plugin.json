@@ -1,0 +1,34 @@
+{
+    "id": "plugin-033e3d9c-a0c8-4f80-bd97-7efe00d49d94",
+    "domain": "gate2ai.com",
+    "namespace": "Gate2AI",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Gate2AI",
+        "name_for_human": "Gate2AI",
+        "description_for_model": "a universal plugin designed to identify and suggest appropriate AI tools for any task. Input your task, problem, or use case into the plugin, and it will generate a curated list of suitable AI tools. Please note the importance of reorganizing the provided tools by their relevancy to your specific use case. In situations where none of the returned tools seem to match your needs perfectly, it's essential to clarify that these are related tools.",
+        "description_for_human": "Discover the perfect AI tools for your needs.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://gate2ai.com/openai/api.json"
+        },
+        "logo_url": "https://gate2ai.com/images/favicon-dark-large.png",
+        "contact_email": "hello@gate2ai.com",
+        "legal_info_url": "https://www.gate2ai.com/openai/plugin-for-chatgpt.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

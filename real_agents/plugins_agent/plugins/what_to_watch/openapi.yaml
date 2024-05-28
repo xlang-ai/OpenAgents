@@ -1,0 +1,530 @@
+
+openapi: 3.0.1
+info:
+  title: What To Watch API
+  description: API for searching, getting show details, recommendations, and streaming information for TV shows and Movies (coming soon).
+  version: 1.0.0
+servers:
+  - url: 'https://gpt-show-search.fly.dev'
+paths:
+  /show/{show_name}:
+    get:
+      operationId: getShowDetails
+      summary: Get details of a TV show by name
+      parameters:
+        - in: path
+          name: show_name
+          schema:
+            type: string
+          required: true
+          description: Name of the TV show.
+      responses:
+        '200':
+          description: Details of the TV show.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  adult:
+                    type: boolean
+                  backdrop_path:
+                    type: string
+                  created_by:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int32
+                        credit_id:
+                          type: string
+                        name:
+                          type: string
+                        gender:
+                          type: integer
+                          format: int32
+                        profile_path:
+                          type: string
+                  episode_run_time:
+                    type: array
+                    items:
+                      type: integer
+                      format: int32
+                  first_air_date:
+                    type: string
+                    format: date
+                  genres:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int32
+                        name:
+                          type: string
+                  homepage:
+                    type: string
+                  id:
+                    type: integer
+                    format: int32
+                  in_production:
+                    type: boolean
+                  languages:
+                    type: array
+                    items:
+                      type: string
+                  last_air_date:
+                    type: string
+                    format: date
+                  last_episode_to_air:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        format: int32
+                      name:
+                        type: string
+                      overview:
+                        type: string
+                      vote_average:
+                        type: number
+                      vote_count:
+                        type: integer
+                        format: int32
+                      air_date:
+                        type: string
+                        format: date
+                      episode_number:
+                        type: integer
+                        format: int32
+                      production_code:
+                        type: string
+                      runtime:
+                        type: integer
+                        format: int32
+                      season_number:
+                        type: integer
+                        format: int32
+                      show_id:
+                        type: integer
+                        format: int32
+                      still_path:
+                        type: string
+                  name:
+                    type: string
+                  next_episode_to_air:
+                    type: string
+                    format: nullable
+                  networks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int32
+                        logo_path:
+                          type: string
+                        name:
+                          type: string
+                        origin_country:
+                          type: string
+                  number_of_episodes:
+                    type: integer
+                    format: int32
+                  number_of_seasons:
+                    type: integer
+                    format: int32
+                  origin_country:
+                    type: array
+                    items:
+                      type: string
+                  original_language:
+                    type: string
+                  original_name:
+                    type: string
+                  overview:
+                    type: string
+                  popularity:
+                    type: number
+                  poster_path:
+                    type: string
+                  production_companies:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int32
+                        logo_path:
+                          type: string
+                        name:
+                          type: string
+                        origin_country:
+                          type: string
+                  production_countries:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        iso_3166_1:
+                          type: string
+                        name:
+                          type: string
+                  seasons:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        air_date:
+                          type: string
+                          format: date
+                        episode_count:
+                          type: integer
+                          format: int32
+                        id:
+                          type: integer
+                          format: int32
+                        name:
+                          type: string
+                        overview:
+                          type: string
+                        poster_path:
+                          type: string
+                        season_number:
+                          type: integer
+                          format: int32
+                  spoken_languages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        english_name:
+                          type: string
+                        iso_639_1:
+                          type: string
+                        name:
+                          type: string
+                  status:
+                    type: string
+                  tagline:
+                    type: string
+                  type:
+                    type: string
+                  vote_average:
+                    type: integer
+                    format: int32
+                  vote_count:
+                    type: integer
+                    format: int32
+                  videos:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            iso_639_1:
+                              type: string
+                            iso_3166_1:
+                              type: string
+                            name:
+                              type: string
+                            key:
+                              type: string
+                            published_at:
+                              type: string
+                              format: date-time
+                            site:
+                              type: string
+                            size:
+                              type: integer
+                              format: int32
+                            type:
+                              type: string
+                            official:
+                              type: boolean
+                            id:
+                              type: string
+                  images:
+                    type: object
+                    properties:
+                      backdrops:
+                        type: array
+                        items:
+                          type: string
+                      logos:
+                        type: array
+                        items:
+                          type: string
+                      posters:
+                        type: array
+                        items:
+                          type: string
+                  credits:
+                    type: object
+                    properties:
+                      cast:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            adult:
+                              type: boolean
+                            gender:
+                              type: integer
+                              format: int32
+                            id:
+                              type: integer
+                              format: int32
+                            known_for_department:
+                              type: string
+                            name:
+                              type: string
+                            original_name:
+                              type: string
+                            popularity:
+                              type: number
+                            profile_path:
+                              type: string
+                            character:
+                              type: string
+                            credit_id:
+                              type: string
+                            order:
+                              type: integer
+                              format: int32
+                      crew:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            adult:
+                              type: boolean
+                            gender:
+                              type: integer
+                              format: int32
+                            id:
+                              type: integer
+                              format: int32
+                            known_for_department:
+                              type: string
+                            name:
+                              type: string
+                            original_name:
+                              type: string
+                            popularity:
+                              type: number
+                            profile_path:
+                              type: string
+                            credit_id:
+                              type: string
+                            department:
+                              type: string
+                            job:
+                              type: string
+                  translations:
+                    type: object
+                    properties:
+                      translations:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            iso_3166_1:
+                              type: string
+                            iso_639_1:
+                              type: string
+                            name:
+                              type: string
+                            english_name:
+                              type: string
+                            data:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                overview:
+                                  type: string
+                                homepage:
+                                  type: string
+                                tagline:
+                                  type: string
+  /search/{show_name}:
+    get:
+      operationId: searchShows
+      summary: Search for a TV show by name
+      parameters:
+        - in: path
+          name: show_name
+          schema:
+            type: string
+          required: true
+          description: Name of the TV show to search for.
+      responses:
+        '200':
+          description: A list of TV shows that match the search criteria.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        adult:
+                          type: boolean
+                        backdrop_path:
+                          type: string
+                        genre_ids:
+                          type: array
+                          items:
+                            type: integer
+                            format: int32
+                        id:
+                          type: integer
+                          format: int32
+                        origin_country:
+                          type: array
+                          items:
+                            type: string
+                        original_language:
+                          type: string
+                        original_name:
+                          type: string
+                        overview:
+                          type: string
+                        popularity:
+                          type: number
+                        poster_path:
+                          type: string
+                        first_air_date:
+                          type: string
+                          format: date
+                        name:
+                          type: string
+                        vote_average:
+                          type: number
+                        vote_count:
+                          type: integer
+                          format: int32
+  /recommendations/{show_name}:
+    get:
+      operationId: getShowRecomendations
+      summary: Get recommendations for a TV show by name
+      parameters:
+        - in: path
+          name: show_name
+          schema:
+            type: string
+          required: true
+          description: Name of the TV show to get recommendations for.
+      responses:
+        '200':
+          description: A list of recommended TV shows.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        adult:
+                          type: boolean
+                        backdrop_path:
+                          type: string
+                        id:
+                          type: integer
+                          format: int32
+                        name:
+                          type: string
+                        original_language:
+                          type: string
+                        original_name:
+                          type: string
+                        overview:
+                          type: string
+                        poster_path:
+                          type: string
+                        media_type:
+                          type: string
+                        genre_ids:
+                          type: array
+                          items:
+                            type: integer
+                            format: int32
+                        popularity:
+                          type: number
+                        first_air_date:
+                          type: string
+                          format: date
+                        vote_average:
+                          type: number
+                        vote_count:
+                          type: integer
+                          format: int32
+                        origin_country:
+                          type: array
+                          items:
+                            type: string
+  /streaming/{country}/{show_name}:
+    get:
+      operationId: getShowStreamingInfoByCountry
+      summary: Get streaming information for a TV show by country and name
+      parameters:
+        - in: path
+          name: country
+          schema:
+            type: string
+          required: true
+          description: Country code.
+        - in: path
+          name: show_name
+          schema:
+            type: string
+          required: true
+          description: Name of the TV show.
+      responses:
+        '200':
+          description: Streaming information for the TV show.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int32
+                        title:
+                          type: string
+                        poster:
+                          type: string
+                        services:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              provider_id:
+                                type: integer
+                                format: int32
+                              monetization_type:
+                                type: string
+                              standard_url:
+                                type: string
+                              service_name:
+                                type: string

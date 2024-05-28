@@ -1,0 +1,77 @@
+openapi: "3.0.2"
+info:
+  title: Bardeen Magic Box Service
+  description: |
+    This service allows users to create Bardeen automations (playbooks) from natural language.
+  version: "1.0"
+servers:
+  - url: https://api.prod.bardeen.ai/bot/
+
+paths:
+  /query:
+    post:
+      operationId: QueryMagicBox
+      summary: Translate a natural language query into a Bardeen playbook.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: Natural language command.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryResponse"
+        "422":
+          description: Could not understand the provided query. Please rephrase and try again.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+
+components:
+  schemas:
+    QueryResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the generated playbook.
+        description:
+          type: string
+          description: Description of the generated playbook, in the form of a list of all the actions the automation will perform.
+        instructions:
+          type: string
+          description: Instructions to use the generated playbook.
+        shareId:
+          type: string
+          description: Unique identifier of the generated playbook.
+        shareUrl:
+          type: string
+          description: URL of a web page describing the playbook, where the user can confirm and execute it.
+        videoLink:
+          type: string
+          description: (Optional) URL to a video explaining the playbook.
+        assistantHint:
+          type: string
+          description: Additional hints to render or use to modify the result.

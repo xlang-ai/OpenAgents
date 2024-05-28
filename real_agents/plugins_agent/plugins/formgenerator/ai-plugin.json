@@ -1,0 +1,34 @@
+{
+    "id": "plugin-546f5dba-ddb8-4ce2-b449-5cba0918d203",
+    "domain": "ai.forms.app",
+    "namespace": "formgenerator",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "formgenerator",
+        "name_for_human": "forms.app",
+        "description_for_model": "Generate online forms, surveys, quizzes & more with spot-on questions. Use keywords 'query' to prompt the plugin.",
+        "description_for_human": "Generate online forms, surveys, quizzes & more with spot-on questions.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://ai.forms.app/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://forms.app/static/img/ai-logo.png",
+        "contact_email": "support@forms.app",
+        "legal_info_url": "https://forms.app/en/privacy-policy"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

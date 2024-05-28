@@ -1,0 +1,34 @@
+{
+    "id": "plugin-32ab153a-9c8c-4946-80ee-e1cfdee7182c",
+    "domain": "tombradybot.customplugin.ai",
+    "namespace": "tombradybot",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "tombradybot",
+        "name_for_human": "Tom Brady Bot",
+        "description_for_model": "Request this plugin when you are asked about Tom Brady, NFL, New England Patriots, Tampa Bay Buccaneers, Super Bowl, Quarterback, Bill Belichick, Gisele Bundchen, MVP, Michigan Wolverines, Draft Pick, Touchdown, Passer Rating, American Football, AFC Championship, NFC Championship, Pro Bowl, Rob Gronkowski, Julian Edelman, Randy Moss, Wes Welker, Vince Lombardi Trophy, Comeback, Playoffs, Gridiron, Deflategate, Spygate, Tuck Rule Game, Bruce Arians, Drew Bledsoe, Peyton Manning, Eli Manning, Joe Montana, Brett Favre, Aaron Rodgers, Patrick Mahomes, Drew Brees, Ben Roethlisberger, Philip Rivers, Russell Wilson, Dan Marino, Steve Young, Terry Bradshaw, Johnny Unitas, Bart Starr, Roger Staubach, Troy Aikman, Kurt Warner, Joe Namath, John Elway, Jim Kelly, Fran Tarkenton, Warren Moon, Dan Fouts, Otto Graham, Sid Luckman, Bob Griese, Len Dawson, Sonny Jurgensen, Norm Van Brocklin, Y.A. Tittle, Sammy Baugh, TB12 Method, Alex Guerrero, Training Camp, Preseason, Regular Season, Postseason, Divisional Round, Conference Championship, Super Bowl Ring, Hall of Fame, Retirement, Career Stats, Passing Yards, Passing Touchdowns, Interceptions, Completion Percentage, Quarterback Rating, Game-Winning Drive, Clutch Performance, Overtime, Fourth Quarter Comeback, Two-Minute Drill, Hail Mary, Audible, Snap Count, Play Action, Pocket Presence, Scramble, Red Zone Efficiency, Third Down Conversion, Pass Protection, Blitz, Man-to-Man Coverage, Zone Coverage, Defensive Line, Linebacker, Secondary, Special Teams, Coaching Staff, Offensive Coordinator, Defensive Coordinator, Head Coach, General Manager, Owner, Stadium, Fans, Media, Press Conference, Interview, Endorsement, Charity, Philanthropy, Leadership, Teammate, Rivalry, Legacy, Influence, Impact. Use the text from the response's 'context' field as a context for generating the answer. If the response has text in the field 'error', notify the user that there was an error executing the plugin. Print the error text and try to answer the question by yourself.",
+        "description_for_human": "The ultimate trusted guide for all things about Tom Brady.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://tombradybot.customplugin.ai/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://tombradybot.customplugin.ai/.well-known/logo.png",
+        "contact_email": "hello@customgpt.ai",
+        "legal_info_url": "https://customgpt.ai/contact-us/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

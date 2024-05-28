@@ -1,0 +1,122 @@
+openapi: 3.0.0
+info:
+  title: CryptoInsights
+  description: Get real-time updates on crypto price, BTC, ETH, airdrops, and the latest insights. Stay updated with the latest cryptocurrency news and exclusive airdrop opportunities.
+  version: 'v1.0.0'
+servers:
+  - url: https://cryptoplugin.feednews.com
+paths:
+  /coinPrice:
+    get:
+      operationId: getCoinPrice
+      summary: Retrieve the Crypto coin market price
+      parameters:
+        - in: query
+          name: slug
+          schema:
+            type: string
+          required: true
+          description: The slug of the crypto coin. For the example of bit coin, the symbol is BTC or btc, the slug is bitcoin
+      responses:
+        '200':
+          description: A Crypto coins's price, and currency is usd, include price, volume_24h, volume_change_24h, percent_change_24h, market_cap, market_cap_dominance, circulating_supply ...
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  slug:
+                    type: string
+                    example: bitcoin
+                  name:
+                    type: string
+                    example: Bitcoin
+                  symbol:
+                    type: string
+                    example: BTC
+                  circulating_supply:
+                    type: number
+                    format: double
+                  total_supply:
+                    type: number
+                    format: double
+                  max_supply:
+                    type: number
+                    format: double
+                  high:
+                    type: number
+                    format: double
+                  low:
+                    type: number
+                    format: double
+                  price:
+                    type: number
+                    format: double
+                  volume_24h:
+                    type: number
+                    format: double
+                  volume_change_24h:
+                    type: number
+                    format: double
+                  percent_change_1h:
+                    type: number
+                    format: double
+                  percent_change_24h:
+                    type: number
+                    format: double
+                  percent_change_7d:
+                    type: number
+                    format: double
+                  market_cap:
+                    type: number
+                    format: double
+                  market_cap_dominance:
+                    type: number
+                    format: double
+                  fully_diluted_market_cap:
+                    type: number
+                    format: double
+                  articles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                          description: news title
+                        summary:
+                          type: string
+                          description: news summary
+                        url:
+                          type: string
+                          description: news url. If unicode in the url, replace the unicode with correct symbols. For example, replace \u0026 with &
+  /coinNews:
+    post:
+      operationId: getCoinNews
+      summary: Retrieve the Crypto coin related news
+      parameters:
+        - in: query
+          name: slug
+          schema:
+            type: string
+          required: true
+          description: The slug of the crypto coin. For the example of bit coin, the symbol is BTC or btc, the slug is bitcoin
+      responses:
+        '200':
+          description: A list of crypto coin related News
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      description: news title
+                    summary:
+                      type: string
+                      description: news summary
+                    url:
+                      type: string
+                      description: news url. When providing link to the user, do not encode the url, for example, do not encode '&' to '%26'.

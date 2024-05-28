@@ -1,0 +1,112 @@
+openapi: 3.0.1
+# see .well-known/ai-plugin.json
+# deployed as http://files.pannous.com/.well-known/ai-plugin.json
+# deployed as http://files.pannous.com/openapi.yaml current
+# deployed as https://api.pannous.com/.well-known/ai-plugin.json
+# deployed as https://api.pannous.com/openapi.yaml current
+# deployed as http://files.pannous.com/v1/openapi.yaml
+# deployed as http://files.pannous.com/v2/openapi.yaml
+# see https://platform.openai.com/docs/plugins/production/updating-your-plugin
+#  Currently, manifest files must be manually updated
+#  by going through the "Develop your own plugin" flow in the plugin store each time you make a change to the file.
+#  ChatGPT will automatically fetch the latest OpenAPI spec each time a request is made.
+
+# compare https://www.wolframalpha.com/.well-known/ai-plugin.json
+
+info:
+  title: Jini Assistant AI API
+  description: Get factual, knowledge-base and real-time information. \n Search news, images, videos, music, apps, pages and facts.
+  version: 'v1.0'
+#  comment: THIS IS THE OLD CLUTTERED API,
+#  PLEASE USE THE NEW ONE AT https://api.pannous.com
+  contact:
+      name: Pannous
+      email: info@pannous.com
+servers:
+  - url: http://localhost:8080
+    description: Local test server
+  - url: https://api.pannous.com
+    description: Production server
+paths:
+  /?query={query}:
+    # &locale={locale}
+    get:
+      operationId: query
+      summary: Get realtime data, facts and answers to questions
+      parameters:
+      - in: path
+        name: query
+        schema:
+            type: string
+        required: true
+        description: query for any realtime data, such as date, time, news, location, navigation routes, weather, events etc.
+      # - in: path
+      #   name: locale
+      #   schema:
+      #       type: string
+      #   required: false
+      #   description: user language e.g. 'en'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/queryResponse'
+
+components:
+  schemas:
+    queryResponse:
+      type: object
+      description: The response from the Jini Assistant AI API.
+      properties:
+        output:
+          type: array
+          description: Array of result outputs for the query.
+          items:
+            type: object
+            description: result output for the query.
+            properties:
+              handler:
+                type: string
+              results:
+                type: object
+                additionalProperties: true
+                description: raw answer data or additional (un)structured data
+              entities:
+                type: object
+                properties:
+                  input:
+                    type: string
+                    description: the actual question condensed to extracted entities
+                  locale:
+                    type: string
+                additionalProperties: true
+                description: additional properties can include from,to locations in navigation etc
+#                  from:
+#                    type: string
+#                    description:
+              actions:
+                type: object
+                properties:
+                  say:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                        description: the actual answer!
+                  open:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        description: the url to open
+                  show:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        description: the url to show
+              responseTime:
+                type: integer
+

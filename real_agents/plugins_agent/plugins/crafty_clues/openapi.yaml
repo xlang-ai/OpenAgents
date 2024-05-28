@@ -1,0 +1,47 @@
+openapi: 3.0.3
+info:
+  title: Crafty Clues Plugin
+  version: 1.0.0
+  description: Guess the words that the AI craftily clues for you. Add restrictions to make the game more interesting!
+servers:
+  - url: https://crafty-clues.jeevnayak.repl.co
+paths:
+  /new_word:
+    get:
+      operationId: new_word
+      description: Call this at the beginning of each round to get a new target word to clue. Returns an object with a target word that is not in the given list of used words, as well as a list of related words that you're not allowed to include in your clue.
+      parameters:
+        - name: used_words
+          in: query
+          description: A list of target words that have been used so far.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        200:
+          description: A random target word and disallowed words.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  target_word:
+                    type: string
+                    description: The target word that needs to be clued.
+                  disallowed_words:
+                    type: array
+                    description: A list of words related to the target word that can't be in the clue.
+                    items:
+                      type: string
+        400:
+          description: All words have been used.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: An error message indicating that all words have been used.

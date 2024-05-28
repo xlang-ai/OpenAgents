@@ -1,0 +1,171 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "RoboAd - Your AI Ad Assistance",
+    "description": "An AI-powered ad creation tool that helps you create Google Ads based on the content of your website.",
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "https://roboad.herokuapp.com"
+    }
+  ],
+  "paths": {
+    "/analyze-url": {
+      "post": {
+        "summary": "Analyze a URL",
+        "description": "This endpoint will analyze a URL and return the brand name, product/service name, call to action, Languages and unique selling propositions.",
+        "operationId": "analyzeUrl",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "The URL to analyze. This is the main and only required input from the user."
+                  }
+                },
+                "required": ["url"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The analysis of the URL is successful. The response contains the brand name, product/service name, call to action, Languages and unique selling propositions. This information will be used by create-ads endpoint to create the ad.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "brand_name": {
+                      "type": "string",
+                      "description": "The brand name derived from the content at the URL. This is not part of the ad content but can be used to create the ad."
+                    },
+                    "language": {
+                      "type": "array",
+                      "description": "The languages of the website, sorted by dominance. This is not part of the ad content but can be used to create the ad.",
+                      "items": {
+                        "type": "string"
+                      },
+                    },
+                    "product_name": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "The product/service names derived from the content. This is not part of the ad content but can be used to create the ad."
+                    },
+                    "call_to_action": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Suggested call to actions based on the content of the url. This is not part of the ad content but can be used to create the ad."
+                    },
+                    "unique_selling_proposition": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "The unique selling propositions derived from the URL content. This is not part of the ad content but can be used to create the ad."
+                  }
+                }
+                    }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/create-ads": {
+      "post": {
+        "summary": "Return content for creating Google Ads",
+        "description": "Returns content for creating Google Ads. Display each section as bullet point and separate them with a heading in this order: Brand Name, Product/Service Name, Call to Action, Unique Selling Proposition.",
+        "operationId": "createAds",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "brand_name": {
+                    "type": "string",
+                    "description": "The brand name."
+                  },
+                  "language": {
+                    "type": "array",
+                    "description": "The languages of the website, sorted by dominance.",
+                    "items": {
+                      "type": "string"
+                    },
+                  },
+                  "product_name": {
+                    "type": "array",
+                    "description": "The product/service names.",
+                      "items": {
+                        "type": "string"
+                      },
+                  },
+                  "call_to_action": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Call to actions."
+                  },
+                  "unique_selling_proposition": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Unique selling propositions."
+                  }
+                },
+                "required": ["brand_name", "product_name", "call_to_action", "unique_selling_proposition"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Google Ads data is created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "headlines": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "The headlines for the Google Ads. Show them as bullet points. Each headings need to be less than 30 characters"
+                    },
+                    "descriptions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "The descriptions for the Google Ads. Each item should be shown as a bullet point."
+                    },
+                    "paths": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "The paths for the Google Ads. Show the item as bullet point."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

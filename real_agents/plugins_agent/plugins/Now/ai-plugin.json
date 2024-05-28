@@ -1,0 +1,34 @@
+{
+    "id": "plugin-cd2182a5-e030-4d55-9559-c1302c462c07",
+    "domain": "now.techno-gauss.com",
+    "namespace": "Now",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Now",
+        "name_for_human": "Now",
+        "description_for_model": "'Now' fetches Google Trends and keeps you up to date on the hottest topics around the world. It also provides Twitter trend acquisition and keyword search functions in Japan. With this feature, you can dig deeper into a particular trend and get more detailed insights and discussions happening around it. Specify the country code (geo) and language code (hl) when retrieving trends. The default is US for country code and en for language code. When searching Twitter keywords in Japan, specify the keyword you want to search. Recommendation information introduces recommended products related to trends.",
+        "description_for_human": "Get Google Trends. In Japan, you can also get Twitter trends and search Twitter keywords.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://now.techno-gauss.com/openapi.yaml"
+        },
+        "logo_url": "https://now.techno-gauss.com/logo.png",
+        "contact_email": "tetsuro.tayama@gmail.com",
+        "legal_info_url": "https://now.techno-gauss.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

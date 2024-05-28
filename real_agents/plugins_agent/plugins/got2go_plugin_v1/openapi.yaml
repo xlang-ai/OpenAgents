@@ -1,0 +1,78 @@
+openapi: 3.0.1
+info:
+  title: Got2Go AI
+  description: Discover the perfect vacation rentals across the United States.
+  version: 'v1'
+servers:
+  - url: https://got2go.com/api/v1
+paths:
+  /properties/ai-search:
+    get:
+      operationId: getDestinationData
+      summary: Get a list of vacation rentals
+      parameters:
+        - in: query
+          name: q
+          description: Query parameter for search (location, amenities, features)
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: guests
+          description: Number of guests
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: maxPrice
+          description: Maximum price per night (based on average price price per night)
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: bedrooms
+          description: Number of bedrooms
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: bathrooms
+          description: Number of bathrooms
+          required: false
+          schema:
+            type: number
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getDestinationResponse'
+components:
+  schemas:
+    getDestinationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        bedrooms:
+          type: number
+        bathrooms:
+          type: number
+        beds:
+          type: number
+        maxGuests:
+          type: number
+        url:
+          type: string
+        avgPrice:
+          type: number
+        highlights:
+          type: array
+          items:
+            type: string
+

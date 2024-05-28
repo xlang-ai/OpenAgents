@@ -1,0 +1,37 @@
+openapi: 3.0.1
+info:
+  title: Weather Report
+  description: Current weather data for cities and airports using METAR aviation feeds.
+  version: 'v1'
+servers:
+  - url: https://metar.pluginai.ai
+paths:
+  /index.php:
+    get:
+      operationId: getMetar
+      summary: Get the METAR weather data for the specified airport.
+      parameters:
+        - name: icao
+          in: query
+          description: The ICAO code of the airport.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getMetarResponse'
+components:
+  schemas:
+    getMetarResponse:
+      type: object
+      properties:
+        icao:
+          type: string
+          description: The ICAO code of the airport.
+        metar:
+          type: string
+          description: The METAR weather data for the specified airport.

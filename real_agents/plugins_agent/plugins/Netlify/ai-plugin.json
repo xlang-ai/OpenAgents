@@ -1,0 +1,34 @@
+{
+    "id": "plugin-4b0e9307-b0e2-42d1-a489-dc02ddab4619",
+    "domain": "dropgpt.netlify.app",
+    "namespace": "Netlify",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Netlify",
+        "name_for_human": "Netlify Drop",
+        "description_for_model": "Deploy static files like HTML, JavaScript, CSS, and images to Netlify's global CDN, to be served as a website.",
+        "description_for_human": "Describe a simple website you want to make, and deploy it to Netlify to share it with others and claim it as your own.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://dropgpt.netlify.app/openapi.yaml"
+        },
+        "logo_url": "https://www.netlify.com/assets/logos/encapsulated/darkmode/logo-netlify-encapsulated-fullcolor-darkmode.png",
+        "contact_email": "support@netlify.com",
+        "legal_info_url": "https://www.netlify.com/legal/terms-of-use/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

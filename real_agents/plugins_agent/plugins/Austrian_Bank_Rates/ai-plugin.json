@@ -1,0 +1,34 @@
+{
+    "id": "plugin-0703e55f-3ac5-4731-9fd2-1a075d8e2553",
+    "domain": "banken-vergleich.net",
+    "namespace": "Austrian_Bank_Rates",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Austrian_Bank_Rates",
+        "name_for_human": "Austrian Bank Rates",
+        "description_for_model": "Obtain current terms of financial products (checking accounts and savings accounts) from Austrian banks, as well as general information about the banks themselves.",
+        "description_for_human": "Compare the rates and terms of checking accounts and savings accounts from Austrian banks.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://banken-vergleich.net/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://banken-vergleich.net/logo.png",
+        "contact_email": "benedikt.zecha@netzeffekt.at",
+        "legal_info_url": "https://banken-vergleich.net/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

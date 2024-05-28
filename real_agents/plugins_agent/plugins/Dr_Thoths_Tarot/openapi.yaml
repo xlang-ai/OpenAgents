@@ -1,0 +1,255 @@
+openapi: 3.0.1
+info:
+  title: Dr. Thoth's Tarot
+  description: Tarot card novelty entertainment & analysis, by Mnemosyne Labs.
+  version: 'v1'
+servers:
+  - url: https://dr-thoth-tarot.herokuapp.com
+paths:
+  /drawcard:
+    get:
+      operationId: drawcard
+      summary: Get a prompt for drawing a single tarot card.
+      parameters:
+        - name: question
+          in: query
+          required: false
+          schema:
+            type: string
+          description: An optional question to accompany the tarot card reading.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prompt:
+                    type: string
+                    description: A prompt for drawing a single tarot card.
+                  question:
+                    type: string
+                    description: The question provided for the tarot card reading, if any.
+  /threecardspread:
+    get:
+      operationId: threecardspread
+      summary: Get a prompt for performing a three-card tarot spread.
+      parameters:
+        - name: question
+          in: query
+          required: false
+          schema:
+            type: string
+          description: An optional question to accompany the tarot card reading.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prompt:
+                    type: string
+                    description: A prompt for performing a three-card tarot spread.
+  /celticcross:
+    get:
+      operationId: celticcross
+      summary: Get a prompt for performing a Celtic Cross tarot spread.
+      parameters:
+        - name: question
+          in: query
+          required: false
+          schema:
+            type: string
+          description: An optional question to accompany the tarot card reading.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prompt:
+                    type: string
+                    description: A prompt for performing a Celtic Cross tarot spread with 10 cards.
+  /pastpresentfuture:
+    get:
+      operationId: pastpresentfuture
+      summary: Get a prompt for performing a Past, Present, Future tarot spread.
+      parameters:
+        - name: question
+          in: query
+          required: false
+          schema:
+            type: string
+          description: An optional question to accompany the tarot card reading.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prompt:
+                    type: string
+                    description: A prompt for performing a Past, Present, Future tarot spread with 3 cards.
+  /horseshoe:
+    get:
+      operationId: horseshoe
+      summary: Get a prompt for performing a Horseshoe tarot spread.
+      parameters:
+        - name: question
+          in: query
+          required: false
+          schema:
+            type: string
+          description: An optional question to accompany the tarot card reading.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prompt:
+                    type: string
+                    description: A prompt for performing a Horseshoe tarot spread with 7 cards.
+  /relationship:
+    get:
+      operationId: relationship
+      summary: Get a prompt for performing a Relationship tarot spread.
+      parameters:
+        - name: question
+          in: query
+          required: false
+          schema:
+            type: string
+          description: An optional question to accompany the tarot card reading.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prompt:
+                    type: string
+                    description: A prompt for performing a Relationship tarot spread.
+  /career:
+    get:
+      operationId: career
+      summary: Get a prompt for performing a Career tarot spread.
+      parameters:
+        - name: question
+          in: query
+          required: false
+          schema:
+            type: string
+          description: An optional question to accompany the tarot card reading.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prompt:
+                    type: string
+                    description: A prompt for performing a Career tarot spread.
+  /yesno:
+    get:
+      operationId: yesno
+      summary: Get a prompt for performing a Yes/No tarot spread.
+      parameters:
+        - name: question
+          in: query
+          required: false
+          schema:
+            type: string
+          description: An optional question to accompany the tarot card reading.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prompt:
+                    type: string
+                    description: A prompt for performing a Yes/No tarot spread.
+  /chakra:
+    get:
+      operationId: chakra
+      summary: Get a prompt for performing a Chakra tarot spread.
+      parameters:
+        - name: question
+          in: query
+          required: false
+          schema:
+            type: string
+          description: An optional question to accompany the tarot card reading.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prompt:
+                    type: string
+                    description: A prompt for performing a Chakra tarot spread with 7 cards.
+  /occult_card:
+    get:
+      operationId: occult_card
+      summary: Generate a tarot card using the specified planet's Kamea matrix.
+      parameters:
+        - name: planet
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [Saturn, Jupiter, Mars, Sun, Venus, Mercury, Moon]
+          description: The planet name to use the corresponding Kamea matrix.
+        - name: question
+          in: query
+          required: false
+          schema:
+            type: string
+          description: An optional question to accompany the tarot card reading.
+      responses:
+        '200':
+          description: A single tarot card generated using the specified planet's Kamea matrix.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  card:
+                    type: string
+                    description: The tarot card generated using the specified planet's Kamea matrix.
+  /favicon.ico:
+    get:
+      operationId: fetchFavicon
+      summary: Fetch the favicon.ico file
+      description: This endpoint returns the favicon.ico file for the application.
+      responses:
+        '200':
+          description: Favicon file fetched successfully
+          content:
+            image/x-icon:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Favicon file not found
+
+

@@ -1,0 +1,143 @@
+---
+openapi: 3.0.1
+info:
+  title: Coupert
+  description: Search for the internet's best coupons from thousands of online stores.
+  version: 1.0.0
+tags: []
+paths:
+  "/api/v2/openai/getStore":
+    post:
+      summary: Get store info by domain
+      operationId: storeUsingPost
+      deprecated: false
+      description: Get store info by domain
+      tags: []
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CouponsRequest"
+            example:
+              domain: shein.com
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  store:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: The name of store
+                      logo:
+                        type: string
+                        description: The logo of store
+                      domain:
+                        type: string
+                        description: The domain of store
+                      subdomain:
+                        type: string
+                        description: The subdomain of store
+                      url:
+                        type: string
+                        description: The url of store
+                      cashback:
+                        "$ref": "#/components/schemas/Cashback"
+                      coupons:
+                        type: array
+                        items:
+                          "$ref": "#/components/schemas/Coupon"
+                    required:
+                    - name
+                    - url
+                    - cashback
+                    - coupons
+                required:
+                - store
+components:
+  schemas:
+    StoreResponse:
+      type: object
+      properties:
+        store:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of store
+            logo:
+              type: string
+              description: The logo of store
+            domain:
+              type: string
+              description: The domain of store
+            subdomain:
+              type: string
+              description: The subdomain of store
+            url:
+              type: string
+              description: The url of store
+            cashback:
+              "$ref": "#/components/schemas/Cashback"
+            coupons:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Coupon"
+          required:
+          - name
+          - url
+          - cashback
+          - coupons
+      required:
+      - store
+    Coupon:
+      type: object
+      properties:
+        code:
+          type: string
+        title:
+          type: string
+        savedRateIn24H:
+          type: number
+      required:
+      - code
+      - title
+    Cashback:
+      type: object
+      properties:
+        supported:
+          type: boolean
+        type:
+          type: string
+        minPercentage:
+          type: number
+        maxPercentage:
+          type: number
+        minFixedGold:
+          type: number
+        maxFixedGold:
+          type: number
+      required:
+      - supported
+      - type
+      - minPercentage
+      - maxPercentage
+      - minFixedGold
+      - maxFixedGold
+    CouponsRequest:
+      type: object
+      properties:
+        domain:
+          type: string
+          description: domain
+      required:
+      - domain
+servers:
+- url: https://www.coupert.com
+  description: Product Env

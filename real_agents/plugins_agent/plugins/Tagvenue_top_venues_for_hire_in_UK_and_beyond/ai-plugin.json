@@ -1,0 +1,34 @@
+{
+    "id": "plugin-a2eb490e-4673-4bd1-8586-9caab99088c1",
+    "domain": "tagvenue.com",
+    "namespace": "Tagvenue_top_venues_for_hire_in_UK_and_beyond",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Tagvenue_top_venues_for_hire_in_UK_and_beyond",
+        "name_for_human": "Tagvenue",
+        "description_for_model": "Search for event venues and spaces in Australia, Canada, Ireland, Singapore, the UK, and the USA. Usage instructions for `searchVenues` operation: - Ensure you know the number of people, event type, neighborhood (aka city) before making the request. - Try to extract these parameters from user's prompt. - Parameter `room_tag` stands for event or venue/space type. Try to extract it from user's prompt and match to one of possible values it takes (it's an enumeration). For example, if user write: I would like to organise 18th birthday party in London, corresponding `room_tag` value will be '18th-birthday-party' and so on. - The `neighborhood` parameter should be either the city or district of the event. Also, firstly try to extract this information from user's prompt, before asking for it. - The country code must follow the ISO 3166-1 format. - Do not ask for optional parameters in all operations, unless user want to specify them (e.g. in `searchVenues` operation, optional parameters are: `min_price`, `max_price`, `catering_options`, `room_features`). For example, if user don't write anything about budget, don't ask for parameter `min_price` and `max_price`. - If user don't provide event type, you will need to ask for it. Be sure it's matching one of allowed values. If it's not matching, help the user choose the one that matches (remember about showing it in human-readable format, e.g. 'new-years-eve-party' should become 'New Year's Eve Party'). - If some parameter is not required (e.g. 'min_price', 'max_price', don't ask for it, even if it's missing. - Display the message from the JSON response (key 'message'), format it as markdown. - Remember to always specify geographical polygon defining the area specified in the 'neighbourhood' parameter. Use parameters: 'longitude_from', 'longitude_to', 'latitude_from', 'latitude_to'. For example, for London, UK, it will be: longitude_from=-0.6354655323242131, longitude_to=0.3999958934570369, latitude_from=51.18283102057172, latitude_to=51.7857274295358. For Singapore: longitude_from=103.5857280163047, longitude_to=104.10345872919532, latitude_from=1.094670817216937, latitude_to=1.578622737491244, and so on. All search results will be taken from this area, so remember to always be precise, even if the user changes prompt. - Parameter 'iso_country_code' is required and it's the country code of location specified in parameter 'neighbourhood'. - Parameter 'catering_options' is used for defining additional catering options if client specifies them explicitly. It is a comma-separated list of catering options (id:description). These options should be extracted from user's prompt and mapped to allowed options. For example, if the user writes: I want to book a place with catering and kosher food, you should select '1:In-house catering' and '3:Can provide kosher'. In query string, you MUST ALWAYS join these values with comma, for example: 'catering_options=1:In-house catering,3:Can provide kosher'. - Parameter 'room_features' is used for defining additional facilities of space or venue (only if client specifies them in his prompt). It is a comma-separated list of room features in format (id:description). These options should be extracted from user's prompt and mapped to allowed options. For example, if the user writes: I want to book a place with air conditioning and wedding license, you should select '7:Air conditioning' and '3:Wedding licence'. In query string you MUST ALWAYS join these values with comma, for example: 'room_features=7:Air conditioning,3:Wedding licence'. - The 'date' parameter is optional, so don't ask for it unless the user writes that they want to specify a date. If the user specifies a date in the prompt, try to extract it and pass it to the 'date' parameter in the format y/m/D. For example, the 4th of June 2023 will be represented as 04/06/2023. - ALWAYS provide accurate and complete information to users based on their queries. - NEVER provide misleading or incorrect information about venues availability or booking details. - Use proper formatting when presenting venues to users. - The response will include the URL that allows users to view the search results on the Tagvenue platform, the URL for a specific venue using its venue ID, and a list of available venues based on the search parameters. Relevance sort when providing recommendations. Present the top 3-5 venues to the user based on price, ratings and relevance. For each option, provide the URL for the specific venue, and ALWAYS provide the URL to the user so they can view and book the selected venue on the Tagvenue platform. You MUST ALWAYS provide link to the search URL on Tagvenue platform (returned in the response). Also, you MUST ALWAYS provide the rating of the space and the number of reviews. You must not present more than 6 venues!",
+        "description_for_human": "Search for event venues and spaces in Australia, Canada, Ireland, Singapore, the UK, and the USA.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://tagvenue.com/llms/chatgpt/openapi.yaml"
+        },
+        "logo_url": "https://www.tagvenue.com/img/logos/android-chrome-512x512.png",
+        "contact_email": "hello@tagvenue.com",
+        "legal_info_url": "https://tagvenue.com/page/terms-venue#chatgpt-plugin"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

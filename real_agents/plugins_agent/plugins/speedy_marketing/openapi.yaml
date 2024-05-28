@@ -1,0 +1,34 @@
+openapi: 3.0.0
+info:
+  title: Speedy Marketing API
+  version: 1.0.0
+  description: Marketing tool for your Shopify store, ecommerce website or any business. Write SEO blogs and social media content.
+servers:
+  - url: 'https://api.speedybrand.io'
+paths:
+  /chatgpt_plugin_blog:
+    get:
+      operationId: getBlog
+      summary: Generate a blog post based on a website URL
+      parameters:
+      - in: query
+        name: url
+        schema:
+          type: string
+        required: true
+        description: The url of the website.
+      responses:
+        '200':
+          description: A blog post generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  blog:
+                    type: string
+                    description: The generated blog post
+        '400':
+          description: Bad request. The request body is invalid
+        '500':
+          description: Internal server error. Something went wrong while generating the blog post

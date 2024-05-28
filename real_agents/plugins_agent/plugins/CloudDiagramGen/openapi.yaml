@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: Diagram generation API
+  version: 1.0.0
+  description: Generate cloud architecture diagrams. Unofficial AWS plugin.
+paths:
+  /generate_diagram:
+    post:
+      summary: Generate a diagram from architecture
+      operationId: generateDiagram
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: string
+                  description: architecture data
+              required:
+                - data
+      responses:
+        '200':
+          description: A URL to the generated diagram
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageUrl:
+                    type: string
+                    format: uri
+                required:
+                  - imageUrl
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                required:
+                  - error

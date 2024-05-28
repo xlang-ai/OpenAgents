@@ -1,0 +1,39 @@
+{
+  "id": "plugin-d1d6eb04-3375-40aa-940a-daskjdhsajkda",
+  "domain": "https://skyscanner-api.p.rapidapi.com",
+  "namespace": "Skyscanner",
+  "status": "approved",
+  "manifest": {
+    "schema_version": "v1",
+    "name_for_model": "Skyscanner",
+    "name_for_human": "Skyscanner",
+    "description_for_model": "",
+    "description_for_human": "",
+    "auth": {
+      "type": "service_http",
+      "instructions": "",
+      "authorization_type": "bearer",
+      "verification_tokens": {
+        "openai": "39feb25c54a6427a97c01dbd1342cfd9"
+      }
+    },
+    "api": {
+      "type": "openapi",
+      "url": ""
+    },
+    "logo_url": "https://rapidapi.com/cdn/images?url=https://rapidapi-prod-apis.s3.amazonaws.com/184573d1-f1d6-4244-a810-4dbd1e31d0e9.png",
+    "contact_email": "",
+    "legal_info_url": ""
+  },
+  "oauth_client_id": null,
+  "user_settings": {
+    "is_installed": false,
+    "is_authenticated": true
+  },
+  "categories": [
+    {
+      "id": "most_popular",
+      "title": "Most popular"
+    }
+  ]
+}

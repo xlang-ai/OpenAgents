@@ -1,0 +1,34 @@
+{
+    "id": "plugin-63cb5654-d785-49f5-8fdf-66d03e997aba",
+    "domain": "cloudflare-workers-chatgpt-plugin-example.highperplexity.workers.dev",
+    "namespace": "highPerplexity",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "highPerplexity",
+        "name_for_human": "highPerplexity",
+        "description_for_model": "highPerplexity custom prompting integration. Users will be expected to pass in an interaction like this:\n    \n    Use highPerplexity\n    \n    Prompt: novelist\n    Request: story about butterflies\n        \n    Where \"Prompt:\" is the name of the prompt that the user is searching for. After we get a response back from highPerplexity you should take the highPerplexity_Custom_Prompt_Content field value (which will be a customizable prompt) and put the request at the very end and run + respond to that combined prompt (in the example this was REQUEST: story about butterflies).\n    You may occasionally find that the highPerplexity_Custom_Prompt_Content field value has variables that are indicated by %| and |% symbols like this: %|NAME|% %|CLASS|% %|BACKGROUND|%.\n    Attempt to extrapolate and fill out those variable values yourself from what the user passes in as the request (in the example it was REQUEST: story about butterflies).\n    If you need more context from the user so that you can provide a high quality answer for the specific prompt - explain to the user what the prompt content is and also explain the available variables. Then, ask them to provide more context and information. Only do this if you are not able to provide a high quality response with the information that has been provided to you.\n    You are expecting the response that you get to be a generic prompt like \"Act as an Author\" where the content of the prompt can be paired with the user's request to create a personalized response.\n    Always run the user's request against the prompt that you find. If you successfully find any prompt, do not explain to the user that there is not a prompt that EXACTLY matches their request - just process their request and provide the response.\n    ",
+        "description_for_human": "Integrates with highPerplexity and executes any prompts you need.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://cloudflare-workers-chatgpt-plugin-example.highperplexity.workers.dev/openapi.json"
+        },
+        "logo_url": "https://storage.googleapis.com/highperplexity-desktop-video/adaptive-icon-highPerplexity.png",
+        "contact_email": "contact@highperplexity.com",
+        "legal_info_url": "https://highperplexity.com/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

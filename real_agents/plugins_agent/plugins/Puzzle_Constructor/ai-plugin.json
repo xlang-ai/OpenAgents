@@ -1,0 +1,34 @@
+{
+    "id": "plugin-c7913fc5-99c0-4d7e-a4d5-fa8c73d95be9",
+    "domain": "crosswordconstructor.com",
+    "namespace": "Puzzle_Constructor",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Puzzle_Constructor",
+        "name_for_human": "Puzzle Constructor",
+        "description_for_model": "A tool for creating crosswords. You can create crosswords by providing words and hints. You can provide an optional grid_size to allow larger crosswords",
+        "description_for_human": "A tool for creating crosswords. You can create crosswords from words and hints.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://crosswordconstructor.com/openapi.yaml"
+        },
+        "logo_url": "https://crosswordconstructor.com/logo.png",
+        "contact_email": "devin@crosswordconstructor.com",
+        "legal_info_url": "https://crosswordconstructor.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

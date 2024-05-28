@@ -1,0 +1,34 @@
+{
+    "id": "plugin-09c947dd-dc54-4d7b-acb5-1a8ccd7d7a13",
+    "domain": "lsong.org",
+    "namespace": "lsongai",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "lsongai",
+        "name_for_human": "Lsong AI",
+        "description_for_model": "Lsong's AI provides AI-powered content like news, images, music, movies, weather, stories, memes, and more.",
+        "description_for_human": "Lsong's AI provides AI-powered content like news, images, music, movies, weather, stories, memes, and more.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://api.lsong.org/openapi.json"
+        },
+        "logo_url": "https://lsong.org/icon.png",
+        "contact_email": "openai@lsong.org",
+        "legal_info_url": "https://lsong.org/terms.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

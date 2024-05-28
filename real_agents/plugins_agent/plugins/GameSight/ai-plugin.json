@@ -1,0 +1,34 @@
+{
+    "id": "plugin-accb7bbc-dbfe-4443-88a6-39968f3847f4",
+    "domain": "openai.tapapis.com",
+    "namespace": "GameSight",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "GameSight",
+        "name_for_human": "GameSight",
+        "description_for_model": "GameSight is a comprehensive tool for discovering, comparing, and gaining insights into video games. It enables users to search for specific games or related content such as guides, news, reviews, game strategy guide and beginner's guide to the game. Additionally, users can seek recommendations tailored to their preferences, or compare games based on player reviews. GameSight provides broad game coverage but might have limitations for some less popular or very new games. It also offers insights into game content, such as reviews, guides, PVs, and news, presenting a diverse array of game-related information. Lastly, it provides game recommendations and allows comparisons between different games based on player reviews. Please note that the available information and functions depend on the game's popularity and the time since its release.",
+        "description_for_human": "Discover games, game-related content, get recommendations, and compare games based on player reviews.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://openai.tapapis.com/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://openai.tapapis.com/.well-known/logo.png",
+        "contact_email": "laihongchang@xd.com",
+        "legal_info_url": "https://www.taptap.io/doc/13"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

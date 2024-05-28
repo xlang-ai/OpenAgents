@@ -1,0 +1,87 @@
+openapi: 3.0.1
+info:
+  title: Wishbucket
+  description: Unified product search across all Korean platforms and brands.
+  version: '0.1'
+servers:
+  - url: https://pickin2.phloxcorp.io
+paths:
+  /search:
+    get:
+      description: Accepts a search query and returns a list of items.
+      operationId: getSearch
+      parameters:
+        - name: queryInEnglish
+          in: query
+          schema:
+            type: string
+          description: The search query in English.
+          required: true
+        - name: queryInKorean
+          in: query
+          schema:
+            type: string
+          description: The search query in Korean.
+          required: true
+        - name: maxPrice
+          in: query
+          schema:
+            type: string
+          description: The maximum price.
+        - name: minPrice
+          in: query
+          schema:
+            type: string
+          description: The minimum price.
+        - name: brandName
+          in: query
+          schema:
+            type: string
+          description: The name of brand to filter by.
+        - name: storeName
+          in: query
+          schema:
+            type: string
+          description: The name of store to filter by.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/searchResponse'
+components:
+  schemas:
+    searchResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: The number of returned items.
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              itemName:
+                type: string
+              brandName:
+                type: string
+              storeName:
+                type: string
+              itemLink:
+                type: string
+              price:
+                type: integer
+              currency:
+                type: string
+              tags:
+                type: array
+                items:
+                  type: string
+              likeCount:
+                type: integer
+                description: The number of likes each item has received.
+          description: The list of items.

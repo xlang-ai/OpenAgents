@@ -1,0 +1,111 @@
+info:
+  title: Find a Gift
+  version: 0.1.0
+openapi: 3.0.2
+paths:
+  /GiftInterview:
+    get:
+      operationId: gift_interview_GiftInterview_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Gift Interview
+  /legal:
+    get:
+      operationId: read_root_legal_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Read Root
+  /logo.png:
+    get:
+      operationId: plugin_logo_logo_png_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Plugin Logo
+  /openapi.yaml:
+    get:
+      operationId: openapi_spec_openapi_yaml_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Openapi Spec
+  /search:
+    post:
+      operationId: generate_search_urls_search_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchTerm'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Generate Search Urls
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    SearchTerm:
+      properties:
+        search_terms:
+          items:
+            type: string
+          title: Search Terms
+          type: array
+      required:
+      - search_terms
+      title: SearchTerm
+      type: object
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+      type: object

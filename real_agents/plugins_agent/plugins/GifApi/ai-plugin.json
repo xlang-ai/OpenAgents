@@ -1,0 +1,34 @@
+{
+    "id": "plugin-f26778d9-9b57-422b-8443-6a1a65d494eb",
+    "domain": "chat-plugin-giphy.efficiency.tools",
+    "namespace": "GifApi",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "GifApi",
+        "name_for_human": "GIF Search",
+        "description_for_model": "Plugin for searching for Gifs using the Giphy API. Use it whenever a user asks for a gif relating to a certain search term. If the search term isn't clear, you can either make one up for them, or pick from the list of trending gifs via the trending api. Always use the embed_url when displaying the image directly. Always include direct links to the content using the url. Always include \"Powered by GIPHY\" at the end of the message and make sure it links to https://giphy.com/.",
+        "description_for_human": "Search through a wide range of gifs - Powered by Giphy.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://chat-plugin-giphy.efficiency.tools/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://chat-plugin-giphy.efficiency.tools/.well-known/logo.png",
+        "contact_email": "gif-search-plugin@efficiency.tools",
+        "legal_info_url": "https://www.efficiency.tools/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

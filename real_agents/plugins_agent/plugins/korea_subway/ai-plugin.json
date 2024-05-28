@@ -1,0 +1,34 @@
+{
+    "id": "plugin-5eb1178b-f619-42f3-ba88-2d3a078b30c8",
+    "domain": "openai.metrochat.xyz",
+    "namespace": "korea_subway",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "korea_subway",
+        "name_for_human": "Korea subway route",
+        "description_for_model": "Korea  metro subway route info.",
+        "description_for_human": "Korea  metro subway route info.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://openai.metrochat.xyz/openapi.yaml"
+        },
+        "logo_url": "https://openai.metrochat.xyz/logo.png",
+        "contact_email": "handdola@gmail.com",
+        "legal_info_url": "http://handdola.github.io/searchroute/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

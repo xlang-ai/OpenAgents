@@ -1,0 +1,942 @@
+---
+openapi: 3.0.0
+info:
+  title: Charge My EV ChatGPT Plugin
+  version: 1.0.1
+paths:
+  "/api/openai/superchargers/frequently-asked-questions":
+    get:
+      summary: Get an answer from frequently asked questions about the Charge My EV
+        service and data
+      description: 'Example questions include but are not limited to: What is Charge
+        My EV? How do I use Charge My EV? What is the Charge My EV API? What is the
+        Charge My EV data source?'
+      operationId: getSuperchargerFAQsUsingGET
+      parameters: []
+      responses:
+        '200':
+          description: Frequently asked questions about superchargers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    description: Metadata about the FAQ request
+                    "$ref": "#/components/schemas/Meta"
+                  infoLink:
+                    type: string
+                    format: uri
+                    description: An optional link to a page with more information
+                      about the service, e.g. https://charge-my-ev.guide
+                  faqs:
+                    type: array
+                    description: Frequently asked questions about superchargers and
+                      their answers.
+                    items:
+                      type: object
+                      properties:
+                        question:
+                          type: string
+                          description: The frequently asked question
+                        answer:
+                          type: string
+                          description: The answer to the frequently asked question
+                        link:
+                          type: string
+                          format: uri
+                          description: An optional link to more information about
+                            the frequently asked question
+  "/api/openai/charging-locations/other-providers":
+    get:
+      operationId: getNonTeslaProviderChargingStationsUsingGET
+      summary: Fetches public charging stations from various vendors like Electrify
+        America, Rivian, ChargePoint, etc. offering level 1-3 charging speeds.
+      description: Location results are returned within the items array.
+      parameters:
+      - name: provider
+        in: query
+        required: false
+        description: The vendor/provider of the charging station, e.g. ChargePoint,
+          Rivian, etc.
+        schema:
+          type: string
+      - name: title
+        in: query
+        required: false
+        description: The name of the charging station or business name, e.g. Walmart,
+          Target, etc. Do not use this parameter for address or city. Use the address
+          and city query parameters instead.
+        schema:
+          type: string
+      - name: city
+        in: query
+        required: false
+        description: City(ies) for which to query general public charging station
+          information. Multiple are comma-separated, e.g. Reno, Toronto, Berlin, New
+          York, etc.
+        schema:
+          type: string
+      - name: state
+        in: query
+        required: false
+        description: US State abbreviation to query for public charging station locations.
+          Multiple are comma-separated, e.g. e.g. NV, CA, NY, etc.
+        schema:
+          type: string
+      - name: country
+        in: query
+        required: false
+        description: Country for which to query general public charging station information.
+          E.g. Portugal, United States, Mexico, Japan, etc.
+        schema:
+          type: string
+      - name: countryCode
+        in: query
+        required: false
+        description: Two character country code for which to query general public
+          charging station information. E.g. PT, US, MX, JP, etc.
+        schema:
+          type: string
+      - name: address
+        in: query
+        required: false
+        description: 'Charging station street address. Extract the street name from
+          the full address, removing the number. Split city and state if provided.
+          Example: ''123 Main St. Reno, NV'' -> ''Main St.'', ''Reno'', ''NV''.'
+        schema:
+          type: string
+      - name: zipCode
+        in: query
+        required: false
+        description: The zip code of the charging station, e.g. 12345
+        schema:
+          type: string
+      - name: planned
+        in: query
+        required: false
+        description: Whether to query for planned public charging stations
+        schema:
+          type: boolean
+      - name: dc_fast_chargers
+        in: query
+        required: false
+        description: Whether to query for public charging stations with DC fast charging,
+          e.g. Rivian, Electrify America, etc. This does not mean they are available
+          to non-Tesla vehicles.
+        schema:
+          type: boolean
+      - name: connectorType
+        in: query
+        required: false
+        description: The type of connector to query for, e.g. J1772, CHAdeMO, Tesla
+          (NACS), CCS, etc.
+        schema:
+          type: string
+      - name: pricing
+        in: query
+        required: false
+        description: The pricing structure of the charging station, if free or otherwise.
+          For free, use 'free' otherwise leave blank for everything else.
+        schema:
+          type: string
+      - name: facilityType
+        in: query
+        required: false
+        description: The type of facility the charging station is located at, e.g.
+          Parking, Retail, Restaurant, Government Office, etc.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK valid response..
+          content:
+            text/plain: {}
+  "/api/openai/charging-locations/tesla/destination-chargers":
+    get:
+      operationId: getTeslaDestinationChargerLocationsUsingGET
+      summary: Retrieves available Tesla destination charger locations. May require
+        a CCS-to-NACS connector adapter.
+      description: Location results are returned within the items array.
+      parameters:
+      - name: title
+        in: query
+        required: false
+        description: The name of the charging station or business name, e.g. Walmart,
+          Target, etc. Do not use this parameter for address or city. Use the address
+          and city query parameters instead.
+        schema:
+          type: string
+      - name: city
+        in: query
+        required: false
+        description: City to query charging station locations. Multiple are comma-separated,
+          e.g. Reno, Toronto, Berlin, New York, etc.
+        schema:
+          type: string
+      - name: state
+        in: query
+        required: false
+        description: US State abbreviation to query for  charging station locations.
+          Multiple are comma-separated, e.g. NV, CA, NY, etc.
+        schema:
+          type: string
+      - name: country
+        in: query
+        required: false
+        description: Country for which to query general public charging station information.
+          E.g. Portugal, United States, Mexico, Japan, etc.
+        schema:
+          type: string
+      - name: countryCode
+        in: query
+        required: false
+        description: Two character country code for which to query general public
+          charging station information. E.g. PT, US, MX, JP, etc.
+        schema:
+          type: string
+      - name: address
+        in: query
+        required: false
+        description: 'Charging station street address. Extract the street name from
+          the full address, removing the number. Split city and state if provided.
+          Example: ''123 Main St. Reno, NV'' -> ''Main St.'', ''Reno'', ''NV''.'
+        schema:
+          type: string
+      - name: zipCode
+        in: query
+        required: false
+        description: The zip code of the charging station, e.g. 12345
+        schema:
+          type: string
+      - name: connectorType
+        in: query
+        required: false
+        description: The type of connector to query for, e.g. J1772, CHAdeMO, Tesla
+          (NACS), CCS, etc.
+        schema:
+          type: string
+      - name: pricing
+        in: query
+        required: false
+        description: The pricing structure of the charging station, if free or otherwise.
+          For free, use 'free' otherwise leave blank for everything else.
+        schema:
+          type: string
+      - name: facilityType
+        in: query
+        required: false
+        description: The type of facility the charging station is located at, e.g.
+          Parking, Retail, Restaurant, Government Office, etc.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK valid response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/TeslaDestinationChargingStationResponse"
+  "/api/openai/charging-locations/tesla/superchargers/open-to-non-tesla-evs":
+    get:
+      summary: Retrieves available Tesla supercharger locations for non-Tesla owners
+        and vehicles. May require a CCS-to-NACS connector adapter. Locations are global.
+      description: Location results are returned within the items array. Locations
+        are global.
+      operationId: checkAvailableTeslaSuperchargersOpenToNonTeslaEVsUsingGET
+      parameters:
+      - name: city
+        in: query
+        required: false
+        description: City for which to retrieve Tesla supercharger for non-Tesla vehicles
+          information. E.g. Toronto, Berlin, New York, etc.
+        schema:
+          type: string
+      - name: state
+        in: query
+        required: false
+        description: State (or province) for which to retrieve Tesla supercharger
+          for non-Tesla vehicles information. e.g. CA, NY, etc.
+        schema:
+          type: string
+      - name: country
+        in: query
+        required: false
+        description: Country for which to retrieve Tesla supercharger for non-Tesla
+          vehicles information. E.g. United States, Germany, Portugal, etc.
+        schema:
+          type: string
+      - name: region
+        in: query
+        required: false
+        description: Region (more-or-less continent but not entirely a 1-to-1) for
+          which to retrieve supercharger for non-Tesla vehicles information. E.g.
+          North America, Europe, Asia, etc.
+        schema:
+          type: string
+      - name: title
+        in: query
+        required: false
+        description: The name of the charging station or business name, e.g. Gigafactory,
+          Walmart, Target, etc. Do not use this parameter for address or city. Use
+          the address and city query parameters instead.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK valid response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/NonTeslaVehicleSuperchargerResponse"
+  "/api/openai/charging-locations/tesla/superchargers/exclusive-to-tesla-evs":
+    get:
+      summary: Retrieves Tesla supercharger locations exclusively available for Tesla
+        owners and vehicles.
+      description: Location results are returned within the items array. Locations
+        are global.
+      operationId: checkAvailableTeslaSuperchargersExclusiveToTeslaEVsUsingGET
+      parameters:
+      - name: city
+        in: query
+        required: false
+        description: City for which to retrieve Tesla supercharger for Tesla owner
+          vehicles information. E.g. Reno, Toronto, Berlin, New York, etc.
+        schema:
+          type: string
+      - name: state
+        in: query
+        required: false
+        description: State (or province) for which to retrieve Tesla supercharger
+          for Tesla owner vehicles information. e.g. NV, CA, NY, etc.
+        schema:
+          type: string
+      - name: country
+        in: query
+        required: false
+        description: Country for which to retrieve Tesla supercharger for Tesla owner
+          vehicles information. E.g. United States, Germany, etc.
+        schema:
+          type: string
+      - name: region
+        in: query
+        required: false
+        description: Region for which to retrieve Tesla supercharger for Tesla owner
+          vehicles information. E.g. North America, Europe, Asia, etc.
+        schema:
+          type: string
+      - name: title
+        in: query
+        required: false
+        description: The name of the charging station or business name, e.g. Gigafactory,
+          Walmart, Target, etc. Do not use this parameter for address or city. Use
+          the address and city query parameters instead.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK valid response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ExclusiveTeslaVehicleSuperchargerResponse"
+  "/api/openai/charging-locations/tesla/superchargers/total-stats":
+    get:
+      summary: Fetches statistical information of available Tesla supercharger locations
+        open and available to both Tesla owners and non-Tesla owners/vehicles.
+      description: This data is sourced from the Tesla Find Us API.
+      operationId: checkTotalAvailableNonTeslaVehicleSuperchargerStatsUsingGET
+      parameters:
+      - name: city
+        in: query
+        required: false
+        description: City for which to retrieve statistical Tesla supercharger location
+          information. E.g. Reno, Toronto, Berlin, New York, etc.
+        schema:
+          type: string
+      - name: state
+        in: query
+        required: false
+        description: State (or province) for which to retrieve statistical Tesla supercharger
+          location information. E.g NV, CA, NY, etc.
+        schema:
+          type: string
+      - name: country
+        in: query
+        required: false
+        description: Country for which to retrieve statistical Tesla supercharger
+          location information. E.g US, MX, CA, etc.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK valid response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  numOfLocations:
+                    "$ref": "#/components/schemas/NumOfLocations"
+                  items:
+                    type: object
+                    description: The relevant supercharger information based on the
+                      user request, organized by country, state/province and city
+                      names.
+                    properties:
+                      byCity:
+                        type: object
+                        description: The relevant count and city names of supercharger
+                          locations based on the user request
+                        properties:
+                          count:
+                            type: number
+                            description: Overall city count of available superchargers
+                          data:
+                            type: array
+                            description: The relevant city names of supercharger locations
+                              based on the user request
+                            items:
+                              type: string
+                      byProvinceState:
+                        type: object
+                        description: The relevant count and state/province names of
+                          supercharger locations based on the user request.
+                        properties:
+                          count:
+                            type: number
+                            description: Overall state/province count of available
+                              superchargers.
+                          data:
+                            type: array
+                            description: The relevant state/province names of supercharger
+                              locations based on the user request
+                            items:
+                              "$ref": "#/components/schemas/ProvincesStates"
+                      byCountry:
+                        type: object
+                        description: The relevant count and country names of supercharger
+                          locations based on the user request
+                        properties:
+                          count:
+                            type: number
+                            description: Overall country count of available superchargers
+                          data:
+                            type: array
+                            description: The relevant country names of supercharger
+                              locations based on the user request
+                            items:
+                              type: string
+                  meta:
+                    type: object
+                    description: General metadata about the supercharger request
+                    "$ref": "#/components/schemas/Meta"
+  "/api/openai/charging-locations/tesla/superchargers/planned":
+    get:
+      summary: Retrieves currently planned Tesla supercharger locations. Whether they
+        are available to non-Tesla vehicles or not is TBD since they're in the planned
+        stage.
+      description: 'This data is sourced from the Tesla Find Us API. '
+      operationId: checkAvailablePlannedTeslaVehicleSuperchargerStationsGETAndParams
+      parameters:
+      - name: city
+        in: query
+        required: false
+        description: City for which to retrieve planned Tesla supercharger locations.
+          E.g. Reno, Toronto, Berlin, New York, etc.
+        schema:
+          type: string
+      - name: state
+        in: query
+        required: false
+        description: State (or province) for which to retrieve planned Tesla supercharger
+          locations. e.g. NV, CA, NY, etc.
+        schema:
+          type: string
+      - name: country
+        in: query
+        required: false
+        description: Country for which to retrieve planned Tesla supercharger locations.
+          E.g. United States, Germany, Portugal, etc.
+        schema:
+          type: string
+      - name: countryCode
+        in: query
+        required: false
+        description: Two letter country code for which to retrieve planned Tesla supercharger
+          locations. E.g. US, DE, PT, etc.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK valid response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PlannedTeslaVehicleSuperchargerLocationsResponse"
+components:
+  schemas:
+    NumOfLocations:
+      type: integer
+      description: The number of available superchargers or locations to display to
+        the user if requested based on the user's criteria, e.g. 861 would mean 861
+        superchargers are available based on the user's request.
+    Count:
+      type: integer
+      description: Number of available superchargers returned
+    Error:
+      type: boolean
+      description: Whether or not an error occurred
+    ErrorMessage:
+      type: string
+      description: Error message if an error occurred
+    Cities:
+      type: array
+      items:
+        type: string
+        description: Charging stations by cities relevant to the request. Can be used
+          to summarize some of the results to the user and encourage them to fine
+          tune their location request especially for larger dataset results.
+    ProvincesStates:
+      type: array
+      items:
+        type: object
+        description: Charging station location(s) by province/state relevant to the
+          request. Can be used to summarize some of the results to the user and encourage
+          them to fine tune their location request.
+        properties:
+          abbr:
+            type: string
+            description: Abbreviation of the province/state, if available
+          name:
+            type: string
+            description: Name of the province/state
+          country:
+            type: integer
+            description: Country of the province/state
+          stations:
+            type: integer
+            description: Number of overall stations in the province/state. Useful
+              for summarizing results to the user and encouraging them to fine tune
+              their location request.
+    Countries:
+      type: array
+      description: Charging station locations by countries relevant to the request.
+      items:
+        type: string
+        description: Name of the country
+    Providers:
+      type: array
+      description: Charging station locations by providers/vendors relevant to the
+        request.
+      items:
+        type: string
+        description: Name of the provider/vendor
+    UserTip:
+      type: string
+      description: An optional tip for the user when their location request returns
+        no results
+    Params:
+      type: object
+      description: The parameters provided and used to retrieve the supercharger locations
+    Meta:
+      type: object
+      properties:
+        numOfLocations:
+          "$ref": "#/components/schemas/NumOfLocations"
+        error:
+          "$ref": "#/components/schemas/Error"
+        errorMessage:
+          "$ref": "#/components/schemas/ErrorMessage"
+        count:
+          "$ref": "#/components/schemas/Count"
+        providers:
+          "$ref": "#/components/schemas/Providers"
+        cities:
+          "$ref": "#/components/schemas/Cities"
+        provincesStates:
+          "$ref": "#/components/schemas/ProvincesStates"
+        countries:
+          "$ref": "#/components/schemas/Countries"
+        params:
+          "$ref": "#/components/schemas/Params"
+    MetaPlannedStations:
+      type: object
+      properties:
+        error:
+          "$ref": "#/components/schemas/Error"
+        errorMessage:
+          "$ref": "#/components/schemas/ErrorMessage"
+        count:
+          "$ref": "#/components/schemas/Count"
+        cities:
+          type: object
+          properties:
+            count:
+              "$ref": "#/components/schemas/Count"
+            data:
+              "$ref": "#/components/schemas/Cities"
+        provincesStates:
+          type: object
+          properties:
+            count:
+              "$ref": "#/components/schemas/Count"
+            data:
+              "$ref": "#/components/schemas/ProvincesStates"
+        countries:
+          type: object
+          properties:
+            count:
+              "$ref": "#/components/schemas/Count"
+            data:
+              "$ref": "#/components/schemas/Countries"
+        params:
+          "$ref": "#/components/schemas/Params"
+    AvailableCharger:
+      type: object
+      description: A charging station location based on the user's request with properties
+        like Title, Address, Number of Stations, Permalink, Map URL, etc.
+      properties:
+        last_updated:
+          type: string
+          description: The date and time the charging station information was last
+            updated
+        location_id:
+          type: string
+          description: Unique identifier for the chargin location. Used for the permalink
+            and other purposes.
+        permalink:
+          type: string
+          format: uri
+          description: The link for the location's title for more info in the format
+            https://charge-my-ev.guide/l/{location_id}.
+        map_url:
+          type: string
+          format: uri
+          description: A link to google maps with the location of the charging station
+            in the format of https://www.google.com/maps/place/{latitude},{longitude}
+        overview:
+          type: string
+        title:
+          type: string
+          description: Name of the charger location. Typically takes on the form of
+            {business_name} {city} - {provider} for ease
+        status:
+          type: string
+          description: The status of the charging station, e.g. Available, Planned,
+            Temporarily Unavailable, etc.
+        open:
+          type: boolean
+          description: If provider is Tesla, whether the supercharger station is currently
+            open to the public or not
+        pricing:
+          type: string
+          description: The pricing structure of the charging station, if free or otherwise
+        isTeslaSupercharger:
+          type: boolean
+          description: If the provider is Tesla, whether the location is a supercharging
+            station.
+        isTeslaSuperchargerForNonTeslas:
+          type: boolean
+          description: If the provider is Tesla, whether the location is a supercharging
+            station available to non-Tesla vehicles or not.
+        isTeslaDestinationCharger:
+          type: boolean
+          description: If the provider is Tesla, whether the location is a Tesla destination
+            charger.
+        provider:
+          type: string
+          description: The corresponding vendor/provider of the charging station,
+            e.g. Tesla, ChargePoint, Rivian, etc.
+        compatibility:
+          type: string
+          description: If provider is Tesla, the number of supercharger stations,
+            hours of availability, the type of plug/adapter, etc.
+        level_2_chargers_count:
+          type: integer
+          description: Number of charger stations available with level 2 charging
+        dc_fast_chargers_count:
+          type: integer
+          description: Number of charger stations available with DC fast charging
+        facility_type:
+          type: string
+          description: The type of facility the charging station is located at, e.g.
+            Parking, Retail, Restaurant, Government Office, etc.
+        address:
+          type: string
+        city:
+          type: string
+        province_state:
+          type: string
+          description: United States states should be in the form of their two character
+            abbreviation code, e.g. CA for California. Other countries' state codes
+            can be their full name.
+        zip:
+          type: string
+        country:
+          type: string
+          description: Standard country code, e.g US for United States
+        country_code:
+          type: string
+          description: Standard country code, e.g US for United States
+        connnector_types:
+          type: array
+          description: The types of connectors available at the charging station,
+            e.g. J1772, CHAdeMO, Tesla (NACS), Combined Charging System (CCS) for
+            non-Teslas, etc.
+          items:
+            type: string
+        access_days_time:
+          type: string
+          description: The days and times the charging station is available for use
+        station_phone:
+          type: array
+          items:
+            type: object
+            description: Contact information for the public charging station
+            properties:
+              label:
+                type: string
+              number:
+                type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        amenities:
+          type: array
+          description: If provider is Tesla, amenities available at the supercharger
+            location to show if requested by the user
+          items:
+            type: object
+            description: Amenities available at the supercharger location
+            properties:
+              label:
+                type: string
+                description: Amenity descriptor, e.g. Restaurant, Restroom, etc.
+              url:
+                type: string
+                description: Google Maps URL to the relevant amenities of the supercharger
+                  location
+    Supercharger:
+      type: object
+      description: A Tesla supercharger location based on the user's request with
+        properties like Title, Address, Number of Stations, nonTeslaEnabled, Permalink,
+        etc.
+      properties:
+        location_id:
+          type: string
+          description: Unique identifier for the supercharger location. Used for the
+            permalink and other purposes.
+        title:
+          type: string
+          description: Name of the supercharger location. Typically takes on the form
+            of {city}, {state} for ease. Uses location_id for the permalink.
+        open:
+          type: boolean
+          description: Whether the supercharger station is currently open to the public
+            or not
+        stations:
+          type: integer
+          description: Number of supercharger stations available at the location
+        overview:
+          type: string
+        compatibility:
+          type: string
+          description: The number of supercharger stations, hours of availability,
+            the type of plug/adapter, etc.
+        address:
+          type: string
+        city:
+          type: string
+        province_state:
+          type: string
+          description: United States states should be in the form of their two character
+            abbreviation code, e.g. CA for California. Other countries' state codes
+            can be their full name.
+        postal_code:
+          type: string
+        country:
+          type: string
+        country_code:
+          type: string
+          description: Standard country code, e.g US for United States
+        region:
+          type: string
+          description: Contitent the supercharger is located in
+        nonTeslaEnabled:
+          type: boolean
+          description: If the provider is Tesla, whether the charging station is available
+            to non-Tesla vehicles or not.
+        sales_phone:
+          type: array
+          items:
+            type: object
+            description: Contact information for the supercharger
+            properties:
+              label:
+                type: string
+              number:
+                type: string
+        connnector_types:
+          type: array
+          description: The types of connectors available at the supercharging station,
+            e.g. Tesla connector (NACS), Combined Charging System (CCS) for non-Teslas,
+            etc.
+          items:
+            type: string
+        amenities:
+          type: array
+          description: Amenities available at the supercharger location to show if
+            requested by the user
+          items:
+            type: object
+            description: Amenities available at the supercharger location
+            properties:
+              label:
+                type: string
+                description: Amenity descriptor, e.g. Restaurant, Restroom, etc.
+              url:
+                type: string
+                description: Google Maps URL to the relevant amenities of the supercharger
+                  location
+        permalink:
+          type: string
+          format: uri
+          description: A link to a page with more information about the supercharger's
+            location in the format https://charge-my-ev.guide/l/{location_id}
+        map_url:
+          type: string
+          format: uri
+          description: A link to google maps with the location of the supercharger
+            station in the format of https://www.google.com/maps/place/{latitude},{longitude}
+        latitude:
+          type: string
+        longitude:
+          type: string
+        provider:
+          type: string
+    GeneralAvailableChargingStationResponse:
+      type: object
+      description: General and available charging station locations based on the user's
+        request.
+      properties:
+        numOfLocations:
+          "$ref": "#/components/schemas/NumOfLocations"
+        items:
+          type: array
+          description: The individual Tesla destination charging locations that match
+            the user's request.
+          items:
+            "$ref": "#/components/schemas/AvailableCharger"
+        tip:
+          type: string
+          description: A brief tip for the chat bot and the user when their location
+            request returns no results or is too broad.
+        infoLink:
+          type: string
+          description: Brief instructions and a link to the plugin's website, https://charge-my-ev.guide,
+            for more information about the plugin and the data it provides.
+        meta:
+          type: object
+          description: Metadata about the charging stations request
+          "$ref": "#/components/schemas/Meta"
+    TeslaDestinationChargingStationResponse:
+      type: object
+      description: Available Tesla destination charging station locations based on
+        the user's request.
+      properties:
+        numOfLocations:
+          "$ref": "#/components/schemas/NumOfLocations"
+        items:
+          type: array
+          description: The individual Tesla destination charging locations that match
+            the user's request.
+          items:
+            "$ref": "#/components/schemas/AvailableCharger"
+        tip:
+          type: string
+          description: A brief tip for the chat bot and the user when their location
+            request returns no results or is too broad.
+        infoLink:
+          type: string
+          description: Brief instructions and a link to the plugin's website, https://charge-my-ev.guide,
+            for more information about the plugin and the data it provides.
+        meta:
+          type: object
+          description: Metadata about the charging stations request
+          "$ref": "#/components/schemas/Meta"
+    ExclusiveTeslaVehicleSuperchargerResponse:
+      type: object
+      description: Exclusive Tesla supercharger locations response for Tesla EVs based
+        on the user's request.
+      properties:
+        numOfLocations:
+          "$ref": "#/components/schemas/NumOfLocations"
+        items:
+          type: array
+          description: The supercharger locations that match the users request.
+          items:
+            "$ref": "#/components/schemas/Supercharger"
+        infoLink:
+          type: string
+          description: Brief instructions and a link to the plugin's website, https://charge-my-ev.guide,
+            for more information about the plugin and the data it provides.
+        userTip:
+          type: string
+          description: A brief tip for the user when their location request returns
+            no results or is too broad or to recap the results of their request.
+        meta:
+          type: object
+          description: Metadata about the supercharger request
+          "$ref": "#/components/schemas/Meta"
+    NonTeslaVehicleSuperchargerResponse:
+      type: object
+      description: Tesla supercharger locations available to non-Tesla EVs based on
+        the user's request.
+      properties:
+        numOfLocations:
+          "$ref": "#/components/schemas/NumOfLocations"
+        items:
+          type: array
+          description: The supercharger locations that match the users request.
+          items:
+            "$ref": "#/components/schemas/Supercharger"
+        infoLink:
+          type: string
+          description: Brief instructions and a link to the plugin's website, https://charge-my-ev.guide,
+            for more information about the plugin and the data it provides.
+        userTip:
+          type: string
+          description: A brief tip for the user when their location request returns
+            no results or is too broad or to recap the results of their request.
+        meta:
+          type: object
+          description: Metadata about the supercharger request
+          "$ref": "#/components/schemas/Meta"
+    PlannedTeslaVehicleSuperchargerLocationsResponse:
+      type: object
+      description: Planned Tesla supercharger location response based on the user's
+        request.
+      properties:
+        numOfLocations:
+          "$ref": "#/components/schemas/NumOfLocations"
+        items:
+          type: array
+          description: The planned supercharger locations that match the users request
+            parameters
+          items:
+            "$ref": "#/components/schemas/Supercharger"
+        userTip:
+          type: string
+          description: An optional tip for the user when their location request returns
+            no results or is too broad
+        infoLink:
+          type: string
+          description: Brief instructions and a link to the plugin's website, https://charge-my-ev.guide,
+            for more information about the plugin and the data it provides.
+        meta:
+          type: object
+          description: Metadata about the planned supercharger location request
+          "$ref": "#/components/schemas/MetaPlannedStations"

@@ -1,0 +1,358 @@
+---
+info:
+  title: Chi Data Buddy
+  version: 1.0.0
+  description: Chicago data from the City of Chicago Data Portal.
+openapi: 3.0.1
+paths:
+  "/business_categories":
+    get:
+      operationId: getBusinessCategories
+      parameters:
+      - description: The ward number to filter the business data by.
+        in: query
+        name: ward
+        required: false
+        schema:
+          type: integer
+      - description: The year to filter the business data by.
+        in: query
+        name: year
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      properties:
+                        business_activity:
+                          description: The category of the business activity.
+                          type: string
+                        num_businesses:
+                          description: The number of businesses in the category.
+                          type: integer
+                      type: object
+                    type: array
+                  source:
+                    properties:
+                      name:
+                        description: The name of the dataset within the Chicago Open
+                          Data Portal.
+                        type: string
+                      url:
+                        description: The source url of the data where the user can
+                          find this data.
+                        type: string
+                    type: object
+                type: object
+          description: Successful operation.
+        '400':
+          description: Bad request. Invalid parameters.
+        '500':
+          description: Internal server error. Unable to fetch data from the external
+            API.
+      summary: 'Retrieve the number of businesses in different categories, with optional
+        filters on ward and year.  Source: ''Business Licenses'' dataset, details
+        at https://data.cityofchicago.org/Community-Economic-Development/Business-Licenses/r5kz-chrr.'
+  "/department_contracts":
+    get:
+      operationId: departmentContracts
+      parameters:
+      - description: The year to filter the contracts data by.
+        in: query
+        name: year
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      properties:
+                        average_contract_size:
+                          description: The average contract size for the department.
+                          format: double
+                          type: number
+                        department:
+                          description: The name of the department.
+                          type: string
+                        num_contracts:
+                          description: The number of contracts in the department.
+                          type: integer
+                        total_award_amount:
+                          description: The total value of contracts for the department.
+                          format: double
+                          type: number
+                      type: object
+                    type: array
+                  source:
+                    properties:
+                      name:
+                        description: The name of the dataset within the Chicago Open
+                          Data Portal.
+                        type: string
+                      url:
+                        description: The source url of the data where the user can
+                          find this data.
+                        type: string
+                    type: object
+                type: object
+          description: Successful operation.
+        '400':
+          description: Bad request. Invalid parameters.
+        '500':
+          description: Internal server error. Unable to fetch data from the external
+            API.
+      summary: 'Retrieve total contract value, number of contracts, and average contract
+        size for each department, filtered by year.    Source: ''Contracts'' dataset,
+        details at https://data.cityofchicago.org/Administration-Finance/Contracts/rsxa-ify5.'
+  "/find_murals":
+    get:
+      operationId: findMurals
+      parameters:
+      - description: The ward number to filter the murals data by.
+        in: query
+        name: ward
+        required: false
+        schema:
+          type: integer
+      - description: The start year to filter the murals data by.
+        in: query
+        name: start_year
+        required: false
+        schema:
+          type: integer
+      - description: The end year to filter the murals data by.
+        in: query
+        name: end_year
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      properties:
+                        artist_credit:
+                          description: The name of the artist credited for the mural.
+                          type: string
+                        artwork_title:
+                          description: The title of the mural artwork.
+                          type: string
+                        latitude:
+                          description: The latitude coordinate of the mural location.
+                          format: double
+                          type: number
+                        longitude:
+                          description: The longitude coordinate of the mural location.
+                          format: double
+                          type: number
+                        street_address:
+                          description: The street address where the mural is located.
+                          type: string
+                        ward:
+                          description: The ward number the mural is located in.
+                          type: integer
+                        year_installed:
+                          description: The year the mural was installed.
+                          type: integer
+                        year_restored:
+                          description: The year the mural was restored, if applicable.
+                          type: integer
+                      type: object
+                    type: array
+                  source:
+                    properties:
+                      name:
+                        description: The name of the dataset within the Chicago Open
+                          Data Portal.
+                        type: string
+                      url:
+                        description: The source url of the data where the user can
+                          find this data.
+                        type: string
+                    type: object
+                type: object
+          description: Successful operation.
+        '400':
+          description: Bad request. Invalid parameters.
+        '500':
+          description: Internal server error. Unable to fetch data from the external
+            API.
+      summary: 'Retrieve murals data filtered by ward number, start year, and end
+        year.  Source: ''Mural Registry'' dataset, details at https://data.cityofchicago.org/Historic-Preservation/Mural-Registry/we8h-apcf.'
+  "/find_new_businesses":
+    get:
+      operationId: findNewBusinesses
+      parameters:
+      - description: The ward number to filter the business licenses by.
+        in: query
+        name: ward
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      properties:
+                        date_issued:
+                          description: The date the license was issued.
+                          format: date-time
+                          type: string
+                        doing_business_as_name:
+                          description: The name of the business.  (Sometimes incorrectly
+                            in all caps, please normalize the capitalization.)
+                          type: string
+                      type: object
+                    type: array
+                  source:
+                    properties:
+                      name:
+                        description: The name of the dataset within the Chicago Open
+                          Data Portal.
+                        type: string
+                      url:
+                        description: The source url of the data where the user can
+                          find this data.
+                        type: string
+                    type: object
+                type: object
+          description: Successful operation.
+        '400':
+          description: Bad request. Invalid parameters.
+        '500':
+          description: Internal server error. Unable to fetch data from the external
+            API.
+      summary: 'Retrieve the (up to) 50 most recently issued business licenses, with
+        an optional filter on ward.  Source: ''Business Licenses'' dataset, details
+        at https://data.cityofchicago.org/Community-Economic-Development/Business-Licenses/r5kz-chrr.'
+  "/largest_contracts":
+    get:
+      operationId: largestContracts
+      parameters:
+      - description: The department name to filter the contracts data by.  Must be
+          all capital letters (e.g., DEPARTMENT OF BUILDINGS).
+        in: query
+        name: department
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      properties:
+                        Vendor Name:
+                          description: The name of the vendor with a contract in the
+                            specified department.
+                          type: string
+                        total_award_amount:
+                          description: The sum of the award amount for the vendor's
+                            contracts in the specified department.
+                          format: double
+                          type: number
+                      type: object
+                    type: array
+                  source:
+                    properties:
+                      name:
+                        description: The name of the dataset within the Chicago Open
+                          Data Portal.
+                        type: string
+                      url:
+                        description: The source url of the data where the user can
+                          find this data.
+                        type: string
+                    type: object
+                type: object
+          description: Successful operation.
+        '400':
+          description: Bad request. Invalid or missing department parameter.
+        '500':
+          description: Internal server error. Unable to fetch data from the external
+            API.
+      summary: 'Retrieve vendors with the largest contracts filtered by department.  Source:
+        ''Contracts'' dataset, details at https://data.cityofchicago.org/Administration-Finance/Contracts/rsxa-ify5.'
+  "/recently_completed_service_requests":
+    get:
+      operationId: recentlyCompletedServiceRequests
+      parameters:
+      - description: The ward number to filter the service requests by.
+        in: query
+        name: ward
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      properties:
+                        closed_date:
+                          description: The date the service request was completed.
+                          format: date-time
+                          type: string
+                        created_date:
+                          description: The date the service request was created.
+                          format: date-time
+                          type: string
+                        sr_number:
+                          description: The service request number.
+                          type: string
+                        sr_type:
+                          description: The type of the service request.
+                          type: string
+                        street_address:
+                          description: The street address where the service request
+                            was made.
+                          type: string
+                      type: object
+                    type: array
+                  source:
+                    properties:
+                      name:
+                        description: The name of the dataset within the Chicago Open
+                          Data Portal.
+                        type: string
+                      url:
+                        description: The source url of the data where the user can
+                          find this data.
+                        type: string
+                    type: object
+                type: object
+          description: Successful operation.
+        '400':
+          description: Bad request. Invalid parameters.
+        '500':
+          description: Internal server error. Unable to fetch data from the external
+            API.
+      summary: Retrieve recently completed service requests, with an optional filter
+        on ward.
+servers:
+- url: https://chatgpt.deepdigits.pizza

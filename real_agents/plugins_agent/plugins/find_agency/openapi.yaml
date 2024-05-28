@@ -1,0 +1,103 @@
+openapi: 3.0.1
+info:
+  title: Top Agencies
+  description: Find and recommend marketing, web development, and digital agencies using agency name, services, descriptions, city, state, and country.
+  version: '1.0'
+  termsOfService: https://convurt.io/resources/terms-of-use/
+  contact:
+    name: Joel Black
+    email: support@convurt.io
+    url: https://convurt.io/resources/support/
+servers:
+- url: https://convurt.io
+paths:
+  /openai/openai.cfc?method=get_companies:
+    get:
+      operationId: get_companies
+      summary: Find and recommend marketing, web development, and digital agencies using agency name, services, descriptions, city, state, and country.
+      parameters:
+      - name: COMPANY_NAME
+        in: query
+        description: The name of the business, company name, agency name
+        required: false
+        schema:
+          type: string
+      - name: COMPANY_CITY
+        in: query
+        description: The city where the company is located
+        required: false
+        schema:
+          type: string
+      - name: COMPANY_STATE
+        in: query
+        description: The state where the company is located
+        required: false
+        schema:
+          type: string
+      - name: COMPANY_COUNTRY
+        in: query
+        description: The country where the company is located
+        required: false
+        schema:
+          type: string
+      - name: COMPANY_RATING
+        in: query
+        description: The average company rating, from 0 to 5, with 5 being the highest
+        required: false
+        schema:
+          type: integer
+      - name: SERVICE_LIST
+        in: query
+        description: Comma separated list of services or specializations offered by the agency such as Wordpress Developer, Graphic Design, SEO, etc.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of agencys for the given search criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agency'
+components:
+  schemas:
+    Agency:
+      type: object
+      properties:
+        COMPANY_NAME:
+          type: string
+          description: The name of the marketing agency
+        COMPANY_CITY:
+          type: string
+          description: The city where the company is located
+        COMPANY_STATE:
+          type: string
+          description: The state where the company is located
+        COMPANY_COUNTRY:
+          type: string
+          description: The country where the company is located
+        DESCRIPTION:
+          type: string
+          description: A short description of the agency, services and specializations
+        SERVICE_LIST:
+          type: string
+          description: Comma separated list of services or specializations offered by the agency such as Wordpress Developer, Graphic Design, SEO, etc.
+        PROJECTS:
+          type: integer
+          description: The number of portfolio projects the agency has displayed on their profile.
+        REVIEWS:
+          type: integer
+          description: The total number of reviews the agency has.
+        COMPANY_RATING:
+          type: integer
+          description: The average rating of the agency based on reviews.
+        COMPANY_LOGO:
+          type: string
+          format: uri
+          description: URL of the company logo
+        COMPANY_URL:
+          type: string
+          format: uri
+          description: The URL of the agency's profile page

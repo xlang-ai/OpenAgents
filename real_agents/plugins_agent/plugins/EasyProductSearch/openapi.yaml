@@ -1,0 +1,396 @@
+openapi: 3.0.1
+info:
+  title: Easy Product Search
+  description: The Easy Product Search enables users to search for products and accommodations on online stores in Japan.
+  version: 'v1'
+servers:
+  - url: https://easy-search.techno-gauss.com
+paths:
+  /api/search/{username}:
+    get:
+      operationId: search
+      summary: Search items from online store in Japan
+      parameters:
+      - in: path
+        name: username
+        schema:
+          type: string
+        required: true
+        description: The name of the user.
+      - in: query
+        name: keyword
+        schema:
+          type: string
+          minLength: 2    
+          maxLength: 128
+        required: true
+        description: |
+          The search keyword.
+          URL-encoded string in UTF-8. The entire search keyword must be specified within 128 single-byte characters.
+          Search keywords can be separated by a single-byte space, and the default is the AND condition (search for all keywords).
+          If you want to use the OR condition (search for items that contain any of the keywords), set orFlag to 1.
+          Each keyword must be at least 2 half-size characters or 1 full-size character.
+          As an exception, if each keyword is Hiragana, Katakana, or symbol, it must be at least 2 characters.
+      - in: query
+        name: shopCode
+        schema:
+          type: string
+        description: The shop code. The xyz in the per-shop URL (http://www.rakuten.co.jp/[xyz])
+      - in: query
+        name: itemCode
+        schema:
+          type: string
+        description: |
+          The item code. The value of the format "shop:1234" is rarely included in the output parameters of the Product Search API, Rakuten Product Ranking API, and Favorite Bookmark Acquisition API.
+          Values of the format "shop:1234
+      - in: query
+        name: genreId
+        schema:
+          type: integer
+        description: The genre ID.
+      - in: query
+        name: hits
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 3
+        description: The number of items per page.
+      - in: query
+        name: page
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        description: Number of pages to be acquired. Must be an integer greater than 1 and less than or equal to 100.
+      - in: query
+        name: sort
+        schema:
+          type: string
+          enum: ['+reviewCount', '-reviewCount', '+reviewAverage', '-reviewAverage', '+itemPrice', '-itemPrice', '+updateTimestamp', '-updateTimestamp', 'standard']
+          description: |
+            +reviewCount: Number of reviews (ascending order)
+            -reviewCount: Number of reviews in descending order
+            +reviewAverage: Review average (ascending order)
+            -reviewAverage: Review average order (descending)
+            +itemPrice: Price (ascending order)
+            -itemPrice: Price (descending order)
+            +updateTimestamp: Sort by item update timestamp (ascending order)
+            -updateTimestamp: Sort by item update date and time (descending order)
+            standard: standard sort order
+      - in: query
+        name: minPrice
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 999999999
+        description: Integer between 1 and 999,999,999
+      - in: query
+        name: maxPrice
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 999999999
+        description: Integer between 1 and 999,999,999. maxPrice must be greater than minPrice
+      - in: query
+        name: orFlag
+        schema:
+          type: integer
+          enum: [0, 1]
+        description: |
+          When multiple keywords are set, either AND or OR search can be selected.
+          0:AND search
+          1:OR search
+          However, complex search conditions such as (A and B) or C cannot be specified.
+      - in: query
+        name: NGKeyword
+        schema:
+          type: string
+          minLength: 2    
+          maxLength: 128
+        description: |
+          Keywords you want to exclude from search results
+          URL-encoded strings in UTF-8
+          The format is the same as keyword.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                description: The error message.
+  /api/travel-search/{username}:
+    get:
+      operationId: travelSearch
+      summary: Search for hotels
+      parameters:
+      - in: path
+        name: username
+        schema:
+          type: string
+        required: true
+        description: The name of the user.
+      - in: query
+        name: keyword
+        schema:
+          type: string
+          minLength: 2
+        required: true
+        description: The search keyword.If multiple keywords are specified by separating them with a half-width space, an AND search will be performed.You must specify at least 2 characters.
+      - in: query
+        name: page
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        description: Number of pages to be acquired. Must be an integer greater than 1 and less than or equal to 100.
+      - in: query
+        name: hits
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 3
+        description: A parameter that limits the number of facilities retrieved per page. Must be an integer greater than or equal to 1 and less than or equal to 3.
+      - in: query
+        name: datumType
+        schema:
+          type: integer
+          enum: [1, 2]
+        description: |
+          1: World Geodetic System, unit is degree.
+          2: Japan Geodetic System, unit is second.
+      - in: query
+        name: middleClassCode
+        schema:
+          type: string
+        description: Code indicating prefecture, etc. If this field is specified, only facilities belonging to the specified district will be searched.
+      - in: query
+        name: searchField
+        schema:
+          type: integer
+          enum: [0, 1]
+        description: Specify target items for keyword search. 0:Facility name, plan name, room name, etc. 1:Facility name only
+      - in: query            
+        name: hotelChainCode
+        schema:
+          type: string
+        description: Code to identify the hotel chain. If this field is specified, only facilities belonging to the specified hotel chain will be searched.
+      - in: query            
+        name: hotelThumbnailSize
+        schema:
+          type: integer
+          enum: [1, 2, 3]
+        description: Specify the size of the hotel thumbnail image. 1:Small 2:Medium 3:Large
+      - in: query 
+        name: responseType
+        schema:
+          type: string
+          enum: ['small', 'middle', 'large']
+        description: Parameter specifying the return information type. (small) minimum information only.(middle) medium. (large) all information
+      - in: query
+        name: sort
+        schema:
+          type: string
+          enum: ['standard', '+roomCharge', '-roomCharge']
+        description: standard:Order of the highest keyword search rate. +roomCharge:Lowest price (Low to High). -roomCharge:Lowest price (in order of highest price)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelSearchResponse'
+        "400":
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                description: The error message.
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                description: The error message.
+components:
+  schemas:
+    SearchResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of search results
+        page:
+          type: integer
+          description: Current page number
+        first:
+          type: integer
+          description: The first item in the search results
+        last:
+          type: integer
+          description: The last item in the search results
+        hits:
+          type: integer
+          description: Number of items returned at once
+        pageCount:
+          type: integer
+          description: Maximum 100
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+    Item:
+      type: object
+      properties:
+        itemName:
+          type: string
+          description: Item name
+        catchcopy:
+          type: string
+          description: Catch copy
+        itemCode:
+          type: string
+          description: Item code
+        itemPrice:
+          type: integer
+          description: Item price
+        itemCaption:
+          type: string
+          description: Item description
+        itemUrl:
+          type: string
+          description: Item URL
+        mediumImageUrls:
+          type: array
+          items:
+            type: string
+          description: URLs of item images (128x128)
+        availability:
+          type: integer
+          description: Flag for item availability
+        shipOverseasFlag:
+          type: integer
+          description: Overseas shipping flag
+        shipOverseasArea:
+          type: string
+          description: Areas eligible for overseas shipping
+        reviewCount:
+          type: integer
+          description: Number of reviews
+        reviewAverage:
+          type: number
+          description: Average review score
+        giftFlag:
+          type: integer
+          description: Gift wrapping flag
+        shopName:
+          type: string
+          description: Shop name
+        shopCode:
+          type: string
+          description: Shop code
+        shopUrl:
+          type: string
+          description: Shop URL
+        genreId:
+          type: string
+          description: Genre ID
+        tagIds:
+          type: array
+          items:
+            type: string
+          description: Tag IDs
+    TravelSearchResponse:
+      type: object
+      properties:
+        pagingInfo:
+          type: object
+          properties:
+            recordCount:
+              type: integer
+            pageCount:
+              type: integer
+            page:
+              type: integer
+            first:
+              type: integer
+            last:
+              type: integer
+        hotels:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hotel'
+    Hotel:
+      type: object
+      properties:
+        hotelNo:
+          type: string
+        hotelName:
+          type: string
+        hotelInformationUrl:
+          type: string
+        planListUrl:
+          type: string
+        dpPlanListUrl:
+          type: string
+        reviewUrl:
+          type: string
+        hotelKanaName:
+          type: string
+        hotelSpecial:
+          type: string
+        hotelMinCharge:
+          type: integer
+        latitude:
+          type: number
+        longitude:
+          type: number
+        postalCode:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        telephoneNo:
+          type: string
+        faxNo:
+          type: string
+        access:
+          type: string
+        parkingInformation:
+          type: string
+        nearestStation:
+          type: string
+        hotelImageUrl:
+          type: string
+        hotelThumbnailUrl:
+          type: string
+        roomImageUrl:
+          type: string
+        roomThumbnailUrl:
+          type: string
+        hotelMapImageUrl:
+          type: string
+        reviewCount:
+          type: integer
+        reviewAverage:
+          type: number
+        userReview:
+          type: string

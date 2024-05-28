@@ -1,0 +1,34 @@
+{
+    "id": "plugin-a147da00-be82-496a-a71f-f6815265ab2d",
+    "domain": "whois.smoothplugins.com",
+    "namespace": "whois_domain_checker",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "whois_domain_checker",
+        "name_for_human": "Whois Domain Checker",
+        "description_for_model": "WhoisDomainChecker - A Whois app that takes a list of space-separated domain names, performs the Whois for each domain, and then outputs a list of domain names with each one's availability status indicated by a utf8 icon (\u2705 for available, \u274c for unavailable). Provide the list of domains and the plugin will check their availability.",
+        "description_for_human": "A Whois app that takes a list of space-separated domain names, performs the Whois for each domain.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://whois.smoothplugins.com/openapi.yaml"
+        },
+        "logo_url": "https://smoothplugins.com/img/plugin_logos2/whois3.png",
+        "contact_email": "makevoid@gmail.com",
+        "legal_info_url": "https://smoothplugins.com/tos/1_whois_plugin_tos"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

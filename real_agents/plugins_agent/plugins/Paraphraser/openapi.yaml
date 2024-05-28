@@ -1,0 +1,42 @@
+openapi: 3.0.1
+info:
+  title: Paraphraser.
+  description: Paraphrase any text.
+  version: 'v1'
+servers:
+  - url: https://paraphraser-best.vercel.app/
+paths:
+  /paraphrase:
+    get:
+      operationId: paraphrase
+      summary: Paraphrase the text using an AI Agent
+      parameters:
+        - name: text
+          in: query
+          description: the text to paraphrase
+          required: true
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paraphraserResponse'
+
+components:
+  schemas:
+    paraphraserResponse:
+      type: object
+      properties:
+        instructions:
+            type: string
+            description: instructions on how to process response
+        response:
+            type: string
+            description: response from the AI Agent
+
+
+

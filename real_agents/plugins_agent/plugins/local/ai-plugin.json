@@ -1,0 +1,34 @@
+{
+    "id": "plugin-079858b5-434f-42c2-b38e-9c2c7aefc06c",
+    "domain": "local.goodcall.ai",
+    "namespace": "local",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "local",
+        "name_for_human": "Local by GoodCall",
+        "description_for_model": "Discover and support restaurants, shops & services near you. \ud83c\udf7d\ufe0f \ud83d\udecd\ufe0f \ud83d\udd27",
+        "description_for_human": "Discover and support restaurants, shops & services near you. \ud83c\udf7d\ufe0f \ud83d\udecd\ufe0f \ud83d\udd27",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://local.goodcall.ai/openapi.yaml"
+        },
+        "logo_url": "https://local.goodcall.ai/logo.png",
+        "contact_email": "support@goodcall.com",
+        "legal_info_url": "https://answers.goodcall.com/hc/en-us/articles/4405110871444-Terms-of-Service"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

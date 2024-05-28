@@ -1,0 +1,34 @@
+{
+    "id": "plugin-603fc929-d979-4202-90d4-85c4febd45a8",
+    "domain": "converter.dialogueapps.com",
+    "namespace": "exchangerates",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "exchangerates",
+        "name_for_human": "Exchange Rates",
+        "description_for_model": "The Exchange Rates Data API provides real-time and historical exchange rates for over 170 currencies, supports currency conversion, offers daily historical data for specified periods, returns fluctuation data between dates, and lists all available currencies.",
+        "description_for_human": "Exchange Rates delivers real-time and historical data, enabling conversion and tracking for over 170 currencies.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://converter.dialogueapps.com/openapi.yaml"
+        },
+        "logo_url": "https://converter.dialogueapps.com/logo.png",
+        "contact_email": "sashakrivolap@gmail.com",
+        "legal_info_url": "https://converter.dialogueapps.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

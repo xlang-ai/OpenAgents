@@ -1,0 +1,53 @@
+---
+openapi: 3.0.1
+info:
+  title: Storeya.com External
+  version: '1.0'
+  description: Your personal assistance for automating advertising Google Ads (AdWords)
+    and Microsoft Ads (Bing).
+paths:
+  "/External/PPCAssistance":
+    post:
+      tags:
+      - External
+      operationId: PPCAssistance
+      parameters:
+      - name: url
+        in: query
+        schema:
+          type: string
+      - name: moreData
+        in: query
+        schema:
+          type: string
+          default: ''
+      - name: format
+        in: query
+        schema:
+          type: string
+          default: html
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                "$ref": "#/components/schemas/Results"
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Results"
+            text/json:
+              schema:
+                "$ref": "#/components/schemas/Results"
+components:
+  schemas:
+    Results:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        result:
+          type: string
+          nullable: true
+      additionalProperties: false

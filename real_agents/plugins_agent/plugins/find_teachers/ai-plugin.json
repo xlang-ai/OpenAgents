@@ -1,0 +1,34 @@
+{
+    "id": "plugin-e65d9535-4c2e-4628-80f1-659f1794b546",
+    "domain": "en.amazingtalker.com",
+    "namespace": "find_teachers",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "find_teachers",
+        "name_for_human": "AmazingTalker",
+        "description_for_model": "Find the perfect language teachers and tutors from across the world. Lessons and courses are personalized to help achieve your learning goals whether it be exams, certifications, business, travel or more.",
+        "description_for_human": "Elevate your language learning at any level with personalized 1-on-1 online lessons from tutors across the world.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://en.amazingtalker.com/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://en.amazingtalker.com/.well-known/logo.png",
+        "contact_email": "amazingtalker@amazingtalker.com",
+        "legal_info_url": "https://en.amazingtalker.com/privacy-and-terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

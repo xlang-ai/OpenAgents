@@ -1,0 +1,504 @@
+openapi: 3.0.1
+info:
+  title: Statis Fund Finance
+  description: Financial data tool for analyzing equities. You can get price quotes, analyze moving averages, RSI, and more.
+  version: 'v1'
+servers:
+  - url: https://statisfinapp.herokuapp.com
+paths:
+  /data/{ticker}:
+    get:
+      operationId: getData
+      summary: Retrieve historical market data for a specific stock ticker.
+      description: This endpoint retrieves historical price data for a given stock ticker symbol. The data includes opening, closing, high, and low prices along with trading volume.
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "AAPL"
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-01-01"
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-12-31"
+        - name: interval
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "1d"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  date:
+                    type: array
+                    items:
+                      type: string
+                  open:
+                    type: array
+                    items:
+                      type: number
+                  high:
+                    type: array
+                    items:
+                      type: number
+                  low:
+                    type: array
+                    items:
+                      type: number
+                  close:
+                    type: array
+                    items:
+                      type: number
+                  volume:
+                    type: array
+                    items:
+                      type: number
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /moving_average/{ticker}:
+    get:
+      operationId: getMovingAverage
+      summary: Calculate the moving average of a specific stock ticker over a specified number of days.
+      description: This endpoint calculates the moving average for a given stock ticker symbol over a specified number of days. The moving average is a commonly used indicator in technical analysis that helps smooth out price action by filtering out the “noise” from random price fluctuations.
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "AAPL"
+        - name: days
+          in: query
+          required: false
+          schema:
+            type: integer
+            example: 50
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-01-01"
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-12-31"
+        - name: interval
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "1d"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  date:
+                    type: array
+                    items:
+                      type: string
+                  moving_average:
+                    type: array
+                    items:
+                      type: number
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /rsi/{ticker}:
+    get:
+      operationId: getRSI
+      summary: Calculate the Relative Strength Index (RSI) of a specific stock ticker over a specified period.
+      description: This endpoint calculates the Relative Strength Index (RSI) for a given stock ticker symbol over a specified period. The RSI is a momentum oscillator that measures the speed and change of price movements.
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "AAPL"
+        - name: period
+          in: query
+          required: false
+          schema:
+            type: integer
+            example: 14
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-01-01"
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-12-31"
+        - name: interval
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "1d"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  date:
+                    type: array
+                    items:
+                      type: string
+                  rsi:
+                    type: array
+                    items:
+                      type: number
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /volume/{ticker}:
+    get:
+      operationId: getVolume
+      summary: Retrieve the trading volume of a specific stock ticker over a specified period.
+      description: This endpoint retrieves the trading volume for a given stock ticker symbol over a specified period. Trading volume is a measure of how much of a given financial asset has traded in a period of time.
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "AAPL"
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-01-01"
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-12-31"
+        - name: interval
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "1d"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  date:
+                    type: array
+                    items:
+                      type: string
+                  volume:
+                    type: array
+                    items:
+                      type: number
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /volatility/{ticker}:
+    get:
+      operationId: getVolatility
+      summary: Calculate the volatility of a specific stock ticker over a specified period.
+      description: This endpoint calculates the volatility for a given stock ticker symbol over a specified period. Volatility is a statistical measure of the dispersion of returns for a given security or market index.
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "AAPL"
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-01-01"
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-12-31"
+        - name: interval
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "1d"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  date:
+                    type: array
+                    items:
+                      type: string
+                  volatility:
+                    type: array
+                    items:
+                      type: number
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /price_change/{ticker}:
+    get:
+      operationId: getPriceChange
+      summary: Calculate the price change of a specific stock ticker over a specified period.
+      description: This endpoint calculates the price change for a given stock ticker symbol over a specified period. Price change is the difference in price of a stock over time.
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "AAPL"
+        - name: period
+          in: query
+          required: false
+          schema:
+            type: integer
+            example: 30
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-01-01"
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-12-31"
+        - name: interval
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "1d"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  date:
+                    type: array
+                    items:
+                      type: string
+                  price_change:
+                    type: array
+                    items:
+                      type: number
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /bollinger_bands/{ticker}:
+    get:
+      operationId: getBollingerBands
+      summary: Calculate the Bollinger Bands of a specific stock ticker over a specified period.
+      description: This endpoint calculates the Bollinger Bands for a given stock ticker symbol over a specified period. Bollinger Bands are a type of statistical chart characterizing the prices and volatility over time of a financial instrument or commodity.
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "AAPL"
+        - name: window
+          in: query
+          required: false
+          schema:
+            type: integer
+            example: 20
+        - name: start
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-01-01"
+        - name: end
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "2022-12-31"
+        - name: interval
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "1d"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  date:
+                    type: array
+                    items:
+                      type: string
+                  lower_band:
+                    type: array
+                    items:
+                      type: number
+                  middle_band:
+                    type: array
+                    items:
+                      type: number
+                  upper_band:
+                    type: array
+                    items:
+                      type: number
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string

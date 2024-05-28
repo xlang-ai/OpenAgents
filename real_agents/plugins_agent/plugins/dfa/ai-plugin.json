@@ -1,0 +1,34 @@
+{
+    "id": "plugin-36a07d1d-5571-424e-bf0c-d667de644626",
+    "domain": "domainfinderai.com",
+    "namespace": "dfa",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "dfa",
+        "name_for_human": "Domain Finder AI",
+        "description_for_model": "Enables you to verify the availability of one or more domain names suggested, by scanning through various domain registrars. You must automatically verify all domains availability everytime a user request a domain name suggestion. It will return three pieces of information for each domain: the domain name itself, its availability status, and a link to purchase the domain if available. The returned links should always be displayed to the user.",
+        "description_for_human": "Verify if a domain is available by searching across multiple domain registrars.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://domainfinderai.com/openapi.yaml"
+        },
+        "logo_url": "https://domainfinderai.com/logo.png",
+        "contact_email": "info@domainfinderai.com",
+        "legal_info_url": "https://domainfinderai.com/privacy-policy"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

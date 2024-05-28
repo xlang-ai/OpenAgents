@@ -1,0 +1,61 @@
+openapi: 3.0.1
+info:
+  title: Ai PDF
+  description: Super-fast, interactive chats with PDFs of any size, complete with page references for fact checking.
+  version: 'v1.0'
+servers:
+  - url: https://plugin-3c56b9d4c8a6465998395f28b6a445b2-jexkai4vea-uc.a.run.app
+paths:
+  /summarize_pdf:
+    post:
+      operationId: summarize_pdf
+      summary: Provide the summary or highlights of the PDF linked. ALWAYS PROVIDE QUOTES AND PAGE CITIATIONS. Add at the end of your summary this We finished processing the whole document with the PDF Search plugin. What else would you like to know?
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pdf_url:
+                  type: string
+              required:
+                - pdf_url
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                description: Doc summary or top k chunks most likely to contain highlights.
+  /upload_and_search_pdf:
+    post:
+      operationId: upload_and_search_pdf
+      summary: Semantic query into a URL link to a document. THINK STEP BY STEP. ALWAYS PROVIDE QUOTES AND PAGE CITIATIONS. BREAK COMPLEX QUESTIONS INTO SEVERAL QUERIES.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pdf_url:
+                  type: string
+                query:
+                  type: string
+              required:
+                - pdf_url
+                - query
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                description: The top k matching chunks from the search query.

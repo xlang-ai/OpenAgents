@@ -1,0 +1,34 @@
+{
+    "id": "plugin-9bd47d22-7f8e-4915-81c6-57095cab85a4",
+    "domain": "byby.ai",
+    "namespace": "ByByAI",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "ByByAI",
+        "name_for_human": "ByByAI",
+        "description_for_model": "Plugin for displaying a table of products. Each product consists of properties such as: Title, Description, Link, Number of stars, Image URL. The user should provide a searchTerm and optionally the quantity of products (default is 5). The responses should be represented in a Markdown table with the following columns: Title, Description, Rating, Image. The images will optionally be displayed in the table, only if the user requests it. The Title should be a link with the Link provided by the API.",
+        "description_for_human": "Search for the best Amazon products ordered by rating.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://byby.ai/openapi.yaml"
+        },
+        "logo_url": "https://byby.ai/logo.jpeg",
+        "contact_email": "contact@byby.ai",
+        "legal_info_url": "https://byby.ai/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

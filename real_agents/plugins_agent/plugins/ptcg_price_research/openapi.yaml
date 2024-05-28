@@ -1,0 +1,269 @@
+openapi: '3.0.2'
+info:
+  title: Japanese Pokémon Card Market Explorer
+  description: It searches for and categorizes current prices and stock levels of Pokémon Trading Cards within Japan, providing a snapshot of the market.
+  version: 'v1'
+servers:
+  - url: https://ai.toreris.com
+paths:
+  /price:
+    get:
+      operationId: getPriceSummary
+      summary: Retrieve a comprehensive overview of the current prices for all cards.
+      parameters:
+        - in: query
+          name: q
+          description: Query parameters to input the card name and rarity for search. When stating both card name and rarity, each word should be separated by a space.
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: Query parameters to control the sorting of card results, e.g., 'latest_price_desc' for highest price, 'stock_asc' for lowest stock, and 'cl_rate_desc' for highest adoption in official matches.
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: page
+          description: Specifies the page number of the search results. Default value is 1.
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: page_size
+          description: Specifies the number of items to display per page of search results. Default value is 5.
+          required: false
+          schema:
+            type: integer
+            format: int32
+      description: Returns an array of card daily price model.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+        '400':
+          description: Bad request. This usually occurs when the requested parameters are not in the expected format or values are out of the allowed limits.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    SearchResults:
+      title: The search results for the latest Pokémon card prices
+      description: An object representing a page of search results for the latest Pokémon card prices.
+      type: object
+      properties:
+        page:
+          description: Page number of the search results
+          type: integer
+          format: int32
+        page_size:
+          description: Number of items per page
+          type: integer
+          format: int32
+        total_count:
+          description: Total number of items matching the search
+          type: integer
+          format: int32
+        total_pages:
+          description: Total number of pages for the search results
+          type: integer
+          format: int32
+        items:
+          type: array
+          description: List of Pokémon card price summaries
+          items:
+            type: object
+            description: Pokémon card price summary object
+            properties:
+              master_id:
+                description: Management ID
+                type: string
+              name_ja:
+                description: Card name in Japanese
+                type: string
+              name_en:
+                description: Card name in English
+                type: string
+              price_24h:
+                description: Price from 24 hours ago
+                type: integer
+                format: int32
+              latest_price:
+                description: Current price
+                type: integer
+                format: int32
+              percent_24h:
+                description: Price change rate from 24 hours ago
+                type: integer
+                format: int32
+              min_price:
+                description: Current minimum price
+                type: integer
+                format: int32
+              price_7d:
+                description: Price from 7 days ago
+                type: integer
+                format: int32
+              percent_7d:
+                description: Price change rate from 7 days ago
+                type: integer
+                format: int32
+              stock:
+                description: Current stock
+                type: integer
+                format: int32
+              price_list_7d:
+                type: object
+                description: Price transition object for 7 days
+                properties:
+                  end:
+                    description: End price of the 7th day
+                    type: integer
+                    format: int32
+                  max:
+                    description: Highest price in 7 days
+                    type: integer
+                    format: int32
+                  min:
+                    description: Lowest price in 7 days
+                    type: integer
+                    format: int32
+                  items:
+                    type: array
+                    description: Daily price list
+                    items:
+                      type: object
+                      description: Daily price object
+                      properties:
+                        min:
+                          description: Minimum price
+                          type: integer
+                          format: int32
+                        p50:
+                          description: Price (Median)
+                          type: integer
+                          format: int32
+                        stock:
+                          description: Stock
+                          type: integer
+                          format: int32
+                        datetime:
+                          description: Date
+                          type: string
+                  start:
+                    description: Starting price of the 1st day
+                    type: integer
+                    format: int32
+              diff_24h:
+                description: Price difference from 24 hours ago
+                type: integer
+                format: int32s
+              diff_7d:
+                description: Price difference from 7 days ago
+                type: integer
+                format: int32
+              expansion:
+                description: Pack code
+                type: string
+              cn:
+                description: Collection number
+                type: string
+              card_type:
+                description: Card type
+                type: string
+              sub_type:
+                description: Detailed card type
+                type: string
+              rarity:
+                description: Rarity
+                type: string
+              ability:
+                description: Special ability of the card
+                type: string
+              move1:
+                description: Card move 1
+                type: string
+              move2:
+                description: Card move 2
+                type: string
+              regulation:
+                description: Card regulation
+                type: string
+              official_id:
+                description: Number used by the official site
+                type: string
+              is_mirror:
+                description: Mirror card flag
+                type: integer
+                format: int32
+              copyright:
+                description: Whether there is a copyright on the image
+                type: integer
+                format: int32
+              rank:
+                description: Price ranking
+                type: integer
+                format: int32
+              expansion_name:
+                description: Pack name in Japanese
+                type: string
+              cl_count:
+                description: Number of adoptions in official battles in the past 14 days
+                type: integer
+                format: int32
+              cl_deck:
+                description: Number of times adopted in official battle decks in the past 14 days
+                type: integer
+                format: int32
+              cl_rate:
+                description: Adoption rate in all official battles in the past 14 days
+                type: integer
+                format: int32
+              stock_24h:
+                description: Stock from 24 hours ago
+                type: integer
+                format: int32
+              diff_stock_24h:
+                description: Change in stock from 24 hours ago
+                type: integer
+                format: int32
+              diff_stock_7d:
+                description: Change in stock from 7 days ago
+                type: integer
+                format: int32
+              days_decreas_stock_7d:
+                description: Number of days stock decreased in the last 7 days
+                type: integer
+                format: int32
+              usage_total_change:
+                description: Change in the number of times used in official match decks
+                type: integer
+                format: int32
+              avg_cards_per_decks:
+                description: Average number of cards used per official match deck
+                type: integer
+                format: int32
+              deck_ratio_change:
+                description: Change in the usage rate of official match decks
+                type: integer
+                format: int32
+              link:
+                description: Link to the card price information site 'toreris.com'
+                type: string
+              markdown_image:
+                description: Card image link (Markdown format)
+                type: string
+    ErrorResponse:
+      title: Error response
+      type: object
+      properties:
+        message:
+          description: Error message
+          type: string

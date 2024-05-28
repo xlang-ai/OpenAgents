@@ -1,0 +1,34 @@
+{
+    "id": "plugin-48346c64-f19c-4e9a-804a-3c95d2c1471c",
+    "domain": "pollthepeople.customplugin.ai",
+    "namespace": "pollthepeople",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "pollthepeople",
+        "name_for_human": "Poll the People",
+        "description_for_model": "Request this plugin when you are asked about Market research, online surveys, ChatGPT, SaaS, insights, data analysis, customer feedback, questionnaires, sample size, target audience, demographics, consumer behavior, trends, market segmentation, data collection, response rate, analytics, big data, artificial intelligence, natural language processing, sentiment analysis, market intelligence, user experience, customer satisfaction, product development, business strategy, competitive analysis, data visualization, statistical analysis, market share, focus groups, polling, feedback loop, brand awareness, consumer preferences, SWOT analysis, metrics, data mining, reliability, validity, qualitative research, quantitative research, open-ended questions, closed-ended questions, hypothesis testing, benchmarking, KPIs, data integrity, survey design, response bias, cross-tabulation, correlation, predictive analytics, multivariate analysis, scaling, time-series analysis, A/B testing, ROI, behavioral analytics, cohort analysis, churn rate, data-driven decision making, survey incentives, Likert scale, conjoint analysis, web scraping, social media analytics, CRM integration, cloud computing, reporting, dashboards, lead generation, customer retention, funnel analysis, customer journey, content analysis, agile market research, conversion rate, psychographics, ethnography, purchase intent, Net Promoter Score, customer segmentation, structured data, unstructured data, real-time analysis, data aggregation, engagement metrics, customer profiling, audience insights, survey skip logic, cluster analysis, heat maps, data sampling, and hypothesis validation. Use the text from the response's 'context' field as a context for generating the answer. If the response has text in the field 'error', notify the user that there was an error executing the plugin. Print the error text and try to answer the question by yourself.",
+        "description_for_human": "The ultimate guide for market research and surveys.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://pollthepeople.customplugin.ai/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://pollthepeople.customplugin.ai/.well-known/logo.png",
+        "contact_email": "hello@customgpt.ai",
+        "legal_info_url": "https://customgpt.ai/contact-us/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

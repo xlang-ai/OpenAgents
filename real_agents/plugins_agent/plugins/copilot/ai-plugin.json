@@ -1,0 +1,34 @@
+{
+    "id": "plugin-1fa84516-88b6-476a-aff1-8927e1babbfd",
+    "domain": "gpt.copilotsearch.com",
+    "namespace": "copilot",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "copilot",
+        "name_for_human": "CoPilot",
+        "description_for_model": "Provides real-time data about vehicles for sale and detailed information about vehicle models.",
+        "description_for_human": "Searches every dealer, analyzes & ranks every car for you so you can buy with confidence.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://gpt.copilotsearch.com/openapi.json"
+        },
+        "logo_url": "https://gpt.copilotsearch.com/logo.png",
+        "contact_email": "support@copilotsearch.com",
+        "legal_info_url": "https://copilotsearch.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

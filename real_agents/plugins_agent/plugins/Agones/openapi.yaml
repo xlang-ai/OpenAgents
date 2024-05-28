@@ -1,0 +1,59 @@
+---
+openapi: 3.1.0
+info:
+  title: Agones
+  version: v0.2
+  description: Agones provides soccer (football) results for matches played all over
+    the world in the past 15 years.
+servers:
+- url: https://agones.gr
+  description: Agones Server for ChatGPT
+paths:
+  "/api/chatgpt":
+    get:
+      operationId: getAgonesResults
+      summary: Get result of soccer game
+      responses:
+        '200':
+          description: The result of the Agones query
+          content:
+            text/plain: {}
+        '500':
+          description: Agones was unable to generate a result
+        '501':
+          description: Agones was unable to generate a result
+        '503':
+          description: Service temporarily unavailable.
+      parameters:
+      - name: team1
+        in: query
+        description: The first soccer team
+        required: true
+        schema:
+          type: string
+      - name: team2
+        in: query
+        description: The second soccer team
+        required: false
+        schema:
+          type: string
+      - name: date_type
+        in: query
+        description: 'A choice between: latest, next, range'
+        required: true
+        schema:
+          type: string
+      - name: date_from
+        in: query
+        description: A date in yyyy-mm-dd format, only for when date_type is range.
+          Results for this date will be included.
+        required: false
+        schema:
+          type: string
+      - name: date_until
+        in: query
+        description: A date in yyyy-mm-dd format, only for when date_type is range.
+          Results for this date will be included.
+        required: false
+        schema:
+          type: string

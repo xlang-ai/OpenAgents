@@ -1,0 +1,1068 @@
+---
+openapi: 3.0.2
+info:
+  title: Lsong API Server
+  description: Lsong's AI provides AI-powered content like news, images, music, movies,
+    weather, stories, memes, and more.
+  version: v0.0.1
+paths:
+  "/github/repos":
+    get:
+      operationId: get_SearchRepos
+      tags:
+      - github
+      summary: Search github repositories
+      parameters:
+      - description: The query to search for
+        required: true
+        schema:
+          type: string
+          description: The query to search for
+        name: q
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  repos:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: itty-router-openapi
+                        description:
+                          type: string
+                          example: OpenAPI 3 schema generator and validator for Cloudflare
+                            Workers
+                        stars:
+                          type: string
+                          example: '80'
+                        url:
+                          type: string
+                          example: https://github.com/cloudflare/itty-router-openapi
+                      required:
+                      - name
+                      - description
+                      - stars
+                      - url
+                required:
+                - repos
+  "/douyin/user":
+    get:
+      operationId: get_DouyinUser
+      tags:
+      - douyin
+      summary: Get user info
+      parameters:
+      - description: user id of the douyin user
+        required: true
+        schema:
+          type: string
+          description: user id of the douyin user
+          example: MS4wLjABAAAAp-blO3lU0G60N2_NX_GUo0AeabduA6YMZhOijRdo9LYgI8dBeuxVduZKVcgShbFA
+        name: uid
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+  "/douyin/videos":
+    get:
+      operationId: get_DouyinVideos
+      tags:
+      - douyin
+      summary: Get videos by user id
+      parameters:
+      - description: user id of the douyin user
+        required: true
+        schema:
+          type: string
+          description: user id of the douyin user
+          example: MS4wLjABAAAAp-blO3lU0G60N2_NX_GUo0AeabduA6YMZhOijRdo9LYgI8dBeuxVduZKVcgShbFA
+        name: uid
+        in: query
+      - description: offset
+        required: true
+        schema:
+          type: number
+          description: offset
+          default: 0
+        name: offset
+        in: query
+      - description: count
+        required: true
+        schema:
+          type: number
+          description: count
+          default: 10
+        name: count
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+  "/youdao/fanyi":
+    get:
+      operationId: get_YoudaoFanyi
+      tags:
+      - youdao
+      summary: youdao fanyi, translate to chinese
+      parameters:
+      - description: words to translate
+        required: true
+        schema:
+          type: string
+          description: words to translate
+          example: hello world
+          default: hello world
+        name: q
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    translation:
+                      type: array
+                      items:
+                        type: string
+                        example: 你好，世界
+                    basic:
+                      type: object
+                      properties:
+                        explains:
+                          type: array
+                          items:
+                            type: string
+                            example: 你好，世界：一种用于表示问候或欢迎的短语，通常用于初次见面或表示友好。
+                      required:
+                      - explains
+                    query:
+                      type: string
+                      example: hello world
+                    errorCode:
+                      type: number
+                      example: 0
+                    web:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          value:
+                            type: array
+                            items:
+                              type: string
+                              example: 你好世界
+                          key:
+                            type: string
+                            example: hello world
+                        required:
+                        - value
+                        - key
+                  required:
+                  - translation
+                  - basic
+                  - query
+                  - errorCode
+                  - web
+  "/v2ex/latest":
+    get:
+      operationId: get_V2exLatest
+      tags:
+      - v2ex
+      summary: v2ex latest topics
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+      parameters: []
+  "/v2ex/trending":
+    get:
+      operationId: get_V2exTrending
+      tags:
+      - v2ex
+      summary: v2ex trending topics
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+      parameters: []
+  "/zhihu/trending":
+    get:
+      operationId: get_TopSearch
+      tags:
+      - zhihu
+      summary: Get trending news
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      example: 脑机接口人体试验获批
+                    url:
+                      type: string
+                      example: https://www.zhihu.com/search?q=脑机接口人体试验获批
+                  required:
+                  - title
+                  - url
+      parameters: []
+  "/zhihu/questions":
+    get:
+      operationId: get_TopQuestions
+      tags:
+      - zhihu
+      summary: Get trending questions
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      example: 中美商务部长已会面，双方同意建立沟通渠道，哪些信息值得关注？
+                    url:
+                      type: string
+                      example: https://www.zhihu.com/question/603100567
+                    content:
+                      type: string
+                      example: 据商务部26日消息，5月25日，商务部部长王文涛在赴美国参加亚太经合组织贸易部长会议期间，在华盛顿会见美国商务部长雷蒙多。双方就中美经贸关系和共同关心的经贸问题进行了坦诚、专业、建设性的交流。中方就美对华经贸政策、半导体政策、出口管制、对外投资审查等表达重点关切。双方同意建立沟通渠道，就具体经贸关切和合作事项保持和加强交流。（记者
+                        李晓喻）关于中美经贸关系，这些人说了大实话
+                    temperature:
+                      type: string
+                      example: 507 万热度
+                  required:
+                  - title
+                  - url
+                  - content
+                  - temperature
+      parameters: []
+  "/weibo/trending":
+    get:
+      operationId: get_WeiboTrending
+      tags:
+      - weibo
+      summary: weibo trending
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      example: 神十六各系统准备就绪
+                    url:
+                      type: string
+                      example: https://m.weibo.cn/search?containerid=100103type%3D1%26q%3D%E7%A5%9E%E5%8D%81%E5%85%AD%E5%90%84%E7%B3%BB%E7%BB%9F%E5%87%86%E5%A4%87%E5%B0%B1%E7%BB%AA
+                  required:
+                  - title
+                  - url
+      parameters: []
+  "/ikea/recommend":
+    get:
+      operationId: get_IkeaRecommend
+      tags:
+      - ikea
+      summary: IKEA Recommend
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+      parameters: []
+  "/maoyan/recently":
+    get:
+      operationId: get_RecentlyMovie
+      tags:
+      - maoyan
+      summary: Get recently movies
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: 灌篮高手
+                    star:
+                      type: string
+                      example: 宫城良田,三井寿,流川枫
+                    date:
+                      type: string
+                      example: '2023-04-20'
+                    version:
+                      type: string
+                      example: v2d imax
+                    score:
+                      type: number
+                      example: 9.4
+                    poster:
+                      type: string
+                      example: https://p0.pipi.cn/mmdb/fb7386bee7ac7e338fd7c316918ec78e573ba.jpg?imageMogr2/thumbnail/2500x2500%3E
+                    url:
+                      type: string
+                      example: https://www.maoyan.com/films/1383605
+                  required:
+                  - name
+                  - star
+                  - date
+                  - version
+                  - score
+                  - poster
+                  - url
+      parameters: []
+  "/weather/today":
+    get:
+      operationId: get_GetWeatherToday
+      tags:
+      - weather
+      summary: Get weather today
+      parameters:
+      - description: city name in english as lowercase
+        required: false
+        schema:
+          type: string
+          description: city name in english as lowercase
+          example: beijing
+          default: beijing
+        name: city
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coord:
+                    type: object
+                    properties:
+                      lon:
+                        type: number
+                        example: 116.3972
+                      lat:
+                        type: number
+                        example: 39.9075
+                    required:
+                    - lon
+                    - lat
+                  weather:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          example: 804
+                        main:
+                          type: string
+                          example: Clouds
+                        description:
+                          type: string
+                          example: overcast clouds
+                        icon:
+                          type: string
+                          example: 04d
+                      required:
+                      - id
+                      - main
+                      - description
+                      - icon
+                  base:
+                    type: string
+                    example: stations
+                  main:
+                    type: object
+                    properties:
+                      temp:
+                        type: number
+                        example: 27.94
+                      feels_like:
+                        type: number
+                        example: 27.01
+                      temp_min:
+                        type: number
+                        example: 27.94
+                      temp_max:
+                        type: number
+                        example: 27.94
+                      pressure:
+                        type: number
+                        example: 1012
+                      humidity:
+                        type: number
+                        example: 29
+                      sea_level:
+                        type: number
+                        example: 1012
+                      grnd_level:
+                        type: number
+                        example: 1006
+                    required:
+                    - temp
+                    - feels_like
+                    - temp_min
+                    - temp_max
+                    - pressure
+                    - humidity
+                    - sea_level
+                    - grnd_level
+                  visibility:
+                    type: number
+                    example: 10000
+                  wind:
+                    type: object
+                    properties:
+                      speed:
+                        type: number
+                        example: 2.81
+                      deg:
+                        type: number
+                        example: 189
+                      gust:
+                        type: number
+                        example: 3.67
+                    required:
+                    - speed
+                    - deg
+                    - gust
+                  clouds:
+                    type: object
+                    properties:
+                      all:
+                        type: number
+                        example: 100
+                    required:
+                    - all
+                  dt:
+                    type: number
+                    example: 1685078016
+                  sys:
+                    type: object
+                    properties:
+                      type:
+                        type: number
+                        example: 1
+                      id:
+                        type: number
+                        example: 9609
+                      country:
+                        type: string
+                        example: CN
+                      sunrise:
+                        type: number
+                        example: 1685047899
+                      sunset:
+                        type: number
+                        example: 1685100686
+                    required:
+                    - type
+                    - id
+                    - country
+                    - sunrise
+                    - sunset
+                  timezone:
+                    type: number
+                    example: 28800
+                  id:
+                    type: number
+                    example: 1816670
+                  name:
+                    type: string
+                    example: Beijing
+                  cod:
+                    type: number
+                    example: 200
+                required:
+                - coord
+                - weather
+                - base
+                - main
+                - visibility
+                - wind
+                - clouds
+                - dt
+                - sys
+                - timezone
+                - id
+                - name
+                - cod
+  "/podcasts/search":
+    get:
+      operationId: get_PodcastsSearch
+      tags:
+      - podcasts
+      summary: podcasts search
+      parameters:
+      - description: search query
+        required: true
+        schema:
+          type: string
+          description: search query
+          example: changelog
+        name: q
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      example: 'The Changelog: Software Development, Open Source'
+                    genres:
+                      type: array
+                      items:
+                        type: string
+                        example: Technology
+                    feed:
+                      type: string
+                      example: https://changelog.com/podcast/feed
+                    cover:
+                      type: string
+                      example: https://is4-ssl.mzstatic.com/image/thumb/Podcasts123/v4/b5/b1/43/b5b14333-7cbe-123d-c444-0204e5d08102/mza_311421542997449775.png/600x600bb.jpg
+                    date:
+                      type: string
+                      example: '2023-05-26T18:00:00Z'
+                    country:
+                      type: string
+                      example: USA
+                    url:
+                      type: string
+                      example: https://podcasts.apple.com/us/podcast/the-changelog-software-development-open-source/id341623264?uo=4
+                  required:
+                  - title
+                  - genres
+                  - feed
+                  - cover
+                  - date
+                  - country
+                  - url
+  "/youtube/user":
+    get:
+      operationId: get_YouTubeUser
+      tags:
+      - youtube
+      summary: youtube user
+      parameters:
+      - description: youtube username
+        required: true
+        schema:
+          type: string
+          description: youtube username
+          example: JFlaMusic
+        name: username
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+  "/youtube/video":
+    get:
+      operationId: get_YouTubeVideo
+      tags:
+      - youtube
+      summary: youtube video
+      parameters:
+      - description: youtube video id
+        required: true
+        schema:
+          type: string
+          description: youtube video id
+          example: xE_rMj35BIM
+        name: id
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+  "/music/search":
+    get:
+      operationId: get_MusicSearch
+      tags:
+      - music
+      summary: search music by keywords
+      parameters:
+      - description: keywords
+        required: true
+        schema:
+          type: string
+          description: keywords
+          example: See You Again
+        name: q
+        in: query
+      - description: limit
+        required: true
+        schema:
+          type: number
+          description: limit
+          default: 5
+        name: limit
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+  "/music/lyric":
+    get:
+      operationId: get_MusicLyric
+      tags:
+      - music
+      summary: music lyric
+      parameters:
+      - description: music id
+        required: true
+        schema:
+          type: string
+          description: music id
+          example: '1357375695'
+        name: id
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+  "/huobi/kline":
+    get:
+      operationId: get_HuobiKline
+      tags:
+      - huobi
+      summary: huobi kline
+      parameters:
+      - description: symbol
+        required: true
+        schema:
+          type: string
+          description: symbol
+          example: btcusdt
+          default: btcusdt
+        name: symbol
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ch:
+                    type: string
+                    example: market.btcusdt.kline.1day
+                  status:
+                    type: string
+                    example: ok
+                  ts:
+                    type: number
+                    example: 1685433362222
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          example: 1685376000
+                        open:
+                          type: number
+                          example: 27625.99
+                        close:
+                          type: number
+                          example: 27740.01
+                        low:
+                          type: number
+                          example: 27525
+                        high:
+                          type: number
+                          example: 27938
+                        amount:
+                          type: number
+                          example: 1509.2125478880384
+                        vol:
+                          type: number
+                          example: 41799358.8714838
+                        count:
+                          type: number
+                          example: 41376
+                      required:
+                      - id
+                      - open
+                      - close
+                      - low
+                      - high
+                      - amount
+                      - vol
+                      - count
+                required:
+                - ch
+                - status
+                - ts
+                - data
+  "/bilibili/video":
+    get:
+      operationId: get_GetVideoInfo
+      tags:
+      - bilibili
+      summary: Get video info
+      parameters:
+      - description: bvid in the url of the video
+        required: true
+        schema:
+          type: string
+          description: bvid in the url of the video
+          example: BV1bT411478C
+        name: bvid
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: RTX4060TI评测：只比3060TI快10%
+                  description:
+                    type: string
+                    example: 4060TI来了，我们测了一下，对比完3070和3060TI GD6和GD6X之后，感觉……有点拉。
+                  poster:
+                    type: string
+                    example: http://i0.hdslb.com/bfs/archive/3ea8be4fb81f1ffd9c60174040a161960b6dd5e2.jpg
+                  pubdate:
+                    type: number
+                    example: 1684849981
+                  subtitle:
+                    type: object
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                    required:
+                    - body
+                  series:
+                    type: array
+                    items:
+                      type: object
+                      properties: {}
+                  category:
+                    type: string
+                    example: 数码
+                  author:
+                    type: object
+                    properties:
+                      mid:
+                        type: number
+                        example: 25876945
+                      name:
+                        type: string
+                        example: 极客湾Geekerwan
+                      face:
+                        type: string
+                        example: http://i1.hdslb.com/bfs/face/d0f7a7ee34a4a45c8390eb3a07e4d7f2d70bae91.jpg
+                    required:
+                    - mid
+                    - name
+                    - face
+                  url:
+                    type: string
+                    example: https://www.bilibili.com/video/BV1bT411478C
+                required:
+                - title
+                - description
+                - poster
+                - pubdate
+                - subtitle
+                - series
+                - category
+                - author
+                - url
+  "/bilibili/subtitle":
+    get:
+      operationId: get_BilibiliSubtitle
+      tags:
+      - bilibili
+      summary: bilibili subtitle
+      parameters:
+      - description: bvid in the url of the video
+        required: true
+        schema:
+          type: string
+          description: bvid in the url of the video
+          example: BV1bT411478C
+        name: bvid
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+  "/hackernews/top":
+    get:
+      operationId: get_TopStories
+      tags:
+      - hackernews
+      summary: Get top stories
+      parameters:
+      - description: offset
+        required: false
+        schema:
+          type: number
+          description: offset
+          default: 0
+        name: offset
+        in: query
+      - description: limit
+        required: false
+        schema:
+          type: number
+          description: limit
+          default: 10
+        name: limit
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    by:
+                      type: string
+                      example: luu
+                    descendants:
+                      type: number
+                      example: 73
+                    id:
+                      type: number
+                      example: 36040457
+                    kids:
+                      type: array
+                      items:
+                        type: number
+                        example: 36056585
+                    score:
+                      type: number
+                      example: 67
+                    time:
+                      type: number
+                      example: 1684821788
+                    title:
+                      type: string
+                      example: What's up with this new memory_order_consume memory
+                        order?
+                    type:
+                      type: string
+                      example: story
+                    url:
+                      type: string
+                      example: https://devblogs.microsoft.com/oldnewthing/20230427-00/?p=108107
+                  required:
+                  - by
+                  - descendants
+                  - id
+                  - kids
+                  - score
+                  - time
+                  - title
+                  - type
+                  - url
+  "/hackernews/latest":
+    get:
+      operationId: get_NewStories
+      tags:
+      - hackernews
+      summary: Get latest stories
+      parameters:
+      - description: offset
+        required: false
+        schema:
+          type: number
+          description: offset
+          default: 0
+        name: offset
+        in: query
+      - description: limit
+        required: false
+        schema:
+          type: number
+          description: limit
+          default: 10
+        name: limit
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    by:
+                      type: string
+                      example: luu
+                    descendants:
+                      type: number
+                      example: 73
+                    id:
+                      type: number
+                      example: 36040457
+                    kids:
+                      type: array
+                      items:
+                        type: number
+                        example: 36056585
+                    score:
+                      type: number
+                      example: 67
+                    time:
+                      type: number
+                      example: 1684821788
+                    title:
+                      type: string
+                      example: What's up with this new memory_order_consume memory
+                        order?
+                    type:
+                      type: string
+                      example: story
+                    url:
+                      type: string
+                      example: https://devblogs.microsoft.com/oldnewthing/20230427-00/?p=108107
+                  required:
+                  - by
+                  - descendants
+                  - id
+                  - kids
+                  - score
+                  - time
+                  - title
+                  - type
+                  - url
+  "/uniqlo/stylingbook":
+    get:
+      operationId: get_UniqloStylingbook
+      tags:
+      - uniqlo
+      summary: uniqlo trending
+      parameters:
+      - description: uniqlo category, women/men/kids/baby
+        required: true
+        schema:
+          type: string
+          description: uniqlo category, women/men/kids/baby
+          example: kids
+          default: women
+        name: category
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: {}

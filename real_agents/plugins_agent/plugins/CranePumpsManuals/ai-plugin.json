@@ -1,0 +1,34 @@
+{
+    "id": "plugin-52ed8c19-26cf-4e5e-b433-3162e9a3853e",
+    "domain": "cpsconnect.cranepumps.com",
+    "namespace": "CranePumpsManuals",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "CranePumpsManuals",
+        "name_for_human": "CranePumps Manuals",
+        "description_for_model": "Returns the catalog and manual for a pump based on model number.",
+        "description_for_human": "Returns the catalog and manual for a pump based on model number.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://cpsconnect.cranepumps.com/manuals.json"
+        },
+        "logo_url": "https://cpsconnect.cranepumps.com/content/images/crane-favicon.png",
+        "contact_email": "cranepumps@cranepumps.com",
+        "legal_info_url": "https://www.cranepumps.com/downloadables/Terms_And_Conditions_USA.pdf"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

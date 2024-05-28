@@ -1,0 +1,166 @@
+---
+openapi: 3.0.2
+info:
+  title: Recombinant AI
+  version: 0.1.0
+  description: Input a Github repo URL. Get a holistic,deep, relational understanding
+    of the codebase.
+paths:
+  "/":
+    get:
+      summary: Root
+      operationId: root__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  "/get_status_messages":
+    get:
+      summary: Get Status Messages
+      operationId: get_status_messages_get_status_messages_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  "/get_repo_files":
+    post:
+      summary: Get Repo Files
+      operationId: get_repo_files_get_repo_files_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RepoData"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/get_file_content":
+    post:
+      summary: Get File Content Route
+      operationId: get_file_content_route_get_file_content_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/FileData"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/list_branches":
+    post:
+      summary: List Branches Route
+      operationId: list_branches_route_list_branches_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RepoData"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/RecombLogo.png":
+    get:
+      summary: Plugin Logo
+      operationId: plugin_logo_RecombLogo_png_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    FileData:
+      title: FileData
+      required:
+      - repo_url
+      - path
+      type: object
+      properties:
+        repo_url:
+          title: Repo Url
+          type: string
+        path:
+          title: Path
+          type: string
+        branch:
+          title: Branch
+          type: string
+          default: main
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    RepoData:
+      title: RepoData
+      required:
+      - repo_url
+      type: object
+      properties:
+        repo_url:
+          title: Repo Url
+          type: string
+        branch:
+          title: Branch
+          type: string
+          default: main
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string

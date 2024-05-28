@@ -1,0 +1,143 @@
+openapi: 3.0.1
+info:
+  title: Shor's algorithm in QASM
+  description: Generate quantum circuits for Shor's algorithm in QASM format.
+  version: 'v1'
+servers:
+  - url: https://qasmshor.onrender.com
+paths:
+  /BigQubits/about_us:
+    get:
+      operationId: about_us
+      summary: BigQubits.com is designed to facilitate research on quantum computing. All the apps are web-based and thus you can run your algorithms right inside your browsers.
+      description: > 
+        Our mission is to encourage and enable the STEM community to use quantum computing as a tool to solve the difficult problems for the betterment of humanity. 
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+  /BigQubits/qasmshor/get_queue_status/{queueID}:
+    get:
+      operationId: get_queue_status
+      summary: Get the status of the previously submitted task of generating the circuit based on the number, its coprime and the desired accuracy.
+      description: Each task is tracked in a queue by a queue ID. The queue ID is used to retrieve the status of the task.
+      parameters:
+      - in: path
+        name: queueID
+        description: The queue ID of the QASM generation task.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved the status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/generationResult'
+        '404':
+          description: Queue ID not found.
+        '429':
+          description: Too many requests.
+        '500':
+          description: Internal server error.
+  /BigQubits/qasmshor/queue_in_QASM_generation_task:
+    post:
+      operationId: queue_in_QASM_generation_task
+      summary: Submit a task the queue. The task uses the number, its coprime and the desired accuracy to generate a QASM circuit.
+      description: If the result of the task is available immediately, for example, from the cache. The function will return the result immediately without putting the task to the queue.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                number:
+                  type: string
+                  description: The number to be factored. This field represents an arbitrarily large integer. The value should be convertible to an integer.
+                coprime:
+                  type: string
+                  description: The coprime of the number. This field represents an arbitrarily large integer. The value should be convertible to an integer and must be coprime to the number parameter. If missing, it will be the first coprime.
+                accuracy:
+                  type: integer
+                  description: The desired accuracy of the operation. This should be an integer representing the number of significant figures to be used in the calculation. By default, 10.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/queue'
+
+components:
+  schemas:
+    status:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status of the task submitted by queue_in_QASM_generation_task, 'rejected', 'in-progress', 'completed' or 'failed'. 'rejected' means the input is wrong, thus calculation cannot proceed.
+        reason:
+          type: string
+          description: When the code is 'rejected' or 'failed', this property has the detailed reason.
+      required:
+        - code
+        - reason
+    generationResult:
+      type: object
+      required:
+        - status
+        - queueID
+        - url
+        - parameters
+      properties:
+        queueID:
+          type: string
+          description: The queue ID of the QASM generation task.
+        url:
+          type: string
+          description: The URL of the generated QASM file. If the url is empty, it means the circuit is not ready. Please refer to the status property for more information.
+        status:
+          $ref: '#/components/schemas/status'
+        parameters:
+          type: object
+          properties:
+            number:
+              type: string
+              description: The number parameter used in the calculation.
+            coprime:
+              type: string
+              description: The coprime parameter used in the calculation.
+            accuracy:
+              type: integer
+              description: The accuracy parameter used in the calculation.
+            alternative_coprimes:
+              type: string
+              description: All the alternative coprimes of the number. The first one is used by deffault, but the user could pick any of them.
+          required:
+            - number
+            - coprime
+            - accuracy
+            - alternative_coprimes
+          description: The parameters that were used in the calculation.
+
+    queue:
+      type: object
+      required:
+        - status
+        - queueID
+        - url
+      properties:     
+        status:
+          $ref: '#/components/schemas/status'
+        queueID:
+          type: string
+          description: Used to retrieve the generationResult.
+          nullable: true          
+        url:
+          type: string
+          description: When the status is'completed', the url will carry the result for the user to download the QASM file.

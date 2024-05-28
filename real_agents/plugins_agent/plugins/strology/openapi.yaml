@@ -1,0 +1,45 @@
+---
+openapi: 3.0.1
+info:
+  title: Astrology
+  description: A plugin that tells users their daily astrological horoscope to help
+    them make decisions and plans based on their sun sign. If you don't know the user's 
+    sun sign, ask for it first.
+  version: v1
+servers:
+  - url: https://api.pretzelbox.cc
+paths:
+  "/p/strology/prediction/{sunsign}":
+    get:
+      operationId: getPrediction
+      summary: Get the user's daily astrological prediction based on their sunsign
+      parameters:
+        - in: path
+          name: sunsign
+          schema:
+            type: string
+          required: true
+          description: The user's sunsign
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getPredictionResponse"
+components:
+  schemas:
+    getPredictionResponse:
+      type: object
+      properties:
+        predictions:
+          type: array
+          items:
+            type: object
+            properties:
+              sunsign:
+                type: string
+              prediction:
+                type: string
+      description: Astrological predictions for all sunsigns
+

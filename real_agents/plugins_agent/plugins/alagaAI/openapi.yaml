@@ -1,0 +1,31 @@
+openapi: 3.0.1
+info:
+  title: alaga.ai_PH
+  description: A knowledge base from the Philippine Department of Health website that contains health-related programs and info.
+  version: 'v1'
+servers:
+  - url: https://alaga-ai-h43cosb3ia-uc.a.run.app
+paths:
+  /search__request_from_gpt:
+    post:
+      operationId: searchKnowledgeBase
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                keywords:
+                  type: string
+              required: ["keywords"]
+        description: Keywords to search the knowledge base.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                description: The list of matching documents with source.

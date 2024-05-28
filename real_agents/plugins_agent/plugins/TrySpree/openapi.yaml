@@ -1,0 +1,29 @@
+openapi: 3.0.1
+info:
+  title: TrySpree
+  description: A plugin that enables the user to find free samples using ChatGPT.
+  version: 'v1'
+servers:
+  - url: https://www.tryspree.com
+paths:
+  /chatgpt-samples:
+    get:
+      operationId: getSamples
+      summary: Get the list of free samples and show information such as the link, name, and description for each free sample.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getSamplesResponse'
+components:
+  schemas:
+    getSamplesResponse:
+      type: object
+      properties:
+        free-samples:
+          type: array
+          items:
+            type: string
+          description: A list of links to samples with each sample item having a URL, name, and brief description to help explain the offer to the user.

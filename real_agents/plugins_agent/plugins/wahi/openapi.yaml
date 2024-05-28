@@ -1,0 +1,391 @@
+openapi: 3.0.1
+info:
+  title: Listing Search API
+  description: Hey Ontario, ask and get so in the know on the latest listings, property insights and more.
+  version: 1.0.0
+servers:
+  - url: https://api.prod.wahi.com/gpt
+paths:
+  /search:
+    get:
+      operationId: searchListings
+      summary: Search for property listings, including flats, houses, condos, and apartments for sale, rent, or lease.
+      parameters:
+        - in: query
+          name: first
+          schema:
+            type: integer
+          description: Retrieve the first X items in the result set.
+          required: false
+          example: 10
+        - in: query
+          name: last
+          schema:
+            type: integer
+          description: Retrieve the last X items in the result set.
+          required: false
+          example: 42
+        - in: query
+          name: sortBy
+          description: Sort results based on a specific attribute.
+          schema:
+            type: string
+            enum:
+              [
+                relevance,
+                date,
+                distance,
+                listDate,
+                listPrice,
+                price,
+                soldDate,
+                updatedOn,
+              ]
+            default: relevance
+          required: false
+        - in: query
+          name: sortOrder
+          description: Specify the sort order - ascending (asc) or descending (desc).
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc
+          required: false
+        - in: query
+          name: active
+          description: Filter results by active listings. By default, returns active listings only. If set to false, it returns sold listings only.
+          schema:
+            type: boolean
+            default: true
+          required: false
+        - in: query
+          name: coordinatesLatitude
+          description: Latitude coordinate for geographic filtering.
+          schema:
+            type: number
+            format: float
+            nullable: false
+          required: false
+        - in: query
+          name: coordinatesLongitude
+          description: Longitude coordinate for geographic filtering.
+          schema:
+            type: number
+            format: float
+            nullable: false
+          required: false
+        - in: query
+          name: distance
+          description: Filter results by the distance from the specified coordinates. The distance unit is meters.
+          schema:
+            type: number
+            format: float
+            nullable: false
+          required: false
+        - in: query
+          name: maxPrice
+          schema:
+            type: number
+            format: float
+            description: Filter results by a maximum price in CAD.
+          required: false
+        - in: query
+          name: minPrice
+          schema:
+            type: number
+            format: float
+            description: Filter results by a minimum price in CAD.
+          required: false
+        - in: query
+          name: minBeds
+          description: Filter results by a minimum number of bedrooms.
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: maxBeds
+          description: Filter results by a maximum number of bedrooms.
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: minBaths
+          description: Filter results by a minimum number of bathrooms.
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: maxBaths
+          description: Filter results by a maximum number of bathrooms.
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: highestRatedSchools
+          description: Filter listings by Fraser Institute School Rating with a score greater than or equal to 7.
+          schema:
+            type: boolean
+          required: false
+        - in: query
+          name: searchString
+          description: A search query string to find listings matching specific keywords or phrases.
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: propertyTypes
+          description: Filter listings by specific property types.
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                [
+                  Apartment,
+                  Detached,
+                  SemiDetached,
+                  Townhouse,
+                  Condominium,
+                  Land,
+                  Other,
+                ]
+          required: false
+        - in: query
+          name: listingType
+          description: Filter listings by sale or rent.
+          schema:
+            type: string
+            enum: [Sale, Rent]
+          required: false
+        - in: query
+          name: garage
+          description: Filter listings that include a garage.
+          schema:
+            type: boolean
+          required: false
+        - in: query
+          name: fireplace
+          description: Filter listings that include a fireplace.
+          schema:
+            type: boolean
+          required: false
+        - in: query
+          name: airConditioning
+          description: Filter listings that include air conditioning.
+          schema:
+            type: boolean
+          required: false
+        - in: query
+          name: allowPets
+          description: Filter listings that allow pets.
+          schema:
+            type: boolean
+          required: false
+        - in: query
+          name: newlyAdded
+          description: Filter listings that have been recently added.
+          schema:
+            type: boolean
+          required: false
+        - in: query
+          name: minLotDepth
+          description: Filter listings by minimum lot depth (in meters).
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: maxLotDepth
+          description: Filter listings by maximum lot depth (in meters).
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: minLotWidth
+          description: Filter listings by minimum lot width (in meters).
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: maxLotWidth
+          description: Filter listings by maximum lot width (in meters).
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: minParkings
+          description: Filter listings by minimum number of parking spaces.
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: minSquareFt
+          description: Filter listings by minimum square footage.
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: maxSquareFt
+          description: Filter listings by maximum square footage.
+          schema:
+            type: integer
+          required: false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListingsResponse"
+components:
+  schemas:
+    Coordinates:
+      type: object
+      description: Latitude and longitude coordinates of a location.
+      properties:
+        latitude:
+          type: number
+          format: float
+          nullable: false
+        longitude:
+          type: number
+          format: float
+          nullable: false
+
+    Address:
+      type: object
+      description: Detailed address information for a property listing.
+      properties:
+        area:
+          type: string
+          description: The area where the property is located.
+        city:
+          type: string
+          description: The city where the property is located.
+        country:
+          type: string
+          description: The country where the property is located.
+        district:
+          type: string
+          description: The district where the property is located.
+        majorIntersection:
+          type: string
+          description: The nearest major intersection to the property.
+        neighborhood:
+          type: string
+          description: The neighborhood where the property is located.
+        streetDirection:
+          type: string
+          description: The direction the street is facing.
+        streetName:
+          type: string
+          description: The name of the street where the property is located.
+        streetNumber:
+          type: string
+          description: The street number of the property.
+        streetSuffix:
+          type: string
+          description: The suffix for the street name (e.g., "Avenue" or "Street").
+        unitNumber:
+          type: string
+          description: The unit number of the property, if applicable.
+        zip:
+          type: string
+          description: The postal code of the property.
+        state:
+          type: string
+          description: The state or province where the property is located.
+
+    Listing:
+      type: object
+      description: A single property listing with its details.
+      properties:
+        mlsId:
+          type: string
+          description: The unique identifier for the property listing in MLS board.
+        listPrice:
+          type: number
+          format: float
+          description: The listing price in CAD.
+        annualTaxAmount:
+          type: number
+          format: float
+          description: The annual tax amount in CAD.
+        coordinates:
+          $ref: "#/components/schemas/Coordinates"
+        geoZoneSeoPath:
+          type: string
+          description: The breadcrumb hierarchy path from province/state to neighborhood.
+        highestRatedSchool:
+          type: number
+          format: float
+          description: The rating of the highest-rated school nearby.
+        listDate:
+          type: string
+          format: date-time
+          description: The date the property was listed.
+        soldPrice:
+          type: number
+          format: float
+          description: The price the property was sold for, if applicable.
+        soldDate:
+          type: string
+          format: date-time
+          description: The date the property was sold, if applicable.
+        address:
+          $ref: "#/components/schemas/Address"
+        numBedrooms:
+          type: number
+          format: float
+          description: The total number of bedrooms in the property.
+        numBedroomsFull:
+          type: number
+          format: float
+          description: The number of full-size bedrooms in the property.
+        numBedroomsPlus:
+          type: number
+          format: float
+          description: The number of additional rooms that can be used as bedrooms.
+        numBathrooms:
+          type: number
+          format: float
+          description: The total number of bathrooms in the property.
+        numBathroomsFull:
+          type: number
+          format: float
+          description: The number of full-size bathrooms in the property.
+        numBathroomsPlus:
+          type: number
+          format: float
+          description: The number of additional rooms that can be used as bathrooms.
+        numParkingSpaces:
+          type: number
+          format: float
+          description: The number of parking spaces available at the property.
+        detailsPropertyType:
+          type: string
+          description: The detailed property type description. More specific than the property type.
+        type:
+          type: string
+          enum: [Sale, Rent]
+          description: The type of listing, either for sale or for rent.
+        url:
+          type: string
+          description: The URL to access the listing page.
+        coverImage:
+          type: string
+          description: The main image of the property listing.
+        sqft:
+          type: string
+          description: The square footage of the property, displayed as a unique value (X), range (X-X), or comparative value (<X).
+
+    ListingsResponse:
+      title: ListingsResponse
+      type: object
+      description: The response object containing an array of property listings.
+      properties:
+        listings:
+          title: Listings
+          description: An array of property listings.
+          type: array
+          items:
+            $ref: "#/components/schemas/Listing"

@@ -1,0 +1,92 @@
+---
+openapi: 3.0.2
+info:
+  title: Tax Calculator
+  description: Calculate sales tax or lookup tax rates for any address in the U.S.
+  version: 0.1.0
+paths:
+  "/sales/tax":
+    post:
+      summary: Sales Tax
+      operationId: sales_tax_sales_tax_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Item"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/FreeFormSalesTax"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    FreeFormSalesTax:
+      title: FreeFormSalesTax
+      required:
+      - summary
+      type: object
+      properties:
+        summary:
+          title: Summary
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    Item:
+      title: Item
+      required:
+      - city
+      - state
+      type: object
+      properties:
+        street:
+          title: Street
+          type: string
+          default: ''
+        city:
+          title: City
+          type: string
+        state:
+          title: State
+          type: string
+        transactionValue:
+          title: Transactionvalue
+          type: number
+          default: 100
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string

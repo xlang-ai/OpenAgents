@@ -1,0 +1,34 @@
+{
+    "id": "plugin-205f8535-35d5-449d-af3a-03b9d29dbb1c",
+    "domain": "sentence-beasts.thx.pw",
+    "namespace": "Sentence_Beasts",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Sentence_Beasts",
+        "name_for_human": "Sentence Beasts",
+        "description_for_model": "Automatic to the end, Summon monsters with words, create monsters in words, simulate a match in short, and record the match.",
+        "description_for_human": "Summon or create unique word monsters, engage them in thrilling battles, and record the outcomes using Word Monsters.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://sentence-beasts.thx.pw/openapi.yaml"
+        },
+        "logo_url": "https://sentence-beasts.thx.pw/logo.svg",
+        "contact_email": "contact@thx.pw",
+        "legal_info_url": "https://blog.thx.pw/p/sentence-beasts-legal-info-en.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

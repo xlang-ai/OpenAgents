@@ -1,0 +1,54 @@
+openapi: 3.0.1
+info:
+  title: Talkface IELTS Prep plugin
+  description: Use the latest IELTS Speaking exam questions to prep your IELTS speaking with Talkface.
+  version: 'v1'
+servers:
+  - url: https://talkface.ai
+paths:
+  /ChatGPTPlugin/ielts-topic/part1:
+    get:
+      operationId: getIeltsTopicPt1
+      summary: Get a ramdom topic for IELTS spkeaking test part 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getIeltsPt1TopicResponse'
+  /ChatGPTPlugin/ielts-topic/part2:
+    get:
+      operationId: getIeltsTopicPt2
+      summary: Get a ramdom task for IELTS spkeaking test part 2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getIeltsPt2TopicResponse'
+components:
+  schemas:
+    getIeltsPt1TopicResponse:
+      type: object
+      properties:
+        topic:
+          type: string
+          description: a general topic for this test, like "Hometown".
+        questions:
+          type: array
+          description: Some questions about the topic. You should ask the first questions, wait for the tester to answer, and then ask another one. You should ask no more than 3 questions.
+          items:
+            type: string
+    getIeltsPt2TopicResponse:
+      type: object
+      properties:
+        topic:
+          type: string
+          description: a task the tester need to do in this test, like "Describe something".
+        questions:
+          type: array
+          description: a list of prompts to help the tester to begin. You need to tell the tester "You should say {the prompts}"
+          items:
+            type: string

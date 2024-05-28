@@ -1,0 +1,69 @@
+openapi: 3.0.1
+info:
+  title: Shop AI
+  description: Search for the best Amazon products ordered by rating.
+  version: 'v1'
+servers:
+  - url: https://byby.ai
+paths:
+  /api/search:
+    get:
+      operationId: searchProducts
+      summary: Search tops based on a search term and quantity.
+      parameters:
+        - in: query
+          name: searchTerm
+          schema:
+            type: string
+          required: true
+          description: The search term to look for in top's overview.
+        - in: query
+          name: quantity
+          schema:
+            type: integer
+            default: 5
+          required: false
+          description: The quantity of products to retrieve from the top.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/searchProductsResponse'
+
+components:
+  schemas:
+    searchProductsResponse:
+      description: The response containing the top and its products.
+      type: object
+      properties:
+        topTitle:
+          type: string
+          description: The title of the top.
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+
+    Product:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the product.
+        description:
+          type: string
+          description: The description of the product.
+        link:
+          type: string
+          description: The URL link of the product.
+        salesPrice:
+          type: string
+          description: The sales price of the product.
+        imageUrl:
+          type: string
+          description: The URL link to the image of the product.
+        numberStars:
+          type: integer
+          description: The rating of the product.

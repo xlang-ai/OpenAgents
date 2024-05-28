@@ -1,0 +1,78 @@
+openapi: 3.0.1
+info:
+  title: Meme Generation
+  description: Your AI meme generator.
+  version: 'v1'
+servers:
+  - url: https://memepluginchatgpt.azurewebsites.net/
+paths:
+  /generate_meme:
+    post:
+      operationId: generateMeme
+      summary: Generate a meme.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                memeTemplateName:
+                  type: string
+                  description: The name of the meme template. Leave it empty if unclear, but try to guess if possible. This field is optional.
+                memeText:
+                  type: string
+                  description: The text of the meme. If the user did not specify exactly, create your own based on the user's wishes. By default, use two lines separated by a single newline (unless you know the template requires more, such as the 'Expanding Brain' which requires four lines). Empty lines must not be provided. If it's a retry query, rewrite the text so that the number of non-empty lines equals "correctLineNumber". This field is required.
+                isRetry:
+                  type: boolean
+                  description: Indicates whether this is a retry call after an error message was returned. This field is required.
+              additionalProperties: false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meme_link:
+                    type: string
+                    description: The link to the generated meme.
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message indicating the reason for the failure.
+                  memeTemplateName:
+                    type: string
+                    description: The name of the meme template.
+                  retry:
+                    type: boolean
+                    description: Indicator if the model should retry, fix the input, and retry the operation. It should not be retried more than two times.
+                  wrongMemeText:
+                    type: boolean
+                    description: Indicator that the model needs to generate a new meme text.
+                  exampleMemeText:
+                    type: string
+                    description: An example of the correct meme text for the given template. The new meme text should be similar in format, but don't copy the text itself (i.e., it should be changed to what is needed for it to make sense). Text in square brackets is for context for the model.
+                  linesProvided:
+                    type: integer
+                    description: The number of meme text non-empty lines that the model wrongly provided. Empty lines don't count and should not be provided.
+                  correctLineNumber:
+                    type: integer
+                    description: The correct number of non-empty lines required for the meme text.
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message indicating an unexpected error.

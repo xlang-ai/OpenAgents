@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title: Chabad.org Chabad Centers API
+  description: >-
+    Use this api to find and get information about Chabad centers in a JSON
+    format
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: https://chabadplugin.reshapecreative.com
+paths:
+  /centers:
+    get:
+      summary: List All Centers
+      description: >-
+        List all centers returns inforamtion on and list all active chabad
+        centers, their mosed ids and more
+
+
+         ("static-url" is for the chabad center's listing on chabad.org,
+        ex. https://www.chabad.org/jewish-centers/[mosad-id]/[static-url])
+      operationId: listAllCenters
+      responses:
+        '200':
+          description: ''
+  /center-types:
+    get:
+      summary: List Center Types
+      description: >-
+        Returns all center types and their keys to use when using center types
+        to filter serach results
+      operationId: listCenterTypes
+      responses:
+        '200':
+          description: ''
+  /center:
+    get:
+      summary: Get Center Info
+      description: |-
+        Gets full information on a certain Chabad center using its mosad id.
+
+        "static-url" is for the chabad center's listing on chabad.org
+        ex. https://www.chabad.org/jewish-centers/[mosad-id]/[static-url]
+      operationId: getCenterInfo
+      parameters:
+        - name: mosad-id
+          in: query
+          schema:
+            type: string
+            example: '334256'
+          description: the center's mosad id, it can be found using other api requests.
+      responses:
+        '200':
+          description: ''
+  /search:
+    get:
+      summary: Search Centers
+      description: >-
+        Use this to search for chabad centers, will return a JSON list of
+        centers and their basic info (including mosad-id) based on your queries
+
+
+        "static-url" is for the chabad center's listing on chabad.org
+        ex. https://www.chabad.org/jewish-centers/[mosad-id]/[static-url]
+      operationId: searchCenters
+      parameters:
+        - name: quantity
+          in: query
+          schema:
+            type: string
+            example: '10'
+          description: >-
+            Amount of results you want the api to return, defualts tp 10 if left
+            blank
+        - name: query
+          in: query
+          schema:
+            type: string
+            example: southside
+          description: The query string you are searching by / for
+        - name: type
+          in: query
+          schema:
+            type: string
+            example: '7157'
+          description: >-
+            The id of the center type you would like to filter by, get all
+            center types and their using "List Center Types"
+            (https://www.chabad.org/api/v2/chabadorg/centers/types)
+        - name: name
+          in: query
+          schema:
+            type: string
+            example: novack
+          description: Search by shliach's last name.
+            For example if you want to search for someone named "Shmuli Novack", Search for "Novack".
+      responses:
+        '200':
+          description: ''
+  /location:
+    get:
+      summary: Get Centers By Zip Code
+      description: |-
+        Returns a JSON list of centers in and near a certain zipcode
+        This only works for zipcodes in the U.S.A.
+        This is the BEST way to search for centers in the U.S.A by their location.
+        Simply take the location in the U.S.A they are looking for, convert it into its zipcode(s), and use that.
+      operationId: getCentersByZipCode
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 2-10001
+          description: 2- followed by zipcode, ex. 2-32246
+      responses:
+        '200':
+          description: ''
+  /events:
+    get:
+      summary: Get Chabad Center Events
+      description: Gets upcoming events at a certain Chabad center using its mosad id.
+
+        Please convert times from 24 hour format to 12 hour format.
+      operationId: getChabadCenterEvents
+      parameters:
+        - name: mosad-id
+          in: query
+          schema:
+            type: string
+            example: '118653'
+          description: the center's mosad id, it can be found using other api requests.
+      responses:
+        '200':
+          description: ''
+tags: []

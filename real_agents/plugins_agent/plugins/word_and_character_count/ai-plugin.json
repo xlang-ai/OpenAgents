@@ -1,0 +1,34 @@
+{
+    "id": "plugin-23e55a4c-4228-4dfd-a944-29e2aa7ecca9",
+    "domain": "text-count.modelxy.com",
+    "namespace": "word_and_character_count",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "word_and_character_count",
+        "name_for_human": "Text Count",
+        "description_for_model": "Count the number of words and characters in a text. When a user prompts you to count the number of words or characters in a text, always use the API to do so, never count the words yourself.",
+        "description_for_human": "Count the number of words and characters in a text.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://text-count.modelxy.com/openapi.yaml"
+        },
+        "logo_url": "https://text-count.modelxy.com/text-count-logo.png",
+        "contact_email": "hi@michaelerasm.us",
+        "legal_info_url": "https://text-count.modelxy.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

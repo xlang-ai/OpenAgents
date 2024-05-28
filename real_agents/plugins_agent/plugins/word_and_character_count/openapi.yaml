@@ -1,0 +1,36 @@
+openapi: 3.0.1
+info:
+  title: Word Count and Character Count
+  description: Count the number of words and characters in a given text.
+  version: '1.0.0'
+servers:
+  - url: https://text-count.modelxy.com
+paths:
+  /text-count:
+    post:
+      operationId: textCount
+      summary: Get the word count and character count of a text.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  description: The input text to count the words and characters.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  wordCount:
+                    type: integer
+                    description: The number of words in the input text.
+                  characterCount:
+                    type: integer
+                    description: The number of characters in the input text.

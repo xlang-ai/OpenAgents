@@ -1,0 +1,34 @@
+{
+    "id": "plugin-a261f428-2df0-4a0a-b91b-9d22443bb74e",
+    "domain": "easy-resume.net",
+    "namespace": "resume",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "resume",
+        "name_for_human": "Easy Resume",
+        "description_for_model": "Managing resumes, you can create your resumes.",
+        "description_for_human": "Quickly create and edit your resume with the option to download as a docx or pdf, and find the job you deserve!",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://easy-resume.net/openapi.yaml"
+        },
+        "logo_url": "https://easy-resume.net/logo.png",
+        "contact_email": "info@easy-resume.net",
+        "legal_info_url": "https://easy-resume.net/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

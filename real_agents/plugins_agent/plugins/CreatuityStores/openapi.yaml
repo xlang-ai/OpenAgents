@@ -1,0 +1,151 @@
+openapi: 3.0.1
+info:
+  title: Search products
+  description: Search for products the user is looking for and ready to buy online
+  version: "v2"
+servers:
+  - url: https://chatgpt.wild.creatuity.net
+paths:
+  /api/search:
+    post:
+      operationId: getProductList
+      summary: Get the list of products relevant for given search parameters.
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: number
+          description: The max number of products to return. No more than 100.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+  /api/stores:
+    get:
+      operationId: getStores
+      summary: Get the list of integrated and available stores
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: number
+          description: Store list page number
+        - in: query
+          name: size
+          schema:
+            type: number
+            description: Size of the page
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    title: Total
+                    type: number
+                    description: The number of all stores in the database
+                  size:
+                    type: number
+                    title: Size
+                    description: Size number given in request
+                  page:
+                    type: number
+                    title: Page
+                    description: Page number given in request
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Store"
+
+
+components:
+  schemas:
+    QueryRequest:
+      title: QueryRequest
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          title: Text
+          type: string
+          description: Description of product which match the best user's product needs.
+        brand:
+          title: Brand
+          type: string
+          description: Space-separated product brands.
+        category:
+          title: Category
+          type: string
+          description: Space-separated product categories or types.
+        min_price:
+          title: Minimal Price
+          type: number
+          description: Filter product by price to get only product equally or more expensive then given value. Value should be in USD.
+        max_price:
+          title: Maximum Price
+          type: number
+          description: Filter product by price to get only product equally or less expensive then given value. Value should be in USD.
+    Store:
+      title: Store
+      required:
+        - store_url
+        - store_description
+      type: object
+      properties:
+        store_url:
+          title: Store URL
+          type: string
+        store_description:
+          title: Short store description
+          type: string
+    Product:
+      title: Product
+      required:
+        - name
+        - description
+        - price
+        - category
+        - brand
+        - url
+        - image_url
+        - currency_code
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          type: string
+        price:
+          title: Price
+          type: number
+        brand:
+          title: Brand
+          type: string
+        category:
+          title: Categories
+          type: string
+        currency_code:
+          title: Currency
+          type: string
+        url:
+          title: URL
+          type: string
+        image_url:
+          title: Image
+          type: string

@@ -1,0 +1,41 @@
+openapi: 3.0.1
+info:
+  title: PortfolioMeta Plugin
+  description: Analyze stocks and get comprehensive real-time investment data and analytics.
+  version: "v1"
+servers:
+  - url: https://portfoliometa.com
+paths:
+  /api/all-stock-info?ticker={ticker}:
+    get:
+      operationId: getStockData
+      summary: Get current data for any U.S. stock.
+      parameters:
+        - in: path
+          name: ticker
+          schema:
+            type: string
+          required: true
+          description: The ticker symbol of the stock.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getStockDataResponse"
+
+components:
+  schemas:
+    getStockDataResponse:
+      type: object
+      properties:
+        data:
+          type: string
+          description: All data for the stock.
+        EXTRA_INFORMATION_TO_ASSISTANT:
+          type: string
+          description: Extra information for the assistant only.
+        learnMoreUrl:
+          type: string
+          description: URL to learn more about the stock.

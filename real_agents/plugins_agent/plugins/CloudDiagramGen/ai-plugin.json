@@ -1,0 +1,29 @@
+{
+    "id": "plugin-c6a2ad4a-8399-425b-9821-fb0de24c3464",
+    "domain": "ei6xvhnd3r.eu-west-1.awsapprunner.com",
+    "namespace": "CloudDiagramGen",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "CloudDiagramGen",
+        "name_for_human": "Cloud Diagram Gen",
+        "description_for_model": "Generating cloud architecture diagrams.",
+        "description_for_human": "Generate cloud architecture diagrams. Unofficial AWS plugin.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://ei6xvhnd3r.eu-west-1.awsapprunner.com/openapi.yaml"
+        },
+        "logo_url": "https://ei6xvhnd3r.eu-west-1.awsapprunner.com/logo.png",
+        "contact_email": "ysf.askri@gmail.com",
+        "legal_info_url": "https://ei6xvhnd3r.eu-west-1.awsapprunner.com"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": []
+}

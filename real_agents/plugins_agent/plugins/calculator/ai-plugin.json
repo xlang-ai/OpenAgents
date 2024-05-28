@@ -1,0 +1,34 @@
+{
+    "id": "plugin-a170dbe2-cd79-4e0b-a936-8106a5d5039a",
+    "domain": "calc.smoothplugins.com",
+    "namespace": "calculator",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "calculator",
+        "name_for_human": "Calculator",
+        "description_for_model": "Calculator - A calculator app that executes a given formula and returns a result. This app can execute basic operations as well as other operations like modulus, exponentiation, bitwise OR, bitwise AND, left shift, and right shift. Provide the formula and the app will execute it and return a result. The formula needs to be URL-escaped. Here are some examples - formula: 1+2 - /?formula=1%2B2 -- formula: 2*3 - /?formula=2%2A3 -- formula: 3^4 - /?formula=3%5E4 -- and so on... .",
+        "description_for_human": "A calculator app that executes a given formula and returns a result. This app can execute basic and advanced operations.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://calc.smoothplugins.com/openapi.yaml"
+        },
+        "logo_url": "https://smoothplugins.com/img/plugin_logos2/calc1.png",
+        "contact_email": "makevoid@gmail.com",
+        "legal_info_url": "https://smoothplugins.com/tos/2_maps_plugin_tos"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

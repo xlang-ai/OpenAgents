@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  title: Resume Builder API
+  version: 1.0.0
+  description: Quickly create and edit your resume with the option to download as a docx or pdf, and find the job you deserve!
+paths:
+  /resume:
+    post:
+      operationId: createResume
+      summary: Creates a new resume using the provided data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuillDelta'
+      responses:
+        '200':
+          description: Resume created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResumeResponse'
+        '400':
+          description: Invalid input data
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    QuillDelta:
+      type: object
+      properties:
+        ops:
+          type: array
+          items:
+            type: object
+            properties:
+              insert:
+                type: string
+              delete:
+                type: integer
+                minimum: 1
+              retain:
+                type: integer
+                minimum: 1
+              attributes:
+                type: object
+                properties:
+                  bold:
+                    type: boolean
+                  italic:
+                    type: boolean
+                  underline:
+                    type: boolean
+                  strike:
+                    type: boolean
+                  link:
+                    type: string
+                    format: uri
+                  list:
+                    type: string
+                    enum: ['ordered', 'bullet']
+                  header:
+                    type: integer
+                    minimum: 1
+                    maximum: 6
+                  color:
+                    type: string
+                    pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                  background:
+                    type: string
+                    pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                  font:
+                    type: string
+                  size:
+                    type: string
+                  align:
+                    type: string
+                    enum: ['left', 'center', 'right', 'justify']
+                  direction:
+                    type: string
+                    enum: ['rtl', 'ltr']
+                  indent:
+                    type: integer
+                    minimum: 1
+                    maximum: 8
+                  script:
+                    type: string
+                    enum: ['super', 'sub']
+                additionalProperties: false
+            required:
+              - insert
+      required:
+        - ops
+    ResumeResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the created resume
+        access_url:
+          type: string
+          description: The URL to access the created resume
+      example:
+        id: "123456"
+        access_url: "https://easy-resume.net/edit/123456"

@@ -1,0 +1,260 @@
+---
+openapi: 3.0.2
+info:
+  title: CoPilot GPT API
+  description: Get current and historical information about vehicle models and vehicles
+    for sale.
+  version: 5d59078
+paths:
+  "/logo.png":
+    get:
+      summary: Get Logo
+      operationId: get_logo_logo_png_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            image/png: {}
+  "/year_make_model":
+    get:
+      summary: Get Year Make Model
+      description: |-
+        Get basic data about a year / make / model combination.
+        Returns:
+            available engines,
+            available transmissions,
+            available body styles,
+            available fuel types,
+            fuel economy (mpg city and highway)
+      operationId: get_year_make_model_year_make_model_get
+      parameters:
+      - required: true
+        schema:
+          title: Year
+          type: integer
+        name: year
+        in: query
+      - required: true
+        schema:
+          title: Make
+          type: string
+        name: make
+        in: query
+      - required: true
+        schema:
+          title: Model
+          type: string
+        name: model
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/models_by_make_and_year":
+    get:
+      summary: Get Models By Make And Year
+      description: Get models that are available for a given year and make.
+      operationId: get_models_by_make_and_year_models_by_make_and_year_get
+      parameters:
+      - required: true
+        schema:
+          title: Year
+          type: integer
+        name: year
+        in: query
+      - required: true
+        schema:
+          title: Make
+          type: string
+        name: make
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Models By Make And Year Models By Make And Year
+                  Get
+                type: object
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/vehicles_for_sale":
+    get:
+      summary: Get Vehicles For Sale
+      description: |-
+        Returns a curated list of the top-ranked vehicles for sale in a city and state, and
+        the url of a page on CoPilot which shows additional ranked vehicles for sale.
+
+        - For a given year, make, model, city, and state
+        - For a given make, model, city, and state
+        - For a given city, and state
+      operationId: get_vehicles_for_sale_vehicles_for_sale_get
+      parameters:
+      - required: true
+        schema:
+          title: City
+          type: string
+        name: city
+        in: query
+      - required: true
+        schema:
+          title: State
+          type: string
+        name: state
+        in: query
+      - required: false
+        schema:
+          title: Year
+          type: integer
+        name: year
+        in: query
+      - required: false
+        schema:
+          title: Make
+          type: string
+          default: ''
+        name: make
+        in: query
+      - required: false
+        schema:
+          title: Model
+          type: string
+          default: ''
+        name: model
+        in: query
+      - required: false
+        schema:
+          title: Host
+          type: string
+        name: host
+        in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/VehiclesForSaleResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    NamedCount:
+      title: NamedCount
+      required:
+      - name
+      - count
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+        count:
+          title: Count
+          type: integer
+    PublicSRP:
+      title: PublicSRP
+      required:
+      - description
+      - url
+      - area_counts
+      - search_counts
+      - top_ranked_vehicles
+      type: object
+      properties:
+        description:
+          title: Description
+          type: string
+        url:
+          title: Url
+          type: string
+        area_counts:
+          title: Area Counts
+          type: array
+          items:
+            "$ref": "#/components/schemas/NamedCount"
+        search_counts:
+          title: Search Counts
+          type: array
+          items:
+            "$ref": "#/components/schemas/NamedCount"
+        top_ranked_vehicles:
+          title: Top Ranked Vehicles
+          type: array
+          items:
+            "$ref": "#/components/schemas/Url"
+    Url:
+      title: Url
+      required:
+      - title
+      - url
+      type: object
+      properties:
+        title:
+          title: Title
+          type: string
+        url:
+          title: Url
+          type: string
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    VehiclesForSaleResponse:
+      title: VehiclesForSaleResponse
+      required:
+      - description
+      - results
+      type: object
+      properties:
+        description:
+          title: Description
+          type: string
+        results:
+          title: Results
+          type: array
+          items:
+            "$ref": "#/components/schemas/PublicSRP"

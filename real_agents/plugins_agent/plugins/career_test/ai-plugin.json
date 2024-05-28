@@ -1,0 +1,34 @@
+{
+    "id": "plugin-6671aab1-a668-452a-b608-cf34c9838b28",
+    "domain": "mindart.app",
+    "namespace": "career_test",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "career_test",
+        "name_for_human": "Mindart",
+        "description_for_model": "Allow user to find the most suitable jobs based on the RIASEC model. You need to know the users type1 and type2. The only options are Realistic, Investigative, Artistic, Social, Enterprising, Conventional. Example request: https://mindart.app/api/hello/?type1=realistic&type2=social",
+        "description_for_human": "Career test to help you find your dream job, with automation risk and average salary.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://mindart.app/openapi.yaml"
+        },
+        "logo_url": "https://mindart.app/img/mindart-logo.svg",
+        "contact_email": "m.lionardo@gmail.com",
+        "legal_info_url": "https://mindart.app"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

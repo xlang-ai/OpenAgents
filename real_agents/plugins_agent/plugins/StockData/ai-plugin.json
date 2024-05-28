@@ -1,0 +1,34 @@
+{
+    "id": "plugin-179f1505-ceee-4af5-997f-7639f619096a",
+    "domain": "portfoliometa.com",
+    "namespace": "StockData",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "StockData",
+        "name_for_human": "PortfolioMeta",
+        "description_for_model": "Plugin for retrieving real-time data for stocks. The plugin returns price data, performance data, fundamental data, statistical data and risk data for individual stocks. In your response, share your insights regarding the data.",
+        "description_for_human": "Analyze stocks and get comprehensive real-time investment data and analytics.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://portfoliometa.com/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://portfoliometa.com/.well-known/logo.png",
+        "contact_email": "michael@portfoliometa.com",
+        "legal_info_url": "https://portfoliometa.com/plugin-info"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

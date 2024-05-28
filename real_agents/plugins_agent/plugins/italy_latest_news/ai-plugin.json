@@ -1,0 +1,34 @@
+{
+    "id": "plugin-188c5770-1c00-4891-8754-3eae1d907878",
+    "domain": "www.articoli-alternativi-gratis.it",
+    "namespace": "italy_latest_news",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "italy_latest_news",
+        "name_for_human": "Italy Latest News",
+        "description_for_model": "Provides the latest news updates from Italy. The model should issue a search command through the browser tool with the query \"latest news Italy\" or a similar relevant term. After retrieving the search results, the model should click on the most relevant and recent sources, and quote the key information to provide a summary of the news. When providing the summary, the model should aim to use concise sentences to manage the token count effectively. Where possible, the model should provide the news in response to the user's specific questions or interests about Italy, using relevant keywords from the user's prompts to refine the search and the presentation of the news.",
+        "description_for_human": "Get the most recent news from Italy.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://www.articoli-alternativi-gratis.it/italy-latest-news/store-listing/openapi.yaml"
+        },
+        "logo_url": "https://www.articoli-alternativi-gratis.it/italy-latest-news/store-listing/logo.jpg",
+        "contact_email": "info@articoli-alternativi-gratis.it",
+        "legal_info_url": "https://www.articoli-alternativi-gratis.it/italy-latest-news/store-listing/legal.htm"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

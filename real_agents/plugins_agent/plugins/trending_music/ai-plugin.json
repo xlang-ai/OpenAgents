@@ -1,0 +1,34 @@
+{
+    "id": "plugin-18825949-7b76-4e09-bdb1-856be0968f81",
+    "domain": "rising-analogy-387407.uc.r.appspot.com",
+    "namespace": "trending_music",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "trending_music",
+        "name_for_human": "Trending Music",
+        "description_for_model": "Find the most trending music around the world. You can search by country, genre, or globally. You can also get detailed information about a specific song or find songs similar to a specific track. Use the country's ISO 3166-1 alpha-2 code for country-specific searches. For genre-specific searches, use the genre's specific code. Available genres: POP, HIP_HOP_RAP, DANCE, ELECTRONIC, RNB_SOUL, ALTERNATIVE, ROCK, LATIN, FILM_TV_STAGE, COUNTRY, AFRO_BEATS, WORLDWIDE, REGGAE_DANCE_HALL, HOUSE, K_POP, FRENCH_POP, SINGER_SONGWRITER, REGIONAL_MEXICANO.",
+        "description_for_human": "Service for finding the trending music, by genre, countries, and top songs globally.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://rising-analogy-387407.uc.r.appspot.com/openapi.yaml"
+        },
+        "logo_url": "https://rising-analogy-387407.uc.r.appspot.com/logo.png",
+        "contact_email": "macetenth@gmail.com",
+        "legal_info_url": "https://rising-analogy-387407.uc.r.appspot.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

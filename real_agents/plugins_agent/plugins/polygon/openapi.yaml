@@ -1,0 +1,310 @@
+openapi: 3.0.1
+info:
+  title: Polygon
+  description: Market data, news, and fundamentals for stocks, options, forex, and crypto from Polygon.io.
+  contact: {}
+  version: 1.0.0
+  x-apisguru-categories:
+  - financial
+  x-logo:
+    url: https://twitter.com/polygon_io/profile_image?size=original
+  x-origin:
+  - format: swagger
+    url: https://polygon.io/docs/swagger.json
+    version: "2.0"
+  x-providerName: polygon.io
+servers:
+- url: https://api.polygon.io/
+security:
+- apiKey: []
+paths:
+  /v1/marketstatus/now:
+    get:
+      summary: Get the current trading status of the exchanges and overall financial markets
+      operationId: getMarketStatus
+      parameters:
+        - name: apiKey
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Your API key
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  afterHours:
+                    type: boolean
+                    description: Whether or not the market is in post-market hours
+                  currencies:
+                    type: object
+                    properties:
+                      crypto:
+                        type: string
+                        description: The status of the crypto market
+                      fx:
+                        type: string
+                        description: The status of the forex market
+                  earlyHours:
+                    type: boolean
+                    description: Whether or not the market is in pre-market hours
+                  exchanges:
+                    type: object
+                    properties:
+                      nasdaq:
+                        type: string
+                        description: The status of the Nasdaq market
+                      nyse:
+                        type: string
+                        description: The status of the NYSE market
+                      otc:
+                        type: string
+                        description: The status of the OTC market
+                  market:
+                    type: string
+                    description: The status of the market as a whole
+                  serverTime:
+                    type: string
+                    description: The current time of the server
+        default:
+          description: Default response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message
+  "/v2/aggs/ticker/{stocksTicker}/range/{multiplier}/{timespan}/{from}/{to}":
+    get:
+      summary: Get aggregate bars for a stock over a given date range in custom time window sizes
+      parameters:
+        - name: stocksTicker
+          in: path
+          description: The ticker symbol of the stock/equity
+          required: true
+          schema:
+            type: string
+        - name: multiplier
+          in: path
+          description: The size of the timespan multiplier
+          required: true
+          schema:
+            type: integer
+        - name: timespan
+          in: path
+          description: The size of the time window
+          required: true
+          schema:
+            type: string
+            enum:
+              - day
+        - name: from
+          in: path
+          description: The start of the aggregate time window, either a date with the format YYYY-MM-DD or a millisecond timestamp
+          required: true
+          schema:
+            type: string
+        - name: to
+          in: path
+          description: The end of the aggregate time window, either a date with the format YYYY-MM-DD or a millisecond timestamp
+          required: true
+          schema:
+            type: string
+        - name: adjusted
+          in: query
+          description: Whether or not the results are adjusted for splits, by default results are adjusted
+          required: false
+          schema:
+            type: boolean
+            default: true
+        - name: sort
+          in: query
+          description: Sort the results by timestamp, asc will return results in ascending order (oldest at the top), desc will return results in descending order (newest at the top)
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: asc
+        - name: limit
+          in: query
+          description: Limits the number of base aggregates queried to create the aggregate results, max 50000 and default 5000
+          required: false
+          schema:
+            type: integer
+            default: 5000
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ticker:
+                    type: string
+                    description: The exchange symbol that this item is traded under
+                  adjusted:
+                    type: boolean
+                    description: Whether or not this response was adjusted for splits
+                  queryCount:
+                    type: integer
+                    description: The number of aggregates (minute or day) used to generate the response
+                  request_id:
+                    type: string
+                    description: A request id assigned by the server
+                  resultsCount:
+                    type: integer
+                    description: The total number of results for this request
+                  status:
+                    type: string
+                    description: The status of this request's response
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        c:
+                          type: number
+                          description: The close price for the symbol in the given time period
+                        h:
+                          type: number
+                          description: The highest price for the symbol in the given time period
+                        l:
+                          type: number
+                          description: The lowest price for the symbol in the given time period
+                        n:
+                          type: integer
+                          description: The number of transactions in the aggregate window
+                        o:
+                          type: number
+                          description: The open price for the symbol in the given time period
+                        otc:
+                          type: boolean
+                          description: Whether or not this aggregate is for an OTC ticker, this field will be left off if false
+                        t:
+                          type: integer
+                          description: The Unix Msec timestamp for the start of the aggregate window
+                        v:
+                          type: number
+                          description: The trading volume of the symbol in the given time period
+                        vw:
+                          type: number
+                          description: The volume weighted average price
+                  next_url:
+                    type: string
+                    description: If present, this value can be used to fetch the next page of data
+  "/v2/aggs/ticker/{forexTicker}/range/{multiplier}/{timespan}/{from}/{to}":
+    get:
+      summary: Get aggregate bars for a forex pair over a given date range in custom time window sizes
+      parameters:
+        - name: forexTicker
+          in: path
+          required: true
+          description: The ticker symbol of the currency pair
+          schema:
+            type: string
+        - name: multiplier
+          in: path
+          required: true
+          description: The size of the timespan multiplier
+          schema:
+            type: integer
+        - name: timespan
+          in: path
+          required: true
+          description: The size of the time window
+          schema:
+            type: string
+        - name: from
+          in: path
+          required: true
+          description: The start of the aggregate time window. Either a date with the format YYYY-MM-DD or a millisecond timestamp
+          schema:
+            type: string
+        - name: to
+          in: path
+          required: true
+          description: The end of the aggregate time window. Either a date with the format YYYY-MM-DD or a millisecond timestamp
+          schema:
+            type: string
+        - name: adjusted
+          in: query
+          description: Whether or not the results are adjusted for splits. By default, results are adjusted. Set this to false to get results that are NOT adjusted for splits
+          schema:
+            type: boolean
+            default: true
+        - name: sort
+          in: query
+          description: Sort the results by timestamp. asc will return results in ascending order (oldest at the top), desc will return results in descending order (newest at the top)
+          schema:
+            type: string
+            default: asc
+        - name: limit
+          in: query
+          description: Limits the number of base aggregates queried to create the aggregate results. Max 50000 and Default 5000
+          schema:
+            type: integer
+            default: 5000
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ticker:
+                    type: string
+                    description: The exchange symbol that this item is traded under
+                  adjusted:
+                    type: boolean
+                    description: Whether or not this response was adjusted for splits
+                  queryCount:
+                    type: integer
+                    description: The number of aggregates (minute or day) used to generate the response
+                  request_id:
+                    type: string
+                    description: A request id assigned by the server
+                  resultsCount:
+                    type: integer
+                    description: The total number of results for this request
+                  status:
+                    type: string
+                    description: The status of this request's response
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        c:
+                          type: number
+                          description: The close price for the symbol in the given time period
+                        h:
+                          type: number
+                          description: The highest price for the symbol in the given time period
+                        l:
+                          type: number
+                          description: The lowest price for the symbol in the given time period
+                        n:
+                          type: integer
+                          description: The number of transactions in the aggregate window
+                        o:
+                          type: number
+                          description: The open price for the symbol in the given time period
+                        t:
+                          type: integer
+                          description: The Unix Msec timestamp for the start of the aggregate window
+                        v:
+                          type: number
+                          description: The trading volume of the symbol in the given time period
+                        vw:
+                          type: number
+                          description: The volume weighted average price

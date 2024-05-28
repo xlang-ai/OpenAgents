@@ -1,0 +1,34 @@
+{
+    "id": "plugin-a0d6210a-8bfe-4fb9-b2ce-41b7c9533a4d",
+    "domain": "webrewind.app",
+    "namespace": "WebRewind",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "WebRewind",
+        "name_for_human": "WebRewind",
+        "description_for_model": "Plugin for getting a picture of a website at a specific date. The user should provide a website and a time. When use it provide the image in Markdown format and give a brief description of the website at that time.",
+        "description_for_human": "Get the picture of a website at a specific date.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://webrewind.app/openapi.yaml"
+        },
+        "logo_url": "https://webrewind.app/logo.png",
+        "contact_email": "hello@marceloarias.com",
+        "legal_info_url": "http://example.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

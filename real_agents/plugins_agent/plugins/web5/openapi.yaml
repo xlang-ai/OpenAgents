@@ -1,0 +1,237 @@
+components:
+  schemas:
+    instructionResponse:
+      properties:
+        code:
+          description: a sample piece of code
+          type: string
+        explanation:
+          description: what the sample code does.
+          type: string
+      type: object
+info:
+  description: An assistant for helping build web5 applications using the web5 sdk.
+  title: Web5 assistant
+  version: v1
+openapi: 3.0.1
+paths:
+  /help/browser:
+    get:
+      operationId: helpBrowser
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Shows how to use web5 in a html page script tag, loading from a CDN.
+  /help/communication:
+    get:
+      operationId: helpCommunication
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: If you want to have an app that has peer to peer communication (from
+        DID to DID) you can look at this example (which makes a richer use of protocols).
+        This uses a index.html web page.
+  /help/did:
+    get:
+      operationId: helpDid
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Create a Decentralized Identifier (DID). This one creates one of the
+        ION did method type.
+  /help/did_description:
+    get:
+      operationId: helpDid_description
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Explains what a DID (decentralized identifier) is.
+  /help/dwn_delete:
+    get:
+      operationId: helpDwn_delete
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Delete Data from a Decentralized Web Node
+  /help/dwn_description:
+    get:
+      operationId: helpDwn_description
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Explains what a Decentralized Web Node (DWN, or DWeb Node) is (not
+        code examples).
+  /help/dwn_read:
+    get:
+      operationId: helpDwn_read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Read from Decentralized Web Nodes
+  /help/dwn_write:
+    get:
+      operationId: helpDwn_write
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Show how to write to Decentralized Web Nodes.
+  /help/protocol:
+    get:
+      operationId: helpProtocol
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Shows how to install a protocol, and also has an example of a web5
+        protocol defintion that allows a credential issuance flow. Protocols allow
+        threaded conversations and more and are a key feature web5.
+  /help/protocol_description:
+    get:
+      operationId: helpProtocol_description
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Explains what a protocol is in the context of web5 and DWN.
+  /help/query:
+    get:
+      operationId: helpQuery
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Method for querying the DWeb Node of a provided target DID.
+  /help/query-full:
+    get:
+      operationId: helpQuery-full
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Query from your DWN or remote DWeb nodes. Uses protocol as filter criteria
+        but can also use a 'schema' field instead of protocol (which is a jsonschema)
+  /help/quickstart:
+    get:
+      operationId: helpQuickstart
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: To get going quickly, follow these instructions to setup a node.js
+        javascript project that uses web5 and shows a range of actions.
+  /help/setup:
+    get:
+      operationId: helpSetup
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: This is how you install it from the command line for npm, showing the
+        version. A package.json example is also provided.
+  /help/store:
+    get:
+      operationId: helpStore
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Shows how to store in the web5 DWN.
+  /help/sync:
+    get:
+      operationId: helpSync
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Explains how sync works with DWeb Nodes (DWNs) and web5
+  /help/todo_app:
+    get:
+      operationId: helpTodo_app
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Build a ToDo App (and end to end example)
+  /help/update_to_web5:
+    get:
+      operationId: helpUpdate_to_web5
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: A guide on how to Upgrade Your webapp to Web5 (a tutorial)
+  /help/write-send:
+    get:
+      operationId: helpWrite-send
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/instructionResponse'
+          description: OK
+      summary: Create a record in Alice's DWN, and send it directly to Bobs DWeb Nodes.
+servers:
+- url: https://chatgpt.tbddev.org

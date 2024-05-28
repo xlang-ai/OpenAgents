@@ -1,0 +1,34 @@
+{
+    "id": "plugin-736c774d-c69e-4c3c-994b-0a57120b0817",
+    "domain": "gpt-domain-bot.fly.dev",
+    "namespace": "domains",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "domains",
+        "name_for_human": "Domains Bot",
+        "description_for_model": "You can check if a domain is available. Users can search for their desired domain name.",
+        "description_for_human": "Checks for a domain name's availability. You can search for your desired domain name.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://gpt-domain-bot.fly.dev/openapi.yaml"
+        },
+        "logo_url": "https://gpt-domain-bot.fly.dev/images/logo.png",
+        "contact_email": "aaron@aaroncruz.com",
+        "legal_info_url": "https://gpt-domain-bot.fly.dev/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

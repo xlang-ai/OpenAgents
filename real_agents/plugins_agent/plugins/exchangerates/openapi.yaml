@@ -1,0 +1,161 @@
+---
+info:
+  description: Exchange Rates delivers real-time and historical data, enabling conversion and tracking for over 170 currencies.
+  title: Exchange Rates Data API
+  version: v1
+openapi: 3.0.1
+paths:
+  "/convert":
+    get:
+      operationId: convertCurrency
+      parameters:
+      - description: The amount to be converted.
+        in: query
+        name: amount
+        required: true
+        schema:
+          type: string
+      - description: The three-letter currency code of the currency you would like
+          to convert from.
+        in: query
+        name: from
+        required: true
+        schema:
+          type: string
+      - description: The three-letter currency code of the currency you would like
+          to convert to.
+        in: query
+        name: to
+        required: true
+        schema:
+          type: string
+      - description: Specify a date (format YYYY-MM-DD) to use historical rates for
+          this conversion.
+        in: query
+        name: date
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Currency conversion endpoint, which can be used to convert any amount
+        from one currency to another. In order to convert currencies, please use the
+        API's convert endpoint, append the from and to parameters and set them to
+        your preferred base and target currency codes.
+  "/fluctuation":
+    get:
+      operationId: getFluctuation
+      parameters:
+      - description: The end date of your preferred timeframe.
+        in: query
+        name: end_date
+        required: true
+        schema:
+          type: string
+      - description: The start date of your preferred timeframe.
+        in: query
+        name: start_date
+        required: true
+        schema:
+          type: string
+      - description: Enter the three-letter currency code of your preferred base currency.
+        in: query
+        name: base
+        schema:
+          type: string
+      - description: Enter a list of comma-separated currency codes to limit output
+          currencies.
+        in: query
+        name: symbols
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Get currency fluctuation data between specified dates. The data can
+        be for all available currencies or for a specific set of currencies. It's
+        useful for applications that need to track the volatility of exchange rates.
+  "/latest":
+    get:
+      operationId: getRealtimeRate
+      parameters:
+      - description: Enter the three-letter currency code of your preferred base currency.
+        in: query
+        name: base
+        schema:
+          type: string
+      - description: Enter a list of comma-separated currency codes to limit output
+          currencies.
+        in: query
+        name: symbols
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Get real-time exchange rate
+  "/symbols":
+    get:
+      operationId: getCurrencies
+      responses:
+        '200':
+          description: OK
+      summary: Get all available currencies
+  "/timeseries":
+    get:
+      operationId: getTimeseries
+      parameters:
+      - description: The end date of your preferred timeframe.
+        in: query
+        name: end_date
+        required: true
+        schema:
+          type: string
+      - description: The start date of your preferred timeframe.
+        in: query
+        name: start_date
+        required: true
+        schema:
+          type: string
+      - description: Enter the three-letter currency code of your preferred base currency.
+        in: query
+        name: base
+        schema:
+          type: string
+      - description: Enter a list of comma-separated currency codes to limit output
+          currencies.
+        in: query
+        name: symbols
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Get historical rates for a time frame
+  "/{date}":
+    get:
+      operationId: getHistoricalRate
+      parameters:
+      - description: A date in the past for which historical rates are requested.
+        in: path
+        name: date
+        required: true
+        schema:
+          type: string
+      - description: Enter the three-letter currency code of your preferred base currency.
+        in: query
+        name: base
+        schema:
+          type: string
+      - description: Enter a list of comma-separated currency codes to limit output
+          currencies.
+        in: query
+        name: symbols
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Get historical rates for a specific date
+servers:
+- url: https://converter.dialogueapps.com

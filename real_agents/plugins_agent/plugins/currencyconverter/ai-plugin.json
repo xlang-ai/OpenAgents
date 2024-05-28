@@ -1,0 +1,34 @@
+{
+    "id": "plugin-aa8a399d-a369-432e-81b7-ee6e889c1b8f",
+    "domain": "currency-conversion--nerrosa.repl.co",
+    "namespace": "currencyconverter",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "currencyconverter",
+        "name_for_human": "Currency Converter",
+        "description_for_model": "Convert currencies based on real-time rates. Include the following words in your prompt - 'convert', 'amount', 'from' and 'to'.",
+        "description_for_human": "Convert currencies based on real-time rates.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://currency-conversion--nerrosa.repl.co/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT8s4grs_ieuZVNMibShwPYJBJpF_aEB2Iuvx7k0w0FSysZ2FDC",
+        "contact_email": "hello@createmorecustomers.com",
+        "legal_info_url": "https://orrenprunckun.com/terms/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

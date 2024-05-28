@@ -1,0 +1,147 @@
+openapi: 3.0.0
+info:
+  title: Acquire.com ChatGPT Plugin
+  description: Everything you need to buy and sell startups.
+  version: 1.0.0
+servers:
+  - url: https://acquire-chatgpt.fly.dev/api/chatgpt
+paths:
+  /search:
+    post:
+      operationId: searchStartups
+      summary: Search for startup acquisition candidates
+      description: This endpoint takes a number of advanced search filters and returns startup acquisitions which meet the search criteria.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                location:
+                  type: string
+                  description: The startup location.
+                startup_type:
+                  type: array
+                  items:
+                    type: string
+                    enum: [saas, ecommerce, mobile, shopify_app, other, crypto, agency, marketplace]
+                    description: The type of startup to search for.
+                min_price:
+                  type: integer
+                  description: The minimum asking price of the startup.
+                max_price:
+                  type: integer
+                  description: The maximum asking price of the startup.
+                min_revenue:
+                  type: integer
+                  description: The minimum total revenue the startup generates.
+                max_revenue:
+                  type: integer
+                  description: The maximum total revenue the startup generates.
+                tech_stack:
+                  type: string
+                  description: The tech stack this startup uses. Includes information about languages such as PHP or Javascript, as well as hosting such as AWS.
+                description:
+                  type: string
+                  description: A generic description of what the startup focuses on. This includes generic information such as target market and app description.
+                limit:
+                  type: integer
+                  description: Total number of startups to return.
+                  default: 2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        startup_id:
+                          type: string
+                          description: The startup's unique identifier.
+                        startup_url:
+                          type: string
+                          description: External URL on acquire.com
+                        headline:
+                          type: string
+                          description: Headline describing the startup.
+                        type:
+                          type: string
+                          enum: [saas, ecommerce, mobile, shopify_app, other, crypto, agency, marketplace]
+                          description: The startup type.
+                        asking_price:
+                          type: integer
+                          description: The startup's asking price.
+                        about:
+                          type: string
+                          description: Description of this startup.
+  /show:
+    get:
+      operationId: showStartup
+      summary: Show information about a specific startup given a unique startup ID.
+      description: This endpoint takes a unique startup ID and returns detailed information about the startup.
+      parameters:
+        - name: startup_id
+          in: query
+          description: ID of the startup.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        headline:
+                          type: string
+                          description: Headline describing the startup.
+                        type:
+                          type: string
+                          enum: [saas, ecommerce, mobile, shopify_app, other, crypto, agency, marketplace]
+                          description: The startup type.
+                        asking_price:
+                          type: integer
+                          description: The startup's asking price.
+                        about:
+                          type: string
+                          description: Description of this startup.
+                        revenue_multiple:
+                          type: number
+                          description: Startup's revenue multiple.
+                        total_revenue_annual:
+                          type: number
+                          description: Startup's total annual revenue.
+                        total_profit_annual:
+                          type: number
+                          description: Startup's total annual profit.
+                        total_growth_annual:
+                          type: number
+                          description: Startup's total annual growth.
+                        location:
+                          type: string
+                          description: Startup's location.
+                        tech_stack:
+                          type: string
+                          description: Description of this startup's tech stack.
+                        competitors:
+                          type: array
+                          items:
+                            type: string
+                            description: Product competitor.
+                        url:
+                          type: string
+                          description: External URL to access information about this startup.

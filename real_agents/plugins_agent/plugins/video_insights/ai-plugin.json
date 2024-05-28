@@ -1,0 +1,34 @@
+{
+    "id": "plugin-df2f5f73-11c0-4c8a-8710-13fccfd9511b",
+    "domain": "jettel.de",
+    "namespace": "video_insights",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "video_insights",
+        "name_for_human": "Video Insights",
+        "description_for_model": "Plugin for getting the transcript, metadata and other information of various video providers like Youtube or Daily Motion",
+        "description_for_human": "Interact with online video platforms like Youtube or Daily Motion.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://jettel.de/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://jettel.de/logo.png",
+        "contact_email": "alexanderjettel@gmail.com",
+        "legal_info_url": "https://www.jettel.de/legal.txt"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "most_popular",
+            "title": "Most popular"
+        }
+    ]
+}

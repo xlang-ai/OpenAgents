@@ -1,0 +1,34 @@
+{
+    "id": "plugin-4bbaa33f-4dc8-4f00-9fe5-7b5a2c880ec8",
+    "domain": "esne.ai",
+    "namespace": "podcastSearch",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "podcastSearch",
+        "name_for_human": "Podcast search",
+        "description_for_model": "explore podcasts",
+        "description_for_human": "This tool explores podcasts from PodcastIndex.org, a platform for decentralized audio content discovery.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://esne.ai/openapi.yaml"
+        },
+        "logo_url": "https://esne.ai/logo.png",
+        "contact_email": "info@comicstripblog.com",
+        "legal_info_url": "https://esne.ai/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

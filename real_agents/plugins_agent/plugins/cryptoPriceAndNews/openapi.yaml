@@ -1,0 +1,202 @@
+openapi: 3.0.0
+info:
+  title: Crypto News
+  description: Plugin for get Crypto Coin's id and price / news; first use coint list to get coin's id; second use coin's id to get coin's price
+  version: 1.0.0
+servers:
+  - url: 'https://crypto-news.replit.app'
+paths:
+  /coinList:
+    get:
+      operationId: getCoinsId
+      summary: Retrieve the Crypto coin ids，that can fill in coinData's requestBody coinIds, if the id is not e.g bitcoin,ethereum,tether,binance-coin,usd-coin,ripple,cardano,lido-staked-ether,dogecoin,polygon,solana,litecoin,polkadot; first use /coinList to get the coin's id, then to get price
+      responses:
+        '200':
+          description: A list of Crypto coin ids, get the id  and can fill in coinData requestBody and coinIds property
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    price:
+                      type: object
+                      properties:
+                        usd:
+                          type: number
+                          example: 29069.667924322366
+                      description: the coin latest price
+                    id:
+                      type: string
+                      example: bitcoin
+                      description: The id that can fill in coinData's requestBody coinIds
+  /coinPrice:
+    post:
+      operationId: getCoinsPrice
+      summary: Retrieve the Crypto coins market price, if the id is not e.g bitcoin,ethereum,tether,binance-coin,usd-coin,ripple,cardano,lido-staked-ether,dogecoin,polygon,solana,litecoin,polkadot; first use /coinList to get the coin's id, then to get price
+      requestBody:
+        description: id of coin, e.g. bitcoin,ethereum
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                coinId:
+                  type: string
+                  description: id of coin, if the id is not e.g bitcoin,ethereum,tether,binance-coin,usd-coin,ripple,cardano,lido-staked-ether,dogecoin,polygon,solana,litecoin,polkadot; first use /coinList to get the coin's id
+      responses:
+        '200':
+          description: A Crypto coins's price, and currency is usd, include price_latest、price_change_percentage_24h、market_cap、vol_spot_24h, market_cap, ath, ath_date ...
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: bitcoin
+                  name:
+                    type: string
+                    example: Bitcoin
+                  market_data:
+                    type: object
+                    properties:
+                      max_supply:
+                        type: integer
+                      circulating_supply:
+                        type: number
+                        format: double
+                      circulating_supply_percentage:
+                        type: number
+                        format: double
+                      price:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            currency:
+                              type: string
+                            price_latest:
+                              type: number
+                              format: double
+                            market_cap:
+                              type: number
+                              format: double
+                            fully_diluted_valuation:
+                              type: number
+                              format: double
+                            price_change_24h:
+                              type: number
+                              format: double
+                            price_change_percentage_24h:
+                              type: number
+                              format: double
+                            price_change_percentage_1h:
+                              type: number
+                              format: double
+                            price_change_percentage_7d:
+                              type: number
+                              format: double
+                            price_change_percentage_30d:
+                              type: number
+                              format: double
+                            price_change_percentage_90d:
+                              type: number
+                              format: double
+                            price_change_percentage_180d:
+                              type: number
+                              format: double
+                            high_24h:
+                              type: number
+                              format: double
+                            low_24h:
+                              type: number
+                              format: double
+                            high_7d:
+                              type: number
+                              format: double
+                            low_7d:
+                              type: number
+                              format: double
+                            ath:
+                              type: number
+                              format: double
+                            ath_date:
+                              type: number
+                            atl:
+                              type: number
+                              format: double
+                            atl_date:
+                              type: number
+                            vol_spot_24h:
+                              type: number
+                              format: double
+                            vol_spot_change_24h:
+                              type: number
+                              format: double
+                            vol_spot_change_percentage_24h:
+                              type: number
+                              format: double
+                            vol_derivatives_24h:
+                              type: number
+                              format: double
+                            vol_derivatives_change_24h:
+                              type: number
+                              format: double
+                            vol_derivatives_change_percentage_24h:
+                              type: number
+                              format: double
+                            vol_spot_7d:
+                              type: number
+                              format: double
+                            vol_derivatives_7d:
+                              type: number
+                              format: double
+                      tickers:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            pair_type:
+                              type: string
+                            exchange_name:
+                              type: string
+                            price_latest:
+                              type: number
+                              format: double
+                            price_change_percentage_24h:
+                              type: number
+                              format: double
+                            vol_24h:
+                              type: number
+                              format: double
+                            vol_change_percentage_24h:
+                              type: number
+                              format: double
+                            liquidity_score:
+                              type: number
+                            last_traded_at:
+                              type: number
+  /coinNews:
+    get:
+      operationId: getCryptoNews
+      summary: Retrieve the latest Crypto News
+      responses:
+        '200':
+          description: A list of Crypto Coin and Market latest News
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      description: new's title
+                    url:
+                      type: string
+                      description: new's url, user can click jump to read the news
+                      

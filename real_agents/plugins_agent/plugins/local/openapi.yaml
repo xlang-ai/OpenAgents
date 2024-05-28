@@ -1,0 +1,341 @@
+openapi: 3.0.1
+info:
+  title: Local
+  description: A ChatGPT extension giving consumers access to information
+    surrounding businesses using the Yelp, Google Maps, and GoodCall apis.
+  version: v1
+servers:
+  - url: https://local.goodcall.ai
+components:
+  schemas:
+    -well-known-ai-plugin-json-getResponse:
+      type: object
+      properties: {}
+    businesses-search-getResponse:
+      type: object
+      properties:
+        businesses:
+          type: array
+          items:
+            type: object
+            properties:
+              business_url:
+                type: string
+              display_address:
+                type: array
+                items:
+                  type: string
+              name:
+                type: string
+              display_phone:
+                type: string
+            required:
+              - business_url
+              - display_address
+              - name
+              - display_phone
+      required:
+        - businesses
+    categories-getResponse:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              alias:
+                type: string
+                description: Category alias
+              title:
+                type: string
+                description: Category title
+              parent_aliases:
+                type: array
+                items:
+                  type: string
+                description: List of aliases of parent categories
+              country_whitelist:
+                type: array
+                items:
+                  type: string
+                description: List of country codes this category is available in
+              country_blacklist:
+                type: array
+                items:
+                  type: string
+                description: List of country codes this category is not available in
+            required:
+              - alias
+              - title
+              - parent_aliases
+              - country_whitelist
+              - country_blacklist
+      required:
+        - categories
+    logo-png-getResponse:
+      type: string
+    openapi-yaml-getResponse:
+      type: string
+  parameters: {}
+paths:
+  /.well-known/ai-plugin.json:
+    get:
+      operationId: -well-known-ai-plugin-json
+      summary: The plugin manifest used by ChatGPT
+      x-google-backend:
+        address: https://local--well-known-ai-plugin-json-get-6dtsqvpbyq-uc.a.run.app
+      responses:
+        "200":
+          description: The manifest file.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/-well-known-ai-plugin-json-getResponse"
+  /businesses/search:
+    get:
+      operationId: businesses-search
+      summary: Search for businesses by keyword, category, location, price level, etc.
+      x-google-backend:
+        address: https://local-businesses-search-get-6dtsqvpbyq-uc.a.run.app
+      parameters:
+        - schema:
+            type: string
+            description: Search term, e.g. "food" or "restaurants". The term may also be the
+              business's name, such as "Starbucks". If term is not included the
+              endpoint will default to searching across businesses from a small
+              number of popular categories.
+          required: false
+          name: term
+          in: query
+        - schema:
+            type: string
+            description: 'Required if either latitude or longitude is not provided. This
+              string indicates the geographic area to be used when searching for
+              businesses. Examples: "New York City", "NYC", "350 5th Ave, New
+              York, NY 10118". Businesses returned in the response may not be
+              strictly within the specified location.'
+          required: false
+          name: location
+          in: query
+        - schema:
+            type: number
+            default: 3
+            description: Number of results to return. Always default to 3 unless specified
+              with an exact amount by the user.
+          required: false
+          name: limit
+          in: query
+        - schema:
+            type: number
+            description: Offset the list of returned results by this amount.
+          required: false
+          name: offset
+          in: query
+        - schema:
+            type: string
+            description: Required, if location is not provided. Latitude of the location to
+              search from. If latitude is provided, longitude is required too.
+          required: false
+          name: latitude
+          in: query
+        - schema:
+            type: string
+            description: Required if location is not provided. Longitude of the location to
+              search from. If longitude is provided, latitude is required too.
+          required: false
+          name: longitude
+          in: query
+        - schema:
+            type: string
+            description: A suggested search radius in meters. This field is used as a
+              suggestion to the search. The actual search radius may be lower
+              than the suggested radius in dense urban areas, and higher in
+              regions of less business density. If the specified value is too
+              large, a AREA_TOO_LARGE error may be returned. The max value is
+              40,000 meters (about 25 miles).
+          required: false
+          name: radius
+          in: query
+        - schema:
+            type: string
+            description: >-
+              Categories to filter the search results with. See the list of
+              supported categories. The category filter can be a list of comma
+              delimited categories.
+                e.g., "bars,french" will filter by Bars OR French.
+                The category alias should be used (e.g. "discgolf", not "Disc Golf").
+          required: false
+          name: categories
+          in: query
+        - schema:
+            type: string
+            description: Locale code in the format of {language code}_{country code}. See
+              the list of supported locales.
+          required: false
+          name: locale
+          in: query
+        - schema:
+            type: string
+            description: >-
+              Pricing levels to filter the search result with: 1 = $, 2 = $, 3
+              = $$, 4 = $$. The price filter can be a list of comma delimited
+              pricing levels.
+
+              e.g., "1, 2, 3" will filter the results to show the ones that are $, $, or $$.
+          required: false
+          name: price
+          in: query
+        - schema:
+            type: string
+            description: When set to true, only return the businesses that are open now.
+              Notice that open_at and open_now cannot be used together.
+          required: false
+          name: open_now
+          in: query
+        - schema:
+            type: string
+            description: A string representing the time in the timezone of the search
+              location, formatted in ISO format. Value must be greater than two
+              weeks ago. If specified, it will return businesses open at the
+              given time. Notice that open_at and open_now cannot be used
+              together.
+          required: false
+          name: open_at
+          in: query
+        - schema:
+            type: string
+            description: >-
+              Suggestion to the search algorithm that the results be sorted by
+              one of the these modes: best_match, rating, review_count or
+              distance. The default is best_match. Note that specifying the
+              sort_by is a suggestion (not strictly enforced) to Yelp's search,
+              which considers multiple input parameters to return the most
+              relevant results.
+
+
+              e.g., the rating sort is not strictly sorted by the rating value, but by an adjusted rating value that takes into account the number of ratings,
+
+              similar to a Bayesian average. This is to prevent skewing results to businesses with a single review.
+          required: false
+          name: sort_by
+          in: query
+        - schema:
+            type: string
+            description: Determines the platform for mobile_link
+          required: false
+          name: device_platform
+          in: query
+        - schema:
+            type: string
+            description: The date for the reservation, format is YYYY-mm-dd
+          required: false
+          name: reservation_date
+          in: query
+        - schema:
+            type: string
+            description: The time of the requested reservation, format is HH:MM. Required if
+              reservation_date is defined.
+          required: false
+          name: reservation_time
+          in: query
+        - schema:
+            type: number
+            description: How many people are attending the reservation. Required if
+              reservation_date and reservation_time are defined.
+          required: false
+          name: reservation_covers
+          in: query
+        - schema:
+            type: boolean
+            description: Whether to filter out results that don't have openings matching the
+              params
+          required: false
+          name: matches_party_size_param
+          in: query
+      responses:
+        "200":
+          description: This endpoint returns up to 1000 businesses with some basic
+            information based on the provided search criteria.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/businesses-search-getResponse"
+        "400":
+          description: The user passed in invalid parameters.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/businesses-search-getResponse"
+                  - properties:
+                      error:
+                        type: string
+                    required:
+                      - error
+        "500":
+          description: There was an error thrown internally and the support team has
+            already been notified. We apologize for the inconvenience.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/businesses-search-getResponse"
+                  - properties:
+                      error:
+                        type: string
+                    required:
+                      - error
+  /categories:
+    get:
+      operationId: categories
+      summary: Get all Yelp business categories across all locales.
+      x-google-backend:
+        address: https://local-categories-get-6dtsqvpbyq-uc.a.run.app
+      parameters:
+        - schema:
+            type: string
+            description: Specify the locale to filter the categories returned to only those
+              available in that locale, and to translate the names of the
+              categories appropriately. See the list of supported locales. If
+              not included, all categories across all locales will be returned
+              and the category names will be in English.
+          required: false
+          name: locale
+          in: query
+      responses:
+        "200":
+          description: This endpoint returns all Yelp business categories across all
+            locales by default. Include the "locale" parameter to filter to only
+            those categories available for a particular locale, and
+            translate/localize the names of those categories.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/categories-getResponse"
+  /logo.png:
+    get:
+      operationId: logo-png
+      summary: The Logo for the plugin.
+      x-google-backend:
+        address: https://local-logo-png-get-6dtsqvpbyq-uc.a.run.app
+      responses:
+        "200":
+          description: The image file.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/logo-png-getResponse"
+  /openapi.yaml:
+    get:
+      operationId: openapi-yaml
+      summary: The OpenAPI specification for the plugin.
+      x-google-backend:
+        address: https://local-openapi-yaml-get-6dtsqvpbyq-uc.a.run.app
+      responses:
+        "200":
+          description: The manifest file.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/openapi-yaml-getResponse"

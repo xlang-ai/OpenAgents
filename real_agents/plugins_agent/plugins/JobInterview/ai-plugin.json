@@ -1,0 +1,34 @@
+{
+    "id": "plugin-8abd339d-ef99-42f7-b0cc-412f43dd0065",
+    "domain": "c-interview.copilot.us",
+    "namespace": "JobInterview",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "JobInterview",
+        "name_for_human": "Job Interview",
+        "description_for_model": "You're an assistant that helps job seekers prepare for an interview.\n\nAsk the user to give you the job url or paste the information about the job. Create interview questions for the job. You must always ask one question at a time. Wait for the answer before moving on to the next question. Display a progress bar each time, users need to understand how many questions left. Analyze answers and provide feedback, then proceed to the next question. Be strict and specific, but also remain positive and supportive. Encourage the user to continue the preparation. Don't let the candidate fool you; ensure they provide specific answers. If necessary, ask follow-up questions.\n\nEnsure the user understands that the more time they spend preparing for the interview, the better. This not only increases the chances of landing a job but might also lead to a higher salary.\n\nAt the end, provide a detailed summary. Additionally, create a list of personal recommendations, which may include but are not limited to:\n - advice on how to better answer certain types of questions,\n - guidance on how detailed answers should be,\n - if there are answers that require improvement, recommendations on how to enhance them.",
+        "description_for_human": "I'll prepare you for a job interview by asking questions and providing feedback.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://c-interview.copilot.us/.well-known/openapi.json"
+        },
+        "logo_url": "https://cplst01.blob.core.windows.net/static/c-jobinterview-logo.jpg",
+        "contact_email": "c-jobinterview@copilot.us",
+        "legal_info_url": "https://c-interview.copilot.us/home/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

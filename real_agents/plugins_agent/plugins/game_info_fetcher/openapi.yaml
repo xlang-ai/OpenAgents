@@ -1,0 +1,491 @@
+---
+openapi: 3.0.1
+info:
+  title: GameBase
+  description: Query and get game info, If platform is Nintendo Switch, We also support
+    querying prices.
+  version: '1.0'
+servers:
+- url: https://api.gamebase.chat
+  description: Generated server url
+paths:
+  "/games":
+    post:
+      tags:
+      - game-controller
+      summary: game search. Search game info by filter, Use the English name of the
+        game to query.If you think the result is not good enough or not fit the query
+        well, you MUST switch to the web query api(it is /api/url-result) and try
+        to use google to search related contents
+      operationId: queryGame
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GameQueryFilterDTO"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/GameResultVO"
+  "/api/youtube-search":
+    post:
+      tags:
+      - fetch-url-result-controller
+      summary: youtube search. search video from youtube
+      operationId: searchYoutubeVideos
+      parameters:
+      - name: query
+        in: query
+        description: the query words to get videos
+        required: true
+        schema:
+          type: string
+          description: the query words to get videos
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/VideoElement"
+  "/api/url-result":
+    post:
+      tags:
+      - fetch-url-result-controller
+      summary: web query. extract content from given url, if game query not return
+        or user wants latest info, you can use this api to search google.You can always
+        use this api to search extra infos by using google or bing or some other search
+        engines
+      operationId: getUrlResult
+      parameters:
+      - name: url
+        in: query
+        description: the url to get content from
+        required: true
+        schema:
+          type: string
+          description: the url to get content from
+          example: https://www.google.com/search?q=塞尔达传说
+        example: https://www.google.com/search?q=塞尔达传说
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/UrlResult"
+components:
+  schemas:
+    GameQueryFilterDTO:
+      type: object
+      properties:
+        query:
+          type: string
+          description: Game name, Use the English name of the game to query
+        genres:
+          type: string
+          description: Game genres, Split with ','. Value should be one of ['action','indie','adventure','role-playing-games-rpg','strategy','shooter','casual','simulation','puzzle','arcade','platformer','racing','massively-multiplayer','sports','fighting','family','board-games','educational','card']
+          example: action,indie
+          enum:
+          - action
+          - indie
+          - adventure
+          - role-playing-games-rpg
+          - strategy
+          - shooter
+          - casual
+          - simulation
+          - puzzle
+          - arcade
+          - platformer
+          - racing
+          - massively-multiplayer
+          - sports
+          - fighting
+          - family
+          - board-games
+          - educational
+          - card
+        tags:
+          type: string
+          description: Game tags, Split with ','. Value should be one of ['singleplayer','multiplayer','full-controller-support','open-world','fps','2d','third-person','first-person','cooperative','online-co-op','horror','survival','sandbox','zombies','pvp','mature','3d','remake','jrpg','puzzles']
+          example: singleplayer,multiplayer
+          enum:
+          - singleplayer
+          - multiplayer
+          - full-controller-support
+          - open-world
+          - fps
+          - 2d
+          - third-person
+          - first-person
+          - cooperative
+          - online-co-op
+          - horror
+          - survival
+          - sandbox
+          - zombies
+          - pvp
+          - mature
+          - 3d
+          - remake
+          - jrpg
+          - puzzles
+        dates:
+          type: string
+          description: Filter by a release date
+          example: 2010-01-01,2018-12-31.1960-01-01,1969-12-31
+        metacritic:
+          type: string
+          description: Filter by a metacritic rating. the pattern is `lower,higher`
+          example: '80,100'
+        platforms:
+          type: string
+          description: 'Filter by a game platform. split with '',''. correspondence
+            between platforms and numbers: [''4(PC)'', ''187(PlayStation 5)'', ''18(PlayStation
+            4)'', ''1(Xbox One)'', ''186(Xbox Series S/X)'', ''7(Nintendo Switch)'',
+            ''3(iOS)'', ''21(Android)'', ''8(Nintendo 3DS)'', ''9(Nintendo DS)'',
+            ''13(Nintendo DSi)'', ''5(macOS)'', ''6(Linux)'', ''14(Xbox 360)'', ''80(Xbox)'',
+            ''16(PlayStation 3)'', ''15(PlayStation 2)'', ''27(PlayStation)'', ''19(PS
+            Vita)'', ''17(PSP)'', ''10(Wii U)'', ''11(Wii)'', ''105(GameCube)'', ''83(Nintendo
+            64)'', ''24(Game Boy Advance)'', ''43(Game Boy Color)'', ''26(Game Boy)'',
+            ''79(SNES)'', ''49(NES)'', ''55(Classic Macintosh)'', ''41(Apple II)'',
+            ''166(Commodore / Amiga)'', ''28(Atari 7800)'', ''31(Atari 5200)'', ''23(Atari
+            2600)'', ''22(Atari Flashback)'', ''25(Atari 8-bit)'', ''34(Atari ST)'',
+            ''46(Atari Lynx)'', ''50(Atari XEGS)'', ''167(Genesis)'', ''107(SEGA Saturn)'',
+            ''119(SEGA CD)'', ''117(SEGA 32X)'', ''74(SEGA Master System)'', ''106(Dreamcast)'',
+            ''111(3DO)'', ''112(Jaguar)'', ''77(Game Gear)'', ''12(Neo Geo)'']'
+          example: '4,187,18'
+          enum:
+          - '4'
+          - '187'
+          - '18'
+          - '1'
+          - '186'
+          - '7'
+          - '3'
+          - '21'
+          - '8'
+          - '9'
+          - '13'
+          - '5'
+          - '6'
+          - '14'
+          - '80'
+          - '16'
+          - '15'
+          - '27'
+          - '19'
+          - '17'
+          - '10'
+          - '11'
+          - '105'
+          - '83'
+          - '24'
+          - '43'
+          - '26'
+          - '79'
+          - '49'
+          - '55'
+          - '41'
+          - '166'
+          - '28'
+          - '31'
+          - '23'
+          - '22'
+          - '25'
+          - '34'
+          - '46'
+          - '50'
+          - '167'
+          - '107'
+          - '119'
+          - '117'
+          - '74'
+          - '106'
+          - '111'
+          - '112'
+          - '77'
+          - '12'
+        parentPlatforms:
+          type: string
+          description: 'Filter by a game parent platform. split with '',''. correspondence
+            between platforms and numbers: [''1(PC)'', ''2(PlayStation)'', ''3(Xbox)'',
+            ''4(iOS)'', ''8(Android)'', ''5(Apple Macintosh)'', ''6(Linux)'', ''7(Nintendo)'',
+            ''9(Atari)'', ''10(Commodore / Amiga)'', ''11(SEGA)'', ''12(3DO)'', ''13(Neo
+            Geo)'', ''14(Web)'']'
+          example: '1,2,3'
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '8'
+          - '5'
+          - '6'
+          - '7'
+          - '9'
+          - '10'
+          - '11'
+          - '12'
+          - '13'
+          - '14'
+        ordering:
+          type: string
+          description: 'Available fields: name, released, added, created, updated,
+            rating, metacritic. You can reverse the sort order adding a hyphen'
+          example: "-released"
+      description: game query filter
+    CountryPrice:
+      type: object
+      properties:
+        country:
+          type: string
+          description: Country Name
+          example: Japan
+        meta:
+          type: string
+          description: Discount information, including the expiry time of the discount
+            activity
+        price:
+          "$ref": "#/components/schemas/Price"
+      description: The price list of each country and region of eshop, sorted from
+        low to high
+    GameInfoDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: the id of the game
+        name:
+          type: string
+          description: the name of the game
+        slug:
+          type: string
+          description: the slug of the game
+        description:
+          type: string
+          description: the description of the game
+        metacriticScore:
+          type: integer
+          description: metacritic score of the game
+          format: int64
+        released:
+          type: string
+          description: game released date, format like 2023-04-25
+        backgroundImage:
+          type: string
+          description: 'background image of the game, it''s a image url, you can just
+            show image using this url, use markdown, for example: ![]($BACKGROUND_IMAGE)'
+        website:
+          type: string
+          description: 'the game website, use markdown, for example: [$NAME]($WEBSITE)'
+        esrbRating:
+          type: string
+          description: the esrb rating of the game
+        alternativeNames:
+          type: array
+          description: alternative name of the game
+          items:
+            type: string
+            description: alternative name of the game
+        metacriticUrl:
+          type: string
+          description: the url of the metacritic of the game
+        platforms:
+          type: array
+          description: the platforms on which the game published
+          items:
+            "$ref": "#/components/schemas/Platform"
+        parentPlatforms:
+          type: array
+          description: the parent platforms on which the game published
+          items:
+            "$ref": "#/components/schemas/Platform"
+        genres:
+          type: array
+          description: the game genre
+          items:
+            type: string
+            description: the game genre
+        genreSlugs:
+          type: array
+          description: the game genre slugs. can be used in genres in query api
+          items:
+            type: string
+            description: the game genre slugs. can be used in genres in query api
+        tags:
+          type: array
+          description: the game tags, only return 10 tags
+          items:
+            type: string
+            description: the game tags, only return 10 tags
+        tagSlugs:
+          type: array
+          description: the game tag slugs. can be used in tags in query api
+          items:
+            type: string
+            description: the game tag slugs. can be used in tags in query api
+        developers:
+          type: array
+          description: the game developers
+          items:
+            type: string
+            description: the game developers
+        developerSlugs:
+          type: array
+          description: the game developer slugs
+          items:
+            type: string
+            description: the game developer slugs
+        publishers:
+          type: array
+          description: the game publishers
+          items:
+            type: string
+            description: the game publishers
+        publisherSlugs:
+          type: array
+          description: the game publishers
+          items:
+            type: string
+            description: the game publishers
+        gamePrice:
+          "$ref": "#/components/schemas/GamePriceVO"
+    GamePriceVO:
+      type: object
+      properties:
+        eshopPriceInfo:
+          "$ref": "#/components/schemas/NSEshopGamePriceDTO"
+        steamPriceInfo:
+          "$ref": "#/components/schemas/SteamGamePriceDTO"
+      description: the game price info in eshop
+    GameResultVO:
+      type: object
+      properties:
+        gameInfos:
+          type: array
+          items:
+            "$ref": "#/components/schemas/GameInfoDTO"
+    NSEshopGamePriceDTO:
+      type: object
+      properties:
+        best_price:
+          type: string
+          description: the lowest price of the game
+          example: "$59.99"
+        prices:
+          type: array
+          description: The price list of each country and region of eshop, sorted
+            from low to high
+          items:
+            "$ref": "#/components/schemas/CountryPrice"
+      description: the game price info from nintendo eshop, the top 5 lowest prices
+    Platform:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        releasedAt:
+          type: string
+      description: the parent platforms on which the game published
+    Price:
+      type: object
+      properties:
+        current_price:
+          type: string
+          description: Current Price
+          example: "$59.99"
+        discount:
+          type: boolean
+          description: Is there a discount
+          example: true
+        original_price:
+          type: string
+          description: Original Price
+          example: "$59.99"
+      description: Price Info
+    SteamGamePriceDTO:
+      type: object
+      properties:
+        current_price:
+          type: string
+          description: the current price from steam
+        history_highest_price:
+          type: string
+          description: the highest price from steam history
+        history_lowest_price:
+          type: string
+          description: the lowest price from steam history
+      description: the game price info from steam
+    VideoElement:
+      type: object
+      properties:
+        title:
+          type: string
+          description: the title of video
+        description:
+          type: string
+          description: video description
+        url:
+          type: string
+          description: the video watch url
+        thumbnail:
+          type: string
+        author:
+          type: string
+        authorUrl:
+          type: string
+          description: the url link to the author of the video
+    ImageLink:
+      type: object
+      properties:
+        src:
+          type: string
+          description: image src, you can use this to show the image
+        alt:
+          type: string
+          description: image description
+      description: the image link in this web page if exists. we only give at most
+        10 links
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+          description: href(url)
+        text:
+          type: string
+          description: the text for describing the href
+      description: the web link in this web page if exists. we only give at most 10
+        links
+    UrlResult:
+      type: object
+      properties:
+        title:
+          type: string
+          description: the title of the url
+          example: hello - site
+        plainContent:
+          type: string
+          description: the plain content of this url
+        images:
+          type: array
+          description: the image link in this web page if exists. we only give at
+            most 10 links
+          items:
+            "$ref": "#/components/schemas/ImageLink"
+        links:
+          type: array
+          description: the web link in this web page if exists. we only give at most
+            10 links
+          items:
+            "$ref": "#/components/schemas/Link"

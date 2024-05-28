@@ -1,0 +1,55 @@
+openapi: 3.0.1
+info:
+  title: OCR Plugin
+  description: The best way to read text from from any document. Extract text from scanned PDFs, photos, and even handwriting.
+  version: "v1"
+servers:
+  - url: https://chatocr.fly.dev
+paths:
+  /upload_url:
+    post:
+      operationId: uploadUrl
+      summary: Upload a URL to a file and return the OCR data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: The URL of the file
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                description: The OCR data for the file
+  /feedback:
+    post:
+      operationId: sendFeedback
+      summary: Save feedback to developers for review
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                feedback:
+                  type: string
+                  description: The feedback string from the user
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+                    description: A success message thanking the user for the feedback

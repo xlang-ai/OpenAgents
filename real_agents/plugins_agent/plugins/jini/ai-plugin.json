@@ -1,0 +1,34 @@
+{
+    "id": "plugin-f949f5fc-956d-48ad-8cad-b9ec5535528a",
+    "domain": "api.pannous.com",
+    "namespace": "jini",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "jini",
+        "name_for_human": "Jini",
+        "description_for_model": "Request real-time information:  Search images, videos, music, apps and facts. Get the latest news, twitter trends, sports scores, (stock) prices, celebrity and country data, navigation routes, public transport and traffic info. Acts as a proxy to make any information that exists online available.",
+        "description_for_human": "Get factual, knowledge-base and real-time information. \n Search news, images, videos, music, apps, pages and facts.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://api.pannous.com/openapi.yaml"
+        },
+        "logo_url": "https://api.pannous.com/logo.png",
+        "contact_email": "info@pannous.com",
+        "legal_info_url": "http://files.pannous.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

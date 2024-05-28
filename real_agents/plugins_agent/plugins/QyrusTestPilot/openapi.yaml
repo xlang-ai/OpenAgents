@@ -1,0 +1,377 @@
+openapi: 3.0.2
+info:
+  title: FastAPI
+  version: 0.1.0
+  description: You can test your webapp without writing a single line of code by just giving the URL
+servers:
+  - url: https://devui-qyrusbot.quinnox.info
+paths:
+  /execute_test:
+    post:
+      summary: Trigger Web Test Fun
+      description: Gets URL and triggers web app testing agent and acknowledges the start of the agent by returning the test_reference_id
+      operationId: trigger_web_test_fun_execute_test_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteStepsInput'
+            examples:
+              Success:
+                summary: Request to trigger an automated test agent to test a webapp
+                description: Request to trigger an automated test agent to test a webapp with a valid URL
+                value:
+                  req_id: UUAS-JNA1-AMIA-OLAS
+                  scenario_id: 1
+      responses:
+        '200':
+          description: Successful response for a automated test trigger
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteStepsOutput'
+              examples:
+                success:
+                  summary: Automated test for a webapp is triggered successfully
+                  value:
+                    OK: true
+                    message: Execution Started for ref id MKAS-AMKS-MIKA-MKAA
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /generate-scenarios:
+    post:
+      summary: Generate Scenarios Fun
+      description: Gets URL and triggers web app testing agent and acknowledges the start of the agent generating the scenarios for the url by returning the test_reference_id
+      operationId: generate_scenarios_fun_generate_scenarios_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateScenariosInput'
+            examples:
+              Success:
+                summary: Request to trigger an automated test agent to test a webapp
+                description: Request to trigger an automated test agent to generate scenarios for the webapp with a valid URL
+                value:
+                  url: https://www.example.com
+      responses:
+        '200':
+          description: Successful response for a automated test trigger
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateScenariosOutput'
+              examples:
+                success:
+                  summary: Automated test for a webapp is triggered successfully
+                  value:
+                    OK: true
+                    message: Running
+                    test_reference_id: YUAS-SBHA-1NAN-HA61
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /get-scenarios:
+    post:
+      summary: Get Scenarios Fun
+      description: Gets URL and triggers web app testing agent and acknowledges the start of the agent by returning the test_reference_id
+      operationId: get_scenarios_fun_get_scenarios_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetScenariosInput'
+            examples:
+              Success:
+                summary: Request to get the scenarios 
+                description: Request to trigger an test agent to get the generated scenarios with a valid test_reference_id
+                value:
+                  test_reference_id: YUAS-SBHA-1NAN-HA61
+      responses:
+        '200':
+          description: Successful response for a automated test trigger
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScenariosOutput'
+              examples:
+                success:
+                  summary: Responds with generate scenarios with its ids
+                  value:
+                    OK: true
+                    message: Running
+                    scnearios:
+                      id: 1
+                      test_description: Test Login
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /get-steps:
+    post:
+      summary: Get Steps Fun
+      description: Gets URL and triggers web app testing agent and acknowledges the start of the agent by returning the test_reference_id
+      operationId: get_steps_fun_get_steps_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetStepsInput'
+            examples:
+              Success:
+                summary: Request to trigger an automated test agent to test a webapp
+                description: Request to trigger an automated test agent to test a webapp with a valid URL
+                value:
+                  req_id: UUAS-JNA1-AMIA-OLAS
+                  scenario_id: 1
+      responses:
+        '200':
+          description: Successful response for a automated test trigger
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStepsOutput'
+              examples:
+                success:
+                  summary: Automated test for a webapp is triggered successfully
+                  value:
+                    OK: true
+                    message: Running
+                    steps:
+                      - click on soething
+                      - verify something is there
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /get-execution-status:
+    post:
+      summary: Get Execution Status Fun
+      description: Gets the test_reference_id and gives out the status of the automated test run and displays the screenshot using the s3 URL provided
+      operationId: get_execution_status_fun_get_execution_status_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecutionStatusInput'
+            examples:
+              Success:
+                summary: Request to get the status of the execution of automated exploratory test using test_reference_id given to the request earlier
+                description: Request to get the status of the execution of automated exploratory test using test_reference_id given to the request earlier
+                value:
+                  test_reference_id: UUAS-JNA1-AMIA-OLAS
+      responses:
+        '200':
+          description: These are the some of the responses for the scenarios where user asks for the status of the scenario execution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionStatusOutput'
+              examples:
+                Running:
+                  summary: If the test has started running
+                  value:
+                    OK: true
+                    message: ''
+                    status: Running
+                    steps_completed: 5
+                    total_steps: 3
+                Completed:
+                  summary: If the run is completed
+                  value:
+                    OK: true
+                    message: ''
+                    status: Completed
+                    steps_completed: 5
+                    total_steps: 5
+                Not Found:
+                  summary: If the reference ID is wrong
+                  value:
+                    OK: false
+                    message: Did not find a reference test run
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ExecuteStepsInput:
+      title: ExecuteStepsInput
+      required:
+        - test_reference_id
+        - scenario_id
+      type: object
+      properties:
+        test_reference_id:
+          title: Test Reference Id
+          type: string
+        scenario_id:
+          title: Scenario Id
+          type: integer
+    ExecuteStepsOutput:
+      title: ExecuteStepsOutput
+      required:
+        - OK
+        - message
+      type: object
+      properties:
+        OK:
+          title: Ok
+          type: boolean
+        message:
+          title: Message
+          type: string
+    ExecutionStatusInput:
+      title: ExecutionStatusInput
+      required:
+        - test_reference_id
+      type: object
+      properties:
+        test_reference_id:
+          title: Test Reference Id
+          type: string
+    ExecutionStatusOutput:
+      title: ExecutionStatusOutput
+      required:
+        - OK
+        - message
+      type: object
+      properties:
+        OK:
+          title: Ok
+          type: boolean
+        message:
+          title: Message
+          type: string
+        status:
+          title: Status
+          type: string
+        steps_completed:
+          title: Steps Completed
+          type: integer
+        total_steps:
+          title: Total Steps
+          type: integer
+    GenerateScenariosInput:
+      title: GenerateScenariosInput
+      required:
+        - url
+      type: object
+      properties:
+        url:
+          title: Url
+          type: string
+    GenerateScenariosOutput:
+      title: GenerateScenariosOutput
+      required:
+        - OK
+        - message
+      type: object
+      properties:
+        OK:
+          title: Ok
+          type: boolean
+        message:
+          title: Message
+          type: string
+        test_reference_id:
+          title: Test Reference Id
+          type: string
+    GetScenariosInput:
+      title: GetScenariosInput
+      required:
+        - test_reference_id
+      type: object
+      properties:
+        test_reference_id:
+          title: Test Reference Id
+          type: string
+    GetScenariosOutput:
+      title: GetScenariosOutput
+      required:
+        - OK
+        - message
+      type: object
+      properties:
+        OK:
+          title: Ok
+          type: boolean
+        message:
+          title: Message
+          type: string
+        scnearios:
+          title: Scnearios
+          type: object
+    GetStepsInput:
+      title: GetStepsInput
+      required:
+        - test_reference_id
+        - scenario_id
+      type: object
+      properties:
+        test_reference_id:
+          title: Test Reference Id
+          type: string
+        scenario_id:
+          title: Scenario Id
+          type: integer
+    GetStepsOutput:
+      title: GetStepsOutput
+      required:
+        - OK
+        - message
+      type: object
+      properties:
+        OK:
+          title: Ok
+          type: boolean
+        message:
+          title: Message
+          type: string
+        steps:
+          title: Steps
+          type: array
+          items: {}
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string

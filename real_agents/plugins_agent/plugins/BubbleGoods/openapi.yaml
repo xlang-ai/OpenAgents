@@ -1,0 +1,73 @@
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: "Bubble Goods ChatGPT API"
+  description: "Marketplace of 1000+ tasty & healthy foods. Discover new Vegan, Keto, Gluten-Free products & more."
+
+servers:
+  - url: "https://chatgpt.bubblegoods.com/api"
+
+paths:
+  /search:
+    get:
+      operationId: "search"
+      summary: "Search Bubble Good's product index with a query."
+      description: "Returns information about products matching the query. For example, a query of 'vegan' returns vegan products."
+      parameters:
+        - in: "query"
+          name: "query"
+          required: true
+          schema:
+            type: "string"
+          description: "A query string. For example, 'vegan' would return paginated results of vegan products."
+        - in: "query"
+          name: "page"
+          required: false
+          schema:
+            type: "integer"
+          description: "The results page you'd like to view."
+      responses:
+        '400':
+          description: "Error - no query parameter"
+        '200':
+          description: "Successful operation."
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  total_results:
+                    type: "integer"
+                    description: "The total number of matching product results."
+                  page_count:
+                    type: "integer"
+                    description: "Count of results pages."
+                  is_last_page:
+                    type: "boolean"
+                    description: "Is true if we're on the last page."
+                  page_length:
+                    type: "integer"
+                    description: "The number of items on the current page."
+                  page_number:
+                    type: "integer"
+                    description: "The current page number."
+                  results:
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        name:
+                          type: "string"
+                          description: "The name of this product."
+                        ingredients:
+                          type: "string"
+                          description: "The ingredients in the product."
+                        brand:
+                          type: "string"
+                          description: "The producer of the product."
+                        url:
+                          type: "string"
+                          description: "The URL for more information on this product."
+                        tags:
+                          type: "string"
+                          description: "Tags that apply to this product."

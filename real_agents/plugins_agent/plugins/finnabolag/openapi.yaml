@@ -1,0 +1,159 @@
+openapi: 3.0.1
+info:
+  title: Company Financials Plugin
+  description: A chatbot plugin to fetch a Swedish company and its holding (if available) financial data given its registration number.
+  version: 'v1'
+# TODO: Change url
+servers:
+  - url: https://finna-bolag.fly.dev #http://localhost:5003
+paths:
+  /get_company_data:
+    get:
+      summary: Get company data
+      operationId: getCompanyData
+      parameters:
+        - in: query
+          name: registration_number
+          required: true
+          description: Registration number of the company.
+          schema:
+            type: string
+        - in: query
+          name: is_holding
+          required: false
+          description: To return the group company data
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Company data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    format: int32
+                  body:
+                    type: object
+                    properties:
+                      company:
+                        type: object
+                        description: Company details.
+                      holding:
+                        type: object
+                        description: Holding details.
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /search_company:
+    get:
+      summary: Search companies by keyword
+      operationId: searchCompany
+      parameters:
+        - name: keyword
+          in: query
+          description: The keyword to search for companies
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Company'
+        '404':
+          description: No companies found
+
+components:
+  schemas:
+    getCompanyResponse:
+      type: object
+      properties:
+        company:
+          type: string
+          items:
+            type: string
+          description: json file of company financials
+        overview:
+          type: string
+          items:
+            type: string
+          description: json file of company details, such as name, address, etc
+    Company:
+      type: object
+      properties:
+        orgnr:
+          type: string
+          description: The registration number of the company
+        jurnamn:
+          type: string
+          description: The name of the company
+        ftgtyp:
+          type: string
+          description: The type of the company
+        bolpres:
+          type: string
+          description: The company's board representation
+        abv_hgrupp:
+          type: string
+          description: The high-level group of the company
+        abv_ugrupp:
+          type: string
+          description: The sub-group of the company
+        ba_postort:
+          type: string
+          description: The company's postal city
+        companyPresentation:
+          type: object
+          description: Additional presentation data for the company
+        linkTo:
+          type: string
+          description: The link to the company's details
+        score:
+          type: object
+          description: The score of the company's search result
+        remarks:
+          type: array
+          items:
+            type: string
+          description: Remarks about the company
+        hasremarks:
+          type: boolean
+          description: Indicates if the company has remarks
+        relatedmetadata:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+          description: Related metadata about the company
+        hasrelatedmetadata:
+          type: boolean
+          description: Indicates if the company has related metadata
+        status:
+          type: string
+          description: The status of the company

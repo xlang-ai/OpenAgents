@@ -1,0 +1,21 @@
+path_dict = {
+    "help_browser": "/help/browser",
+    "communication_help": "/help/communication",
+    "help_did": "/help/did",
+    "did_description": "/help/did_description",
+    "dwn_delete_help": "/help/dwn_delete",
+    "dwn_description": "/help/dwn_description",
+    "dwn_read": "/help/dwn_read",
+    "dwn_write_help": "/help/dwn_write",
+    "help_protocol": "/help/protocol",
+    "protocol_description": "/help/protocol_description",
+    "query_help": "/help/query",
+    "query_full": "/help/query-full",
+    "quickstart": "/help/quickstart",
+    "help_setup": "/help/setup",
+    "help_store": "/help/store",
+    "help_sync": "/help/sync",
+    "todo_app_helper": "/help/todo_app",
+    "update_to_web5": "/help/update_to_web5",
+    "write_send_help": "/help/write-send"
+}

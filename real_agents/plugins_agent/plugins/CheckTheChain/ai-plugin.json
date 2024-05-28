@@ -1,0 +1,34 @@
+{
+    "id": "plugin-62454d8d-e270-41bf-967f-4a9a5db85849",
+    "domain": "www.nani.ooo",
+    "namespace": "CheckTheChain",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "CheckTheChain",
+        "name_for_human": "CheckTheChain",
+        "description_for_model": "Plugin for doing on-chain analysis over blockchain and crypto protocol datasets like Bitcoin, Ethereum and Uniswap",
+        "description_for_human": "Look for anything on the blockchain and get instant analysis.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://nani.ooo/openapi.json"
+        },
+        "logo_url": "https://nani.ooo/logo.png",
+        "contact_email": "me@nani.ooo",
+        "legal_info_url": "https://nani.ooo/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,110 @@
+openapi: 3.0.1
+info:
+  title: ThemeParkHipster
+  description: Find theme park waiting times around the world by entering the country name, theme park name, or ride name.
+  version: 'v1'
+servers:
+  - url: https://plugin.themeparkhipster.com
+paths:
+  /parks:
+    get:
+      operationId: getParks
+      summary: Get the list of parks
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getParksResponse'
+  /parks/{park_id}/queue_times:
+    get:
+      operationId: getQueueTimes
+      summary: Get the queue times for a specific park
+      parameters:
+      - in: path
+        name: park_id
+        schema:
+            type: integer
+        required: true
+        description: The ID of the park.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getQueueTimesResponse'
+
+components:
+  schemas:
+    getParksResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          name:
+            type: string
+          parks:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                country:
+                  type: string
+                continent:
+                  type: string
+                latitude:
+                  type: string
+                longitude:
+                  type: string
+                timezone:
+                  type: string
+    getQueueTimesResponse:
+      type: object
+      properties:
+        lands:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              rides:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    is_open:
+                      type: boolean
+                    wait_time:
+                      type: integer
+                    last_updated:
+                      type: string
+        rides:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              is_open:
+                type: boolean
+              wait_time:
+                type: integer
+              last_updated:
+                type: string

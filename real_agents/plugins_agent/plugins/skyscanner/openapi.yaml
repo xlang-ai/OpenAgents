@@ -1,0 +1,90 @@
+openapi: "3.0.0"
+info:
+  title: "Skyscanner Flights Live Search API"
+  version: "1.0.0"
+  description: Makes travel planning easy with Skyscanner, helping you search flight deals and plan your next exciting trip.
+servers:
+- url: https://skyscanner-api.p.rapidapi.com/v3/flights/live/search/
+paths:
+  /create:
+    post:
+      summary: "Initiate the search request"
+      operationId: "create"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                market:
+                  type: "string"
+                  description: "Market where search is coming from"
+                locale:
+                  type: "string"
+                  description: "Language to be used for the search"
+                currency:
+                  type: "string"
+                  description: "Currency that the search result prices are returned in"
+                queryLegs:
+                  type: "string"
+                  description: "Origin and destination for the given search"
+                adults:
+                  type: "integer"
+                  description: "Number of adults traveling"
+                childrenAges:
+                  type: "integer"
+                  description: "Number of children traveling"
+                includeSustainabilityData:
+                  type: "boolean"
+                  description: "Include sustainability data option for result to contain sustainability data"
+                  default: true
+                nearbyAirports:
+                  type: "boolean"
+                  description: "Option for search to include nearby airports instead of the specified airport"
+                  default: false
+                cabinClass:
+                  type: "string"
+                  description: "Class of travel to search for"
+      responses:
+        '200':
+          description: "Search initiated"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateResponse"
+components:
+  schemas:
+    CreateResponse:
+      type: "object"
+      properties:
+        sessionToken:
+          type: "string"
+          description: "Token to be used to poll for results"
+    PollResponse:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+          description: "Indicates status of the search request is running or completed"
+        action:
+          type: "string"
+          description: "Indicates how to treat the SearchResults contained in a SearchContent"
+        Itineraries:
+          type: "array"
+          items: {}
+        Leg:
+          type: "object"
+          properties: {}
+        Segment:
+          type: "object"
+          properties: {}
+        Places:
+          type: "object"
+          properties: {}
+        Carriers:
+          type: "object"
+          properties: {}
+        Agents:
+          type: "object"
+          properties: {}

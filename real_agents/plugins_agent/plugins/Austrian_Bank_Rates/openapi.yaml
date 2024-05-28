@@ -1,0 +1,110 @@
+openapi: 3.0.1
+
+info:
+  title: Austrian Bank Rates
+  description: 'Compare the rates and terms of checking accounts and savings accounts from Austrian banks.'
+  version: 'v1'
+servers:
+  - url: https://banken-vergleich.net
+paths:
+  /api/bank:
+    get:
+      operationId: bank
+      summary: Generelle Informationen zu den österreichischen Banken. Der Name der Bank dient als id für das Filtern der Produkte
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bank'
+  /api/account:
+    get:
+      operationId: account
+      summary: Informationen aller Girokonten
+      parameters:
+        - name: id
+          in: query
+          description: Name der Bank zum filtern der Girokonten.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account'
+  /api/call:
+    get:
+      operationId: call
+      summary: Aktuelle Tagesgeld Angebote der Banken
+      parameters:
+        - name: id
+          in: query
+          description: Name der Bank zum filtern der Tagesgeld Angebote.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/call'
+components:
+  schemas:
+    bank:
+      type: array
+      items:
+        type: object
+        description: Girokonto Informationen zu Banken
+        properties:
+          name:
+            type: string
+            description: Name der Bank
+          type:
+            type: string
+            description: Information ob die Bank Filialen (Filialbank) oder keine Filialen (Direktbank) hat
+          products:
+            type: array
+            description: Produktkategorien die von der Bank angeboten werden
+            items:
+              type: string
+              description: Produktkategorie
+    account:
+      type: array
+      items:
+        type: object
+        description: Informationen, Konditionen und Link zu Girokonten
+        properties:
+          name:
+            type: string
+            description: Name der Bank
+          productName:
+            type: string
+            description: Name des Girokontos
+          conditions:
+            type: string
+            description: aktuelle Konditionen des Girokontos
+          link:
+            type: string
+            description: Link zu dem Girokonto Angebot der Bank
+    call:
+      type: array
+      items:
+        type: object
+        description: Tagesgeld Konditionen verschiedener Banken
+        properties:
+          name:
+            type: string
+            description: Name der Bank
+          productName:
+            type: string
+            description: Name des Tagesgeld Produkts
+          conditions:
+            type: string
+            description: aktuelle Konditionen des Tagesgeld
+          link:
+            type: string
+            description: Link zu dem Tagesgeld Angebot der Bank

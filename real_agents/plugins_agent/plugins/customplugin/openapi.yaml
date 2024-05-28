@@ -1,0 +1,42 @@
+openapi: 3.0.2
+info:
+  title: AI Chatbot Builder
+  description: AI Chatbot Builder
+  version: 1.0.0
+servers:
+- url: https://customplugin.customplugin.ai
+paths:
+  /query:
+    post:
+      summary: Request the context
+      description: Query to request the context
+      operationId: query_get_context
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetContextRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContextResponse'
+components:
+  schemas:
+    GetContextRequest:
+      title: GetContextRequest
+      type: object
+      properties:
+        text:
+          type: string
+    GetContextResponse:
+      title: GetContextResponse
+      type: object
+      properties:
+        context:
+          type: string
+        error:
+          type: string

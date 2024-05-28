@@ -1,0 +1,34 @@
+{
+    "id": "plugin-e7315224-2343-4bb0-81ef-cdc12bdad288",
+    "domain": "imgser.aigenprompt.com",
+    "namespace": "ImageSearch",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "ImageSearch",
+        "name_for_human": "ImageSearch",
+        "description_for_model": "Find images and display the images with titles. Display author name and Unsplash name like this: Photo by author_name with author_website link on Unsplash with unsplash_website link. Display customize image link like this: [Customize your image using AI](customize_image_url)",
+        "description_for_human": "Discover complimentary images to enhance your generated article or to highlight specific paragraphs from Unsplash.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://imgser.aigenprompt.com/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://imgser.aigenprompt.com/logo.png",
+        "contact_email": "roberts@aigenprompt.com",
+        "legal_info_url": "https://imgser.aigenprompt.com/legal-info.txt"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

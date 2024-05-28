@@ -1,0 +1,192 @@
+openapi: 3.0.1
+info:
+  title: openai-video-api
+  description: Interact with online video platforms like Youtube or Daily Motion.
+  version: '2023-05-06T23:51:19Z'
+servers:
+- url: https://openai.jettel.de
+  x-amazon-apigateway-endpoint-configuration:
+    disableExecuteApiEndpoint: true
+paths:
+  /unknown/getVideoSummary:
+    get:
+      operationId: GetVideoSummaryOperationUnknown
+      parameters:
+      - name: full-video-url
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Content-Type:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoSummaryResponseUnknown'
+      summary: Returns the summary and metadata of an unsupported video provider
+  /youtube/getFullTranscript:
+    get:
+      operationId: GetFullTranscriptOperationYoutube
+      parameters:
+      - name: timestamped
+        in: query
+        schema:
+          type: string
+      - name: video-id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Content-Type:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FullTranscriptResponseYoutube'
+      summary: Returns the full transcript and metadata of a Youtube video
+  /unknown/getFullTranscript:
+    get:
+      operationId: GetFullTranscriptOperationUnknown
+      parameters:
+      - name: full-video-url
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Content-Type:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FullTranscriptResponseUnknown'
+      summary: Returns the full transcript and metadata of an unsupported video provider
+  /youtube/getVideoSummary:
+    get:
+      operationId: GetVideoSummaryOperationYoutube
+      parameters:
+      - name: video-id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Content-Type:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoSummaryResponseYoutube'
+      summary: Returns the summary and metadata of a Youtube video
+components:
+  schemas:
+    FullTranscriptResponseYoutube:
+      title: FullTranscriptResponse
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            is_age_restricted:
+              type: boolean
+              description: Whether the video is age-restricted or not
+            keywords:
+              type: array
+              description: Keywords related to the video
+              items:
+                type: string
+            length_in_seconds:
+              type: string
+              description: Length of the video in seconds
+            number_of_views:
+              type: string
+              description: Number of views of the video
+            video_title:
+              type: string
+              description: Title of the video
+          description: Metadata of the video
+        status:
+          type: integer
+          description: Status code of response
+        timestamped:
+          type: boolean
+          description: Whather the transcript includes timestamps
+        transcript:
+          type: string
+          description: The full transcript of the video
+        video-id:
+          type: string
+          description: Video ID of the transcript
+    VideoSummaryResponseYoutube:
+      title: VideoSummaryResponse
+      type: object
+      properties:
+        metadata:
+          type: object
+          properties:
+            is_age_restricted:
+              type: boolean
+              description: Whether the video is age-restricted or not
+            keywords:
+              type: array
+              description: Keywords related to the video
+              items:
+                type: string
+            length_in_seconds:
+              type: string
+              description: Length of the video in seconds
+            number_of_views:
+              type: string
+              description: Number of views of the video
+            video_title:
+              type: string
+              description: Title of the video
+          description: Metadata of the video
+        status:
+          type: integer
+          description: Status code of response
+        summary:
+          type: string
+          description: The summary of the video
+        video-id:
+          type: string
+          description: Video ID of the transcript
+    FullTranscriptResponseUnknown:
+      title: FullTranscriptResponseUnknown
+      type: object
+      properties:
+        status:
+          type: integer
+          description: Status code of response
+        response_body:
+          type: string
+          description: The full transcript of this video and whether it was a successful
+            transcript
+    VideoSummaryResponseUnknown:
+      title: VideoSummaryResponseUnknown
+      type: object
+      properties:
+        status:
+          type: integer
+          description: Status code of response
+        response_body:
+          type: string
+          description: The info about this video and whether it was a successful summary

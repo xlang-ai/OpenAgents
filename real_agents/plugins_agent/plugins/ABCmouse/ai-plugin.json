@@ -1,0 +1,34 @@
+{
+    "id": "plugin-c6175037-25c5-4b97-a2b7-828a016be2f8",
+    "domain": "ai.abcmouse.com",
+    "namespace": "ABCmouse",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "ABCmouse",
+        "name_for_human": "ABCmouse",
+        "description_for_model": "Assistant uses the ABCmouse plugin to get relevant learning activity suggestions for any child 2-8 years of age. Assistant will reply with the following 3 paragraphs 1) Activity Search Results [image] and [url] 2) Activity Learning Objectives [description] and [learning_objective] 3) Followup Questions. The first paragraph contains a list of the activities [url] with their learning attributes listed clearly and concisely as bullet points under the product [description], together with a link to the activity [url] and an explanation [learning_objective]. Links will always be returned and should be shown to the user. Assistant suggestions consider only the most important objectives of the activities [description, learning_objective] that will help them fit the users request, and each activity [url] mention is brief, short and concise. In the third paragraph assistant always asks helpful follow-up questions and end with a question mark. When assistant is asking a follow-up question, it uses its learning activity expertise to provide information pertaining to the subject of the user\u2019s request that may guide them in their search for the right activity.",
+        "description_for_human": "Provides fun and educational learning activities for children 2-8 years old.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://ai.abcmouse.com/openapi.yml"
+        },
+        "logo_url": "https://ai.abcmouse.com/logo.png",
+        "contact_email": "support@ageoflearning.com",
+        "legal_info_url": "https://ai.abcmouse.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+openapi: 3.0.1
+info:
+  title: Weather
+  description: Provides weather forecast based on location. Includes temperature, precipitation, cloud cover, wind and much more.
+  version: 'v1.2'
+servers:
+  - url: https://weather--vicentescode.repl.co
+paths:
+  /weathernow:
+    get:
+      operationId: getWeatherNow
+      summary: Get the current weather information based on city, state, and country. You MUST ALWAYS convert the plugin response to the units that are most useful to your user, when in doubt assume USA/Enlish units.
+      parameters:
+      - in: query
+        name: city
+        schema:
+          type: string
+        required: true
+        description: The city name.
+      - in: query
+        name: state
+        schema:
+          type: string
+        required: false
+        description: The state code (optional).
+      - in: query
+        name: country
+        schema:
+          type: string
+        required: true
+        description: The country code.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /weatherforecast:
+    get:
+      operationId: getWeatherForecast
+      summary: Get up to 16 day weather forecast (first day is always the current date) based on city, state, and country. THINK STEP BY STEP TO ADJUST THE NUMBER OF DAYS IN THE QUERY CNT TO COVER THE DAYS THE USER WANTS.
+      parameters:
+      - in: query
+        name: cnt
+        schema:
+          type: string
+        required: false
+        description: Number of days up to 16 for weather forecast (optional). First day is always the current date. THINK STEP BY STEP TO ADJUST THE NUMBER OF DAYS IN THE QUERY CNT TO COVER THE DAYS THE USER WANTS.
+      - in: query
+        name: city
+        schema:
+          type: string
+        required: true
+        description: The city name.
+      - in: query
+        name: state
+        schema:
+          type: string
+        required: false
+        description: The state code (optional).
+      - in: query
+        name: country
+        schema:
+          type: string
+        required: true
+        description: The country code.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true

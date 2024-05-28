@@ -1,0 +1,34 @@
+{
+    "id": "plugin-0b136121-87cd-42fd-af75-2e7472779749",
+    "domain": "gitsearch.sdan.io",
+    "namespace": "ChatWithGit",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "ChatWithGit",
+        "name_for_human": "ChatWithGit",
+        "description_for_model": "Allows users to search code on GitHub repositories based on a query. Users can provide a search query, and the system will fetch the relevant code chunks from GitHub. You can only fetch relevant chunks of code from Github search. You must always include at least one search term when searching source code. For example, searching for language:go is not valid, while amazing language:go is. When searching for code, you can get text match metadata for the file\u00a0content\u00a0and file\u00a0path\u00a0fields when you pass the\u00a0text-match\u00a0media type. For example, if you want to find the definition of the\u00a0addClass\u00a0function inside\u00a0jQuery repository, your query would look something like this: language:js+repo:jquery/jquery  This query searches for the keyword\u00a0addClass\u00a0within a file's contents. The query limits the search to files where the language is JavaScript in the\u00a0jquery/jquery\u00a0repository. You can only use links that are clearly defined in the response in your response.",
+        "description_for_human": "Search code on GitHub repositories based on a query.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://gitsearch.sdan.io/openapi.yaml"
+        },
+        "logo_url": "https://gitsearch.sdan.io/logo.png",
+        "contact_email": "support@gitsearch.sdan.io",
+        "legal_info_url": "https://gitsearch.sdan.io/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

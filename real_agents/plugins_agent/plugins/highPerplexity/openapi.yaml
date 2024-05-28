@@ -1,0 +1,73 @@
+---
+openapi: 3.0.2
+info:
+  title: highPerplexity
+  description: Integrates with highPerplexity and executes any prompts you need.
+  version: v0.0.6
+paths:
+  "/search":
+    get:
+      operationId: get_GetSearch
+      tags:
+      - Search
+      summary: Search and run highPerplexity prompts
+      parameters:
+      - description: The prompt that the user is searching for
+        required: true
+        schema:
+          type: string
+          description: The prompt that the user is searching for
+          default: novelist
+        name: highperplexity_prompt_query
+        in: query
+      - description: The request that the user is running against the prompt that
+          is found
+        required: true
+        schema:
+          type: string
+          description: The request that the user is running against the prompt that
+            is found
+          default: story about butterflies
+        name: highperplexity_request_query
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  highPerplexity_Custom_Prompt_Title:
+                    type: string
+                    example: Act as a Doctor
+                  highPerplexity_Custom_Prompt_Content:
+                    type: string
+                    example: I want you to act as a doctor and come up with creative
+                      treatments for illnesses or diseases. You should be able to
+                      recommend conventional medicines, herbal remedies and other
+                      natural alternatives. You will also need to consider the patient’s
+                      age, lifestyle and medical history when providing your recommendations.
+                      My first suggestion request is
+                  highPerplexity_Custom_Prompt_Description:
+                    type: string
+                    example: Act as a doctor in this prompt, providing creative treatments
+                      for illnesses or diseases while considering the patient's age,
+                      lifestyle, and medical history. Replace the REQUEST variable
+                      with a specific illness or condition you'd like treatment recommendations
+                      for. The response will include conventional medicines, herbal
+                      remedies, and other natural alternatives.
+                  highPerplexity_Custom_Prompt_Variables:
+                    type: array
+                    items:
+                      type: string
+                      example: "%|REQUEST|%"
+                  highPerplexity_Custom_Prompt_URL:
+                    type: string
+                    example: https://highperplexity.com/view/a95aff08-d18f-486f-bc06-6923874de942
+                required:
+                - highPerplexity_Custom_Prompt_Title
+                - highPerplexity_Custom_Prompt_Content
+                - highPerplexity_Custom_Prompt_Description
+                - highPerplexity_Custom_Prompt_Variables
+                - highPerplexity_Custom_Prompt_URL

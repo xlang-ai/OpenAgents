@@ -1,0 +1,40 @@
+{
+    "id": null,
+    "domain": null,
+    "namespace": null,
+    "status": null,
+    "manifest": {
+      "schema_version": null,
+      "name_for_model": null,
+      "name_for_human": "Alpha Vantage",
+      "description_for_model": null,
+      "description_for_human": null,
+      "auth": {
+        "type": "user_http",
+        "instructions": null,
+        "client_url": null,
+        "scope": null,
+        "authorization_url": null,
+        "authorization_content_type": null,
+        "verification_tokens": null
+      },
+      "api": {
+        "type": null,
+        "url": null
+      },
+      "logo_url": "https://rapidapi.com/cdn/images?url=https://rapidapi-prod-apis.s3.amazonaws.com/74/d5c7ab835e4a178722ee8cb91ed833/0abef396391b84d1a32362e389a8309b.png",
+      "contact_email": null,
+      "legal_info_url": null
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+      "is_installed": null,
+      "is_authenticated": null
+    },
+    "categories": [
+      {
+        "id": null,
+        "title": null
+      }
+    ]
+  }

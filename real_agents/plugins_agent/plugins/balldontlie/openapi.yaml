@@ -1,0 +1,121 @@
+openapi: 3.0.3
+servers:
+  - url: https://balldontlie.io
+info:
+  contact: {}
+  description: A free API that collects information about NBA players, games, stats, and teams in years.
+  title: balldontlie
+  version: 1.0.0
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    url: https://balldontlie.io/logo192.png
+  x-origin:
+    - format: postman
+      url: https://www.postman.com/collections/c51c3810db2ab3ca4ab4
+      version: "1.0"
+  x-providerName: balldontlie.io
+tags:
+  - name: players
+  - name: teams
+  - name: games
+  - name: stats
+paths:
+  /api/v1/games:
+    get:
+      description: all games (example parameters)
+      operationId: allGamesExampleParameters
+      parameters:
+        - in: query
+          name: seasons[]
+          schema:
+            example: "2018"
+            type: string
+        - in: query
+          name: team_ids[]
+          schema:
+            example: "1"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: all games (example parameters)
+      tags:
+        - games
+  /api/v1/games/32881:
+    get:
+      description: specific game
+      operationId: specificGame
+      responses:
+        "200":
+          description: ""
+      summary: specific game
+      tags:
+        - games
+  /api/v1/players:
+    get:
+      description: all players (search)
+      operationId: allPlayersSearch
+      parameters:
+        - in: query
+          name: search
+          schema:
+            example: lebron
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: all players (search)
+      tags:
+        - players
+  /api/v1/players/237:
+    get:
+      description: specific player
+      operationId: specificPlayer
+      responses:
+        "200":
+          description: ""
+      summary: specific player
+      tags:
+        - players
+  /api/v1/stats:
+    get:
+      description: all stats (example parameters)
+      operationId: allStatsExampleParameters
+      parameters:
+        - in: query
+          name: season[]
+          schema:
+            example: "2018"
+            type: string
+        - in: query
+          name: player_ids[]
+          schema:
+            example: "237"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: all stats (example parameters)
+      tags:
+        - stats
+  /api/v1/teams:
+    get:
+      description: all teams
+      operationId: allTeams
+      responses:
+        "200":
+          description: ""
+      summary: all teams
+      tags:
+        - teams
+  /api/v1/teams/1:
+    get:
+      description: specific team
+      operationId: specificTeam
+      responses:
+        "200":
+          description: ""
+      summary: specific team
+      tags:
+        - teams

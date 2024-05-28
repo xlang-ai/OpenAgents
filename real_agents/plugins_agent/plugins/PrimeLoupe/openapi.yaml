@@ -1,0 +1,178 @@
+---
+openapi: 3.0.2
+info:
+  title: PrimeLoupe
+  description: Simplify your decision-making process by summarizing Amazon product
+    reviews for you.
+  termsOfService: https://primeloupe.com/terms/
+  contact:
+    name: Misam Saki
+    url: https://www.linkedin.com/in/misam-saki/
+    email: justmisam@gmail.com
+  version: 1.0.0
+paths:
+  "/":
+    get:
+      summary: Index
+      description: |-
+        Returns the "Home" page, which is a simple web page that accepts an Amazon product URL
+        and shows the summary after pressing the Enter key or the Summarize button
+      operationId: index__get
+      parameters:
+      - required: false
+        schema:
+          title: Q
+          type: string
+          default: ''
+        name: q
+        in: query
+      - required: false
+        schema:
+          title: Url
+          type: string
+          default: ''
+        name: url
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/terms":
+    get:
+      summary: Terms
+      description: Returns the "Terms of Service" page
+      operationId: terms_terms_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  "/privacy":
+    get:
+      summary: Terms
+      description: Returns the "Privacy Policy" page
+      operationId: terms_privacy_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  "/chrome":
+    get:
+      summary: Chrome
+      description: Redirects users to the PrimeLoupe Google Chrome Extension page
+      operationId: chrome_chrome_get
+      responses:
+        '307':
+          description: Successful Response
+  "/api/v1/get_full_url":
+    get:
+      summary: Api V1 Get Full Url
+      description: Gets an Amazon product shortlink and returns the full URL
+      operationId: api_v1_get_full_url_api_v1_get_full_url_get
+      parameters:
+      - required: false
+        schema:
+          title: Shortlink
+          type: string
+          default: ''
+        name: shortlink
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/api/v1/get_summary/{asin}":
+    get:
+      summary: Api V1 Get Summary
+      description: |-
+        Gets an Amazon product ASIN and optinally the product domain (default as 'www.amazon.com')
+        , then returns the summary of the product reviews as a JSON object
+      operationId: api_v1_get_summary_api_v1_get_summary__asin__get
+      parameters:
+      - required: true
+        schema:
+          title: Asin
+          type: string
+        name: asin
+        in: path
+      - required: false
+        schema:
+          title: Domain
+          type: string
+          default: www.amazon.com
+        name: domain
+        in: query
+      - required: false
+        schema:
+          title: Wait For Result
+          type: boolean
+          default: false
+        name: wait_for_result
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string

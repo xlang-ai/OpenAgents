@@ -1,0 +1,489 @@
+---
+openapi: 3.0.2
+info:
+  title: Secretary Kim
+  version: 0.1.0
+  description: Korean weather, subway information! Enjoy a smart life with Secretary
+    Kim.
+paths:
+  "/.well-known/ai-plugin.json":
+    get:
+      tags:
+      - manifest
+      summary: Get Plugin Manifest
+      operationId: get_plugin_manifest__well_known_ai_plugin_json_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain: {}
+  "/legal":
+    get:
+      tags:
+      - manifest
+      summary: Get Legal
+      operationId: get_legal_legal_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  "/logo3.png":
+    get:
+      tags:
+      - manifest
+      summary: Get Logo Image
+      operationId: get_logo_image_logo3_png_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  "/weather_now/{city}":
+    get:
+      tags:
+      - weather
+      summary: get current temperature of the given city (주어진 도시의 현재 온도)
+      operationId: weather_now_weather_now__city__get
+      parameters:
+      - description: name of city. should be korean name (도시의 이름, 한국어로 작성)
+        required: true
+        schema:
+          title: City
+          type: string
+          description: name of city. should be korean name (도시의 이름, 한국어로 작성)
+        name: city
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Weather"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/weather_forecast/{city}":
+    get:
+      tags:
+      - weather
+      summary: get future weather of the given city (주어진 도시의 미래 날씨, 내일 모레 글피를 제공)
+      operationId: weather_forecast_weather_forecast__city__get
+      parameters:
+      - description: name of city. should be korean name (도시의 이름, 한국어로 작성)
+        required: true
+        schema:
+          title: City
+          type: string
+          description: name of city. should be korean name (도시의 이름, 한국어로 작성)
+        name: city
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/WeatherForecastResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/subway/location":
+    get:
+      tags:
+      - subway
+      summary: 현재 열차 위치 확인
+      operationId: train_info_subway_location_get
+      parameters:
+      - required: true
+        schema:
+          title: Line Info
+          type: string
+        example: 1호선
+        name: line_info
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Train Info Subway Location Get
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Subway"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/subway/route":
+    get:
+      tags:
+      - subway
+      summary: Get Subway Route
+      description: Fetch subway transfer information from start station to end station.
+        You should enter station name only in Korean, not adding '역' at the end of
+        the station name.
+      operationId: get_subway_route_subway_route_get
+      parameters:
+      - required: true
+        schema:
+          title: Start Station
+          type: string
+        name: start_station
+        in: query
+      - required: true
+        schema:
+          title: End Station
+          type: string
+        name: end_station
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SubwayRouteResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/shortcut/{shortcut_word}":
+    get:
+      tags:
+      - shortcut
+      summary: get promptshorcut. replace the given [{number}] into returned text.
+        (입력 단축어를 제공. 결과로 받은 텍스트를 입력으로 이해)
+      operationId: prompt_shortcut_shortcut__shortcut_word__get
+      parameters:
+      - description: shortcut word, which will be replace by given result. (결과값으로
+          대치될 단축어)
+        required: true
+        schema:
+          title: Shortcut Word
+          type: string
+          description: shortcut word, which will be replace by given result. (결과값으로
+            대치될 단축어)
+        example: ㅇㅇㅂㅇ
+        name: shortcut_word
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Prompt Shortcut Shortcut  Shortcut Word  Get
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    DriveInfo:
+      title: DriveInfo
+      required:
+      - laneID
+      - laneName
+      - startName
+      - stationCount
+      - wayCode
+      - wayName
+      type: object
+      properties:
+        laneID:
+          title: Laneid
+          type: string
+        laneName:
+          title: Lanename
+          type: string
+        startName:
+          title: Startname
+          type: string
+        stationCount:
+          title: Stationcount
+          type: integer
+        wayCode:
+          title: Waycode
+          type: integer
+        wayName:
+          title: Wayname
+          type: string
+    DriveInfoSet:
+      title: DriveInfoSet
+      required:
+      - driveInfo
+      type: object
+      properties:
+        driveInfo:
+          title: Driveinfo
+          type: array
+          items:
+            "$ref": "#/components/schemas/DriveInfo"
+    ExChangeInfo:
+      title: ExChangeInfo
+      required:
+      - laneName
+      - startName
+      - exName
+      - exSID
+      - fastTrain
+      - fastDoor
+      - exWalkTime
+      type: object
+      properties:
+        laneName:
+          title: Lanename
+          type: string
+        startName:
+          title: Startname
+          type: string
+        exName:
+          title: Exname
+          type: string
+        exSID:
+          title: Exsid
+          type: integer
+        fastTrain:
+          title: Fasttrain
+          type: integer
+        fastDoor:
+          title: Fastdoor
+          type: integer
+        exWalkTime:
+          title: Exwalktime
+          type: integer
+    ExChangeInfoSet:
+      title: ExChangeInfoSet
+      type: object
+      properties:
+        exchangeInfo:
+          title: Exchangeinfo
+          type: array
+          items:
+            "$ref": "#/components/schemas/ExChangeInfo"
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    Result:
+      title: Result
+      required:
+      - globalStartName
+      - globalEndName
+      - globalTravelTime
+      - globalDistance
+      - globalStationCount
+      - fare
+      - cashFare
+      - driveInfoSet
+      - stationSet
+      type: object
+      properties:
+        globalStartName:
+          title: Globalstartname
+          type: string
+        globalEndName:
+          title: Globalendname
+          type: string
+        globalTravelTime:
+          title: Globaltraveltime
+          type: integer
+        globalDistance:
+          title: Globaldistance
+          type: integer
+        globalStationCount:
+          title: Globalstationcount
+          type: integer
+        fare:
+          title: Fare
+          type: integer
+        cashFare:
+          title: Cashfare
+          type: integer
+        driveInfoSet:
+          "$ref": "#/components/schemas/DriveInfoSet"
+        exChangeInfoSet:
+          "$ref": "#/components/schemas/ExChangeInfoSet"
+        stationSet:
+          "$ref": "#/components/schemas/StationSet"
+    StationSet:
+      title: StationSet
+      required:
+      - stations
+      type: object
+      properties:
+        stations:
+          title: Stations
+          type: array
+          items:
+            "$ref": "#/components/schemas/Stations"
+    Stations:
+      title: Stations
+      required:
+      - startID
+      - startName
+      - endSID
+      - endName
+      - travelTime
+      type: object
+      properties:
+        startID:
+          title: Startid
+          type: integer
+        startName:
+          title: Startname
+          type: string
+        endSID:
+          title: Endsid
+          type: integer
+        endName:
+          title: Endname
+          type: string
+        travelTime:
+          title: Traveltime
+          type: integer
+    Subway:
+      title: Subway
+      required:
+      - statnTnm
+      - trainNo
+      - statnNm
+      type: object
+      properties:
+        statnTnm:
+          title: Statntnm
+          type: string
+        trainNo:
+          title: Trainno
+          type: string
+        statnNm:
+          title: Statnnm
+          type: string
+    SubwayRouteResponse:
+      title: SubwayRouteResponse
+      required:
+      - result
+      type: object
+      properties:
+        result:
+          "$ref": "#/components/schemas/Result"
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    Weather:
+      title: Weather
+      required:
+      - city
+      - date
+      - time
+      - temperature
+      - rain_prob
+      - big_dust
+      - big_dust_grade
+      type: object
+      properties:
+        city:
+          title: City
+          type: string
+        date:
+          title: Date
+          type: string
+        time:
+          title: Time
+          type: string
+        temperature:
+          title: Temperature
+          type: string
+        rain_prob:
+          title: Rain Prob
+          type: string
+        big_dust:
+          title: Big Dust
+          type: string
+        big_dust_grade:
+          title: Big Dust Grade
+          type: string
+    WeatherForecast:
+      title: WeatherForecast
+      required:
+      - city
+      - date
+      - max_temperature
+      - min_temperature
+      - rain_prob
+      - sky_state
+      type: object
+      properties:
+        city:
+          title: City
+          type: string
+        date:
+          title: Date
+          type: string
+        max_temperature:
+          title: Max Temperature
+          type: string
+        min_temperature:
+          title: Min Temperature
+          type: string
+        rain_prob:
+          title: Rain Prob
+          type: string
+        sky_state:
+          title: Sky State
+          type: string
+    WeatherForecastResponse:
+      title: WeatherForecastResponse
+      required:
+      - day_after_1
+      - day_after_2
+      - day_after_3
+      type: object
+      properties:
+        day_after_1:
+          "$ref": "#/components/schemas/WeatherForecast"
+        day_after_2:
+          "$ref": "#/components/schemas/WeatherForecast"
+        day_after_3:
+          "$ref": "#/components/schemas/WeatherForecast"

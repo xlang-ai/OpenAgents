@@ -1,0 +1,29 @@
+{
+    "id": "plugin-7b21a4f0-7cb1-4283-9d8c-155fb4888075",
+    "domain": "api.factba.se",
+    "namespace": "fiscalnote",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "fiscalnote",
+        "name_for_human": "FiscalNote",
+        "description_for_model": "Use the Biden remarks API to answer questions about statements (spoken or written) made by President Biden. Use the calendar API to answer questions about the White House official calendar. Use the Roll Call API to search for news articles related to Congressional people and proceedings.",
+        "description_for_human": "FiscalNote enables access to select market-leading, real-time data sets for legal, political, and regulatory information",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://api.factba.se/openapi.json"
+        },
+        "logo_url": "https://api.factba.se/static/fn-logo.png",
+        "contact_email": "collin.stedman@fiscalnote.com",
+        "legal_info_url": ""
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": []
+}

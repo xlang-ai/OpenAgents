@@ -1,0 +1,36 @@
+openapi: 3.0.1
+info:
+  title: Photorealistic Prompt Generator.
+  description: Generate Photorealistic prompts for Midjourney.
+  version: 'v1'
+servers:
+  - url: https://midjourney-ruddy.vercel.app
+paths:
+  /gen:
+    get:
+      operationId: promptGenerator
+      summary: Generate Photorealistic prompts for Midjourney
+      parameters:
+        - name: number
+          in: query
+          description: the number of news
+          required: false
+          schema:
+            type: number
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/promptGeneratorResponse'
+components:
+  schemas:
+    promptGeneratorResponse:
+      type: object
+      properties:
+        instructions:
+            type: string
+            description: instructions on how generate the prompt
+

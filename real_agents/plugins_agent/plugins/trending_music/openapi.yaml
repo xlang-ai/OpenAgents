@@ -1,0 +1,158 @@
+openapi: 3.0.1
+info:
+  title: Trending Music
+  description: Service for finding the trending music, by genre, countries, and top songs globally.
+  version: 'v1'
+servers:
+  - url: https://rising-analogy-387407.uc.r.appspot.com
+paths:
+  /top_songs:
+    get:
+      operationId: topSongs
+      summary: Get the top songs globally
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /top_songs/{country}:
+    get:
+      operationId: topSongsCountry
+      summary: Get the top songs for a specific country
+      parameters:
+        - in: path
+          name: country
+          schema:
+            type: string
+          required: true
+          description: The country for which to get the top songs. Use the country's ISO 3166-1 alpha-2 code. For example, for the United States, use 'US'.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /top_songs/{country}/{genre}:
+    get:
+      operationId: topSongsCountryGenre
+      summary: Get the top songs for a specific country and genre
+      parameters:
+        - in: path
+          name: country
+          schema:
+            type: string
+          required: true
+          description: The country for which to get the top songs. Use the country's ISO 3166-1 alpha-2 code. For example, for the United States, use 'US'.
+        - in: path
+          name: genre
+          schema:
+            type: string
+          required: true
+          description: |
+            The genre for which to get the top songs. Use the genre's specific code. For example, for Hip Hop, use 'HIP_HOP_RAP'.
+            
+            Available genres: POP, HIP_HOP_RAP, DANCE, ELECTRONIC, RNB_SOUL, ALTERNATIVE, ROCK, LATIN, FILM_TV_STAGE, COUNTRY, AFRO_BEATS, WORLDWIDE, REGGAE_DANCE_HALL, HOUSE, K_POP, FRENCH_POP, SINGER_SONGWRITER, REGIONAL_MEXICANO.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /top_songs/genre/{genre}:
+    get:
+      operationId: topSongsGenre
+      summary: Get the top songs for a specific genre
+      parameters:
+        - in: path
+          name: genre
+          schema:
+            type: string
+          required: true
+          description: |
+            The genre for which to get the top songs. Use the genre's specific code. For example, for Hip Hop, use 'HIP_HOP_RAP'.
+            
+            Available genres: POP, HIP_HOP_RAP, DANCE, ELECTRONIC, RNB_SOUL, ALTERNATIVE, ROCK, LATIN, FILM_TV_STAGE, COUNTRY, AFRO_BEATS, WORLDWIDE, REGGAE_DANCE_HALL, HOUSE, K_POP, FRENCH_POP, SINGER_SONGWRITER, REGIONAL_MEXICANO.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /artist_info/{artist_id}:
+    get:
+      operationId: artistInfo
+      summary: Get the information about a specific artist
+      parameters:
+        - in: path
+          name: artist_id
+          schema:
+            type: string
+          required: true
+          description: The id of the artist for which to get the information.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /song_info:
+    get:
+      operationId: songInfo
+      summary: Get the information about a specific song
+      parameters:
+        - in: query
+          name: song_name
+          schema:
+            type: string
+          required: true
+          description: The name of the song for which to get the information.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /similar_songs/{track_id}:
+    get:
+      operationId: getRelatedSongs
+      summary: Get similar songs to a specific track
+      parameters:
+        - in: path
+          name: track_id
+          schema:
+            type: integer
+          required: true
+          description: The id of the track for which to get similar songs.
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
+  /.well-known/ai-plugin.json:
+    get:
+      operationId: manifest
+      summary: Get the trending music manifest
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object

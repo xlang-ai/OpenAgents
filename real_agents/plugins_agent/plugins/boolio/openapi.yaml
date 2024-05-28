@@ -1,0 +1,356 @@
+openapi: 3.1.0
+info:
+  title: Boolio ChatGPT plugin
+  version: 2023.6.2
+  description: The easiest way to analyze global stock values with the power of quantitative factor methodologies.
+paths:
+  /api/stock/summary:
+    post:
+      summary: Summarize stock info
+      description: Summarize stock info of the given country and ticker
+      operationId: postApiStockSummary
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StockSummaryRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/search/factor:
+    get:
+      summary: Search factor
+      description: Search for factor by keywords. If the query is an empty string,
+        `category` field must be set.
+      operationId: getApiSearchFactor
+      parameters:
+      - name: query
+        in: query
+        description: Keywords in English to search for the factor
+        required: true
+        schema:
+          type: string
+      - name: category
+        in: query
+        description: The category the factor belongs to. Should be one of the examples
+          when the query is empty.
+        required: false
+        schema:
+          type: string
+        examples:
+          Example0:
+            value: Scoring
+          Example1:
+            value: Value
+          Example2:
+            value: Efficiency
+          Example3:
+            value: Profitability
+          Example4:
+            value: Growth
+          Example5:
+            value: Stability
+          Example6:
+            value: Price
+          Example7:
+            value: Volume
+          Example8:
+            value: Statistics
+          Example9:
+            value: Shareholder Policy
+          Example10:
+            value: Analyst Outlook
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FactorDefinition'
+        '400':
+          description: 'Invalid value for: query parameter query, Invalid value for:
+            query parameter category'
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/search/sector:
+    get:
+      summary: Search industry sectors
+      description: Search for sector IDs by keywords.
+      operationId: getApiSearchSector
+      parameters:
+      - name: query
+        in: query
+        description: Keywords in English to search for the factor
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sector'
+        '400':
+          description: 'Invalid value for: query parameter query'
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+  /api/custom-index/screen:
+    post:
+      summary: Screen stocks
+      description: |
+        Search for stocks meeting the given criteria.
+
+        Note:
+        Before calling this endpoint, please ensure to call `/api/search/factor`
+        first to search for the factor.
+
+        Please ensure the value is in the correct unit corresponding to the factor.
+      operationId: postApiCustom-indexScreen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScreenerRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScreenerItem'
+        '400':
+          description: 'Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Direction:
+      type: string
+      description: The sort direction
+      enum:
+      - ASC
+      - DESC
+    FactorDefinition:
+      required:
+      - id
+      - name
+      - description
+      - unit
+      - category
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/FactorId'
+        name:
+          type: string
+          description: The name of the factor
+        description:
+          type: string
+          description: The meaning of the factor
+        unit:
+          type: string
+          description: The unit of the factor
+        category:
+          type: string
+          description: The category of the factor
+    FactorId:
+      type: integer
+      description: The unique identifier for the factor
+      format: int32
+      example: 1113
+    FilterCondition:
+      required:
+      - factorId
+      - operator
+      - value
+      - searchMode
+      type: object
+      properties:
+        factorId:
+          $ref: '#/components/schemas/FactorId'
+        operator:
+          $ref: '#/components/schemas/FilterOperator'
+        value:
+          type: number
+          description: The minimum threshold. If `searchMode` is `RELATIVE`, the scale
+            of value is percent.
+          format: double
+        searchMode:
+          $ref: '#/components/schemas/SearchMode'
+      example:
+        factorId: 1133
+        operator: '>='
+        value: 100.0
+        searchMode: Absolute
+    FilterOperator:
+      type: string
+      description: Operator
+      enum:
+      - '>'
+      - '>='
+      - <=
+      - <
+    GroupId:
+      type: integer
+      description: |
+        The unique identifier for the group or sector.
+      format: int32
+    ScreenerItem:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        symbol:
+          type: string
+    ScreenerRequest:
+      required:
+      - prompt
+      - region
+      - limit
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: The latest chat prompt from the user
+        region:
+          type: string
+          description: An ISO-3166-1 alpha-2 code of the country
+          example: KR
+        sectorIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupId'
+          description: Sector identifiers that can be found from at `/api/sector/search`
+        filterRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterCondition'
+          description: The search criteria. Multiple conditions mean logical and (&&).
+            The factors should be identified by numeric ID that can be found at GET
+            /api/custom-index/factors
+        sortRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortingRule'
+          description: The sorting criteria, which can be used to find top N items
+            that meets the search criteria.
+        limit:
+          type: integer
+          description: The maximum number of stocks in the result
+          format: int32
+    SearchMode:
+      type: string
+      description: Whether the type of value is absolute or relative. If `searchMode`
+        is `RELATIVE`, the scale of value is percent.
+      enum:
+      - Absolute
+      - Relative
+    Sector:
+      required:
+      - id
+      - name
+      - level
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/GroupId'
+        name:
+          type: string
+        level:
+          type: integer
+          description: The hierarchical level of the sector. The higher is the narrower.
+          format: int32
+    SortingRule:
+      required:
+      - factorId
+      - direction
+      type: object
+      properties:
+        factorId:
+          $ref: '#/components/schemas/FactorId'
+        direction:
+          $ref: '#/components/schemas/Direction'
+      example:
+        factorId: 1113
+        direction: DESC
+    StockSummaryRequest:
+      required:
+      - prompt
+      - region
+      - symbol
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: The latest chat prompt from the user
+        region:
+          type: string
+          description: An ISO-3166-1 alpha-2 code of the country
+          example: JP
+        symbol:
+          type: string
+          description: The identifier of the stock in the corresponding region
+          example: AAPL

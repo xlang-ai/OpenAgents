@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+  title: Spotify API
+  version: 1.0.0
+  description: Get Spotify Tracks & Playlist Details. Update 19 May 2023. Now it returns the true JSON data.
+paths:
+  /search:
+    get:
+      summary: Search
+      parameters:
+        - name: keyword
+          in: query
+          description: Search query
+          required: true
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: "Type of search (multi or one of the following: albums, artists, episodes, genres, playlists, podcasts, tracks, users)"
+          required: true
+          schema:
+            type: string
+            enum:
+              - album
+              - artist
+              - track
+              - year
+              - genre
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized
+        '429':
+          description: Too Many Requests
+      servers:
+        - url: https://spotify117.p.rapidapi.com
+          description: RapidAPI Server
+      security:
+        - ApiKeyAuth: []
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-RapidAPI-Key

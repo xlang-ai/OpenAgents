@@ -1,0 +1,34 @@
+{
+    "id": "plugin-0571aeda-ea7e-4cc3-b4bc-eea26fa465f3",
+    "domain": "chatgpt.mediareadyai.com",
+    "namespace": "mediaready",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "mediaready",
+        "name_for_human": "MediaReady",
+        "description_for_model": "Identify sources and experts for journalists.",
+        "description_for_human": "Identify sources and experts for journalists.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://chatgpt.mediareadyai.com/openai.yaml"
+        },
+        "logo_url": "https://chatgpt.mediareadyai.com/logo.png",
+        "contact_email": "ejbrisson@gmail.com",
+        "legal_info_url": "https://www.sourcescoutai.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

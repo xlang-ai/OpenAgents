@@ -1,0 +1,350 @@
+---
+openapi: 3.0.2
+info:
+  title: MagiCodex
+  description: 'Ask about Magic: The Gathering cards, rules and interactions.'
+  version: 0.1.0
+paths:
+  "/rules":
+    get:
+      summary: Query rules by semantic query.
+      description: |-
+        Accepts a semantic query in the form of a snippet of
+        Magic: The Gathering rules text.
+        * Returns relevant rules as a result.
+      operationId: query_rules_rules_get
+      parameters:
+      - required: true
+        schema:
+          title: Q
+          type: string
+        name: q
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Query Rules Rules Get
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Rule"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/cards":
+    get:
+      summary: Query cards by exact parameters.
+      description: |-
+        Accepts a search query in the form of a GET request
+        with multiple optional query parameters.
+        * Returns relevant cards as a result.
+        * Parameters are combined with AND logic.
+        * Limited to 10 results at a time.
+      operationId: query_cards_cards_get
+      parameters:
+      - required: false
+        schema:
+          title: Artist
+          type: string
+        name: artist
+        in: query
+      - required: false
+        schema:
+          title: Colors
+          type: string
+        name: colors
+        in: query
+      - required: false
+        schema:
+          title: Keywords
+          type: string
+        name: keywords
+        in: query
+      - required: false
+        schema:
+          title: Loyalty
+          type: string
+        name: loyalty
+        in: query
+      - required: false
+        schema:
+          title: Mana Cost
+          type: string
+        name: mana_cost
+        in: query
+      - required: false
+        schema:
+          title: Mana Value
+          type: number
+        name: mana_value
+        in: query
+      - required: false
+        schema:
+          title: Name
+          type: string
+        name: name
+        in: query
+      - required: false
+        schema:
+          title: Power
+          type: string
+        name: power
+        in: query
+      - required: false
+        schema:
+          title: Scryfall Id
+          type: string
+        name: scryfall_id
+        in: query
+      - required: false
+        schema:
+          title: Set Code
+          type: string
+        name: set_code
+        in: query
+      - required: false
+        schema:
+          title: Text
+          type: string
+        name: text
+        in: query
+      - required: false
+        schema:
+          title: Toughness
+          type: string
+        name: toughness
+        in: query
+      - required: false
+        schema:
+          title: Types
+          type: string
+        name: types
+        in: query
+      - required: false
+        schema:
+          title: Uuid
+          type: string
+          format: uuid
+        name: uuid
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/fuzzy":
+    get:
+      summary: Get card by fuzzy search on card name.
+      description: Accepts a card name and returns the card with the closest name.
+      operationId: get_fuzzy_card_name_fuzzy_get
+      parameters:
+      - required: true
+        schema:
+          title: Card Name
+          type: string
+        name: card_name
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/random":
+    get:
+      summary: Get a random card
+      description: Returns a random card
+      operationId: get_random_card_random_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  "/booster/{set_code}":
+    get:
+      summary: Get a booster pack from a set by set code.
+      operationId: get_booster_booster__set_code__get
+      parameters:
+      - required: true
+        schema:
+          title: Set Code
+          type: string
+        name: set_code
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Booster Booster  Set Code  Get
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Card"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/logo.png":
+    get:
+      summary: Get Logo
+      operationId: get_logo_logo_png_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  "/.well-known/ai-plugin.json":
+    get:
+      summary: Get Ai Plugin
+      operationId: get_ai_plugin__well_known_ai_plugin_json_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    Card:
+      title: Card
+      required:
+      - uuid
+      type: object
+      properties:
+        artist:
+          title: Artist
+          type: string
+        colors:
+          title: Colors
+          type: string
+        keywords:
+          title: Keywords
+          type: string
+        loyalty:
+          title: Loyalty
+          type: string
+        mana_cost:
+          title: Mana Cost
+          type: string
+        mana_value:
+          title: Mana Value
+          type: number
+        name:
+          title: Name
+          type: string
+        power:
+          title: Power
+          type: string
+        scryfall_id:
+          title: Scryfall Id
+          type: string
+        scryfall_uri:
+          title: Scryfall Uri
+          type: string
+        set_code:
+          title: Set Code
+          type: string
+        text:
+          title: Text
+          type: string
+        toughness:
+          title: Toughness
+          type: string
+        types:
+          title: Types
+          type: string
+        uuid:
+          title: Uuid
+          type: string
+      example:
+        artist: Kev Walker
+        colors: B
+        mana_cost: "{2}{B}{B}"
+        mana_value: '4'
+        name: Damnation
+        scryfall_id: 26c68473-70ca-40ba-b5c6-71ec30f88a2c
+        scryfall_uri: https://scryfall.com/card/plc/85/damnation
+        set_code: PLC
+        text: Destroy all creatures. They can’t be regenerated.
+        types: Sorcery
+        uuid: 280111ea-c53a-552f-9078-41148322ee96
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    Rule:
+      title: Rule
+      required:
+      - distance
+      - number
+      - text
+      - title
+      type: object
+      properties:
+        distance:
+          title: Distance
+          type: number
+        number:
+          title: Number
+          type: string
+        text:
+          title: Text
+          type: string
+        title:
+          title: Title
+          type: string
+      example:
+        distance: 1.42
+        number: 100.1.
+        text: These Magic rules apply to any Magic game with two or more players,
+          including two-player games and multiplayer games.
+        title: General
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string

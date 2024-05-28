@@ -1,0 +1,34 @@
+{
+    "id": "plugin-8657d452-9dbc-41c4-b20f-0e56a9058e38",
+    "domain": "savvytrader.com",
+    "namespace": "savvy_trader_ai",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "savvy_trader_ai",
+        "name_for_human": "Savvy Trader AI",
+        "description_for_model": "Supplies real-time data for stock/crypto/otc pricing, historical pricing, company information, and more.",
+        "description_for_human": "Realtime stock, crypto and other investment data.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://static.savvytrader.com/files/openapi.yml"
+        },
+        "logo_url": "https://savvytrader.com/android-chrome-192x192.png",
+        "contact_email": "support@savvytrader.com",
+        "legal_info_url": "https://savvytrader.com/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

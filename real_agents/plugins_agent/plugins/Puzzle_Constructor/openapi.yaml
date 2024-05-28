@@ -1,0 +1,65 @@
+---
+openapi: 3.0.0
+info:
+  contact:
+    email: devin@crosswordconstructor.com
+    name: Devin Atkin
+    url: https://crosswordconstructor.com/legal
+  description: A tool for creating crosswords. You can create crosswords from words
+    and hints.
+  termsOfService: https://crosswordconstructor.com/termsofservice
+  title: Crossword Generator
+  version: 1.0.1
+paths:
+  "/generate_crossword":
+    post:
+      description: Generates an image of a crossword from a set of words and clues
+        provided as a json package. The package may also include a grid_size variable
+        to adjust the output size for larger crosswords.
+      operationId: generateCrossword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                clues:
+                  description: An associated array of clues
+                  items:
+                    type: string
+                  type: array
+                grid_size:
+                  description: The size of the desired crossword square. Larger grid
+                    sizes will allow more words.
+                  type: integer
+                words:
+                  description: An array of words
+                  items:
+                    type: string
+                  type: array
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  hints:
+                    description: crossword hints
+                    items:
+                      type: string
+                    type: array
+                  image_url:
+                    description: publicly accessable image URL
+                    type: string
+                type: object
+          description: OK
+        '400':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Bad Request
+servers:
+- description: Google Cloud Run 1
+  url: https://crosswordconstructor.com

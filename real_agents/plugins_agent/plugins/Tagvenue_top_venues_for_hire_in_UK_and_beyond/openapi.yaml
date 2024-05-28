@@ -1,0 +1,189 @@
+openapi: 3.0.1
+info:
+  title: Tagvenue.com Plugin
+  description: Search for event venues and spaces in Australia, Canada, Ireland, Singapore, the UK, and the USA.
+  version: 'v1'
+servers:
+  - url: https://tagvenue.com
+paths:
+  /ajax/search-proxy/openai:
+    get:
+      operationId: searchVenues
+      summary: Search for event venues and spaces in Australia, Canada, Ireland, Singapore, the UK, and the USA where you can book within your budget.
+      parameters:
+        - name: people
+          in: query
+          required: true
+          description: For how many people is the event to be organized?
+          schema:
+            type: integer
+            minimum: 0
+        - name: room_tag
+          in: query
+          required: true
+          description: The type of event or the kind of meeting place that hosts it.
+          schema:
+            type: string
+            enum: [ afternoon-tea, art-studio, anniversary-party, agm, awards-ceremony, breakout, charity-event, conference, corporate-event, market-research, piano-room, pr-event, presentation, press-conference, product-launch, training-room, workshop, dance-studio, casting-and-auditions, rehearsal-rooms, corporate-reception, exhibition, fashion-show, party, promotional-event, concert, gig, live-music, stand-up-comedy, pop-up-shop, pop-up-event, tasting, wine-tasting, baby-shower, cocktail-masterclass, activity-day, company-fun-day, kids-birthday-party, kids-party, stag-party, team-building, it-training, filming-location, tv-studio, photo-shoot, book-launch, recording-studio, networking, cinema, film-festival, screening, seminar, bar-mitzvah, meeting, bat-mitzvah, therapy-room, birthday-dinner, ball, birthday-party, bridal-shower, christening, graduation-party, hen-party, leaving-party, private-party, childrens-birthday-party, childrens-party, tea-party, christmas-dinner, christmas-party, new-years-eve-party, xmas-party, clubbing, corporate-party, engagement-drinks, engagement-party, leavers-ball, office-party, prom, staff-party, civil-partnership, wedding, dining-party, drinks-reception, gala, gala-dinner, retirement-party, performance, private-dining, banquet, banqueting-hall, wedding-reception, unusual-space, unique, boardroom, symposium, outdoor-wedding, garden-wedding, marquee-wedding, rooftop, garden, terrace, asian-weddings, civil-ceremony-venues, unusual-wedding, unique-wedding, wedding-ceremonies, dry-hire, blank-canvas, funky-venues, barn-venues, hall, church, warehouse, theatre, pub, school-hall, riverside-venues, hotel-venues, museum-venues, country-house, community-centre, bbq-venues, cafe-venues, self-catering-venues, bar-venues, restaurant, auditorium-venues, outdoor, exclusive-venues, luxury-venues, minimum-spend-venues, classroom, creative-space, function-room, nightclub-hire, new-years-eve-dinner, funeral-reception, rehearsal-studio, music-studio, film-studio, photo-studio, pop-up-space, karaoke-bar, summer-party, festival, outdoor-activity, teen-party, drama-studio, convention, gallery, library, conservatory, underground, railway-arch, kitchen, sports-hall, modern-venues, racecourse, stadium, party-bus, boat, kids-party-bus, castle, penthouse, field, ice-rink, swimming-pool, bowling-alley, pilates-studio, event-venue, off-site, 18th-birthday-party, wet-hire, supper-club, loft, away-day-venues, 30th-birthday-party, 40th-birthday-party, 50th-birthday-party, dry-hire-wedding, holiday-party ]
+        - name: neighbourhood
+          in: query
+          description: The city or neighborhood in which to search for venues and event spaces.
+          required: true
+          schema:
+            type: string
+        - name: iso_country_code
+          in: query
+          description: ISO country code for the venues and event spaces.
+          required: true
+          schema:
+            type: string
+            enum: [ AU, GB, IE, SG, CA, US ]
+        - name: min_price
+          in: query
+          description: Minimum event space rental price per day (in pounds).
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000000
+        - name: max_price
+          in: query
+          description: Maximum event space rental price per day (in pounds).
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000000
+        - name: items_per_page
+          in: query
+          description: Number of items that should be returned per page.
+          required: false
+          schema:
+            type: integer
+            maximum: 36
+        - name: page
+          in: query
+          description: Number of page that should be returned.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - name: longitude_from
+          in: query
+          description: Left corner of the geographical polygon defining the area specified in the 'neighbourhood' parameter
+          required: true
+          schema:
+            type: number
+            format: float
+        - name: longitude_to
+          in: query
+          description: Right corner of the geographical polygon defining the area specified in the 'neighbourhood' parameter
+          required: true
+          schema:
+            type: number
+            format: float
+        - name: latitude_from
+          in: query
+          description: Bottom corner of the geographical polygon defining the area specified in the 'neighbourhood' parameter
+          required: true
+          schema:
+            type: number
+            format: float
+        - name: latitude_to
+          in: query
+          description: Top corner of the geographical polygon defining the area specified in the 'neighbourhood' parameter
+          required: true
+          schema:
+            type: number
+            format: float
+        - name: catering_options
+          in: query
+          description: A list of comma-separated catering options for the event. Available options are "1:In-house catering", "2:Can provide halal", "3:Can provide kosher", "7:BYO alcohol allowed", "9:Complimentary water", "10:Complimentary tea and coffee", "14:Extensive vegan menu", "15:Extensive gluten-free menu", "16:Allows external catering", "17:Approved caterers only", "18:Kitchen facilities available", "19:Buyout fee for external catering"
+          required: false
+          schema:
+            type: string
+        - name: room_features
+          in: query
+          description: A list of comma-separated additional room features and options of the room. Available features are "3:Wedding licence", "4:Temporary event notices (TENs) available", "5:Wi-Fi", "6:Natural light", "7:Air conditioning", "8:Projector", "9:Flatscreen TV", "10:Whiteboard", "11:Flipchart", "12:PA system / music speakers available", "13:Conference call facilities", "16:Storage space", "17:Own music allowed", "18:Bring your own DJ"
+          required: false
+          schema:
+            type: string
+        - name: date
+          in: query
+          description: Date of the event in the format "DD/MM/YYYY". For example, "04/06/2023" for 4th June 2023.
+          required: false
+          schema:
+            type: string
+            format: date
+            pattern: '^([0-2][0-9]|3[0-1])\/(0[0-9]|1[0-2])\/[0-9]{4}$'
+      responses:
+        '200':
+          description: Successfully retrieved search results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagvenueSearchResponse'
+
+components:
+  schemas:
+    TagvenueSearchResponse:
+      type: object
+      properties:
+        search_url:
+          type: string
+          description: The search URL based on the user's preferences.
+        message:
+          type: string
+          description: The message about the search results.
+        rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoomDetail'
+    RoomDetail:
+      type: object
+      properties:
+        room_and_venue:
+          type: string
+          description: The name of the room and the venue.
+        address:
+          type: string
+          description: The address of the venue.
+        description:
+          type: string
+          description: The description of the room.
+        url:
+          type: string
+          format: uri
+          description: The URL of the room to be used as link to search result.
+        standing_capacity:
+          type: integer
+          description: The standing capacity of the room.
+        seating_capacity:
+          type: integer
+          description: The seating capacity of the room.
+        rating:
+          type: number
+          format: float
+          description: The rating of the room.
+        reviews_count:
+          type: integer
+          description: The number of reviews of the room.
+        neighborhood_message:
+          type: string
+          description: The message about the neighborhood of the room.
+        price:
+          type: string
+          description: The price of the room.
+        price_type:
+          type: string
+          description: The price type of the room.
+        room_features:
+          type: array
+          description: The room features of the room.
+          items:
+            type: string
+        catering_options:
+          type: array
+          description: The catering options of the room.
+          items:
+            type: string

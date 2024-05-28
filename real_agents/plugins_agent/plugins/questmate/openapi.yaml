@@ -1,0 +1,36 @@
+openapi: 3.0.1
+info:
+  title: Questmate Forms Plugin
+  description: Create forms, checklists and workflows (we call 'em Quests!) that you can assign, schedule or make public.
+  version: "v1"
+servers:
+  - url: https://chatgpt-plugin.questmate.com/api
+paths:
+  /createQuestFromPrompt:
+    post:
+      operationId: createQuestFromPrompt
+      summary: Create a Quest from the user provided prompt.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/createQuestFromPromptResponse"
+components:
+  schemas:
+    createQuestFromPromptResponse:
+      type: object
+      properties:
+        questUrl:
+          type: string
+          description: The preview url for the generated Quest.

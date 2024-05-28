@@ -1,0 +1,80 @@
+openapi: 3.0.1
+info:
+  title: Shop and get summarized reviews for Best Deals and Sellers Products.
+  description: Shop and get summarized reviews for the best deals and best seller's products on Amazon.
+  version: 'v1'
+servers:
+  - url: https://amazon-best.vercel.app/
+paths:
+  /best:
+    get:
+      operationId: getBestSellerProduct
+      summary: shop for the best deals and best seller's products on Amazon
+      parameters:
+        - name: product
+          in: query
+          description: the product
+          required: true
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bestSellerProductResponse'
+components:
+  schemas:
+    bestSellerProductResponse:
+      type: object
+      properties:
+        instructions:
+            type: string
+            description: instructions on how to show the results
+        title:
+            type: string
+            description: the product title in Amazon Store
+        price:
+            type: string
+            description: the product price in Amazon Store
+        photo:
+            type: string
+            description: the product photo in Amazon Store
+        url:
+            type: string
+            description: the url that links to the product page in Amazon Store
+        rating:
+            type: string
+            description: the rating of the product
+        review1:
+            type: string
+            description: review product number 1
+        review2:
+            type: string
+            description: review product number 2
+        review3:
+            type: string
+            description: review product number 3
+        review4:
+            type: string
+            description: review product number 4
+        review5:
+            type: string
+            description: review product number 5
+        review6:
+            type: string
+            description: review product number 6
+        review7:
+            type: string
+            description: review product number 7
+        review8:
+            type: string
+            description: review product number 8
+        review9:
+            type: string
+            description: review product number 9
+        review10:
+            type: string
+            description: review product number 10

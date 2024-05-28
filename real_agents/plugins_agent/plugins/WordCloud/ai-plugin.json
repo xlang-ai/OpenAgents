@@ -1,0 +1,34 @@
+{
+    "id": "plugin-bc905a65-fb2e-4b89-8e96-222e54cea458",
+    "domain": "plugin-b0025af30daf4bea989db7074f90b64a-jexkai4vea-uc.a.run.app",
+    "namespace": "WordCloud",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "WordCloud",
+        "name_for_human": "WordCloud",
+        "description_for_model": "Submit a text string and it will return a URL to a wordcloud image of the text.",
+        "description_for_human": "Create word cloud images from text.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://plugin-b0025af30daf4bea989db7074f90b64a-jexkai4vea-uc.a.run.app/openapi.yaml"
+        },
+        "logo_url": "https://plugin-b0025af30daf4bea989db7074f90b64a-jexkai4vea-uc.a.run.app/logo.png",
+        "contact_email": "support@promptapps.ai",
+        "legal_info_url": "https://plugin-b0025af30daf4bea989db7074f90b64a-jexkai4vea-uc.a.run.app/legal.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

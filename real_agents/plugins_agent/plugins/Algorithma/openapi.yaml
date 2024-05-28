@@ -1,0 +1,270 @@
+---
+openapi: 3.0.2
+info:
+  title: Algorithma, a life simulator game
+  version: 0.1.0
+  description: Shape your virtual life with in this immersive life simulator game
+    to begin Type /start to begin.
+paths:
+  "/":
+    get:
+      summary: Home
+      description: Render the home page
+      operationId: home__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  "/introduction":
+    get:
+      summary: Introduction
+      description: Get the introduction content
+      operationId: introduction_introduction_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Introduction POST
+      description: Handle POST requests for introduction
+      operationId: introduction_post_introduction_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  "/start":
+    get:
+      summary: Start
+      description: Get the start content
+      operationId: start_start_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Start POST
+      description: Handle POST requests for start
+      operationId: start_post_start_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  "/purpose":
+    get:
+      summary: Purpose
+      description: Get the purpose content
+      operationId: purpose_purpose_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+  "/context":
+    get:
+      summary: Context
+      description: Get the context content
+      operationId: context_context_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+  "/examples":
+    get:
+      summary: Examples
+      description: Get the examples content
+      operationId: examples_examples_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+  "/errors":
+    get:
+      summary: Errors
+      description: Get the errors content
+      operationId: errors_errors_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+  "/commands":
+    post:
+      summary: Commands
+      description: Get the commands content
+      operationId: commands_commands_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+  "/action":
+    get:
+      summary: Action
+      description: Get the action content
+      operationId: action_action_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+  "/initialize":
+    post:
+      summary: Initialize
+      description: Get the initialize content
+      operationId: initialize_initialize_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/InputData"
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/random/{path}":
+    get:
+      summary: Random
+      description: Get the random content
+      operationId: random_random__path__get
+      parameters:
+      - required: true
+        schema:
+          title: Path
+          type: string
+        name: path
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/random":
+    post:
+      summary: Random POST
+      description: Handle POST requests for random
+      operationId: random_post_random_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/InputData"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/.well-known/{filename}":
+    get:
+      summary: Download
+      operationId: download__well_known__filename__get
+      parameters:
+      - required: true
+        schema:
+          title: Filename
+          type: string
+        name: filename
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    InputData:
+      title: InputData
+      type: object
+      properties:
+        topic:
+          title: Topic
+          type: string
+          default: No topic provided
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string

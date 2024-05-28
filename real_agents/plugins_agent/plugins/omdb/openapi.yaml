@@ -1,0 +1,225 @@
+openapi: 3.0.1
+info:
+  title: OMDb
+  description: The Open Movie Database. The OMDb API is a free web service to obtain
+    movie information, all content and images on the site are contributed and maintained
+    by our users.
+  termsOfService: http://www.omdbapi.com/legal.htm
+  contact:
+    name: Open Movie Database
+    url: http://omdbapi.com
+    email: bfritz@fadingsignal.com
+  license:
+    name: CC BY-NC 4.0
+    url: https://creativecommons.org/licenses/by-nc/4.0/
+  version: "1"
+  x-apisguru-categories:
+  - media
+  - open_data
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: http://raw.githubusercontent.com/Mermade/open_api_specifications/master/OMDb/OMDb.png
+  x-origin:
+  - format: swagger
+    url: https://raw.githubusercontent.com/Mermade/open_api_specifications/master/OMDb/swagger.json
+    version: "2.0"
+  x-providerName: omdbapi.com
+  x-unofficialSpec: true
+externalDocs:
+  description: OMDb Usage
+  url: http://www.omdbapi.com/#usage
+servers:
+- url: http://www.omdbapi.com/
+- url: https://www.omdbapi.com/
+paths:
+  /:
+    get:
+      summary: OMDb Search
+      description: Find a movie, series or episode from the OMDb by title, IMDb-id
+        or by free-text search
+      operationId: Get_OMDb Search
+      parameters:
+      - name: t
+        in: query
+        description: Movie title to search for. One of t, i or s is required.
+        schema:
+          type: string
+      - name: i
+        in: query
+        description: A valid IMDb ID (e.g. tt1285016). One of t, i or s is required.
+        schema:
+          type: string
+      - name: s
+        in: query
+        description: Movie title to search for. One of t, i or s is required.
+        schema:
+          type: string
+      - name: y
+        in: query
+        description: Year of release.
+        schema:
+          type: integer
+      - name: type
+        in: query
+        description: Type of result to return.
+        schema:
+          type: string
+          enum:
+          - movie
+          - series
+          - episode
+      - name: plot
+        in: query
+        description: Return short or full plot.
+        schema:
+          type: string
+          default: short
+          enum:
+          - short
+          - full
+      - name: tomatoes
+        in: query
+        description: Include Rotten Tomatoes ratings.
+        schema:
+          type: boolean
+          default: false
+      - name: r
+        in: query
+        description: The data type to return.
+        required: true
+        schema:
+          type: string
+          default: json
+          enum:
+          - json
+          - xml
+      - name: v
+        in: query
+        description: API version (reserved for future use).
+        schema:
+          type: integer
+          default: 1
+      - name: page
+        in: query
+        description: Page number to return.
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: callback
+        in: query
+        description: JSONP callback name.
+        schema:
+          type: string
+      responses:
+        200:
+          description: Default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/combinedResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/combinedResult'
+components:
+  schemas:
+    combinedResult:
+      required:
+      - Response
+      type: object
+      properties:
+        Actors:
+          type: string
+        Awards:
+          type: string
+        BoxOffice:
+          type: string
+        Country:
+          type: string
+        DVD:
+          type: string
+        Director:
+          type: string
+        Genre:
+          type: string
+        Language:
+          type: string
+        Metascore:
+          type: string
+        Plot:
+          type: string
+        Poster:
+          type: string
+        Production:
+          type: string
+        Rated:
+          type: string
+        Released:
+          type: string
+        Response:
+          type: string
+        Runtime:
+          type: string
+        Search:
+          type: array
+          items:
+            required:
+            - Poster
+            - Title
+            - Type
+            - Year
+            - imdbID
+            type: object
+            properties:
+              Poster:
+                type: string
+              Title:
+                type: string
+              Type:
+                type: string
+              Year:
+                type: string
+              imdbID:
+                type: string
+        Title:
+          type: string
+        Type:
+          type: string
+        Website:
+          type: string
+        Writer:
+          type: string
+        Year:
+          type: string
+        imdbID:
+          type: string
+        imdbRating:
+          type: string
+        imdbVotes:
+          type: string
+        tomatoConsensus:
+          type: string
+        tomatoFresh:
+          type: string
+        tomatoImage:
+          type: string
+        tomatoMeter:
+          type: string
+        tomatoRating:
+          type: string
+        tomatoReviews:
+          type: string
+        tomatoRotten:
+          type: string
+        tomatoURL:
+          type: string
+        tomatoUserMeter:
+          type: string
+        tomatoUserRating:
+          type: string
+        tomatoUserReviews:
+          type: string
+        totalResults:
+          type: string
+        totalSeasons:
+          type: string

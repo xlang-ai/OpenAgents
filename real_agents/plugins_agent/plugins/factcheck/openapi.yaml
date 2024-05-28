@@ -1,0 +1,55 @@
+openapi: 3.0.1
+info:
+  title: Filtir
+  version: 'v1'
+  description: Verify the provided text using external sources.
+servers:
+  - url: https://app.filtir.com
+paths:
+  /facts:
+    post:
+      operationId: getVerifiedFacts
+      summary: Get a list of evidences for a claim.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sendText'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getVerifiedFacts'
+
+components:
+  schemas:
+    sendText:
+      type: object
+      properties:
+        text:
+          type: string
+          description: One claim extracted from the text that needs to be verified. Make sure that the sentence is short and contains only one claim.
+    getVerifiedFacts:
+      type: object
+      properties:
+        facts:
+          type: object
+          properties:
+            claim:
+              type: string
+              description: The original claim.
+            evidences:
+              type: array
+              description: The list of evidences for the claim.
+              items:
+                type: object
+                properties:
+                  text:
+                    type: string
+                    description: The most similar piece of text found from the source. Use this to verify the claim.
+                  link:
+                    type: string
+                    description: The link to the source.

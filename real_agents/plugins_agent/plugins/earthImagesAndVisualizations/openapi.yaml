@@ -1,0 +1,180 @@
+openapi: 3.0.0
+info:
+  title: Map Rendering API
+  version: 1.0.0
+  description: Generates a map image based on provided location, tilt and style.
+servers:
+  - url: https://api.earth-plugin.com
+paths:
+  /map-from-coordinates:
+    post:
+      summary: Generates a link to an image of a map from the provided coordinates.
+      operationId: generateMapFromCoordinates
+      description: This endpoint generates a map image with the provided parameters and returns a URL for the generated image.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                coordinates: # The center of the image
+                  type: array
+                  items:
+                    type: number
+                  description: The longitude and latitude for the map center.
+                  example: [10, 53.55]
+                zoom:
+                  type: number
+                  description: The zoom level for the map. Defaults to 14.
+                  default: 14
+                  example: 13.7
+                  minimum: 0
+                bearing:
+                  type: number
+                  description: The bearing of the map in degrees. Defaults to 0.
+                  example: 0
+                  maximum: 360
+                  minimum: 0
+                tilt:
+                  type: number
+                  description: The tilt of the map in degrees. Defaults to 0.
+                  example: 0
+                  maximum: 60
+                  minimum: 0
+                style:
+                  type: string
+                  description: The Mapbox style of the map. Defaults to 'chatGPT'.
+                  example: 'satellite-streets'
+                  default: 'chatGPT'
+                  enum:
+                    - light # great for the day time
+                    - dark # great for the night, easy on the eyes, dark mode
+                    - streets # great for navigation
+                    - outdoors # great for hiking, etc
+                    - satellite # great for satellite imagery, no road labels, most beautiful in our opinion
+                    - satellite-streets # great for satellite imagery, with road labels 
+                    - chatGPT # chatGPT, same colors as the interface of ChatGPT - the default when no style is provided
+      responses:
+        '200':
+          description: The URL for the generated map image.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageUrl:
+                    type: string
+                    description: The URL for the generated map image.
+                    example: 'https://storage.googleapis.com/earth-plugin-images/abc123.png'
+        '500':
+          description: An error occurred while generating the map image.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: A description of the error.
+  /map-from-location:
+    post:
+      summary: Generates a link to an image of a map from the provided location, address, or place name. Use this for most up to date locations.
+      operationId: generateMapFromLocation
+      description: This endpoint generates a map image with the provided location and returns a URL for the generated image.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                location:
+                  type: string
+                  description: The center of the image. A location query.
+                  example: "Berlin"
+                zoom:
+                  type: number
+                  description: The zoom level for the map. Defaults to 14.
+                  default: 14
+                  example: 13.7
+                  minimum: 0
+                bearing:
+                  type: number
+                  description: The bearing of the map in degrees. Defaults to 0.
+                  example: 0
+                  maximum: 360
+                  minimum: 0
+                tilt:
+                  type: number
+                  description: The tilt of the map in degrees. Defaults to 0.
+                  example: 0
+                  maximum: 60
+                  minimum: 0
+                style:
+                  type: string
+                  description: The style of the map, most of them are Mapbox styles. Defaults to 'light'.
+                  example: 'satellite-streets'
+                  default: 'chatGPT'
+                  enum:
+                    - light # great for the day time
+                    - dark # great for the night, easy on the eyes, dark mode
+                    - streets # great for navigation
+                    - outdoors # great for hiking, etc
+                    - satellite # great for satellite imagery, no road labels - should be suggested to the user - most beautiful
+                    - satellite-streets # great for satellite imagery, with road labels 
+                    - chatGPT # chatGPT, same colors as the interface of ChatGPT
+      responses:
+        '200':
+          description: The URL for the generated map image.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageUrl:
+                    type: string
+                    description: The URL for the generated map image.
+                    example: 'https://storage.googleapis.com/earth-plugin-images/abc123.png'
+        '500':
+          description: An error occurred while generating the map image.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: A description of the error.
+  /get-coordinates:
+    post:
+      summary: Get coordinates from a location or address
+      operationId: getCoordinates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                location:
+                  type: string
+                  description: The location or address to convert into coordinates
+              required:
+                - location
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coordinates:
+                    type: array
+                    items:
+                      type: number
+        '400':
+          description: Invalid input
+
+

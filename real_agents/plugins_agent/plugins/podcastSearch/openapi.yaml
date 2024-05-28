@@ -1,0 +1,36 @@
+openapi: 3.0.1
+info:
+  title: Podcast search
+  description: This tool explores podcasts from PodcastIndex.org, a platform for decentralized audio content discovery.
+  version: '1.0.0'  # versioning should follow the format 'major.minor.patch'
+servers:
+  - url: https://esne.ai
+paths:
+  /podcasts/{podcasttitle}:
+    get:
+      operationId: getPodcasts
+      summary: Get the list of podcasts
+      parameters:
+      - in: path
+        name: podcasttitle
+        schema:
+            type: string
+        required: true
+        description: The title of the podcast.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPodcastsResponse'
+components:
+  schemas:
+    getPodcastsResponse:
+      type: object
+      properties:
+        podcasts:
+          type: array
+          items:
+            type: string
+          description: The list of podcasts.

@@ -1,0 +1,75 @@
+openapi: 3.0.3
+info:
+  title: Keyword Explorer
+  description: Keyword Explorer is a keyword research tool that helps you discover relevant and popular keywords for your product or content, enhancing SEO and content relevancy by providing top related keywords.
+  version: 1.0.0
+  contact:
+    email: kevin@maila.ai
+servers:
+  - url: https://keyword-explorer.maila.ai
+paths:
+  /related-keywords:
+    get:
+      operationId: getRelatedKeywords
+      summary: Get related keywords
+      description: Give a keyword and get a list of related keywords.
+      parameters:
+        - name: keyword
+          in: query
+          description: The main keyword to find related keywords for.
+          required: true
+          schema:
+            type: string
+          example: SEO
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  keywords:
+                    type: array
+                    items:
+                      type: string
+                example:
+                  keywords:
+                    [
+                      "seo marketing",
+                      "seo optimization",
+                      "how to do seo for website step by step",
+                      "google seo tool",
+                      "seo online marketing",
+                      "what does an seo do",
+                      "seo website",
+                      "google free seo tools",
+                      "how to get seo",
+                      "what is seo for beginners",
+                      "what is seo in digital marketing",
+                      "what is seo services",
+                    ]
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                example:
+                  error: No keyword provided
+        "default":
+          description: Error fetching related keywords
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                example:
+                  error: Error fetching related keywords

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-11ee205f-af7e-45b4-8062-d37f6c69e211",
+    "domain": "figletgptplugin.wisemonkey.repl.co",
+    "namespace": "Figlet",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Figlet",
+        "name_for_human": "Figlet",
+        "description_for_model": "Utility for converting strings of text into ASCII fonts.",
+        "description_for_human": "Utility for converting strings of text into ASCII fonts.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://figletgptplugin.wisemonkey.repl.co/openapi.yaml"
+        },
+        "logo_url": "https://i.imgur.com/sGhZBiS.png",
+        "contact_email": "oranbusiness+figletgpt@gmail.com",
+        "legal_info_url": "https://www.termsfeed.com/live/24f4c12e-2c37-4e93-9678-8ce83f7a72fa"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

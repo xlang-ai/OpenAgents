@@ -1,0 +1,63 @@
+openapi: 3.0.1
+info:
+  title: Domain Finder AI ChatGPT Plugin
+  description: Verify if a domain is available by searching across multiple domain registrars.
+  version: 'v1'
+servers:
+  - url: https://chatgptapi.domainfinderai.com/v1
+paths:
+  /domains-availability:
+    post:
+      operationId: checkDomainsAvailability
+      summary: Check if an array of domains are available.
+      description: Receives an array of domains and returns their availability and purchase links.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                registrar:
+                  type: string
+                  description: The registrar to use for checking domain availability, must be one of the list.
+                  enum: ["namecheap", "godaddy", "google", "porkbun", "gandi", "epik", "rebel", "101"]
+                domains:
+                  description: Must be an array of valid domains (without the protocol).
+                  type: array
+                  items:
+                    type: string
+              required:
+                - domains
+      responses:
+        '200':
+          description: An array of domain availability information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Whether the operation was successful.
+                  domains:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        domain:
+                          type: string
+                          description: The domain name.
+                        available:
+                          type: boolean
+                          description: Whether the domain is available.
+                        purchaseLink:
+                          type: string
+                          format: uri
+                          description: The link to purchase the domain if it is available in the format of https://domainfinderai.com/d/{domain}. If there is a registrar specified in the request, add the query parameter registrar={registrar} to the link.
+        '400':
+          description: Bad Request
+        '422':
+          description: Something went wrong
+        '500':
+          description: Internal Server Error

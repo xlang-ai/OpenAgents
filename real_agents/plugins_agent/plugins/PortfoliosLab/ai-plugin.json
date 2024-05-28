@@ -1,0 +1,34 @@
+{
+    "id": "plugin-4c6e98c7-7913-4935-a720-1fe90c4a907b",
+    "domain": "portfolioslab.com",
+    "namespace": "PortfoliosLab",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "PortfoliosLab",
+        "name_for_human": "PortfoliosLab",
+        "description_for_model": "Stocks, ETFs, funds, crypto analysis: historical performance, volatility, risk metrics, Sharpe ratio, drawdowns, etc.",
+        "description_for_human": "Stocks, ETFs, funds, crypto analysis: historical performance, volatility, risk metrics, Sharpe ratio, drawdowns, etc.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://portfolioslab.com/openapi.yaml"
+        },
+        "logo_url": "https://portfolioslab.com/logo.png",
+        "contact_email": "support@portfolioslab.com",
+        "legal_info_url": "https://portfolioslab.com/terms-of-service"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

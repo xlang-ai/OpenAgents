@@ -1,0 +1,34 @@
+{
+    "id": "plugin-f59b4934-f0a3-452a-a919-1bb5db1c716b",
+    "domain": "gpt-show-search.fly.dev",
+    "namespace": "what_to_watch",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "what_to_watch",
+        "name_for_human": "What To Watch",
+        "description_for_model": "Retrieves current TV show information, recommendations, and streaming information (where to watch).",
+        "description_for_human": "Search for current shows, get recommendations, and find out where things are streaming.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://gpt-show-search.fly.dev/openapi.yaml"
+        },
+        "logo_url": "https://gpt-show-search.fly.dev/images/logo.png",
+        "contact_email": "aaron@aaroncruz.com",
+        "legal_info_url": "https://gpt-show-search.fly.dev/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

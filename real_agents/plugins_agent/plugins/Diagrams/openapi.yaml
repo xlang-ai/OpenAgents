@@ -1,0 +1,56 @@
+---
+openapi: 3.0.2
+info:
+  title: Diagrams API
+  description: An API to create diagrams in various text formats and render them.
+  version: 1.0.0
+servers:
+- url: https://diagrams.herokuapp.com
+  description: Plugin server
+paths:
+  "/diagram":
+    post:
+      summary: Render a diagram using Kroki.io or networkx
+      operationId: renderDiagram
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                diagram_type:
+                  type: string
+                  enum:
+                  - blockdiag
+                  - seqdiag
+                  - actdiag
+                  - nwdiag
+                  - packetdiag
+                  - rackdiag
+                  - c4plantuml
+                  - ditaa
+                  - erd
+                  - graphviz
+                  - mermaid
+                  - nomnoml
+                  - plantuml
+                  - svgbob
+                  - umlet
+                  - vega
+                  - vegalite
+                  - wavedrom
+                  - network
+                  description: The type of diagram to generate
+                diagram_source:
+                  type: string
+                  description: The text to be converted into a diagram
+      responses:
+        '200':
+          description: Link to the generated diagram
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Invalid input

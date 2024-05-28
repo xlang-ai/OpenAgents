@@ -1,0 +1,34 @@
+{
+    "id": "plugin-c0a7a473-7149-4065-9d54-f722bd7f3e59",
+    "domain": "ctcp.japaneast.cloudapp.azure.com",
+    "namespace": "CTCP",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "CTCP",
+        "name_for_human": "CT Criteria Parser",
+        "description_for_model": "You are given eligibility criteria for a specific Clinical Trial. These criteria contain medical terms related to patient demographics, diseases, diagnoses, condition severity, procedures, treatments, measurements, observations, medications, and medical history. Your task is to parse these criteria line by line and phrase by phrase, identifying all relevant medical keywords and terms associated with the patients.Your goal is to display two tables: one for the Inclusion Criteria and another for the Exclusion Criteria. Each table should have two columns. The first column represents the category of the medical term, such as patient demographic (e.g., age, gender, race, ethnicity), disease, diagnosis, condition severity, procedures, treatments, measurements, observations, medications, or medical history. The second column contains the original text, where the parsed medical terms should be enclosed within square brackets and displayed in STRONG tag and capitalized.",
+        "description_for_human": "Analyze eligibility criteria in ClinicalTrials.gov. Example input: nctid NCT05859269",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://ctcp.japaneast.cloudapp.azure.com/openapi.yaml"
+        },
+        "logo_url": "https://ctcp.japaneast.cloudapp.azure.com/logo.png",
+        "contact_email": "shangkeyun@gmail.com",
+        "legal_info_url": "https://github.com/lanesky/ctcp-chatgpt-plugin"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

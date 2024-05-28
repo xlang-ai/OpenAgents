@@ -1,0 +1,415 @@
+openapi: 3.0.1
+info:
+  title: "SG Places of Interest"
+  description: "Provides information on attractions, F&B outlets, accommodation, tours, shops, and events in Singapore."
+  version: "v1"
+servers:
+  - url: "https://sg-places.herokuapp.com"
+paths:
+  /search:
+    get:
+      operationId: searchDatabase
+      summary: "Search the Places of Interest database by dataset name(s), keyword, event start date, and event end date. This is an open informational database, and does not constitute a recommendation or endorsement of the places of interest."
+      parameters:
+      - in: query
+        name: dataset
+        schema:
+          type: string
+          description: "Dataset name(s)"
+          default: 'attractions,food_beverages,accommodation,tours,shops,events'
+        description: "The dataset(s) in which to conduct the search. The value must be from the following options [attractions, food_beverages, accommodation, tours, shops, events]. For multiple datasets, the dataset names must be separated by a comma."
+        examples:
+          singleDataset:
+            value: 'food_beverages'
+            summary: 'An example of how to specify a single dataset to search from'
+          multipleDataset:
+            value: 'accommodation,events'
+            summary: 'An example of how to specify a multiple datasets to search from'
+      - in: query
+        name: keyword
+        schema:
+          $ref: '#/components/schemas/General'
+        description: "Keyword to look for within name, description, body and tags when performing the search function."
+      - in: query
+        name: startDate
+        schema:
+          $ref: '#/components/schemas/Date'
+        description: "Only applicable when searching the event dataset. Events starting on or after this date will be returned. Leave this blank to search for ongoing events."
+      - in: query
+        name: endDate
+        schema:
+          $ref: '#/components/schemas/Date'
+        description: "Only applicable when searching the event dataset. Events ending before or on this date will be returned. Leave this blank to search for ongoing events."
+      - in: query
+        name: limit
+        schema:
+          $ref: '#/components/schemas/Limit'
+        description: "Maximum number of records to return in a response."
+      responses:
+        "200":
+          $ref: '#/components/responses/PointsOfInterest'
+
+  /search_map:
+    get:
+      operationId: searchMap
+      summary: "Search the Places of Interest database by dataset name(s), keyword, event start date, and event end date. This is an open informational database, and does not constitute a recommendation or endorsement of the places of interest."
+      parameters:
+      - in: query
+        name: location
+        required: true
+        schema:
+          $ref: '#/components/schemas/Location'
+        description: "A search location specified by latitude and longitude, separated by a comma."
+        example: '1.2835627,103.8584985'
+      - in: query
+        name: radius
+        schema:
+          $ref: '#/components/schemas/Radius'
+        description: "Results will be filted to those within this radius (in metres) from the specified location."
+      - in: query
+        name: dataset
+        schema:
+          type: string
+          description: "For a single dataset, the string must be from the following options [attractions, food_beverages, accommodation, tours, shops, events]. For multiple datasets, the string must consist of dataset names separated by a comma."
+          default: 'attractions,food_beverages,accommodation,tours,shops,events'
+        description: "The dataset(s) in which to conduct the search."
+        examples:
+          singleDataset:
+            value: 'food_beverages'
+            summary: 'An example of how to specify a single dataset to search from'
+          multipleDataset:
+            value: 'accommodation,events'
+            summary: 'An example of how to specify a multiple datasets to search from'
+      - in: query
+        name: keyword
+        schema:
+          $ref: '#/components/schemas/General'
+        description: "Keyword to look for within name, description, body and tags when performing the search function."
+      - in: query
+        name: limit
+        schema:
+          $ref: '#/components/schemas/Limit'
+        description: "Maximum number of records to return in a response."
+      responses:
+        "200":
+          $ref: '#/components/responses/PointsOfInterest'
+
+  /experiential_route:
+    get:
+      operationId: experientialRoute
+      summary: "Returns points of interest along a route specified by the origin, destination, stopovers/waypoints, and transport mode."
+      parameters:
+      - in: query
+        name: "transport-mode"
+        required: true
+        schema:
+          type: string
+          enum: [driving, bicycling, transit, walking]
+          default: driving
+        description: "This specifies the mode of transport to be taken for this experiential route."
+      - in: query
+        name: origin
+        required: true
+        schema:
+          $ref: '#/components/schemas/Location'
+        description: "A route is defined to start at this origin location, which is specified by latitude and longitude, separated by a comma."
+      - in: query
+        name: destination
+        required: true
+        schema:
+          $ref: '#/components/schemas/Location'
+        description: "A route is defined to end at this destination location, which is specified by latitude and longitude, separated by a comma."
+      - in: query
+        name: dataset
+        schema:
+          type: string
+          description: "For a single dataset, the string must be from the following options [attractions, food_beverages, accommodation, tours, shops, events]. For multiple datasets, the string must consist of dataset names separated by a comma."
+          default: 'attractions,food_beverages,accommodation,tours,shops,events'
+        description: "The dataset(s) in which to conduct the search."
+        examples:
+          singleDataset:
+            value: 'food_beverages'
+            summary: 'An example of how to specify a single dataset to search from'
+          multipleDataset:
+            value: 'accommodation,events'
+            summary: 'An example of how to specify a multiple datasets to search from'
+      - in: query
+        name: maxpoi
+        schema:
+          $ref: '#/components/schemas/Maxpoi'
+        description: "Maximum number of points of interest that should be returned."
+      - in: query
+        name: waypoint
+        schema:
+          $ref: '#/components/schemas/Waypoints'
+        description: "A string of comma-separated locations defining stopover points/waypoints along the route, where each location is specified by latitude and longitude separated by a comma."
+        examples:
+          oneStopover:
+            value: '1.2835627,103.8584985'
+            summary: 'An example of how to specify 1 stopover point/waypoint'
+          twoStopover:
+            value: '1.2835627,103.8584985,1.296659,103.848686'
+            summary: 'An example of how to specify 2 stopover points/waypoints.'
+      responses:
+        "200":
+          $ref: '#/components/responses/Route'
+
+  /display_map:
+    post:
+      operationId: displayMap
+      summary: "Returns a URL to access a static image of marked locations on a Google map."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                markers:
+                  type: string
+                  example: "1.2835627,103.8584985|1.296659,103.848686"
+                  description: "A string of locations separated by a pipe character, whereby each location is specified by latitude and longitude separated by a comma."
+              required:
+                - markers
+      responses:
+        "200":
+          $ref: '#/components/responses/Image'
+        "400":
+          $ref: '#/components/responses/ImageError'
+
+
+components:
+  schemas:
+    General:
+      type: string
+      maxLength: 255
+    Date:
+      type: string
+      format: full-date
+    DateTime:
+      type: string
+      format: date-time
+    Limit:
+      type: integer
+      minimum: 1
+      maximum: 20
+      default: 5
+    Location:
+      type: string
+      pattern: "^\\d+\\.\\d+,\\d+\\.\\d+$"
+    Address:
+      type: object
+      properties:
+        block:
+          type: string
+        streetName:
+          type: string
+        floorNumber:
+          type: string
+        unitNumber:
+          type: string
+        buildingName:
+          type: string
+        postalCode:
+          type: string
+        addressLocality:
+          type: string
+        addressCountry:
+          type: string
+    Radius:
+      type: integer
+      minimum: 50
+      maximum: 100000
+      default: 1000
+    Maxpoi:
+      type: integer
+      minimum: 1
+      maximum: 8
+      default: 3
+    Waypoints:
+      type: string
+      pattern: "^((\\d+\\.\\d+,\\d+\\.\\d+,)+(\\d+\\.\\d+,\\d+\\.\\d+)?$"
+
+
+    PointOfInterest:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        contact:
+          type: object
+          properties:
+            primaryContactNo:
+              type: string
+        location:
+          type: object
+          properties:
+            latitude:
+              type: number
+            longitude:
+              type: number
+        officialWebsite:
+          type: string
+        officialEmail:
+          type: string
+        body:
+          type: string
+        dataset:
+          type: string
+        thumbnails:
+          type: array
+          items:
+            type: string
+        images:
+          type: array
+          items:
+            type: string
+        startDate:
+          $ref: '#/components/schemas/Date'
+        endDate:
+          $ref: '#/components/schemas/Date'
+        eventOrganizer:
+          type: string
+        metadata:
+          type: object
+          properties:
+            updatedDate:
+              $ref: '#/components/schemas/DateTime'
+            createdDate:
+              $ref: '#/components/schemas/DateTime'
+        address:
+          $ref: '#/components/schemas/Address'
+        rating:
+          type: integer
+          minimum: 0
+          maximum: 5
+          description: "Google rating for point of interest"
+        businessHour:
+          type: array
+          items:
+            type: object
+            properties:
+              sequenceNumber:
+                type: integer
+                description: 'Index of the day of the week starting with 1 referring to Monday'
+              day:
+                type: string
+                enum: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
+              daily:
+                type: boolean
+              openTime:
+                type: string
+                pattern: "^\\d{2}:\\d{2}$"
+              closeTime:
+                type: string
+                pattern: "^\\d{2}:\\d{2}$"
+              description:
+                type: string
+        businessHourNotes:
+          type: object
+          properties:
+            notes:
+              type: string
+        temporarilyClosed:
+          type: string
+        nearestMrtStation:
+          type: string
+        pricing:
+          type: string
+        ticketed:
+          type: string
+        formattedTimePeriod:
+          type: object
+          additionalProperties:
+            type: string
+        group:
+          type: string
+        categoryDescription:
+          type: string
+        companyDisplayName:
+          type: string
+        companyName:
+          type: string
+        tourLanguage:
+          type: string
+        tourDuration:
+          type: string
+        startingPoint:
+          type: string
+        endingPoint:
+          type: string
+        wheelChairFriendly:
+          type: string
+        childFriendly:
+          type: string
+        minimumAge:
+          type: integer
+        eventDetailList:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+
+    Leg:
+      type: object
+      description: "Each leg forms part of the overall route."
+      properties:
+        distance:
+          type: integer
+          description: 'Travel distance in metres'
+        duration:
+          type: integer
+          description: 'Travel duration in seconds'
+        startAddress:
+          type: string
+          description: 'Address of the start point of the leg'
+        startLocation:
+          $ref: '#/components/schemas/PointOfInterest/properties/location'
+        endAddress:
+          type: string
+          description: 'Address of the end point of the leg'
+        endLocation:
+          $ref: '#/components/schemas/PointOfInterest/properties/location'
+        pointOfInterest:
+          $ref: '#/components/schemas/PointOfInterest'
+
+  responses:
+    PointsOfInterest:
+      description: "A list of relevant points of interest"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/PointOfInterest'
+    Image:
+      description: "A URL displaying a static image"
+      content:
+        text/plain:
+          schema:
+            type: string
+            format: url
+    ImageError:
+      description: "Image generation was unsuccessful."
+      content:
+        text/plain:
+          schema:
+            type: string
+    Route:
+      description: "A list of locations connecting an origin to a destination, stopping by several points of interest."
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#components/schemas/Leg'

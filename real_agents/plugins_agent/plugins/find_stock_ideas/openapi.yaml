@@ -1,0 +1,78 @@
+openapi: 3.0.1
+info:
+    title: find_stock_ideas
+    description: Find a list of stock ideas by asking it or feeding it with news or article.
+    version: "v1"
+servers:
+    - url: https://onepage.report/plugins
+paths:
+  /stock_ideas:
+    get:
+      operationId: getStockIdeasInTable
+      summary: Use to query a list of stock ideas. The list of stocks and their corresponding data should be presented in a mark down table with columns of ticker, company name, description, industry.
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          required: true
+          description: the query should be a roughly 200 words long detailed description of the type of business, products or services that will greatly benefit from the news or events described in the article. 
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    ticker:
+                      type: array
+                      items:
+                        type: string
+                      description: Ticker of the stock.
+                    name:
+                      type: string
+                      description: Name of the company.
+                    description:
+                      type: string
+                      description: Description of the company.
+                    url:
+                      type: array
+                      items:
+                        type: string
+                      description: URL for more information about the stock.
+                    Market Capitalisation:
+                      type: string
+                      description: Market capitalisation of the company.
+                    Sector:
+                      type: string
+                      description: Sector of the company.
+                    Industry:
+                      type: string
+                      description: Industry of the company.
+                    Last Price:
+                      type: string
+                      description: Last price of the stock.
+                    "52w Low - High Price":
+                      type: string
+                      description: 52 week low and high price of the stock.
+                    PE:
+                      type: string
+                      description: Price to Earnings ratio of the stock.
+                    PS:
+                      type: string
+                      description: Price to Sales ratio of the stock.
+                    PB:
+                      type: string
+                      description: Price to Book ratio of the stock.
+        '400':
+          description: Bad Request - No query provided.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string

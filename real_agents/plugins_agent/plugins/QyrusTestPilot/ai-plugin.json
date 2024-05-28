@@ -1,0 +1,34 @@
+{
+    "id": "plugin-28d95285-bb0b-4664-83de-27ef6998a68b",
+    "domain": "devui-qyrusbot.quinnox.info",
+    "namespace": "QyrusTestPilot",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "QyrusTestPilot",
+        "name_for_human": "QyrusTestPilot",
+        "description_for_model": "You can test your webapp without writing a single line of code by just giving the URL",
+        "description_for_human": "You can test your webapp without writing a single line of code by just giving the URL",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://devui-qyrusbot.quinnox.info/openapi.yaml"
+        },
+        "logo_url": "https://devui-qyrusbot.quinnox.info/logo.png",
+        "contact_email": "support@qyrus.com",
+        "legal_info_url": "https://www.qyrus.com/privacy-policy/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

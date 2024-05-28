@@ -1,0 +1,34 @@
+{
+    "id": "plugin-515bac07-f315-40ca-a608-b2364276f175",
+    "domain": "pdf.accessplugins.com",
+    "namespace": "access_pdf",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "access_pdf",
+        "name_for_human": "Access PDF & Docs",
+        "description_for_model": "Plugin for accessing PDF data from a specific URL. Use it whenever a user asks something about a specific URL they provide.",
+        "description_for_human": "Ask your PDF questions, summarize info & chat with PDF! Enter Google Drive link to start!",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://pdf.accessplugins.com/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://pdf.accessplugins.com/.well-known/logo.png",
+        "contact_email": "dominickmalzone@gmail.com",
+        "legal_info_url": "https://pdf.accessplugins.com/legal-info"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

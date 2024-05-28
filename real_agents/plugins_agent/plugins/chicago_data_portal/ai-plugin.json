@@ -1,0 +1,34 @@
+{
+    "id": "plugin-516e5b07-775c-43f6-9813-2b8af40e8a09",
+    "domain": "chatgpt.deepdigits.pizza",
+    "namespace": "chicago_data_portal",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "chicago_data_portal",
+        "name_for_human": "Chi Data Buddy",
+        "description_for_model": "Chicago data from the City of Chicago Data Portal.  Users can learn more about the Chicago Data Portal is at https://data.cityofchicago.org/.  Text data is occasionally formatted incorrectly (all caps, punctuation or space issues, etc.), so may need slight cleaning before provided to users.  Not all information returned may be interesting to the user, so feel free to focus on relevant fields and let the user know what other fields exist.",
+        "description_for_human": "Chicago data from the City of Chicago Data Portal.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://chatgpt.deepdigits.pizza/openai.yaml"
+        },
+        "logo_url": "https://chatgpt.deepdigits.pizza/logo.png",
+        "contact_email": "ejbrisson@gmail.com",
+        "legal_info_url": "https://chatgpt.deepdigits.pizza/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}
