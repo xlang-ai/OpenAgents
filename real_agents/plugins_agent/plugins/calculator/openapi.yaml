@@ -1,0 +1,42 @@
+---
+openapi: 3.0.1
+info:
+  title: Calculator
+  description: 'Calculator - A calculator app that executes a given formula and returns
+    a result. This app can execute basic operations as well as other operations like
+    modulus, exponentiation, bitwise OR, bitwise AND, left shift, and right shift.
+    Provide the formula and the app will execute it and return a result. The formula
+    needs to be URL-escaped. Here are some examples - formula: 1+2 - /?formula=1%2B2
+    -- formula: 2*3 - /?formula=2%2A3 -- formula: 3^4 - /?formula=3%5E4 -- and so
+    on... .'
+  version: v1.0
+servers:
+- url: https://calc.smoothplugins.com
+paths:
+  "/":
+    get:
+      operationId: execute_formula
+      summary: Executes a given formula and returns a result
+      description: Executes a given formula and returns a result
+      parameters:
+      - name: formula
+        in: query
+        description: The formula to execute
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/execute_formula_response"
+components:
+  schemas:
+    execute_formula_response:
+      type: object
+      properties:
+        result:
+          type: string
+          description: The result of the executed formula

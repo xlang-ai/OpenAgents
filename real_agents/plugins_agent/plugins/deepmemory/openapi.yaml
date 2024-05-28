@@ -1,0 +1,93 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Deep Memory Plugin",
+    "description": "Create flashcards and review them on Deep Memory, a spaced repetition app.",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://apiv2.deepmemory.io/gpt-plugin"
+    }
+  ],
+  "paths": {
+    "/flashcards": {
+      "post": {
+        "operationId": "convertFlashcards",
+        "summary": "Send flashcards to Deep Memory and display the link sent back",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FlashcardsArray"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Link"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Link": {
+        "type": "object",
+        "properties": {
+          "link": {
+            "type": "string"
+          },
+          "EXTRA_INFORMATION_TO_ASSISTANT": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "link",
+          "EXTRA_INFORMATION_TO_ASSISTANT"
+        ]
+      },
+      "FlashcardsArray": {
+        "type": "object",
+        "properties": {
+          "cards": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                },
+                "a": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "q",
+                "a"
+              ]
+            }
+          },
+          "deckName": {
+            "type": "string",
+            "description": "Name of the group of flashcards"
+          }
+        },
+        "required": [
+          "cards",
+          "deckName"
+        ]
+      }
+    }
+  }
+}

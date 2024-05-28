@@ -1,0 +1,34 @@
+{
+    "id": "plugin-c26a258b-3781-4b83-bee7-6501f4b110c6",
+    "domain": "www.klook.com",
+    "namespace": "travelActivityHotel",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "travelActivityHotel",
+        "name_for_human": "Klook",
+        "description_for_model": "When user asks travel related questions or mentions a destination for their trips, the model can understand user's requirements and then help them book tours, book activities, book attraction tickets, book hotel rooms, book flight tickets, rent cars, reserve airport transfer service, or provide ideas about destinations.",
+        "description_for_human": "From local escapes to far flung adventures, find the best experiences, tours, hotels and transport options anywhere.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://www.klook.com/v1/gptpluginsrv/public/openapi.json"
+        },
+        "logo_url": "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_400,h_400/v1658221026/blog/mza5gbjifutssk81hc78.webp",
+        "contact_email": "noark.li@klook.com",
+        "legal_info_url": "https://klook.com"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

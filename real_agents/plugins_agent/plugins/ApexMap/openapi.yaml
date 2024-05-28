@@ -1,0 +1,41 @@
+openapi: 3.0.0
+info:
+  title: Apex Legends Ranked Map Plugin
+  description: Checking the current APEX Legends Ranked Map.
+  version: 1.0.0
+servers:
+  - url: https://941p7w-5003.csb.app/
+paths:
+  /apex/ranked-map:
+    get:
+      summary: Get the current ranked map
+      operationId: getRankedMap
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+  /apex/predict-future-map:
+    get:
+      summary: predict future Apex Legends map
+      operationId: predictFutureMaps
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  current_map:
+                    type: string
+                  map_rotation:
+                    type: array
+                    items:
+                      type: string
+                  change_time:
+                    type: string
+                  map_change:
+                    type: string

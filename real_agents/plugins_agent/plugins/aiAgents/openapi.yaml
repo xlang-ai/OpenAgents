@@ -1,0 +1,45 @@
+openapi: 3.0.1
+info:
+  title: AI Agents.
+  description: Collaborate with another AI Agent to perform the goal much faster and more efficient.
+  version: 'v1'
+servers:
+  - url: https://ai-agents-plugin.vercel.app/
+paths:
+  /aiagent:
+    get:
+      operationId: aiagent
+      summary: Talk with a Master AI Agent that will provide guidance and advice to perform your goal
+      parameters:
+        - name: goal
+          in: query
+          description: the goal to send to the Master AI Agent
+          required: true
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIAgentResponse'
+
+components:
+  schemas:
+    AIAgentResponse:
+      type: object
+      properties:
+        instructions:
+            type: string
+            description: instructions on how to process the request from the AI Master Agent
+        response:
+            type: string
+            description: response from the AI Master Agent
+        request:
+            type: string
+            description: the original request
+
+
+

@@ -1,0 +1,92 @@
+---
+openapi: 3.0.1
+info:
+  version: v1
+  title: OpenAI Broadway.com Product API.
+  description: Search for shows that are currently playing on Broadway in New York
+    City.
+servers:
+- url: https://aidocs.broadway.com
+  description: Broadway.com Server for AI endpoints.
+tags:
+- name: open-ai-product-endpoint
+  description: Open AI Product Endpoint. Query for products.
+paths:
+  "/openai/v1/products":
+    get:
+      tags:
+      - open-ai-product-endpoint
+      summary: API for fetching Broadway show information.
+      operationId: productsUsingGET
+      parameters:
+      - name: q
+        in: query
+        description: A precise query that matches one very small show category like
+          plays or musicals, or a Broadway show that needs to be searched for. If
+          the user explicitly stated what show they want, use that show name as a
+          query. The query is as specific as possible to the show name or show category
+          mentioned by the user in its singular form, and don't contain any clarifiers
+          like latest, newest, cheapest, budget, premium, expensive or similar. If
+          the user speaks another language than English, translate their request into
+          English.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Products were found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProductResponse"
+        '503':
+          description: One or more services are unavailable.
+      deprecated: false
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        attributes:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        id:
+          type: integer
+        image:
+          type: string
+        intermissions:
+          type: integer
+        length:
+          type: string
+        name:
+          type: string
+        price_from:
+          type: string
+        reviews:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ProductReview"
+        url:
+          type: string
+      title: Product
+    ProductResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Product"
+      title: ProductResponse
+    ProductReview:
+      type: object
+      properties:
+        reviewer:
+          type: string
+        publication:
+          type: string
+        quote:
+          type: string
+      title: ProductResponse

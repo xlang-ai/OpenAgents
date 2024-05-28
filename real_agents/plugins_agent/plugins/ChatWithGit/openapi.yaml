@@ -1,0 +1,43 @@
+openapi: 3.0.1
+info:
+  title: ChatWithGit
+  description: Search code on GitHub repositories based on a query.
+  version: "v1"
+servers:
+  - url: https://gitsearch.sdan.io
+paths:
+  /git/query:
+    post:
+      operationId: queryGit
+      summary: Search code on GitHub repositories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/queryRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/queryResponse"
+components:
+  schemas:
+    queryRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The search query for code on GitHub repositories.
+    queryResponse:
+      type: object
+      properties:
+        chunks:
+          type: array
+          items:
+            type: string
+          description: The list of code chunks relevant to the user's query from GitHub repositories.

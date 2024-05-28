@@ -1,0 +1,29 @@
+{
+    "id": "plugin-1f7cc4fd-c4e4-4947-bfcc-3f9301eb9fff",
+    "domain": "got2go.com",
+    "namespace": "got2go_plugin_v1",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "got2go_plugin_v1",
+        "name_for_human": "Got2Go",
+        "description_for_model": "Helps discover the perfect vacation rentals across the United States. If the user requests stays outside the United States, politely inform them that we don't support that yet.",
+        "description_for_human": "Your next vacation is one conversation away. Literally. Find the perfect stays in the US with Got2Go.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://got2go.com/ai-plugin-openapi.yaml"
+        },
+        "logo_url": "https://got2go.com/ai-plugin-icon.png",
+        "contact_email": "support@got2go.com",
+        "legal_info_url": "https://help.got2go.com/policies"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": []
+}

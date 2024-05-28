@@ -1,0 +1,53 @@
+openapi: 3.0.1
+info:
+  title: Next Paper Plugin
+  description: Fetch the latest research papers on a specific topic from PubMed.
+  version: 'v1'
+servers:
+  - url: https://nextpaperplugin--mengzhao1.repl.co
+paths:
+  /paper:
+    get:
+      operationId: fetchPaper
+      summary: Fetch the latest paper on a specific topic
+      parameters:
+        - name: keyword
+          in: query
+          description: The topic to search for
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fetchPaperResponse'
+        "404":
+          description: No Results Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        "500":
+          description: Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+components:
+  schemas:
+    fetchPaperResponse:
+      type: object
+      properties:
+        result:
+          type: string
+          description: The details of the latest paper on the topic
+
+    errorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: An error message describing the issue

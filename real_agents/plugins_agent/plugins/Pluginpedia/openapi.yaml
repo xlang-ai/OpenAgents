@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: pluginpedia
+  description: Recommend plugins in the store based on your question, and introduce their usage.
+  version: 1.0.0
+servers:
+  - url: 'https://pluginpedia.replit.app'
+paths:
+  /plugins:
+    post:
+      operationId: getPlugins
+      summary: Retrieve a list of plugins from ChatGPT plugin store
+      requestBody:
+        description: categroy of plugins, Only one category can be filled in a single request e.g. "Finance,Business,SocialNetworking,DeveloperTools,Productivity,Reference,Web,Travel,LocalLife,Shopping,Weather,Navigation,Graphics,Design,News,Newspapers,Utilities,,Education,Sports,Entertainment,Books,Music,Medical,Health,Fitness,Food,Crypto,Kids,Video,Game,Photo"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                categroy:
+                  type: string
+                  description: categroy of plugins, Please only enter categories from the list separated by commas, and make sure the characters and capitalization are correct, Only one category can be filled in a single request. categories list "Finance,Business,SocialNetworking,DeveloperTools,Productivity,Reference,Web,Travel,LocalLife,Shopping,Weather,Navigation,Graphics,Design,News,Newspapers,Utilities,,Education,Sports,Entertainment,Books,Music,Medical,Health,Fitness,Food,Crypto,Kids,Video,Game,Photo"
+      responses:
+        '200':
+          description: A list of plugins from ChatGPT plugin store
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plugin'
+components:
+  schemas:
+    Plugin:
+      type: object
+      description: A plugin and an introduction to this plugin
+      properties:
+        plugin_name:
+          type: string
+          description: plugin‘s name
+        plugin_description:
+          type: string
+          description: An introduction to this plugin, as well as its use cases.
+        plugin_description_for_model:
+          type: string
+          description: An advance introduction to this plugin, as well as its use cases (optional).
+        plugin_logo_url:
+          type: string
+          description: plugin‘s logo image url, Displaying the logo image of this plugin can help users quickly find the plugin in the plugin market, so try to display logo image with markdown in the answer after calling the plugin.
+        prompt_example:
+          type: string
+          description: Examples of prompts for using this plugin, different examples will be separated by commas,These examples can help users quickly get started with this plugin, so try to display them in the answer after calling the plugin.

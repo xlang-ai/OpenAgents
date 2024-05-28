@@ -1,0 +1,34 @@
+{
+    "id": "plugin-2b3bacea-74c3-45e7-913d-2a07f1deb70e",
+    "domain": "plugin.charge-my-ev.guide",
+    "namespace": "SuperchargeMyEV",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "SuperchargeMyEV",
+        "name_for_human": "Supercharge My EV",
+        "description_for_model": "Fetch Tesla supercharger information available to non-Tesla electric vehicles for a specific location. Data includes address, number of charging stations, and other relevant information, as well as a link to a page that has additional information. Links will always be returned and should be shown to the user. The supercharger data can be used to provide users with up-to-date and accurate information based on city, state/province, country and region (continent).",
+        "description_for_human": "Find superchargers for non-Tesla vehicles for a specific location.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://plugin.charge-my-ev.guide/openapi.json"
+        },
+        "logo_url": "https://plugin.charge-my-ev.guide/logo.png",
+        "contact_email": "hello@charge-my-ev.guide",
+        "legal_info_url": "https://charge-my-ev.guide/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

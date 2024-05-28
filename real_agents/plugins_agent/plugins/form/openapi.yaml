@@ -1,0 +1,74 @@
+---
+openapi: 3.0.2
+info:
+  title: YayForms App
+  description: An API to create AI-Powered Forms, Surveys, Quizzes, or Questionnaires
+    on YayForms
+  version: 1.0.0
+paths:
+  "/forms":
+    post:
+      summary: Forms
+      description: Create a Form, Survey, Quiz, or Questionnaire (and their respective
+        questions) on Yay! Forms and return an URL to import the form into the customer's
+        Yay! Forms account.
+      operationId: forms_forms_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/FormData"
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    FormData:
+      title: FormData
+      required:
+      - formSubject
+      type: object
+      properties:
+        formSubject:
+          title: Formsubject
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string

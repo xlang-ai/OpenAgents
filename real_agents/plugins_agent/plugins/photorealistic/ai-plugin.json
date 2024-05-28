@@ -1,0 +1,34 @@
+{
+    "id": "plugin-0efc33e6-78ca-4d8c-a1a4-97d05e2bb4c1",
+    "domain": "midjourney-ruddy.vercel.app",
+    "namespace": "photorealistic",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "photorealistic",
+        "name_for_human": "Photorealistic",
+        "description_for_model": "Plugin trained for generating Photorealistic prompts for the Midjourney image creation tool.",
+        "description_for_human": "Generate Photorealistic prompts for Midjourney.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://midjourney-ruddy.vercel.app/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://midjourney-ruddy.vercel.app/imgs/logo96.png",
+        "contact_email": "support@aiagentslab.com",
+        "legal_info_url": "https://www.aiagentslab.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,51 @@
+openapi: 3.0.1
+info:
+  title: Prompt Perfect
+  description: Type 'perfect' to craft the perfect prompt, every time.
+  version: 'v1'
+servers:
+  - url: https://promptperfect.xyz
+paths:
+  /rephrase:
+    post:
+      operationId: rephrasePrompt
+      summary: Rephrase the given prompt
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Prompt'
+            example:
+              text: "Write a tweet"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RephrasedPrompt'
+              example:
+                text: "Compose a highly detailed and engaging tweet. Keep the tweet within the 280-character limit"
+components:
+  schemas:
+    Prompt:
+      type: object
+      properties:
+        conversation_id:
+          type: string
+          description: The conversation ID.
+        text:
+          type: string
+          description: The prompt text to be rephrased.
+    RephrasedPrompt:
+      type: object
+      properties:
+        conversation_id:
+          type: string
+          description: The conversation ID.
+        rephrased:
+          type: object
+          properties:
+            text:
+              type: string
+              description: The rephrased prompt text.

@@ -1,0 +1,71 @@
+
+    openapi: 3.0.1
+    info:
+        title: AI Powered Web Scanner by HACKIT.
+        description: Smart Web Scanner developed by Yuval Avidani from HACKIT. It uses for scanning websites for potential security threats in order to help the good guys protect from bad guys.
+        version: 'v1'
+    servers:
+        - url: https://hackit.co.il
+    paths:
+        /scan:
+            post:
+                operationId: hackit
+                summary: Scan the website and find vulnerabilities
+                requestBody:
+                    required: true
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    url:
+                                        type: string
+                responses:
+                    '200':
+                        description: OK
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        message:
+                                            type: string
+                                        subdomains:
+                                            type: array
+                                            items:
+                                                type: string
+                                        directories:
+                                            type: array
+                                            items:
+                                                type: string
+                                        valid_links:
+                                            type: array
+                                            items:
+                                                type: string
+                                        injections:
+                                            type: array
+                                            items:
+                                                type: string
+                                        special_headers:
+                                            type: object
+                                        hidden_tags:
+                                            type: array
+                                            items:
+                                                type: string
+                                        special_files:
+                                            type: array
+                                            items:
+                                                type: object
+                                                properties:
+                                                    name:
+                                                        type: string
+                                                    content:
+                                                        type: string
+                                                    url:
+                                                        type: string
+                                        waf:
+                                            type: string
+                                        ip_address:
+                                            type: string
+                                        censys_data:
+                                            type: object

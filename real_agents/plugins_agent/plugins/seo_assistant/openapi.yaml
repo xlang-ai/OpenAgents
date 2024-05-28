@@ -1,0 +1,36 @@
+openapi: 3.0.1
+info:
+  title: SEO Assistant
+  description: The SEO Assistant can generate search engine keyword information in order to aid the creation of content.
+  version: 'v1'
+servers:
+  - url: https://webfx.ai
+paths:
+  /suggestions.php:
+    get:
+      operationId: getGeneratedKeywordSuggestion
+      summary: Get the list of keyword suggestions
+      parameters:
+      - in: query
+        name: keyword
+        schema:
+            type: string
+        required: true
+        description: Phrase or sentence entered by user.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getGeneratedKeywordSuggestionResponse'
+components:
+  schemas:
+    getGeneratedKeywordSuggestionResponse:
+      type: object
+      properties:
+        suggestions:
+          type: array
+          items:
+            type: string
+          description: The list of keyword suggestions.

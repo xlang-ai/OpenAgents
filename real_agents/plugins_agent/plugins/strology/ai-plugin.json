@@ -1,0 +1,34 @@
+{
+    "id": "plugin-19c2fa30-30e2-4c2f-a3a5-2a5464cf15b4",
+    "domain": "pretzelbox.cc",
+    "namespace": "strology",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "strology",
+        "name_for_human": "Strology",
+        "description_for_model": "Get daily astrological predictions for your sun sign.",
+        "description_for_human": "Get daily astrological predictions for your sun sign.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://pretzelbox.cc/strology/openapi.yaml"
+        },
+        "logo_url": "https://pretzelbox.cc/strology/logo.png",
+        "contact_email": "strology@pretzelbox.cc",
+        "legal_info_url": "https://pretzelbox.cc/strology/legal.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

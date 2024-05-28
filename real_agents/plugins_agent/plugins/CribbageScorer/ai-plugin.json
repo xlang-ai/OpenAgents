@@ -1,0 +1,34 @@
+{
+    "id": "plugin-87de6bd4-0228-4f0c-a36f-0e41b45572a2",
+    "domain": "cribbage.azurewebsites.net",
+    "namespace": "CribbageScorer",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "CribbageScorer",
+        "name_for_human": "Cribbage Scorer",
+        "description_for_model": "Tool for scoring your cards in the game of cribbage.",
+        "description_for_human": "Tool for scoring your cards in the game of cribbage.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://cribbage.azurewebsites.net/openapi.yaml"
+        },
+        "logo_url": "https://cribbage.azurewebsites.net/static/crib_scorer_logo.png",
+        "contact_email": "pete@investigatingsoftware.co.uk",
+        "legal_info_url": "https://cribbage.azurewebsites.net/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

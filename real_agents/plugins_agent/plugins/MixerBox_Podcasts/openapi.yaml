@@ -1,0 +1,420 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+      "title": "MixerBox Podcasts",
+      "description": "Search podcasts easily! Explore podcasts covering society, sports, business, news, music, and more!",
+      "version": "v1"
+    },
+    "servers": [
+      {
+        "url": "https://podcasts.mixerbox.com"
+      }
+    ],
+    "paths": {
+      "/gpt/getPodcastsByCategoryMB": {
+        "get": {
+          "summary": "Users can request a specific kind of zh-tw (Zhōngwén) podcast using relevant keywords related to social-and-culture, news, comedy-and-music, art, business, technology, recreation, etc...",
+          "operationId": "getPodcastsByCategoryInZhTw",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "locale",
+              "schema": {
+                "type": "string",
+                "default": "zh-tw"
+              },
+              "description": "Determine the parameter based on the user's language: `zh-tw (Zhōngwén)`",
+              "required": true
+            },
+            {
+              "in": "query",
+              "name": "categoryId",
+              "description": "Type of podcast, social-and-culture, news, comedy-and-music, art, business, technology, recreation, education, kid-and-family, fiction, health-and-fitness, sport, crime, history, tv-and-movie, religion, science, music, government",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "default": "business",
+                "enum": [
+                  "social-and-culture",
+                  "news",
+                  "comedy-and-music",
+                  "art",
+                  "business",
+                  "technology",
+                  "recreation",
+                  "education",
+                  "kid-and-family",
+                  "fiction",
+                  "health-and-fitness",
+                  "sport",
+                  "crime",
+                  "history",
+                  "tv-and-movie",
+                  "religion",
+                  "science",
+                  "music",
+                  "government"
+                ]
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PodcastsResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/gpt/getPodcastsByCategory": {
+        "get": {
+          "summary": "Users can request a specific kind of podcast using relevant keywords related to music, comedy, news, crime, education, history, TV & film, government, society & culture, and religion & spirituality.",
+          "operationId": "getPodcastsByCategoryGlobal",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "locale",
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "ja-jp",
+                  "en-us"
+                ]
+              },
+              "description": "Determine the parameter based on the user's language: `en-us (English)`, `zh-tw (Zhōngwén)` or `ja-jp (Japanese)`",
+              "required": true
+            },
+            {
+              "in": "query",
+              "name": "categoryId",
+              "description": "Type of podcast, 1310 for MUSIC, 1303 for COMEDY, 1489 for NEWS, 1488 for TRUE_CRIME, 1304 for EDUCATION, 1309 for TV_FILM, 1487 for HISTORY, 1314 for RELIGION_SPIRITUALITY, 1511 for GOVERNMENT, 1324 for SOCIETY_CULTURE",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "default": "1310",
+                "enum": [
+                  "1310",
+                  "1303",
+                  "1489",
+                  "1488",
+                  "1304",
+                  "1309",
+                  "1487",
+                  "1314",
+                  "1511",
+                  "1324"
+                ]
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PodcastsResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/gpt/searchPodcast": {
+        "get": {
+          "summary": "Users can search for podcast and receive an array of podcast URLs for streaming.",
+          "operationId": "searchPodcast",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "q",
+              "schema": {
+                "type": "string"
+              },
+              "description": "The podcast name be searched",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PodcastsResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/gpt/getPopularPodcasts": {
+        "get": {
+          "summary": "Users can get popular, hot podcasts",
+          "operationId": "getPopularPodcasts",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "locale",
+              "schema": {
+                "type": "string",
+                "default": "en-us",
+                "enum": [
+                  "zh-tw",
+                  "ja-jp",
+                  "en-us"
+                ]
+              },
+              "description": "Determine the parameter based on the user's language: `zh-tw (Zhōngwén), `en-us (English)`, `zh-tw (Zhōngwén)` or `ja-jp (Japanese)`",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PodcastsResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/gpt/getPopularEpisodes":{
+        "get": {
+          "summary": "Users can get popular, hot podcast episodes",
+          "operationId": "getPopularEpisodes",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "locale",
+              "schema": {
+                "type": "string",
+                "default": "en-us",
+                "enum": [
+                  "zh-tw",
+                  "ja-jp",
+                  "en-us"
+                ]
+              },
+              "description": "Determine the parameter based on the user's language: `zh-tw (Zhōngwén), `en-us (English)`, `zh-tw (Zhōngwén)` or `ja-jp (Japanese)`",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EpisodesResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/gpt/getEpisodesByCategory": {
+        "get": {
+          "summary": "Users can request a specific kind of zh-tw (Zhōngwén) episodes using relevant keywords related to social-and-culture, news, comedy-and-music, art, business, technology, recreation, etc...",
+          "operationId": "getEpisodesByCategoryInZhTw",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "locale",
+              "schema": {
+                "type": "string",
+                "default": "zh-tw"
+              },
+              "description": "Determine the parameter based on the user's language: `zh-tw (Zhōngwén)`",
+              "required": true
+            },
+            {
+              "in": "query",
+              "name": "categoryId",
+              "description": "Type of podcast, social-and-culture, news, comedy-and-music, art, business, technology, recreation, education, kid-and-family, fiction, health-and-fitness, sport, crime, history, tv-and-movie, religion, science, music, government",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "default": "business",
+                "enum": [
+                  "social-and-culture",
+                  "news",
+                  "comedy-and-music",
+                  "art",
+                  "business",
+                  "technology",
+                  "recreation",
+                  "education",
+                  "kid-and-family",
+                  "fiction",
+                  "health-and-fitness",
+                  "sport",
+                  "crime",
+                  "history",
+                  "tv-and-movie",
+                  "religion",
+                  "science",
+                  "music",
+                  "government"
+                ]
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EpisodesResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/gpt/getEpisodesByPodcast":{
+        "get": {
+          "summary": "Users can get latest podcast episodes by podcastId",
+          "operationId": "getEpisodesByPodcast",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "podcastId",
+              "schema": {
+                "type": "string"
+              },
+              "description": "The podcastId be query",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EpisodesResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "PodcastsResponse": {
+          "title": "PodcastsResponse",
+          "required": [
+            "gpt"
+          ],
+          "type": "object",
+          "properties": {
+            "gpt": {
+              "title": "GPTResponse",
+              "type": "object",
+              "properties": {
+                "items": {
+                  "title": "Result of Podcasts",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PodcastItem"
+                  },
+                  "description": "The array of Podcasts."
+                }
+              }
+            }
+          }
+        },
+        "PodcastItem": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "title": "Podcast Title",
+              "type": "string"
+            },
+            "author": {
+              "title": "Podcast author",
+              "type": "string"
+            },
+            "language": {
+              "title": "Podcast language",
+              "type": "string"
+            },
+            "url": {
+              "title": "Podcast url",
+              "type": "string"
+            },
+            "id": {
+              "title": "Podcast id",
+              "type": "string"
+            }
+          }
+        },
+        "EpisodesResponse": {
+          "title": "EpisodesResponse",
+          "required": [
+            "gpt"
+          ],
+          "type": "object",
+          "properties": {
+            "gpt": {
+              "title": "GPTResponse",
+              "type": "object",
+              "properties": {
+                "items": {
+                  "title": "Result of Podcast Episodes",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeItem"
+                  },
+                  "description": "The array of Podcast Episodes."
+                }
+              }
+            }
+          }
+        },
+        "EpisodeItem": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "title": "Episode Title",
+              "type": "string"
+            },
+            "url": {
+              "title": "Episode url",
+              "type": "string"
+            },
+            "id": {
+              "title": "Podcast id",
+              "type": "string"
+            },
+            "guid": {
+              "title": "Episode id",
+              "type": "string"
+            },
+            "duration": {
+              "title": "Episode duration in second",
+              "type": "number"
+            }
+          }
+        }
+      }
+    }
+}

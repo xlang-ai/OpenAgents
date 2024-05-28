@@ -1,0 +1,34 @@
+{
+    "id": "plugin-e4b16c5f-c5ea-402f-9b30-e0d60d2f4070",
+    "domain": "supercharger-958358-jexkai4vea-uc.a.run.app",
+    "namespace": "Supercharger",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Supercharger",
+        "name_for_human": "Supercharger",
+        "description_for_model": "Submit an origin, destination, Tesla model (optionally you can add up to two stop over locations) and receive a route  and any superchargers needed. Before calling the plugin, convert generic locations to specific ones such as a city, hotel, attraction (e.g. Yosemite National Park, CA to Yosemite Valley, CA) and let the user know. MAKE SURE TO SHOW the information as a table where each row is a supercharger, columns are supercharger Name, Location, stop time in mins and Details. Also add the total trip duration and distance. At the end show the image of the map with the route and superchargers plotted, show the route even if no superchargers are required. SHOW THE IMAGES inline on the page. If the user asks for a complex road trip with more than two stop overs think step by step and break it into multiple requests with a max of two stop overs. Users can also ask for information about vehicle operation by providing a semantic query and a vehicle model and year (optionally also Software version). Make sure to obtain the vehicle information needed from the user. Relevant text and associated images will be returned. SHOW THE IMAGES inline on the page. Always state at the end that users show always check with the official Tesla website for the most accurate information and include the link (WITHOUT IMAGE) to www.tesla.com .",
+        "description_for_human": "Awesome Tesla trips: find a route, including supercharger stops. Bonus: chat with the Tesla manual!",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://supercharger-958358-jexkai4vea-uc.a.run.app/openapi.yaml"
+        },
+        "logo_url": "https://supercharger-958358-jexkai4vea-uc.a.run.app/logo.png",
+        "contact_email": "support@example.com",
+        "legal_info_url": "https://supercharger-958358-jexkai4vea-uc.a.run.app/legal.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-08c964fb-7d50-481c-8b85-e623b9846a4d",
+    "domain": "www.coupert.com",
+    "namespace": "Coupert",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Coupert",
+        "name_for_human": "Coupert",
+        "description_for_model": "Assistant uses the Coupert plugin to get coupon suggestions for any shopping or product discovery purpose. Assistant will reply with the following 3 paragraphs 1) Store 2) Coupon Codes 3) Followup Questions. The first paragraph contains store info with their name and cashback, together with a link to the store. Links will always be returned and should be shown to the user with text (Go Shopping). The second paragraph contains a list of the coupons with their code and their Success Rate with field savedRateIn24H and concisely as bullet points under the store, together with a link to the store. Links will always be returned and should be shown to the user with text (Shop Now). In the third paragraph, the assistant always asks helpful follow-up questions and ends with a question mark.",
+        "description_for_human": "Search for the internet's best coupons from thousands of online stores.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://www.coupert.com/api/v2/openai/docs"
+        },
+        "logo_url": "https://www.coupert.com/img/favicon.svg",
+        "contact_email": "service@coupert.com",
+        "legal_info_url": "https://www.coupert.com/privacy"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

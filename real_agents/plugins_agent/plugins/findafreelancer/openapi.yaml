@@ -1,0 +1,34 @@
+openapi: 3.0.1
+info:
+  title: Find a Freelancer
+  description: Find human freelancers that can help complete a given task.
+  version: 'v1'
+servers:
+  - url: https://findafreelancer.replit.app/
+paths:
+  /find:
+    get:
+      operationId: findFreelancers
+      summary: Find freelancers relevant to a given service
+      parameters:
+        - name: service
+          in: query
+          description: The service that the freelancer should provide
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findFreelancersResponse'
+components:
+  schemas:
+    findFreelancersResponse:
+      type: object
+      properties:
+        results:
+          type: string
+          description: Formatted results of relevant freelancers

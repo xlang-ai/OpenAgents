@@ -1,0 +1,94 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "v0",
+    "title": "Open AI Isotonix product Api",
+    "description": "Isotonix products search."
+  },
+  "servers": [
+    {
+      "url": "https://www.isotonix.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "open-ai-product-endpoint",
+      "description": "Open AI Product Endpoint. Query for products."
+    }
+  ],
+  "paths": {
+    "/lib/common/ai/isotonix-search.cfm": {
+      "get": {
+        "tags": [
+          "open-ai-product-endpoint"
+        ],
+        "summary": "API for fetching Isotonix product information",
+        "operationId": "productsUsingGET",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "A precise query that matches one very small category or product that needs to be searched for to find the products the user is looking for. If the user explicitly stated what they want, use that as a query. The query is as specific as possible to the product name or category mentioned by the user in its singular form, and don't contain any clarifiers like latest, newest, cheapest, budget, premium, expensive or similar. The query is always taken from the latest topic, if there is a new topic a new query is started.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "one or more services are unavailable"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "title": "Product"
+      },
+      "ProductResponse": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            }
+          }
+        },
+        "title": "ProductResponse"
+      }
+    }
+  }
+}

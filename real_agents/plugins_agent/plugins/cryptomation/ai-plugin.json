@@ -1,0 +1,34 @@
+{
+    "id": "plugin-027a2653-89e2-4b4d-a746-afd802215d86",
+    "domain": "chat.cryptomation.com",
+    "namespace": "cryptomation",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "cryptomation",
+        "name_for_human": "CryptoMation",
+        "description_for_model": "Crypto transactions, addresses, balances, conversions for any blockchain (Ethereum, Binance, Near, Tron, etc.)",
+        "description_for_human": "Crypto transactions, addresses, balances, conversions for any blockchain (Ethereum, Binance, Near, Tron, etc.)",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://chat.cryptomation.com/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://chat.cryptomation.com/.well-known/cryptomation.svg",
+        "contact_email": "admin@cryptomation.com",
+        "legal_info_url": "https://cryptomation.com/privacy-policy"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,86 @@
+---
+openapi: 3.0.1
+info:
+  title: QR Code generator for text or URLs. It's a general-purpose tool that also
+    enables QR code puzzle games with AI.
+  version: v1
+  description: QR Code generator for text or URLs. It's a general-purpose tool that
+    also enables QR code puzzle games with AI.
+paths:
+  "/LegalInfo":
+    get:
+      tags:
+      - LegalInfo
+      operationId: Get
+      responses:
+        '200':
+          description: Success
+  "/api/QRCode":
+    post:
+      tags:
+      - QRCode
+      summary: Generates QR code from text
+      description: Receives plain text as input and generates a QR code. Returns a
+        URL to the QR code in SVG format. Optionally, the foreground and background
+        colors can be customized.
+      operationId: GenerateQrCode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/QrCodeParameters"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/QrCodeParameters"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/QrCodeParameters"
+      responses:
+        '200':
+          description: Success
+  "/api/QRCode/puzzle":
+    post:
+      tags:
+      - QRCode
+      summary: Generates QR code for puzzle games
+      description: 'Accepts plain text (puzzle answer) as input and generates a QR
+        code. The output is a URL to the SVG format QR code. This API is ideal for
+        creating puzzle games where the answer is hidden in the QR code. To view the
+        QR code, use the URL in markdown code like this: `![QR Code](<URL>)`'
+      operationId: GeneratePuzzleQrCode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PuzzleQrCodeParameters"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/PuzzleQrCodeParameters"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/PuzzleQrCodeParameters"
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    PuzzleQrCodeParameters:
+      type: object
+      properties:
+        answer:
+          type: string
+          nullable: true
+      additionalProperties: false
+    QrCodeParameters:
+      type: object
+      properties:
+        text:
+          type: string
+          nullable: true
+        foregroundColor:
+          type: string
+          nullable: true
+        backgroundColor:
+          type: string
+          nullable: true
+      additionalProperties: false

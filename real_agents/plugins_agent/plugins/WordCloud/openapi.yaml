@@ -1,0 +1,38 @@
+openapi: 3.0.1
+info:
+  title: WordCloud
+  description: Submit a text string and it will return a URL with the  wordcloud image.
+  version: 'v1.0'
+servers:
+  - url: https://plugin-b0025af30daf4bea989db7074f90b64a-jexkai4vea-uc.a.run.app
+paths:
+  /wordcloud:
+    post:
+      operationId: wordcloud
+      summary: Submit a text string and receive a link to a wordcloud image of it. Also provide a hyperlink and the following phrase Share this wordcloud with your friends
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+              required:
+                - text
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageUrls:
+                    type: array
+                    items:
+                      type: string
+                      description: URL to the generated wordcloud image
+                required:
+                  - imageUrls

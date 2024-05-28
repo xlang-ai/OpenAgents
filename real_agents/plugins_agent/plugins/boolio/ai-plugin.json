@@ -1,0 +1,29 @@
+{
+    "id": "plugin-641ab17f-5cff-4696-94aa-1d2b000a473e",
+    "domain": "chatgpt.boolio.co.kr",
+    "namespace": "boolio",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "boolio",
+        "name_for_human": "Boolio Invest",
+        "description_for_model": "Comprehensive global stock value analysis based on quantitative methodologies.",
+        "description_for_human": "The easiest way to analyze global stock values with the power of quantitative factor methodologies.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://chatgpt.boolio.co.kr/openapi.yaml"
+        },
+        "logo_url": "https://chatgpt.boolio.co.kr/logo.png",
+        "contact_email": "ask@boolio.co.kr",
+        "legal_info_url": "https://chatgpt.boolio.co.kr/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": []
+}

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-d1906c30-3a60-40c3-906e-34b50f2ae2b2",
+    "domain": "ai-agents-plugin.vercel.app",
+    "namespace": "aiAgents",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "aiAgents",
+        "name_for_human": "AI Agents",
+        "description_for_model": "Collaborate with another AI Agent to perform the goal more efficient.",
+        "description_for_human": "Unleashing the power of multiple AIs: One goal, limitless productivity.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://ai-agents-plugin.vercel.app/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://ai-agents-plugin.vercel.app/imgs/logo.png",
+        "contact_email": "support@aiagentslab.com",
+        "legal_info_url": "https://www.aiagentslab.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

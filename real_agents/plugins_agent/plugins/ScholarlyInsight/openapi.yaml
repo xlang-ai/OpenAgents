@@ -1,0 +1,39 @@
+openapi: 3.0.1
+info:
+  title: ScholarlyInsight
+  version: 1.0.0
+  description: Query research papers from Arxiv.
+servers:
+  - url: https://scholarlyinsight--chao-gu-ge-lei.repl.co
+paths:
+  /{content}:
+    get:
+      operationId: searchArxiv
+      summary: Search Arxiv
+      parameters:
+        - in: path
+          name: content
+          required: true
+          schema:
+            type: string
+          description: The search query is generally in English. If it is not, please translate it into English first.
+      responses:
+        '200':
+          description: A list of search results.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    summary:
+                      type: string
+                    published:
+                      type: string
+                    primary_category:
+                      type: string
+                    url:
+                      type: string

@@ -1,0 +1,60 @@
+openapi: 3.0.2
+info:
+  title: Access PDF Plugin API
+  description: Ask your PDF questions, summarize info & chat with PDF! Only support Google Drive link!
+  version: 1.0.0
+servers:
+  - url: https://pdf.accessplugins.com
+paths:
+  /parse-url:
+    get:
+      summary: Parse URL
+      description: Fetches the content of a given URL provided by the user
+      operationId: parse_url_get
+      parameters:
+        - name: url
+          in: query
+          description: URL of the web page or pdf to be parsed
+          required: true
+          schema:
+            type: string
+        - name: chat_context
+          in: query
+          description: Chat context for parsing the URL
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+                    description: Text content of the article
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+                  details:
+                    type: string
+                    description: Error details

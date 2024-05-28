@@ -1,0 +1,34 @@
+{
+    "id": "plugin-1941bddd-ffc8-437a-a36e-a4b525c12a3f",
+    "domain": "creaturegen.vercel.app",
+    "namespace": "PluginRandomCreatureGeneration",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "PluginRandomCreatureGeneration",
+        "name_for_human": "Creature Generator",
+        "description_for_model": "Plugin for creating random creatures which returns details of the creature as JSON. You can use it to create a random creature with an image of it. An environment needs to be specified from this list: grassland, desert, icy, forest, swamp, underwater, mountain, or underground caves",
+        "description_for_human": "Creates a random creature and an image it for use in role playing games.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://creaturegen.vercel.app/openapi.yaml"
+        },
+        "logo_url": "https://creaturegen.vercel.app/logo.png",
+        "contact_email": "contactqueries@realityoverlay.com",
+        "legal_info_url": "https://creaturegen.vercel.app/terms.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

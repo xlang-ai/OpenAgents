@@ -1,0 +1,165 @@
+openapi: 3.0.2
+info:
+  title: GameSight
+  description: Discover games, game-related content, get recommendations, and compare games based on player reviews.
+  version: 1.0.0
+servers:
+  - url: https://openai.tapapis.com
+
+paths:
+  /plugin/v1/search-game:
+    post:
+      operationId: searchGames
+      summary: API for looking for games and game recommendations and comparisons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryGameRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getGamesResponse'
+  /plugin/v1/search-game-related-content:
+    post:
+      operationId: searchGameRelatedContent
+      summary: API for search game-related content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryContentRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getContentsResponse'
+components:
+  schemas:
+    QueryGameRequest:
+      title: QueryGameRequest
+      type: object
+      required:
+        - raw_question
+        - query
+      properties:
+        raw_question:
+          type: string
+          description: just pass user raw question
+        query:
+          type: string
+          description: Use this field to finding games related to the conversation input. Please include as many specific keywords as possible;
+    QueryContentRequest:
+      title: QueryContentRequest
+      type: object
+      required:
+        - raw_question
+        - query
+      properties:
+        raw_question:
+          type: string
+          description: just pass user raw question
+        query:
+          type: string
+          description: Use this field to submit up keywords for identifying the most relevant content like ugc,post etc to the conversation context. Please include as many specific keywords as possible;
+    getGamesResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/GameItem"
+    getContentsResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ContentItem"
+    GameItem:
+      title: GameItem
+      type: object
+      properties:
+        title:
+          title: title
+          type: string
+          description: The title of the game.
+        genre:
+          title: genre
+          type: string
+          description: game category
+        description:
+          title: description
+          type: string
+          description: The description of the game.
+        url:
+          title: url
+          type: string
+          description: The url of the game.
+        developer:
+          title: developer
+          type: string
+          description: game developer.
+        publisher:
+          title: publisher
+          type: string
+          description: game publisher.
+        release_date:
+          title: release_date
+          type: string
+          description: game release date.
+        platform:
+          title: platform
+          type: string
+          description: game support platform like ios,android etc.
+        status:
+          title: status
+          type: string
+          description: game status available for download or reservable.
+        price:
+          title: price
+          type: string
+          description: game sale price.
+        localization:
+          title: price
+          type: string
+          description: game supported localization.
+        rating:
+          title: rating
+          type: string
+          description: game rating in GameSight.
+        review:
+          title: review
+          type: string
+          description: game real review from user in GameSight.
+    ContentItem:
+      title: ContentItem
+      type: object
+      properties:
+        url:
+          title: url
+          type: string
+          description: The url of content.
+        title:
+          title: title
+          type: string
+          description: The title of content.
+        author:
+          title: author
+          type: string
+          description: The author of content.
+        summary:
+          title: summary
+          type: string
+          description: The summary of content.
+        content:
+          title: content
+          type: string
+          description: content detail.

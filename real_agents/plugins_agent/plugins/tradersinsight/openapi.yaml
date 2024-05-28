@@ -1,0 +1,83 @@
+openapi: 3.0.1
+info:
+  title: Traders Insight
+  description: Decode the latest technical analysis ideas for stock and bitcoin from top traders.
+  version: 'v1'
+servers:
+  - url: https://traders-insight.vercel.app
+paths:
+  /bitcoin:
+    get:
+      operationId: bitcoin
+      summary: Get latest technical analysis ideas for bitcoin from top traders
+      parameters:
+        - name: string
+          in: query
+          description: trends
+          required: false
+          schema:
+            type: number
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bitcoinResponse'
+  /stocks:
+    get:
+      operationId: stocks
+      summary: Get latest technical analysis ideas for stocks from top traders
+      parameters:
+        - name: string
+          in: query
+          description: trends
+          required: false
+          schema:
+            type: number
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/stocksResponse'
+components:
+  schemas:
+    bitcoinResponse:
+      type: object
+      properties:
+        instructions:
+            type: string
+            description: instructions on how to format the output
+        analysis:
+            type: array
+            items:
+                type: string
+            description: the list of traders analysis
+        Bull:
+            type: string
+            description: the url of a Bull image
+        Bear:
+            type: string
+            description: the url of a Bear image
+
+    stocksResponse:
+      type: object
+      properties:
+        instructions:
+            type: string
+            description: instructions on how to format the output
+        analysis:
+            type: array
+            items:
+                type: string
+            description: the list of traders analysis
+        Bull:
+            type: string
+            description: the url of a Bull image
+        Bear:
+            type: string
+            description: the url of a Bear image

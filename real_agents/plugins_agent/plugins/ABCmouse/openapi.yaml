@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  version: src
+  title: ABCmouseMobileServiceLayer
+  description: Provides fun and educational learning activities for children 2-8 years old.
+servers:
+  - url: https://ai.abcmouse.com/ws/ai/0.1/gpt
+    description: Production server (uses live data)
+paths:
+  /ChatPlugin/RecommendActivities/:
+    post:
+      operationId: ChatPluginRecommendActivities
+      summary: 'API for fetching a list of learning activities based on the users search criteria'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatPluginRecommendActivitiesRequest'
+      responses:
+        '200':
+          description: 'Activities found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatPluginRecommendActivitiesResponse'
+        '500':
+          description: 'One or more services is unavailable'
+components:
+  schemas:
+    ChatPluginRecommendActivitiesResponse:
+      description: ''
+      type: object
+      properties:
+        activities:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatPluginActivity'
+    ChatPluginActivity:
+      description: ''
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: false
+        url:
+          type: string
+          nullable: false
+    ChatPluginRecommendActivitiesRequest:
+      description: ''
+      type: object
+      properties:
+        search_term:
+          description: '(Optional) A general search term used to find activities, you should exclude connectors like "and" or "or"'
+          type: string
+          nullable: false
+        subjects:
+          description: '(Optional) A list of subjects to filter, Either explicitly stated by the user or implicitly inferred by the users request'
+          type: array
+          nullable: true
+          items:
+            type: string
+            nullable: true
+            enum:
+              - Math
+              - ELA
+              - Science
+              - Art
+              - Music
+              - ELL
+              - Health
+        grade_level:
+          description: '(Optional) The childs grade level, Either explicitly stated by the user or implicitly inferred by the users request'
+          type: string
+          nullable: true
+          enum:
+            - Pre-K
+            - Kindergarten
+            - 1st Grade
+            - 2nd Grade
+        age:
+          description: '(Optional) The childs grade level, Either explicitly stated by the user or implicitly inferred by the users request'
+          type: number
+          nullable: true
+          minimum: 2
+          maximum: 7

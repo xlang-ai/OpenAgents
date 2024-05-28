@@ -1,0 +1,34 @@
+{
+    "id": "plugin-09c29ade-2900-4d34-9104-357a1b2d1f3e",
+    "domain": "apiv2.deepmemory.io",
+    "namespace": "deepmemory",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "deepmemory",
+        "name_for_human": "Deep Memory",
+        "description_for_model": "Create as many flashcards as possible from the {input}, in the language of the {input}.FLASHCARD CREATION GUIDELINES:\n\u2022 Create flashcards for each topic in the {input}.\n\u2022 Only use explicit information from the {input} to create flashcards.\n\u2022 Do not use general knowledge or assumptions to create flashcards.\n\u2022 Ensure {question} and {answer} are concise and clear.\n\u2022 {answer} should only contain the answer, without rephrasing the question. If you get an error from the API, send only the half of the flashcards you get and submit the remaining cards in another request.",
+        "description_for_human": "Create flashcards and review them on Deep Memory, a spaced repetition app.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://apiv2.deepmemory.io/gpt-plugin/openapi.yaml"
+        },
+        "logo_url": "https://deepmemory.io/images/icon.svg",
+        "contact_email": "support@deepmemory.io",
+        "legal_info_url": "https://deepmemory.io/rules/#cgu"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

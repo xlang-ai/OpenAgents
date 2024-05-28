@@ -1,0 +1,34 @@
+{
+    "id": "plugin-aafd81f3-71a5-4079-ad11-14efaed4fc8b",
+    "domain": "www.roshi-server.com",
+    "namespace": "Roshi",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Roshi",
+        "name_for_human": "Roshi",
+        "description_for_model": "Create interactive lessons from online articles or Youtube videos.",
+        "description_for_human": "Create interactive lessons from online articles or Youtube videos.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://www.roshi-server.com/openapi.yaml"
+        },
+        "logo_url": "https://www.roshi-server.com/logo.png",
+        "contact_email": "jonny@roshi.ai",
+        "legal_info_url": "https://www.roshi.ai/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

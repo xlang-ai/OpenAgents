@@ -1,0 +1,34 @@
+{
+    "id": "plugin-5a061501-c98e-4f72-aae2-7567475ca09f",
+    "domain": "podcasts.mixerbox.com",
+    "namespace": "MixerBox_Podcasts",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "MixerBox_Podcasts",
+        "name_for_human": "MixerBox Podcasts",
+        "description_for_model": "MixerBox Podcasts has a wide range of categories to choose from, including music, comedy, news, true crime, education, TV, history, religion, government, and society. With such a diverse selection, you'll always find something to listen to that matches your interests! If you're in the mood for something light and fun, we've got you covered. And if you're looking to expand your knowledge and learn about different industries, we can also provide a wealth of educational and history related content to bring you a broad knowledge base. You can even stay up-to-date with current events and the latest trends by listening to podcasts. By using MixerBox Podcasts, you'll have no trouble finding the shows you want to hear, and you'll always be in the know about what's popular. If you're interested in educational podcasts, just ask us for recommendations! We'll give you a list of great shows to check out, and you can start listening right away.",
+        "description_for_human": "Search podcasts easily! Explore podcasts covering society, sports, business, news, music, and more!",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://podcasts.mixerbox.com/.well-known/openapi.json"
+        },
+        "logo_url": "https://static.mixerbox.com/chatai/chatgpt-plugin/Podcasts_logo.png",
+        "contact_email": "support@podcasts.mixerbox.com",
+        "legal_info_url": "https://www.mixerbox.com"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

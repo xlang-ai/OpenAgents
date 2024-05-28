@@ -1,0 +1,88 @@
+openapi: 3.0.1
+info:
+  title: Find tutors plugin
+  description: Elevate your language learning at any level with personalized 1-on-1 online lessons from tutors across the world.
+  version: 'v1'
+servers:
+  - url: https://en.amazingtalker.com
+paths:
+  /v1/pages/teachers:
+    get:
+      operationId: findTeachers
+      summary: Get the list of teachers, dirctly show teacher image user can see
+      parameters:
+      - in: query
+        name: teach_subject
+        schema:
+          type: string
+          pattern: '^[a-zA-Z\s]*$'
+        required: true
+        description: The subject the teacher teaches, only English alphabets are accepted, e.g. english, math.
+      - in: query
+        name: price_preference
+        schema:
+          type: string
+          enum: [super_low_price, low_price, intermediate, middle, high_price, super_high_price]
+        required: false
+        description: The user's course price preference, in order 0~10, 11~15, 16~20, 21~25, 26~30, 30+
+      - in: query
+        name: tag_url_name
+        schema:
+          type: string
+          pattern: '^[a-zA-Z\s]*$'
+        required: false
+        description: Learning needs, only English alphabets are accepted, e.g. certification, conversation
+      - in: query
+        name: auxiliary_language
+        schema:
+          type: string
+          pattern: '^[a-zA-Z\s]*$'
+        required: false
+        description: Language a student would like to use in class besides the language being taught if it is a language lesson. Only English alphabets are accepted, e.g. english, chinese, japanese.
+      - in: query
+        name: teacher_location
+        schema:
+          type: string
+          pattern: '^[A-Za-z]{2}$'
+        required: false
+        description: The user's preference for the teacher's nationality, indicated by a 2-letter country code (ISO 3166-1 alpha-2), e.g. TW for Taiwan, US for United States.
+      - in: query
+        name: other
+        schema:
+          type: string
+        required: false
+        description: For searches not covered by the other options, use the 'other' parameter to input any string you wish to search for.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    teacher_name:
+                      type: string
+                      description: Teacher's name.
+                    short_description:
+                      type: string
+                      description: Teacher's introduction.
+                    image_url:
+                      type: string
+                      description: Teacher's image.
+                    introduction_video_url:
+                      type: string
+                      description: Video of the teacher's introduction.
+                    course_url:
+                      type: string
+                      description: Sales page of the teacher where reservations can be made.
+                    avg_rating:
+                      type: number
+                      description: Average rating of the teacher.
+                    trial_dollar:
+                      type: integer
+                      description: The price of the teacher's trial class.
+                    private_dollar:
+                      type: integer
+                      description: The price of the teacher's formal course.

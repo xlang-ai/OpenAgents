@@ -1,0 +1,34 @@
+{
+    "id": "plugin-848db1dd-9161-4891-af97-5db1074dcc47",
+    "domain": "webfx.ai",
+    "namespace": "seo_assistant",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "seo_assistant",
+        "name_for_human": "SEO Assistant",
+        "description_for_model": "The SEO Assistant can generate search engine keyword information in order to aid the creation of content.",
+        "description_for_human": "The SEO Assistant can generate search engine keyword information in order to aid the creation of content.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://webfx.ai/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://webfx.ai/.well-known/logo.png",
+        "contact_email": "dan@webfx.com",
+        "legal_info_url": "https://www.webfx.com/tools/seo-assistant-terms-conditions/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

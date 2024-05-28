@@ -1,0 +1,34 @@
+{
+    "id": "plugin-fe03a882-a752-4efc-ab04-b56291049878",
+    "domain": "chatgpt.bubblegoods.com",
+    "namespace": "BubbleGoods",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "BubbleGoods",
+        "name_for_human": "Bubble Goods",
+        "description_for_model": "Access Bubble Good's hand-curated, taste-tested product index of healthy foods with no refined sugars, preservatives, fillers or dyes. Bubble Goods has the highest and strictest ingredient requirements in the food industry. Our mission is to empower small, independent food makers across the United States by expanding their consumer audience and providing a platform that offers more opportunities to deliver delicious, high quality goods.",
+        "description_for_human": "Marketplace of 1000+ tasty & healthy foods. Discover new Vegan, Keto, Gluten-Free products & more.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://chatgpt.bubblegoods.com/openapi.yaml"
+        },
+        "logo_url": "https://chatgpt.bubblegoods.com/static/logo.png",
+        "contact_email": "help@bubblegoods.com",
+        "legal_info_url": "https://bubblegoods.com/pages/terms-conditions"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

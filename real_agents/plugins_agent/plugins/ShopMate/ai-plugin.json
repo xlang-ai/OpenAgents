@@ -1,0 +1,34 @@
+{
+    "id": "plugin-f1bbdd5b-8c4f-4333-8758-0ed3edde31c5",
+    "domain": "shopmate-o5kx.onrender.com",
+    "namespace": "ShopMate",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "ShopMate",
+        "name_for_human": "ShopMate AI",
+        "description_for_model": "Assist the user in searching for products in real-time using the Google Shopping API. You can search for products according to the user's requests and available filters. If the user asks to filter the results, utilize the 'tbs' parameter. Multiple filters are available; however, only the most pertinent ones should be displayed. For product results, respond in this format: '\n Title: '\n Store Name: '\n Store Rating: '\n Store Reviews: '\n Delivery: '\n Always respond with product price, delivery information, and store rating in a uniform format.",
+        "description_for_human": "Searches for Products on Google Shopping in Real-Time, No Ads, Only Trusted Stores.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://shopmate-o5kx.onrender.com/openapi.json"
+        },
+        "logo_url": "https://shopmate-o5kx.onrender.com/static/logo.png",
+        "contact_email": "sagar@hey.com",
+        "legal_info_url": "https://shopmate-o5kx.onrender.com/static/legal.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

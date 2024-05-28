@@ -1,0 +1,34 @@
+{
+    "id": "plugin-e6528814-a929-46e7-9189-4b43d64331c2",
+    "domain": "my-plugin.arnasltlt.repl.co",
+    "namespace": "ai_council",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "ai_council",
+        "name_for_human": "Your AI Council",
+        "description_for_model": "AI council sends the user query over to the api which evaluates it from 5 different perspectives and returns an evaluation.",
+        "description_for_human": "The AI council assesses queries through various agents, offering insights from many perspectives.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://my-plugin.arnasltlt.repl.co/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://th.bing.com/th/id/OIG.AuvaCNUrvRfupQEne.ZD?pid=ImgGn",
+        "contact_email": "arnoldas@kemeklis.eu",
+        "legal_info_url": "https://my-plugin.arnasltlt.repl.co"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,599 @@
+---
+openapi: 3.0.2
+info:
+  title: GetYourGuide ChatGPT Plugin Service
+  version: 0.1.0
+  description: Find tours, excursions and other travel activities.
+paths:
+  "/activities":
+    get:
+      tags:
+      - plugin
+      summary: Get Activities
+      description: Endpoint for finding GetYourGuide Activities
+      operationId: get_activities_activities_get
+      parameters:
+      - required: false
+        schema:
+          title: Query
+          type: string
+          default: ''
+        name: query
+        in: query
+      - required: false
+        schema:
+          title: Location
+          type: string
+          default: ''
+        name: location
+        in: query
+      - required: false
+        schema:
+          title: Location Id
+          type: integer
+        name: location_id
+        in: query
+      - required: false
+        schema:
+          title: Skip
+          type: integer
+          default: 0
+        name: skip
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          type: integer
+          default: 4
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Date
+          type: string
+          format: date
+        name: date
+        in: query
+      - required: false
+        schema:
+          "$ref": "#/components/schemas/Collections"
+        name: category
+        in: query
+      - required: false
+        schema:
+          title: Price Lte
+          type: number
+        name: price_lte
+        in: query
+      - required: false
+        schema:
+          title: Price Gte
+          type: number
+          default: 0
+        name: price_gte
+        in: query
+      - required: false
+        schema:
+          title: Rating Gte
+          type: number
+        name: rating_gte
+        in: query
+      - required: false
+        schema:
+          title: Rating Lte
+          type: number
+          default: 5
+        name: rating_lte
+        in: query
+      - required: false
+        schema:
+          title: Time Gte
+          type: string
+        name: time_gte
+        in: query
+      - required: false
+        schema:
+          title: Time Lte
+          type: string
+        name: time_lte
+        in: query
+      - required: false
+        schema:
+          title: Currency
+          type: string
+          default: USD
+        name: currency
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/QueryResponse"
+        '404':
+          description: No activities found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    Activity:
+      title: Activity
+      required:
+      - id
+      - title
+      - abstract
+      - url
+      - photo
+      - attributes
+      - availabilities
+      - reviewStatistics
+      - price
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+          description: Activity ID
+        title:
+          title: Title
+          type: string
+          description: Activity title
+        abstract:
+          title: Abstract
+          type: string
+          description: Activity abstract
+        url:
+          title: Url
+          maxLength: 65536
+          minLength: 1
+          type: string
+          description: Link to the activity page
+          format: uri
+        photo:
+          title: Photo
+          maxLength: 65536
+          minLength: 1
+          type: string
+          description: Link to the activity photo
+          format: uri
+        attributes:
+          title: Attributes
+          type: array
+          items:
+            type: string
+          description: List of attributes for this activity
+        availabilities:
+          title: Availabilities
+          type: array
+          items:
+            "$ref": "#/components/schemas/Availability"
+          description: Availability of this activity
+        reviewStatistics:
+          title: Reviewstatistics
+          allOf:
+          - "$ref": "#/components/schemas/SearchReview"
+          description: Reviews
+        price:
+          title: Price
+          allOf:
+          - "$ref": "#/components/schemas/SearchPrice"
+          description: Activity pricing informations
+    Availability:
+      title: Availability
+      required:
+      - nextAvailableDateTime
+      - minParticipants
+      type: object
+      properties:
+        nextAvailableDateTime:
+          title: Nextavailabledatetime
+          type: string
+        minParticipants:
+          title: Minparticipants
+          type: number
+    Collections:
+      title: Collections
+      enum:
+      - Tours
+      - Sightseeing Walking Tours
+      - Bus & Minivan Tours
+      - Private Car Tours
+      - Segway Tours
+      - Bike Tours
+      - Hop On Hop Offs
+      - Night Tours
+      - Rail Tours
+      - Castle & Palace Tours
+      - Seasonal & Holiday Activities
+      - Christmas Activities
+      - New Year's Activities
+      - Halloween Activities
+      - Photography Tours
+      - Shopping Tours
+      - Neighborhood Tours
+      - TV & Movie Tours
+      - Ghost & Vampire Tours
+      - Music Activities
+      - Interactive Tours & Incentive Events
+      - Culture & History
+      - Architecture Tours
+      - Graffiti & Urban Art
+      - Archaeology
+      - Religious & Spiritual Activities
+      - Meet the Locals
+      - Nature & Adventure
+      - National Parks
+      - Desert Safaris
+      - Quad & ATV Tours
+      - Jeep & 4WD Tours
+      - Safaris & Wildlife Activities
+      - Birdwatching
+      - Air & Helicopter Tours
+      - Airplane tours
+      - Helicopter tours
+      - Balloon Tours
+      - Cruises & Boat Tours
+      - Dolphin & Whale Watching
+      - Sailing Trips & Tours
+      - Duck Tours
+      - Speed & Jet Boat Tours
+      - Activities
+      - Water Sports
+      - Diving
+      - Snorkeling
+      - Kitesurfing
+      - Surfing Lessons
+      - Canoe & Kayak Tours
+      - Fishing Tours
+      - Beach Trips
+      - Swim with Dolphins
+      - Canyoning
+      - River Rafting
+      - Jet Ski
+      - Shark Diving
+      - Parasailing
+      - Outdoor Sports
+      - Hiking
+      - Climbing Experiences
+      - Mountainbiking
+      - Workshops & Classes
+      - Art & Craft Workshops
+      - Driving Experiences
+      - Racing & Dream Cars
+      - Tank Driving
+      - Extreme Sports & Adrenaline
+      - Bungee Jumping
+      - Sky Diving
+      - Paintball
+      - Paragliding
+      - Zipline Adventures
+      - Wellness & Spas
+      - Fitness & Health
+      - Romance & Special Occasions
+      - Dinner Package
+      - City Cards
+      - Culinary & Nightlife
+      - Food & Drink
+      - Wine Tasting & Winery Tours
+      - Food & Gourmet Tours
+      - Whiskey Tours
+      - Cooking Classes
+      - Dinner & Lunch Cruises
+      - Nightlife & Bars
+      - Pub Crawls & Bar Tours
+      - Nightclub Tours
+      - Snow & Winter Sports
+      - Dog Sledding & Husky Tours
+      - Snowmobile Tours
+      - Snowshoe Tours
+      - Sleigh Rides
+      - Entry Tickets
+      - Shows & Musicals
+      - Theater Tours & Tickets
+      - Shows
+      - Musicals
+      - Dinner Shows
+      - Theme Parks & Amusement Parks
+      - Museums & Exhibitions
+      - Zoos & Aquariums
+      - Natural Attractions & National Parks
+      - Concerts & Operas
+      - Rentals
+      - Audio Guides
+      - Scooters & Motorcycles
+      - Ski & Snowboard
+      - Boats & Yachts
+      - Electric Cars
+      - Transfers
+      - Airport Transfers
+      - Port Transfers
+      - Shore excursions
+      - Cablecar Tours
+      - Garden & Park Tours
+      - Literary Activities
+      - Pirate Tours
+      - Factory & Workshop Tours
+      - Comedy Tours
+      - Airboat Tours
+      - Shooting Tours
+      - Cave Tours
+      - Beer Tasting & Brewery Tours
+      - Horse & Carriage Tours
+      - Pedicab & Rickshaw Tours
+      - Day Trips
+      - Valentine's Day
+      - Paddleboarding
+      - Sailing Lessons
+      - Cenote Tours
+      - Camel Riding Tours
+      - Educational Activities
+      - Flight Simulator
+      - Jungle Tours
+      - Hot Springs
+      - Water Parks
+      - Trike Tours
+      - Volcano Activities
+      - Cemetery Tours
+      - Deals & Discounts
+      - Tapas
+      - Flamenco
+      - Sporting Venues
+      - Harry Potter Tours
+      - Seaplane
+      - Papal Audience
+      - Carnival Activities
+      - Communist History
+      - Private Tours
+      - Running
+      - St Patrick’s Day
+      - Churches & Cathedrals
+      - Trabi Safaris
+      - Jazz
+      - Lights Tours
+      - Local language
+      - Second World War
+      - Viewing Points
+      - Wheelchair Accessible
+      - James Bond Tours
+      - Vintage Cars
+      - Chocolate Tours
+      - Solo travelers' tours
+      - Street Food
+      - Sunrise Tours
+      - Tango
+      - Jack the Ripper Tours
+      - Cabaret
+      - Dhow Cruises
+      - Black Cab Tours
+      - Market Tours
+      - Fashion Tours
+      - Coffee Tours
+      - Gondola Tours
+      - UNESCO Sites
+      - Off the Beaten Track
+      - Rainy-Day Activities
+      - Water Taxi
+      - Fado Shows
+      - The Beatles
+      - Macarons
+      - Multi Day Trips
+      - Romantic Activities for Couples
+      - Luxury
+      - Beer bike
+      - Downton Abbey tours
+      - Afternoon Tea
+      - Angels & Demons Tours
+      - Gladiators
+      - Coffee Shop Tours
+      - Favela Tours
+      - Sunset Tours
+      - Puffin Watching
+      - Glacier Exploration
+      - Northern Lights
+      - Island Tours
+      - Escape Rooms
+      - Game of Thrones Tours
+      - Day trips to
+      - Submarine Tours
+      - Ice Cave Tours
+      - Flyboard Activities
+      - Public Transportation Ticket
+      - Cannabis Tours
+      - Luaus
+      - Vodka Tour
+      - Windmills
+      - City Discovery Games
+      - Self-Guided Activities
+      - Celebrities
+      - Small group
+      - Outlander Tours
+      - Lord of the Rings
+      - Local food tours
+      - Samba Dance
+      - GetYourGuide Originals
+      - Eco-certified
+      - VR Activities
+      - Boat Party
+      - Distillery Tours
+      - Fjords
+      - Horse Riding
+      - Manta Ray Tours
+      - Marine Life
+      - Mayan Ruins
+      - Plantation Tours
+      - Pyramid Tours
+      - WiFi & SIM Cards
+      - Stargazing
+      - Swimming with Turtles
+      - Outdoor Activities
+      - Family-friendly Activities
+      - Trolley Tours
+      - Private Cruise Tours
+      - For Adults
+      - Swamp Tours
+      - Seal Watching Tours
+      - Airport Lounge
+      - Underground & Catacombs
+      - Tea ceremonies
+      - Sightseeing cruises
+      - Aquariums
+      - Zoos
+      - Good for Groups
+      - Art experiences
+      - Sightseeing on wheels
+      - Walking Tours
+      - For First-Time Visitors
+      - For Returning Travelers
+      - Water Activities
+      - Guided tours
+      - Truffles
+      - Landmarks & Monuments
+      - Dance classes
+      - New & trending
+      - Unique & unexpected
+      - Outside of the city
+      - Local culture
+      - Recommended guides
+      - Limited time only
+      - Music History
+      - Perfume Workshops
+      - Yoga Classes
+      - Drag Shows
+      - Self-driven tours
+      - Axe Throwing
+      - Summer activities
+      - Spring activities
+      - Autumn activities
+      - Winter activities
+      - Aboriginal culture
+      - Space exploration
+      - Military history
+      - Medieval history
+      - Leonardo da Vinci experiences
+      - Royal experiences
+      - Sightseeing
+      - Travel services
+      - Mystery & Crime experiences
+      - Science & Literature experiences
+      - Other
+      type: string
+      description: An enumeration.
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    QueryResponse:
+      title: QueryResponse
+      required:
+      - results
+      type: object
+      properties:
+        results:
+          title: Results
+          type: array
+          items:
+            "$ref": "#/components/schemas/Activity"
+        seeMore:
+          title: Seemore
+          type: string
+    SearchPrice:
+      title: SearchPrice
+      required:
+      - startingPrice
+      - formattedStartingPrice
+      - basePrice
+      - formattedBasePrice
+      - currency
+      - currencySymbol
+      - priceCategory
+      - priceCategoryLabel
+      - unformattedBookingFee
+      - unformattedDiscountPercentage
+      - discountPercentage
+      type: object
+      properties:
+        startingPrice:
+          title: Startingprice
+          type: number
+        formattedStartingPrice:
+          title: Formattedstartingprice
+          type: string
+        basePrice:
+          title: Baseprice
+          type: number
+        formattedBasePrice:
+          title: Formattedbaseprice
+          type: string
+        currency:
+          title: Currency
+          type: string
+        currencySymbol:
+          title: Currencysymbol
+          type: string
+        priceCategory:
+          title: Pricecategory
+          type: string
+        priceCategoryLabel:
+          title: Pricecategorylabel
+          type: string
+        unformattedBookingFee:
+          title: Unformattedbookingfee
+          type: number
+        unformattedDiscountPercentage:
+          title: Unformatteddiscountpercentage
+          type: number
+        discountPercentage:
+          title: Discountpercentage
+          type: string
+    SearchReview:
+      title: SearchReview
+      required:
+      - quantity
+      - rating
+      type: object
+      properties:
+        quantity:
+          title: Quantity
+          type: integer
+        rating:
+          title: Rating
+          type: number
+        totalCount:
+          title: Totalcount
+          type: integer
+          default: 0
+        averageRating:
+          title: Averagerating
+          type: number
+          default: 0
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string

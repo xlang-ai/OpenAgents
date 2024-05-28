@@ -1,0 +1,34 @@
+{
+    "id": "plugin-3cf29a7b-2fcb-42aa-b762-4d418b543a8b",
+    "domain": "askthecode.dsomok.online",
+    "namespace": "AskTheCode",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "AskTheCode",
+        "name_for_human": "AskTheCode",
+        "description_for_model": "This plugin analyzes the Github repository provided by the user and then tries to answer users questions related to this repository. It accepts the link to the repository from the user. The first step is to analyze the structure of the repository. The response is the list of all files that are present in the repository. Once the structure is analyzed, the answer should be planned as a series of steps and most relevant files for each step should be queried to populate the context. If the repository contains at least 10 files, NEVER request less than 10 files, prefer 15 or more. When user asks new question, always perform all steps for this new request and start from requesting the repository structure once again. If error occures when querying file contents, inform the user that an error ocurred and you are not able to generate the response.",
+        "description_for_human": "Provide a GitHub repository URL with the C# project and ask about any aspect of the code.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://askthecode.dsomok.online/swagger/v1/swagger.yaml"
+        },
+        "logo_url": "https://askthecode.dsomok.online/logo.png",
+        "contact_email": "dsomok.github@gmail.com",
+        "legal_info_url": "https://askthecode.dsomok.online/legal.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

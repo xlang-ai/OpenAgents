@@ -1,0 +1,72 @@
+openapi: 3.0.1
+info:
+  title: Currency Today
+  description: Allows users to convert currency values based on the latest exchange rates.
+  version: 'v1'
+servers:
+  - url: https://today-currency-converter.oiconma.repl.co/
+paths:
+  /currency-converter:
+    get:
+      operationId: fetchConversion
+      summary: Get the conversion rate between two currencies
+      parameters:
+        - name: from
+          in: query
+          description: The currency to convert from
+          required: true
+          schema:
+            type: string
+        - name: to
+          in: query
+          description: The currency to convert to
+          required: true
+          schema:
+            type: string
+        - name: amount
+          in: query
+          description: The amount to convert
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fetchConversionResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+components:
+  schemas:
+    fetchConversionResponse:
+      type: object
+      properties:
+        result:
+          type: object
+          properties:
+            info:
+              type: object
+              properties:
+                rate:
+                  type: number
+                  format: float
+                  description: The conversion rate between the two currencies
+            date:
+              type: string
+              description: The date of the conversion
+            result:
+              type: number
+              format: float
+              description: The converted amount
+    errorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: An error message describing the issue

@@ -1,0 +1,62 @@
+openapi: 3.0.1
+info:
+  title: Your Writing Companion
+  description: Find, hire, and manage remote human writers, the best way to ensure your content is engaging, accurate, and error-free.
+  version: v1
+servers:
+  - url: https://plugin1.findwritersonline.com
+paths:
+  /FindWriters:
+    get:
+      tags:
+        - ChatGPTWriterPlugin
+      description: 'Tool that helps you to hire and manage remote human writers, the best way to ensure your content is engaging, accurate, and error-free'
+      operationId: FindWriters
+      parameters:
+        - name: writing_category
+          in: query
+          description: Category to find appropriate writers
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindWriterResponse'
+components:
+  schemas:
+    FindWriterResponse:
+      type: object
+      properties:
+        writers:
+          type: array
+          items:
+            $ref: '#/components/schemas/WriterObject'
+          nullable: true
+        searchMoreWritersUrl:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+      additionalProperties: false
+    WriterObject:
+      type: object
+      properties:
+        writerName:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        sampleContent:
+          type: string
+          nullable: true
+        hireWriterUrl:
+          type: string
+          nullable: true
+      additionalProperties: false

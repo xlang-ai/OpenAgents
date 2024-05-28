@@ -1,0 +1,34 @@
+{
+    "id": "plugin-ba0dc7bf-ba92-4a26-be11-3846180799d7",
+    "domain": "timemachine.cheatshit.com",
+    "namespace": "timemachine",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "timemachine",
+        "name_for_human": "TimeMachine",
+        "description_for_model": "This tool boosts AI performance by providing real-time data. It offers the present time through an API that accommodates multiple time formats and timezones. While the API defaults to the 'iso8601' format in the 'Asia/Shanghai' timezone, users have the flexibility to choose their desired format and timezone, following straightforward instructions.",
+        "description_for_human": "Enhances AI with real-time awareness, providing current time in various formats and timezones.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://timemachine.cheatshit.com/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://timemachine.cheatshit.com/.well-known/logo.png",
+        "contact_email": "ai@pigswill.me",
+        "legal_info_url": "https://timemachine.cheatshit.com/legal/index.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

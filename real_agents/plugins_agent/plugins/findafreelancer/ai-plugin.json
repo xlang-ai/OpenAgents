@@ -1,0 +1,34 @@
+{
+    "id": "plugin-8f0ef883-877c-425d-9204-7ed21164a0c4",
+    "domain": "findafreelancer.replit.app",
+    "namespace": "findafreelancer",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "findafreelancer",
+        "name_for_human": "Find a Freelancer",
+        "description_for_model": "Find human freelancers to help complete tasks. Use keywords 'find', 'freelancer' to prompt the plugin.",
+        "description_for_human": "Find human freelancers to help complete tasks.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://findafreelancer.replit.app/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://findafreelancer.replit.app/logo.jpg",
+        "contact_email": "john.bralich@gmail.com",
+        "legal_info_url": "https://findafreelancer.replit.app/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

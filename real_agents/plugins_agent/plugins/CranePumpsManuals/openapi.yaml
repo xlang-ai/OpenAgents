@@ -1,0 +1,45 @@
+---
+openapi: 3.0.1
+info:
+  title: CranePumps Manuals
+  description: Returns the catalog and manual for a pump based on model number.
+  version: v2
+servers:
+- url: https://cpsconnect.cranepumps.com/techhubapi
+paths:
+  "/GetCatManual":
+    post:
+      operationId: getCatManual
+      summary: Get the manual and catalog for a pump
+      parameters:
+      - name: modelnumber
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GetCatManualResponse"
+components:
+  schemas:
+    GetCatManualResponse:
+      type: object
+      properties:
+        ManualUrl:
+          type: string
+          description: The URL of the manual.
+        CatalogUrl:
+          type: string
+          description: The URL of the catalog.
+        ManualEnabled:
+          type: boolean
+          description: Whether the manual is enabled.
+        CatalogEnabled:
+          type: boolean
+          description: Whether the catalog is enabled.
+      description: The response from the GetCatManual method.
+

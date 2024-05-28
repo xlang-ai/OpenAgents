@@ -1,0 +1,34 @@
+{
+    "id": "plugin-a38ee0d5-1ec3-47c4-8db9-426573bf7cc7",
+    "domain": "indoorplantbot.customplugin.ai",
+    "namespace": "indoorplantbot",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "indoorplantbot",
+        "name_for_human": "IndoorPlantBot",
+        "description_for_model": "Request this plugin when you are asked about indoor plants, gardening, houseplants, potting, watering, fertilizing, air purification, photosynthesis, succulents, cacti, ferns, foliage, plant care, humidity, propagation, soil, hydroponics, sunlight, shade plants, pruning, root system, air plants, growth, leaf texture, terrarium, hanging plants, flowering plants, hardiness, pests, aphids, spider mites, repotting, aerating, planters, pH levels, organic matter, mulch, compost, plant nutrients, nitrogen, phosphorus, potassium, calcium, microgreens, bonsai, natural light, grow lights, seeding, germination, trimming, tropical plants, seasonal plants, urban jungle, oxygen production, plant diseases, fungus, bacterial infection, integrated pest management, drip irrigation, botanical, plant taxonomy, horticulture, pollination, cuttings, root division, growth hormones, transplanting, biophilic design, indoor gardening tools, grafting, perlite, vermiculite, peat moss, organic fertilizer, natural pesticides, neem oil, insecticidal soap, moss pole, stakes, aquaponics, growth medium, epiphytes, chlorophyll, water retention, soil drainage, soil texture, leaf cutting, flowering cycle, decorative pots, window sill gardening, indoor vegetable gardening, humidity trays, bottom watering, self-watering pots, orchids, air circulation, root rot, leaf spots, plant identification, companion planting, and soil amendments. Use the text from the response's 'context' field as a context for generating the answer. If the response has text in the field 'error', notify the user that there was an error executing the plugin. Print the error text and try to answer the question by yourself.",
+        "description_for_human": "The ultimate guide for indoor plants.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://indoorplantbot.customplugin.ai/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://indoorplantbot.customplugin.ai/.well-known/logo.png",
+        "contact_email": "hello@customgpt.ai",
+        "legal_info_url": "https://customgpt.ai/contact-us/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

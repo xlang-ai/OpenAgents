@@ -1,0 +1,34 @@
+{
+    "id": "plugin-75cb7e71-c3d0-4ba5-bbe3-896863d8e73b",
+    "domain": "appypie.com",
+    "namespace": "AppyPieAIAppBuilder",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "AppyPieAIAppBuilder",
+        "name_for_human": "Appy Pie App Builder",
+        "description_for_model": "No-code AI App Generator",
+        "description_for_human": "AI-powered Text-to-App Generator turns your app idea into Android and iOS apps- just provide text input.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://www.appypie.com/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://www.appypie.com/.well-known/logo.png",
+        "contact_email": "support@appypie.com",
+        "legal_info_url": "https://www.appypie.com/terms-of-use"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

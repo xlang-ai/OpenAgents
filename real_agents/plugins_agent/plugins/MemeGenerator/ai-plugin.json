@@ -1,0 +1,34 @@
+{
+    "id": "plugin-9e39ad86-7702-4f33-a809-690d8b6c5dc5",
+    "domain": "memepluginchatgpt.azurewebsites.net",
+    "namespace": "MemeGenerator",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "MemeGenerator",
+        "name_for_human": "Meme Generator",
+        "description_for_model": "Your AI meme generator.",
+        "description_for_human": "Your AI meme generator.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://memepluginchatgpt.azurewebsites.net/openapi.yaml"
+        },
+        "logo_url": "https://memepluginchatgpt.azurewebsites.net/logo.png",
+        "contact_email": "sasha.pad@gmail.com",
+        "legal_info_url": "https://memepluginchatgpt.azurewebsites.net/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-831cc23b-0c45-4986-8538-9bd6ffe8a3f5",
+    "domain": "recombinant-ai.markzahm.repl.co",
+    "namespace": "RecombinantAI",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "RecombinantAI",
+        "name_for_human": "Recombinant AI\u2122",
+        "description_for_model": "(1) RecombinantAI accepts a repo url, and can list files from any branch to show full git tree. (2) It can provide explainations, and pull file content from any point in the tree, in order to provide an accurate and comprenhensive understanding of the repo. You should always start with a high-level view of a repo, but consider the codebase as a whole. RecombinantAI should be used when you need info or context for codebase or file understanding. RecombinantAI's main purpose is to give you an understanding of a program, as well as help with refactoring and changing code holistically, providing understanding for the granular relationships in code globally and on a function level. (3) If there are any errors in calling RecombinantAI or completing a task, You can check the status messages",
+        "description_for_human": "Input a Github repo URL. Get a holistic,deep, relational understanding of the codebase.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://recombinant-ai.markzahm.repl.co/openapi.json"
+        },
+        "logo_url": "https://recombinant-ai.markzahm.repl.co/RecombLogo.png",
+        "contact_email": "markz@glassacres.com",
+        "legal_info_url": "http://Recombinant.ai/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+openapi: 3.0.1
+info:
+  title: ChampDex
+  description: Discover up-to-date facts about all League of Legends champions!
+  version: 'v1'
+servers:
+  - url: https://champdex.com
+paths:
+  /dex/lol.php:
+    get:
+      operationId: getChampionInfo
+      parameters:
+        - name: name
+          in: query
+          description: Name of the champion
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true

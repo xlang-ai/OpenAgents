@@ -1,0 +1,184 @@
+openapi: 3.0.1
+info:
+    title: Ferryhopper
+    description: Discover ferry routes, book your tickets and explore budget-friendly island destinations with Ferryhopper.
+    version: "v1"
+servers:
+    - url: https://openai.ferryhopper.com
+paths:
+    /get-destination/{country}/{destination}:
+        get:
+            operationId: getDestination
+            summary: Returns information about ferry destinations that are bookable through ferryhopper.
+            parameters:
+                - in: path
+                  name: country
+                  schema:
+                      type: string
+                  required: true
+                  description: The country name.
+                - in: path
+                  name: destination
+                  schema:
+                      type: string
+                  required: true
+                  description: The destination.
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/getDestinationResponse"
+
+    /get-ferries/{origin}/{destination}/{dateStr}:
+        get:
+            operationId: getFerries
+            summary: Returns a list of ferry trips departing on specific date, including minimum price, duration and a booking url.
+            parameters:
+                - in: path
+                  name: origin
+                  schema:
+                      type: string
+                  required: true
+                  description: The origin port name.
+                - in: path
+                  name: destination
+                  schema:
+                      type: string
+                  required: true
+                  description: The destination port name
+                - in: path
+                  name: dateStr
+                  schema:
+                    type: string
+                    format: date
+                  required: true
+                  description: The desired trip departure date
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/getFerriesResponse"
+
+components:
+    schemas:
+      PortName:
+        type: string
+      Ferry:
+        type: object
+        properties:
+          originName:
+            type: string
+          destinationName:
+            type: string
+          ferryCarrierName:
+            type: string
+            format: uri
+          ferryCarrierLogo:
+            type: string
+            format: uri
+          departureDateTime:
+            type: string
+            format: date-time
+          arrivalDateTime:
+            type: string
+            format: date-time
+          durationInMinutes:
+            type: integer
+          minimumPriceInCents:
+            type: integer
+          priceCurrency:
+            type: string
+          bookingUrl:
+            type: string
+            format: uri
+          openGraphData:
+            type: object
+            properties:
+              title:
+                type: string
+              site_name:
+                type: string
+              type:
+                type: string
+              description:
+                type: string
+              url:
+                type: string
+                format: uri
+              image:
+                type: string
+                format: uri
+            required:
+              - title
+              - site_name
+              - type
+              - description
+              - url
+              - image
+        required:
+          - originName
+          - destinationName
+          - ferryCarrierName
+          - ferryCarrierLogo
+          - departureDateTime
+          - arrivalDateTime
+          - durationInMinutes
+          - minimumPriceInCents
+          - priceCurrency
+          - bookingUrl
+          - openGraphData
+      getFerriesResponse:
+        type: object
+        properties:
+          itineraries:
+            type: array
+            items:
+              $ref: '#/components/schemas/Ferry'
+          alternativeOrigins:
+            type: array
+            items:
+              $ref: '#/components/schemas/PortName'
+          alternativeDestinations:
+            type: array
+            items:
+              $ref: '#/components/schemas/PortName'
+      Destination:
+        type: object
+        properties:
+          destinationName:
+            type: string
+          openGraphData:
+            type: object
+            properties:
+              title:
+                type: string
+              site_name:
+                type: string
+              type:
+                type: string
+              description:
+                type: string
+              url:
+                type: string
+                format: uri
+              image:
+                type: string
+                format: uri
+            required:
+              - title
+              - site_name
+              - type
+              - description
+              - url
+              - image
+        required:
+          - destinationName
+          - openGraphData
+      getDestinationResponse:
+        type: array
+        items:
+          $ref: '#/components/schemas/Destination'

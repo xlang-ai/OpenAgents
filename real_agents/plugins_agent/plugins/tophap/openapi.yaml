@@ -1,0 +1,166 @@
+openapi: 3.0.1
+info:
+  title: TopHap
+  description: Enriched real estate data and location-based tools.
+  version: 'v1'
+servers:
+  - url: https://openai-plugin.tophap.com
+paths:
+  /api/property/details/{property_id}:
+    get:
+      operationId: getPropertyDetailsByPropertyId
+      summary: Retrieve details for a single property by property id
+      parameters:
+      - in: path
+        name: property_id
+        schema:
+            type: number
+        required: true
+        description: TopHap property_id
+      - in: query
+        name: user_query
+        schema:
+            type: string
+        required: true
+        description: Send the user's original question.
+      responses:
+        "200":
+          description: OK
+
+  /api/property/details/address:
+    get:
+      operationId: getPropertyDetailsByAddress
+      summary: Retrieve details for a single property by address
+      parameters:
+      - in: query
+        name: property_address
+        schema:
+            type: string
+        required: true
+        description: Address search term
+      - in: query
+        name: user_query
+        schema:
+            type: string
+        required: true
+        description: Send the user's original question.
+      responses:
+        "200":
+          description: OK
+
+  /api/public/search:
+    post:
+      operationId: publicSearch
+      summary: This API returns basic property objects within a polygon or radius criteria and fits the basic filters. The property types available in this API are Residential properties and Land that is Vacant/Residential. Either geojson or radius must be included.
+      parameters:
+      - in: query
+        name: user_query
+        schema:
+            type: string
+        required: true
+        description: Send the user's original question.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                soldInLast:
+                  type: string
+                  description: "Filters results to properties sold in the last N. Must be one of the following:  '1d', '1M', '2M', '3M', '4M', '5M', '6M', '7M', '8M', '9M', '10M', '11M', '1y', '2y', 'd' is days, 'M' is months and 'y' is years."
+                priceMin:
+                  type: number
+                  description: Alias for salePriceMin
+                priceMax:
+                  type: number
+                  description: Alias for salePriceMax
+                salePriceMin:
+                  type: number
+                  description: Minimum price a property was last sold for.
+                salePriceMax:
+                  type: number
+                  description: Maximum price a property was last sold for.
+                estimatePriceMin:
+                  type: number
+                  description: The minimum current estimate of a property.
+                estimatePriceMax:
+                  type: number
+                  description: The maximum current estimate of a property.
+                bedMin:
+                  type: number
+                  description: Bedroom minimum
+                bedMax:
+                  type: number
+                  description: Bedroom maximum
+                bathMin:
+                  type: number
+                  description: Bathroom minimum
+                bathMax:
+                  type: number
+                  description: Bathroom maximum
+                livingMin:
+                  type: number
+                  description: Living area minimum
+                livingMax:
+                  type: number
+                  description: Living area maximum
+                yearBuiltMin:
+                  type: number
+                  description: Year built minimum
+                yearBuiltMax:
+                  type: number
+                  description: Year built maximum
+                geojson:
+                  type: object # todo: geojson type
+                  description: Feature consisting of only Polygon or MultiPolygon
+                radius:
+                  type: object
+                  description: Search for properties within this radius
+                  properties:
+                    distance:
+                      type: string
+                      description: Radius in miles
+                    location:
+                      type: object
+                      properties:
+                        lat:
+                          type: string
+                          description: Latitude position of circle center
+                        lon:
+                          type: string
+                          description: Longitude position of circle center
+                cursor:
+                  type: number
+                  description: Pass the cursor value from the prior search to paginate results.
+                limit:
+                  type: number
+                  description: Number of items to return (default 30). The maximum is 100.
+                returnParcelGeoJSON:
+                  type: boolean
+                  description: Optionally return parcel's GeoJSON shape.
+
+      responses:
+        "200":
+          description: OK
+
+  /api/stats/zone:
+    get:
+      operationId: getStatisticsForZone
+      summary: Retrieve property statistics for a zone / region / area.
+      parameters:
+      - in: query
+        name: query
+        schema:
+            type: string
+        required: true
+        description: "Zone search term. Example: 5-digit zip code or city name"
+      - in: query
+        name: user_query
+        schema:
+            type: string
+        required: true
+        description: Send the user's original question.
+      responses:
+        "200":
+          description: OK

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-2bbc8741-a823-45d2-8d57-f564d81a79b0",
+    "domain": "bardeen.ai",
+    "namespace": "Bardeen",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Bardeen",
+        "name_for_human": "Bardeen",
+        "description_for_model": "Create and run automations on the most popular web services. You can send and receive emails and messages, manage meetings, create and update data in Google Spreadsheet, Notion, Airtable, etc., scrape data on the web, and more.",
+        "description_for_human": "Create and run automations on the most popular web services.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://api.prod.bardeen.ai/bot/static/chatgpt-api.yaml"
+        },
+        "logo_url": "https://assets-global.website-files.com/61f1e1f5e79d214f7f0df5a0/61f6e6d5e613a5a191f81f42_Webclip.png",
+        "contact_email": "support+chatgpt@bardeen.ai",
+        "legal_info_url": "http://bardeen.ai/privacy-policy"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

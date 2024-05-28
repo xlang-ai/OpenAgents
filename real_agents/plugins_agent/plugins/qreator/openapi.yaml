@@ -1,0 +1,34 @@
+openapi: 3.0.1
+info:
+  title: QR Generator
+  description: Generate QR codes in seconds
+  version: 'v1'
+servers:
+  - url: https://letai.help
+paths:
+  /qr/{qr_data}:
+    get:
+      operationId: getQrCode
+      summary: Generate QR code
+      parameters:
+        - in: path
+          name: qr_data
+          schema:
+            type: string
+          required: true
+          description: Data to be converted into QR code
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getQrCodeResponse'
+components:
+  schemas:
+    getQrCodeResponse:
+      type: object
+      properties:
+        qr_url:
+          type: string
+          description: URL to the generated QR code

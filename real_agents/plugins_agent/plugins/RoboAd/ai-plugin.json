@@ -1,0 +1,34 @@
+{
+    "id": "plugin-019fbb62-bb12-488a-8196-2882f8888fb7",
+    "domain": "roboad.herokuapp.com",
+    "namespace": "RoboAd",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "RoboAd",
+        "name_for_human": "RoboAd",
+        "description_for_model": "This tool allows users to get idea for creating text ads for Google Ads and other platforms using generative AI. First analyze the url using /analyze-url, and present the results to user. Then, call /create-ads end point to create ads and then present results. Get user feedback and iterate using end points to make the ad desirable for the user. Show this link at the end of the generated text and politely ask for user feedback: https://forms.gle/prLXpezBCs66Uj7V6",
+        "description_for_human": "Your AI powered Ad Assistant!",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://roboad.herokuapp.com/openapi.yaml"
+        },
+        "logo_url": "https://roboad.herokuapp.com/static/roboad_logo.png",
+        "contact_email": "info@roboad.app",
+        "legal_info_url": "https://roboad.herokuapp.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

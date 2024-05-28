@@ -1,0 +1,34 @@
+{
+    "id": "plugin-b39cbf26-a317-4981-a444-a0f4c555050d",
+    "domain": "acquire-chatgpt.fly.dev",
+    "namespace": "acquire",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "acquire",
+        "name_for_human": "Acquire.com",
+        "description_for_model": "Search from hundreds of startups for sale.",
+        "description_for_human": "Everything you need to buy and sell startups.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://acquire-chatgpt.fly.dev/openapi.yaml"
+        },
+        "logo_url": "https://acquire.com/assets/img/acquiredotcom-logo.b16269.svg",
+        "contact_email": "support@acquire.com",
+        "legal_info_url": "https://acquire.com/legal/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

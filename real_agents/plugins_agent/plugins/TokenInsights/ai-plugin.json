@@ -1,0 +1,34 @@
+{
+    "id": "plugin-59ac9ee9-2b2e-4743-9651-3d07610262d5",
+    "domain": "cryptoplugin.feednews.com",
+    "namespace": "TokenInsights",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "TokenInsights",
+        "name_for_human": "TokenInsights",
+        "description_for_model": "Get realtime crypto price, BTC, ETH, BNB, and the latest insights.The latest coin news and airdrop opportunities.",
+        "description_for_human": "Get realtime crypto price, BTC, ETH, BNB, and the latest insights.The latest coin news and airdrop opportunities.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://cryptoplugin.feednews.com/openapi.yaml"
+        },
+        "logo_url": "https://img.feednews.com/assets/v2/f7eabc30a8ac4f6d82d9bf7e6d32c342",
+        "contact_email": "aiplugins-contact-list@opera.com",
+        "legal_info_url": "https://legal.opera.com/terms/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

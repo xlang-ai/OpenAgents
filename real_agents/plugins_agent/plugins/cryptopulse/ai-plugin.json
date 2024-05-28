@@ -1,0 +1,34 @@
+{
+    "id": "plugin-4ad0e757-b5e0-4500-a877-7ac91107c22b",
+    "domain": "crypto-pulse-top.vercel.app",
+    "namespace": "cryptopulse",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "cryptopulse",
+        "name_for_human": "Crypto Pulse",
+        "description_for_model": "Decode the latest crypto news and its market impact instantly.",
+        "description_for_human": "From News to Profit: Decode Crypto's Market Impact with Ease. Instantly, analyse latest crypto news.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://crypto-pulse-top.vercel.app/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://crypto-pulse-top.vercel.app/imgs/logo96.png",
+        "contact_email": "support@aiagentslab.com",
+        "legal_info_url": "https://www.aiagentslab.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

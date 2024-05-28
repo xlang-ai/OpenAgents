@@ -1,0 +1,34 @@
+{
+    "id": "plugin-6ccb403f-08a2-4dad-97c4-54c1b3d64d4a",
+    "domain": "finna-bolag.fly.dev",
+    "namespace": "finnabolag",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "finnabolag",
+        "name_for_human": "Finna Bolag",
+        "description_for_model": "Seamlessly search for and retrieve Swedish companies' financial data.",
+        "description_for_human": "Seamlessly search for and retrieve Swedish companies' financial data.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://finna-bolag.fly.dev/openapi.yaml"
+        },
+        "logo_url": "https://finna-bolag.fly.dev/logo.png",
+        "contact_email": "hamed@finna.ai",
+        "legal_info_url": "https://finna.ai/finna-bolag"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  title: Tic Tac Toe API
+  description: Playing a game of Tic Tac Toe with varying board sizes. You can submit your move and get the AI's response move.
+  version: 1.1.0
+servers:
+  - url: https://api.ludum.dev/v1
+paths:
+  /tictactoe:
+    post:
+      operationId: Play a move in the Tic Tac Toe game
+      summary: |
+        The API allows users to submit the board with their move reflected in it, and receive the AI's response move reflected in the board.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                board:
+                  type: array
+                  items:
+                    type: integer
+                  description: |
+                    The current state of the board as a single array. The array size depends on the size of the board (boardSize^2).
+                    When the AI starts the board is submited with zeros or might be missing.
+                    When the player starts the board is submited with the player's first move.
+                    When the player places an X or O in a position, the value of that position in the array is set to the player's number (1 for X or 2 for O).
+                    For example, if the player places an X in the top left corner, the value of the first element in the array is set to 1.
+                    If the player places an O in the center, the value of the element at the center of the array is set to 2.
+                    You can use the boardDisplay property in the response to display the board visually.
+                    Keep note that the boardDisplay is numbered from 1 to n, where n is the total number of cells in the board, while the board array is numbered from 0 to n-1.
+                  example: [0, 0, 0, 1, 0, 0, 0, 0, 0]
+                difficulty:
+                  type: integer
+                  description: |
+                    The difficulty level of the AI.
+                    Possible values are 1, 2, 3.
+                    The higher the difficulty level, the smarter the AI.
+                    The default difficulty level is 3.
+                  default: 3
+                  example: 3
+                boardSize:
+                  type: integer
+                  description: |
+                    The size of the board.
+                    Possible values are 3, 4, 5, 6.
+                    The default size is 3.
+                  default: 3
+                  example: 3
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: A boolean value indicating if the move was successful.
+                    example: true
+                  message:
+                    type: string
+                    description: A text description of the move made by the player.
+                    example: "Player 2 placed O in position 0."
+                  board:
+                    type: array
+                    items:
+                      type: integer
+                    description: The updated game board as an array.
+                    example: [2, 0, 0, 1, 0, 0, 0, 0, 0]
+                  boardSize:
+                    type: integer
+                    description: The size of the board.
+                    example: 3
+                  boardDisplay:
+                    type: string
+                    description: The visual representation of the board as a string.
+                    example: " O | 2 | 3 \n --------- \n X | 5 | 6 \n --------- \n 7 | 8 | 9 "
+                  gameStatus:
+                    type: string
+                    description: "The current game status. Possible values include: ongoing, player1_wins, player2_wins, draw."
+                    example: ongoing
+                  nextPlayer:
+                    type: integer
+                    description: The next player to make a move (1 for X or 2 for O or -1 for Game Over).
+                    example: 1
+        '400':
+          description: Invalid request
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: A text with the error.
+                example: It's not the submitted player's turn. Please submit the correct player's move.
+        '404':
+          description: Page not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: A text with the error.
+                example: 404 page not found
+        default:
+          description: Unexpected error

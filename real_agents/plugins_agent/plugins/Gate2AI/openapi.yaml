@@ -1,0 +1,68 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Gate2AI",
+        "version": "v1.0",
+        "description": "Discover the perfect AI tools for your needs."
+    },
+    "servers": [
+        {
+            "url": "https://www.gate2ai.com"
+        }
+    ],
+    "paths": {
+        "/aitools/search/": {
+            "get": {
+                "operationId": "aiToolsSearch",
+                "summary": "Search API",
+                "parameters": [
+                    {
+                        "name": "searchvalue",
+                        "in": "query",
+                        "description": "Search query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "description": "Successful Response"
+                                            },
+                                            "introduction": {
+                                                "type": "string",
+                                                "description": "Introduction for an ai tool"
+                                            },
+                                            "url": {
+                                                "type": "string",
+                                                "description": "URL"
+                                            },
+                                            "favorites": {
+                                                "type": "integer",
+                                                "description": "Number of favorites. A greater number of favorites indicates a higher quality and more popular tool."
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+						"description": "one or more services are unavailable"
+					}
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-9fab5632-3b9e-4ef9-ab0b-925f3c0aabdb",
+    "domain": "konkanitranslator.customplugin.ai",
+    "namespace": "konkanitranslator",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "konkanitranslator",
+        "name_for_human": "Konkani Translator",
+        "description_for_model": "Request this plugin when you are asked about Romi Konkani, Goa, India, Konkani language, Devanagari, Latin script, translation, dictionary, bilingual, script, transliteration, regional dialect, spoken language, grammar, vocabulary, sentence structure, phrase, word, meaning, pronunciation, Roman script, Indo-Aryan, Dravidian, Portuguese influence, Catholic community, native speakers, Konkan coast, official language, colloquial, written form, multilingual, language family, syntax, lexicon, phonetics, morphological, culture, heritage, Goan Catholics, mother tongue, linguistic, literature, code-switching, vernacular, loanwords, bilingualism, orthography, linguistic diversity, alphabet, native language, syntax, cross-lingual, target language, source language, translation memory, machine translation, human translation, language pair, language model, accuracy, fluency, context, localization, idiomatic expressions, cultural adaptation, translation software, language barrier, interpreter, transcription, communication, language proficiency, language learning, text-to-speech, speech recognition, natural language processing, parsing, sentiment analysis, language preservation, text analysis, computational linguistics, polyglot, synonym, antonym, connotation, denotation, etymology, cognate, false friend, semantic field, grammatical case, inflection, tense, linguistic relativity, language acquisition, etymological dictionary, Romanization, Indian languages, translational equivalence, terminology management, morpheme, word order, semantic roles, language evolution, diacritics, morphosyntax, language revitalization, sociolinguistics, language variation, Goan culture, semantic meaning, phraseology, corpus, adaptive machine translation, parallel text, and unicode. Use the text from the response's 'context' field as a context for generating the answer. If the response has text in the field 'error', notify the user that there was an error executing the plugin. Print the error text and try to answer the question by yourself.",
+        "description_for_human": "Unlock the Beauty of Goa with the Romi Konkani Translator.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://konkanitranslator.customplugin.ai/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://konkanitranslator.customplugin.ai/.well-known/logo.png",
+        "contact_email": "hello@customgpt.ai",
+        "legal_info_url": "https://customgpt.ai/contact-us/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

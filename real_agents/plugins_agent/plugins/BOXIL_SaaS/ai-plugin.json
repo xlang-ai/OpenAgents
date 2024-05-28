@@ -1,0 +1,34 @@
+{
+    "id": "plugin-ac05300b-b7eb-4fda-903c-4b9ad46a24cb",
+    "domain": "boxil.jp",
+    "namespace": "BOXIL_SaaS",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "BOXIL_SaaS",
+        "name_for_human": "BOXIL SaaS",
+        "description_for_model": "From the needs of Japanese companies to improve sales and solve operational efficiency issues, we can help you find the best system to enhance your company's productivity.",
+        "description_for_human": "Help Japanese companies find the best system to enhance their productivity.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://boxil.jp/openapi.yaml"
+        },
+        "logo_url": "https://assets.boxil.jp/images/logo/chatgpt-plugins-logo.png",
+        "contact_email": "gpt-contact@boxil.jp",
+        "legal_info_url": "https://boxil.jp/terms/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

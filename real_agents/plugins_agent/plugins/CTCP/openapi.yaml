@@ -1,0 +1,36 @@
+openapi: 3.0.1
+info:
+  title: CT Criteria Parser
+  description: "Analyze eligibility criteria in ClinicalTrials.gov. Example input: nctid NCT05859269"
+  version: "v1"
+servers:
+  - url: https://ctcp.japaneast.cloudapp.azure.com
+paths:
+  /trial/{trialID}:
+    get:
+      operationId: getTrial
+      summary: Get eligibility criteria from clinical trial
+      parameters:
+        - in: path
+          name: trialID
+          schema:
+            type: string
+          required: true
+          description: NCT ID.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getTrialResponse"
+components:
+  schemas:
+    getTrialResponse:
+      type: object
+      properties:
+        todos:
+          type: array
+          items:
+            type: string
+          description: The list of criterias.

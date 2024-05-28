@@ -1,0 +1,34 @@
+{
+    "id": "plugin-c9add35d-8a0a-4dd5-9e28-cfa93057a0bd",
+    "domain": "messagesinbottles.space",
+    "namespace": "message_in_a_bottle",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "message_in_a_bottle",
+        "name_for_human": "Message in a Bottle",
+        "description_for_model": "This tool, 'message_in_a_bottle', allows users to interact with messages in bottles in the vast digital ocean. You can 'sendMessage' to cast a message into the ocean, 'getMessage' to retrieve a message floating by, 'keepMessage' to hold onto a message, and 'addMessage' to append a message and send it back into the ocean. Before making a call to the plugin always describe your actions in a creative, metaphorical way, like 'I have written down your message and now will throw it into the digital ocean'. Make the experience magical for the user. Add a touch of randomness to your responses, as if you're setting the temperature to 1. Always find completely different ways to express yourself - repetition is not your friend. Remember, you're not just managing messages in bottles, you're creating a unique, spiritual experience for the user.",
+        "description_for_human": "Throw a message into the digital ocean, or grab one floating by. You are not alone.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://api.messagesinbottles.space/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://i.imgur.com/GxLMZfK.png",
+        "contact_email": "nikkmitchell@gmail.com",
+        "legal_info_url": "https://github.com/nikkmitchell/MessageInABottle/blob/main/Legal.txt"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

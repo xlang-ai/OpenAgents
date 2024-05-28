@@ -1,0 +1,29 @@
+{
+    "id": "plugin-02ce3ffe-f0eb-4688-b990-4d181ebe29bb",
+    "domain": "openai-plugin.yayforms.com",
+    "namespace": "form",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "form",
+        "name_for_human": "Yay! Forms",
+        "description_for_model": "Plugin to create Forms, Surveys, Quizzes, or Questionnaires (and their respective questions) on Yay! Forms and return an URL to import the form into the customer's Yay! Forms account.",
+        "description_for_human": "Allows you to create AI-Powered Forms, Surveys, Quizzes, or Questionnaires on Yay! Forms.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://openai-plugin.yayforms.com/openapi.json"
+        },
+        "logo_url": "https://app.yayforms.com/logo.svg",
+        "contact_email": "help@yayforms.com",
+        "legal_info_url": "https://yayforms.com/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": []
+}

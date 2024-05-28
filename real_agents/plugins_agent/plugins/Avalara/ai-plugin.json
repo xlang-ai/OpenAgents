@@ -1,0 +1,29 @@
+{
+    "id": "plugin-de203e29-feb2-4fb0-b6b9-29097d0946d3",
+    "domain": "plugins.midgard.avalara.io",
+    "namespace": "Avalara",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Avalara",
+        "name_for_human": "Avalara",
+        "description_for_model": "Given an address in the United States and an amount, the system will calculate the sales tax. The system can also provide the sales tax given a city, or both a city and state. The total sales tax is the sum of state, county, city and special jurisdiction sales taxes.",
+        "description_for_human": "Calculate sales tax or lookup tax rates for any address in the U.S.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://plugins.midgard.avalara.io/openapi.json"
+        },
+        "logo_url": "https://plugins.midgard.avalara.io/favicon.png",
+        "contact_email": "support@avalara.com",
+        "legal_info_url": "https://www.avalara.com/us/en/legal.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": []
+}

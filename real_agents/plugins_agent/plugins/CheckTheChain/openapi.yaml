@@ -1,0 +1,219 @@
+---
+openapi: 3.0.0
+info:
+  title: CheckTheChain
+  version: '1.0'
+  description: Look for anything on the blockchain and get instant analysis.
+paths:
+  "/api/datasets/{datasetId}/tables/{tableId}/schema":
+    get:
+      operationId: getTableSchema
+      summary: Retrieve the schema of a given table in a given dataset. Find dataset
+        and table first.
+      parameters:
+      - in: path
+        name: datasetId
+        schema:
+          "$ref": "#/components/schemas/DatasetId"
+        required: true
+      - in: path
+        name: tableId
+        schema:
+          type: string
+        required: true
+        description: The ID of the table
+      responses:
+        '200':
+          description: A JSON object containing the schema of the table
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  schema:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        type:
+                          type: string
+                        mode:
+                          type: string
+                        description:
+                          type: string
+        '400':
+          description: Bad request, missing or invalid datasetId or tableId parameter
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InternalServerError"
+  "/api/datasets/{datasetId}/tables":
+    get:
+      operationId: getTables
+      summary: Retrieve list of tables in a dataset.
+      parameters:
+      - in: path
+        name: datasetId
+        schema:
+          "$ref": "#/components/schemas/DatasetId"
+        required: true
+      responses:
+        '200':
+          description: A JSON object containing the list of tables
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tables:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Bad request, invalid dataset ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InternalServerError"
+  "/api/datasets":
+    get:
+      operationId: getDatasets
+      summary: Retrieve list of datasets
+      responses:
+        '200':
+          description: A JSON object containing the list of datasets in format `projectId.datasetId`
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  datasets:
+                    type: array
+                    items:
+                      type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InternalServerError"
+  "/api/query":
+    post:
+      operationId: postQuery
+      summary: Execute a SQL query against the Google Big Query dataset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: 'Executes a SQL query against Google Big Query datasets.
+                    The query should specify the project name, dataset name, and table
+                    name clearly e.g. ''bigquery-public-data.crypto_ethereum.balances''.
+                    To ensure efficient and cost-effective queries, the AI model should:
+                    - Use WHERE, LIMIT, and TOP clauses to restrict the amount of
+                    data returned. - Specify the exact columns needed instead of using
+                    SELECT *. - Use functions like APPROX_COUNT_DISTINCT instead of
+                    COUNT DISTINCT. - Minimize the use of JOIN operations.'
+              required:
+              - query
+      responses:
+        '200':
+          description: A JSON object containing the query results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+        '400':
+          description: Bad request, invalid SQL query
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InternalServerError"
+  "/api/resolve":
+    get:
+      operationId: resolveEthAddressOrEns
+      summary: Resolve an Ethereum address or ENS name
+      parameters:
+      - in: query
+        name: input
+        schema:
+          type: string
+        required: true
+        description: Ethereum address or ENS name to resolve
+      responses:
+        '200':
+          description: A JSON object containing the resolved address or ENS name
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+        '400':
+          description: Bad request, invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InternalServerError"
+components:
+  schemas:
+    InternalServerError:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+      - error
+    DatasetId:
+      type: string
+      description: The identifier for dataset in the format projectId.datasetId e.g.
+        bigquery-public-data.crypto_ethereum
+tags: []

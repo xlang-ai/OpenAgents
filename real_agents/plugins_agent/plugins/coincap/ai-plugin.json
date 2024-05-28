@@ -1,0 +1,34 @@
+{
+    "id": "plugin-98d9ce1b-86bb-4294-a66a-c97ace32e979",
+    "domain": "coincap.gptplug.chat",
+    "namespace": "coincap",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "coincap",
+        "name_for_human": "CoinCap",
+        "description_for_model": "Get cryptocurrency information from CoinCap.",
+        "description_for_human": "Get cryptocurrency information from CoinCap.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://coincap.gptplug.chat/openapi.yml"
+        },
+        "logo_url": "https://seeklogo.com/images/C/coincap-logo-B1854DA521-seeklogo.com.png",
+        "contact_email": "ShadovvBeast@gmail.com",
+        "legal_info_url": "https://coincap.gptplug.chat/legal_info.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

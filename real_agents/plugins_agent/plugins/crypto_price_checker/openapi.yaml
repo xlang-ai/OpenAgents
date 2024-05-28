@@ -1,0 +1,42 @@
+---
+openapi: 3.0.1
+info:
+  title: Crypto Price Checker
+  description: 'A Crypto Prices app that takes a pair of crypto or fiat tickers and returns the current price of the pair.'
+  version: v1.0
+servers:
+- url: https://cryptoprices.smoothplugins.com
+paths:
+  "/":
+    get:
+      operationId: check_price
+      summary: Returns the current price of a pair of crypto or fiat tickers
+      description: Returns the current price of a pair of crypto or fiat tickers
+      parameters:
+      - name: ticker_from
+        in: query
+        description: The crypto or fiat ticker to find the current price from
+        required: true
+        schema:
+          type: string
+      - name: ticker_to
+        in: query
+        description: The crypto or fiat ticker to find the current price to
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/check_price_response"
+components:
+  schemas:
+    check_price_response:
+      type: object
+      properties:
+        result:
+          type: string
+          description: The current price of the pair of crypto or fiat tickers

@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+  title: YouTube Search Results API
+  version: 1.0.0
+  description: Fetch the YouTube Search Results and the information for each item for a specific search term, without any limits!
+paths:
+  /youtube-search-results:
+    get:
+      summary: Get all YouTube Search Results
+      parameters:
+        - name: q
+          in: query
+          description: The URL-encoded search query
+          required: true
+          schema:
+            type: string
+        - name: page_token
+          in: query
+          description: Token for paginated results
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: Type of search (optional)
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized
+        '429':
+          description: Too Many Requests
+      servers:
+        - url: https://youtube-search-results.p.rapidapi.com
+          description: RapidAPI Server
+      security:
+        - ApiKeyAuth: []
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-RapidAPI-Key

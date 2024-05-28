@@ -1,0 +1,34 @@
+{
+    "id": "plugin-42224a4e-2339-499b-b602-f9f3aafed6de",
+    "domain": "xapi.lihaorui.com",
+    "namespace": "Xpapers_arXiv_paper_database",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Xpapers_arXiv_paper_database",
+        "name_for_human": "Xpapers",
+        "description_for_model": "This plugin allows you to search for academic papers in the arXiv database. You can use atomic conditions and boolean assembly in your search queries...",
+        "description_for_human": "Effortlessly find real academic papers on arXiv. Dive into abstracts, references, and access public PDF URLs.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://xapi.lihaorui.com/openapi.yaml"
+        },
+        "logo_url": "https://xsearchlogo.oss-us-west-1.aliyuncs.com/logo.png",
+        "contact_email": "haoruileee@gmail.com",
+        "legal_info_url": "xapi.lihaorui.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

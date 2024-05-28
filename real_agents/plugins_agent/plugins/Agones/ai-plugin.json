@@ -1,0 +1,34 @@
+{
+    "id": "plugin-8b2a2334-361e-4813-83b1-d04ac231161b",
+    "domain": "agones.gr",
+    "namespace": "Agones",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Agones",
+        "name_for_human": "Agones",
+        "description_for_model": "Access soccer match results from Agones. Keep in mind soccer is called football in Europe.\r\nResults go back to 2007 until current games being played right now and all scheduled matches for the next 10 days.\r\nResults cover most countries and leagues in the world.\r\nGuidelines:\r\n- Use single-line string for team1, team2 and all other parameters.\r\n- Pass date_from and date_until in a YYYY-MM-DD format\r\n- If one team is passed, returned matches will be about this team and any other opponent.\r\n- If two teams are passed, matches between these two teams will be returned.\r\n- if date_type is 'latest', then the most recent match will be returned.\r\n- If date_type is 'next', then the next match will be returned.\r\n- If date_type is 'range', then all matches between date_from and date_until will be returned.\r\n- Only use date_from and date_until when date_type is 'range' - otherwise these are not used.\r\n- If a match is currently live, the current minute will also be provided.\r\n\r\nResults are an array of dictionaries in the format:\r\n{\r\n    \"home_team\": \"Liverpool\",\r\n    \"away_team\": \"Arsenal\",\r\n    \"match_date\": \"2023-05-02\",\r\n    \"state\": \"finished\"\r\n    \"score_halftime\": \"2 - 0\",\r\n    \"score_current\": \"4 - 0\"\r\n}",
+        "description_for_human": "Agones provides soccer (football) results for matches played all over the world in the past 15 years.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://agones.gr/.well-known/chatgpt.json"
+        },
+        "logo_url": "https://agones.gr/static/img/favicon/android-chrome-192x192.png",
+        "contact_email": "info@agones.gr",
+        "legal_info_url": "https://agones.gr/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

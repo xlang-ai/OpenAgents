@@ -1,0 +1,34 @@
+{
+    "id": "plugin-027a8b9d-7f54-42d3-8a04-1b6391997cf8",
+    "domain": "plugin-3c56b9d4c8a6465998395f28b6a445b2-jexkai4vea-uc.a.run.app",
+    "namespace": "Ai_PDF",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Ai_PDF",
+        "name_for_human": "Ai PDF",
+        "description_for_model": "Provide a URL to a PDF and search the document. Break the user question in multiple semantic search queries and calls as needed. Think step by step.",
+        "description_for_human": "Super-fast, interactive chats with PDFs of any size, complete with page references for fact checking.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://plugin-3c56b9d4c8a6465998395f28b6a445b2-jexkai4vea-uc.a.run.app/openapi.yaml"
+        },
+        "logo_url": "https://plugin-3c56b9d4c8a6465998395f28b6a445b2-jexkai4vea-uc.a.run.app/logo.png",
+        "contact_email": "support@promptapps.ai",
+        "legal_info_url": "https://plugin-3c56b9d4c8a6465998395f28b6a445b2-jexkai4vea-uc.a.run.app/legal.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,91 @@
+openapi: 3.0.1
+info:
+  title: Korea metro subway
+  description: Korea metro subway route information including tranfer
+  contact:
+    name: KJ KIM
+    email: handdola@gmail.com  
+  version: v1
+servers:
+  - url: https://openai.metrochat.xyz
+    variables: {}
+paths:
+  /v1/routes/search:
+    get:
+      tags:
+        - greeting-controller
+      summary: Search routes between departure and destination
+      operationId: searchRoutes
+      parameters:
+        - name: departure
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: destination
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: hour
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: minute
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteResult'
+                
+  /v1/routes/stations:
+      get:
+        tags:
+          - station-controller
+        summary: list stations name containing  prefix
+        operationId: listStations
+        parameters:
+          - name: prefix
+            in: query
+            required: true
+            schema:
+              type: string
+        responses:
+          200:
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: string                
+components:
+  schemas:
+    RouteResult:
+      type: object
+      properties:
+        status:
+          type: boolean
+        today:
+          type: string
+        totalTime:
+          type: integer
+          format: int32
+        transferTime:
+          type: integer
+          format: int32
+        startTime:
+          type: string
+        endTime:
+          type: string
+        summary:
+          type: string

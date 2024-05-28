@@ -1,0 +1,56 @@
+openapi: 3.0.1
+info:
+  title: TalentOrg
+  description: Seach for freelance talents (developers, engineers, etc).
+  version: 'v1'
+servers:
+  - url: https://chatgpt.talentorg.com
+paths:
+  /talent/search:
+    get:
+      operationId: searchTalent
+      summary: Search for talents for a particular position. Call this for each potential job position.
+      parameters:
+      - in: query
+        name: position_name
+        schema:
+            type: string
+        required: true
+        description: The name of this position.
+      - in: query
+        name: category
+        schema:
+            type: string
+        required: true
+        description: The category for this position, such as frontend, backend, mobile, fullstack engineer, or another category deemed fit.
+      - in: query
+        name: region
+        schema:
+            type: array
+            items:
+                type: string
+        description: Limit search to one or more continents in the world. Leave blank to include all regions. Regions are defined as Africa, North America, South America, Asia, Europe, Oceania.
+      - in: query
+        name: budget
+        schema:
+            type: integer
+        description: The maximun budget in US dollars for this position. Leave blank if unknown or unrestricted.
+      - in: query
+        name: minimum_experience
+        schema:
+            type: integer
+        description: Minimum years of experience required for this position. Leave blank if unknown or unrestricted. Estimated based on seniority is fine.
+      - in: query
+        name: skills
+        schema:
+            type: array
+            items:
+                type: string
+        description: Required skillsets for this position, such as programming language or frameworks. Leave blank if unknown or unrestricted. Do not unnecessarily restrict skillsets.
+      responses:
+        "200":
+          description: OK
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schemas/getTodosResponse'

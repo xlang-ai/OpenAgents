@@ -1,0 +1,191 @@
+info:
+  description: Get Inventory Data
+  title: Inventory API
+  version: 1.0.1
+openapi: 3.0.2
+paths:
+  /chat-plugin/locate/locate:
+    post:
+      description: Use this endpoint when a user is asking about inventory levels
+        about an electronic component.
+      operationId: locate_inventory_chat_plugin_locate_locate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocateQuery'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Locate Inventory
+      tags:
+      - plugin
+      - locate
+components:
+  schemas:
+    Company:
+      properties:
+        name:
+          title: Name
+          type: string
+      required:
+      - name
+      title: Company
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    LocateQuery:
+      properties:
+        manufacturer_part_number:
+          items:
+            type: string
+          title: Manufacturer Part Number
+          type: array
+        openai_conversation_id:
+          title: Openai Conversation Id
+          type: string
+        openai_ephemeral_user_id:
+          title: Openai Ephemeral User Id
+          type: string
+        user_query:
+          title: User Query
+          type: string
+      required:
+      - manufacturer_part_number
+      - user_query
+      - openai_conversation_id
+      - openai_ephemeral_user_id
+      title: LocateQuery
+      type: object
+    MetaData:
+      properties:
+        estimated_factory_lead_days:
+          title: Estimated Factory Lead Days
+          type: integer
+        manufacturer_name:
+          title: Manufacturer Name
+          type: string
+        manufacturer_url:
+          title: Manufacturer Url
+          type: string
+        mpn:
+          title: Mpn
+          type: string
+        short_description:
+          title: Short Description
+          type: string
+      required:
+      - mpn
+      - short_description
+      - manufacturer_name
+      title: MetaData
+      type: object
+    Offer:
+      properties:
+        inventoryLevel:
+          title: Inventorylevel
+          type: integer
+        prices:
+          items:
+            $ref: '#/components/schemas/Prices'
+          title: Prices
+          type: array
+      required:
+      - inventoryLevel
+      title: Offer
+      type: object
+    Prices:
+      properties:
+        convertedPrice:
+          title: Convertedprice
+          type: number
+        price:
+          title: Price
+          type: number
+        quantity:
+          title: Quantity
+          type: integer
+      required:
+      - convertedPrice
+      - price
+      - quantity
+      title: Prices
+      type: object
+    Response:
+      properties:
+        metadata:
+          items:
+            $ref: '#/components/schemas/MetaData'
+          title: Metadata
+          type: array
+        prompt:
+          title: Prompt
+          type: string
+        sellers:
+          items:
+            $ref: '#/components/schemas/Sellers'
+          title: Sellers
+          type: array
+      required:
+      - prompt
+      - sellers
+      - metadata
+      title: Response
+      type: object
+    Sellers:
+      properties:
+        company:
+          $ref: '#/components/schemas/Company'
+        isAuthorized:
+          title: Isauthorized
+          type: boolean
+        offers:
+          items:
+            $ref: '#/components/schemas/Offer'
+          title: Offers
+          type: array
+      required:
+      - company
+      - isAuthorized
+      - offers
+      title: Sellers
+      type: object
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+      type: object

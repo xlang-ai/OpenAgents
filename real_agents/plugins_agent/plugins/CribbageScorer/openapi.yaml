@@ -1,0 +1,55 @@
+openapi: 3.0.0
+info:
+  title: Score Calculation API
+  description: Tool for scoring your cards in the game of cribbage.
+  version: 1.0.0
+servers:
+  - url: https://cribbage.azurewebsites.net/
+paths:
+  /score_hand_show:
+    post:
+      summary: Calculate score
+      operationId: score_hand_show
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                starter:
+                  type: string
+                  description: The starter card, e.g. '5H' for 5 of hearts
+                hand:
+                  type: array
+                  items:
+                    type: string
+                    description: A card in the hand, e.g. and array with cards like '5H' for 5 of hearts
+                isCrib:
+                  type: boolean
+                  description: Whether the hand is a crib
+              required:
+                - starter
+                - hand
+                - isCrib
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of response
+                  score:
+                    type: integer
+                    description: The calculated score
+                  message:
+                    type: string
+                    description: A message about the score calculation
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error

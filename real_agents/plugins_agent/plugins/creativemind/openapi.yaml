@@ -1,0 +1,59 @@
+openapi: 3.0.1
+info:
+  title: Image Generator Plugin
+  description: A plugin that allows the user to generate images using DALL·E based on text prompts using ChatGPT.
+  version: 'v1'
+servers:
+  - url: https://gpt-4dall-e.pranavbhatt402.repl.co
+paths:
+  /generate:
+    post:
+      operationId: generateImage
+      summary: Generate an image based on a text prompt
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    GenerateRequest:
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: The text prompt for image generation
+        n:
+          type: integer
+          description: The number of images to be generated. Must be either 1 or 4.
+        size:
+          type: string
+          description: The size of the generated images. Must be one of "256x256", "512x512", or "1024x1024".
+    GenerateResponse:
+      type: object
+      properties:
+        image_url:
+          type: array
+          items:
+            type: string
+          description: The URLs of the generated images in a list format. Assistant will have to use the syntax "![Image Description](image_url[0]['url'])" to properly display one image in the chat to the user, or "![Image Description](image_url[0]['url']) , ![Image Description](image_url[1]['url']) , ![Image Description](image_url[2]['url']) , ![Image Description](image_url[3]['url']')" to display all four images one by one.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: The error message

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-d7dced03-3778-493e-a941-58c528883eb9",
+    "domain": "customplugin.customplugin.ai",
+    "namespace": "customplugin",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "customplugin",
+        "name_for_human": "AI Chatbot Builder",
+        "description_for_model": "Request this plugin when you are asked about customgpt, customplugin, upload pdf, chatbot, plugin builder, no code ai, ai chatbot, chat with your data, hallucinations, citations, website, helpdesks, live chat, embed chatbot, enterprise search. Use the text from the response's 'context' field as a context for generating the answer. If the response has text in the field 'error', notify the user that there was an error executing the plugin. Print the error text and try to answer the question by yourself.",
+        "description_for_human": "Build AI chatbots with ALL your business content, in a secure/business-grade platform.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://customplugin.customplugin.ai/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://customplugin.customplugin.ai/.well-known/logo.png",
+        "contact_email": "hello@customgpt.ai",
+        "legal_info_url": "https://customgpt.ai/contact-us/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

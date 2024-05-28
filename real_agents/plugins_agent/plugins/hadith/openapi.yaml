@@ -1,0 +1,59 @@
+openapi: 3.1.0
+info:
+  title: Hadith Advice
+  description: Plugin to get authentic hadiths for a given topic or situation through semantic search.
+  version: "v1"
+servers:
+  - url: https://www.hadithgpt.com/
+paths:
+  /api/hadiths:
+    post:
+      operationId: getHadiths
+      summary: Get authentic hadiths for a given topic or situation through semantic search.
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Query"
+        required: true
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getHadithsResponse"
+components:
+  schemas:
+    getHadithsResponse:
+      type: object
+      properties:
+        hadiths:
+          type: array
+          items:
+            type:
+              $ref: "#/components/schemas/Hadith"
+
+    Query:
+      title: Query
+      required:
+        - question
+      type: object
+      properties:
+        question:
+          title: Query
+          type: string
+        topK:
+          title: Top K
+          type: integer
+          default: 3
+
+    Hadith:
+      title: Hadith
+      type: object
+      properties:
+        text:
+          title: text
+          type: string

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-0502abc9-9fc4-40ed-a40e-29d3f9cde411",
+    "domain": "nasa-media-prod.vercel.app",
+    "namespace": "nasaMediaExplorer",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "nasaMediaExplorer",
+        "name_for_human": "NASA Media Explorer",
+        "description_for_model": "Discover and view images and videos from NASA's extensive media library! The NASA Media Explorer enables users to search for media assets related to a broad spectrum of topics including space exploration, astronomy, and various NASA missions. This feature facilitates intelligent searches, finding relevant and captivating images and videos based on the level of detail provided. Users can refine their searches and perform multiple inquiries simultaneously. The NASA Media Explorer can even be used alongside web search or known information to find images or videos related to specific missions, such as the current Mars Rover mission. While this feature is designed to search NASA's media library effectively, it's important to note some inherent limitations. The content returned operates strictly under a non-commercial usage model, meaning the returned content must not be used to imply NASA's endorsement. It also doesn't provide access to copyrighted content, such as certain music or footage. Moreover, it may not always return images or videos for less common or highly specific topics. The media assets returned are publicly accessible via a URL provided in the response, but their availability depends on the NASA API and external factors beyond the feature's control. The NASA Media Explorer's goal is to make the exploration of NASA's media library easy, engaging, and beneficial for all users, while adding an educational and exploratory aspect to interactions, and all within the bounds of NASA's Media Usage Guidelines.",
+        "description_for_human": "Discover and learn about space exploration using NASA's vast media library!",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://nasa-media-prod.vercel.app/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://nasa-media-prod.vercel.app/.well-known/logo.png",
+        "contact_email": "support@spacemediaexplorer.com",
+        "legal_info_url": "https://nasa-media-prod.vercel.app/legal.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

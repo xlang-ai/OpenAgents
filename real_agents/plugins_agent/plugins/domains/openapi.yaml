@@ -1,0 +1,44 @@
+openapi: 3.0.1
+info:
+  title: Domain Search API
+  version: 1.0.0
+  description: Checks for a domain name's availability. You can search for your desired domain name.
+servers:
+  - url: 'https://gpt-domain-bot.fly.dev'
+paths:
+  /search:
+    get:
+      operationId: searchDomainsByName
+      parameters:
+        - name: name
+          in: query
+          required: true
+          description: Comma separated domain names to search
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  domains:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The domain name
+                        available:
+                          type: boolean
+                          description: Whether the domain is available
+                        register_link:
+                          type: string
+                          description: Registration link for the domain
+                        error:
+                          type: string
+                          description: Error message if domain lookup fails
+

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-95b364cf-c2d2-4995-9011-0ec216ec6d83",
+    "domain": "reporadar.computercomputer.computer",
+    "namespace": "repo_radar",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "repo_radar",
+        "name_for_human": "Repo Radar",
+        "description_for_model": "If you're helping users code, you can use this to get current information about Github repos. You can search for repos by topic, language, or name. You can also get the README for a repo which you can then use to help the user write code that is more likely to run.",
+        "description_for_human": "Your one-stop shop for up to date Github repo information. Find repos by topic, language, or name.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://reporadar.computercomputer.computer/openapi.yaml"
+        },
+        "logo_url": "https://reporadar.computercomputer.computer/images/logo.png",
+        "contact_email": "aaron@aaroncruz.com",
+        "legal_info_url": "https://reporadar.computercomputer.computer/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,60 @@
+openapi: 3.0.1
+info:
+  title: Ascii Art Font Generator
+  description: Utility for converting strings of text into ASCII fonts.
+  version: 'v1'
+servers:
+  - url: https://figletgptplugin.wisemonkey.repl.co
+paths:
+  /text:
+    post:
+      operationId: GenerateAsciiArt
+      summary: Convert text to ASCII art
+      parameters:
+        - name: text
+          in: query
+          description: The text to be converted, example fonts are doom, graffiti, avatar, big, bulbhead, chunky, cybermedium, epic, graceful, small, double
+          required: true
+          schema:
+            type: string
+        - name: font
+          in: query
+          description: The font style for the ASCII art (default standard)
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the request
+                  text:
+                    type: string
+                    description: The input text
+                  font:
+                    type: string
+                    description: The font style used for ASCII art
+                  ascii:
+                    type: string
+                    description: The generated ASCII art
+                example: "<pre>  __ \n / _|\n| |_ \n|  _|\n|_|  \n     \n</pre>"
+
+  /fonts:
+    get:
+      operationId: FontList
+      summary: List all available fonts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string

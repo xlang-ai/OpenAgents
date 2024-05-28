@@ -1,0 +1,43 @@
+openapi: 3.0.1
+info:
+  title: Product Development Knowledge API
+  description: Your product development coach. Ask about best practices. Get top gurus\u2019 product thinking.
+  version: "v1"
+servers:
+  - url: https://klever-chatgpt-plugin-prod.herokuapp.com
+paths:
+  /get-data:
+    get:
+      operationId: getData
+      summary: |
+        Retrieve a curated list of product development best practices.
+      description: |
+        This endpoint allows you to retrieve a curated list of product development best practices from reputable sources. By using this information, you can gain valuable insights to improve your product development skills and create well-documented, high-quality products.
+      parameters:
+        - in: query
+          name: userQuestion
+          schema:
+            type: string
+          required: true
+          description: The user's question that needs to be addressed.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getDataResponse"
+components:
+  schemas:
+    getDataResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL of the source containing the best practice or insight.
+        title:
+          type: string
+          description: The title of the best practice or insight.
+        content:
+          type: string
+          description: The content of the best practice or insight, which can be used to respond to user queries or for reference purposes.

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-a5d26934-e9ce-46d0-b18d-d06bcda34621",
+    "domain": "paraphraser-best.vercel.app",
+    "namespace": "Paraphraser",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Paraphraser",
+        "name_for_human": "Paraphraser",
+        "description_for_model": "Paraphrase any text.",
+        "description_for_human": "Say it better, say it different: Paraphrase like a Pro. Paraphrase for impact and inspire.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://paraphraser-best.vercel.app/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://paraphraser-best.vercel.app/imgs/logo.png",
+        "contact_email": "support@aiagentslab.com",
+        "legal_info_url": "https://www.aiagentslab.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

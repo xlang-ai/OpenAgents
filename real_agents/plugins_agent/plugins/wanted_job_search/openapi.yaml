@@ -1,0 +1,80 @@
+openapi: 3.0.1
+info:
+  title: Job Search
+  description: Search and get job positions.
+  version: "v1"
+servers:
+  - url: https://assistant.wanted.co.kr
+paths:
+  /search/job-postings/keyword:
+    post:
+        operationId: searchGlobal
+        summary: Get the list of global job positions
+        requestBody:
+          required: true
+          content:
+            application/json:
+                schema:
+                  $ref: "#/components/schemas/searchGlobalRequest"
+        responses:
+          "200":
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/searchGlobalResponse"
+
+components:
+  schemas:
+    searchGlobalRequest:
+      type: object
+      required:
+        - keyword
+      properties:
+        keyword:
+            type: string
+            description: The keyword to search job
+    searchGlobalResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          url:
+            type: string
+            description: The URL of job position
+          title:
+            type: string
+          description:
+            type: string
+          jobLocation:
+            $ref: "#/components/schemas/PostalAddress"
+          hiringOrganization:
+            $ref: "#/components/schemas/Organization"
+          created:
+            type: string
+          qualifications:
+            type: string
+          responsibilities:
+            type: string
+          experienceRequirements:
+            type: string
+    PostalAddress:
+        type: object
+        properties:
+          countryCode:
+            type: string
+          addressLocality:
+            type: string
+          address:
+            type: string
+    Organization:
+        type: object
+        properties:
+          name:
+            type: string
+          logo:
+            type: string
+          url:
+            type: string

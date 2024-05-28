@@ -1,0 +1,34 @@
+{
+    "id": "plugin-d2aad050-7e89-4617-b1f1-ce5de8b80ec4",
+    "domain": "chatgpt.talentorg.com",
+    "namespace": "TalentOrg",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "TalentOrg",
+        "name_for_human": "TalentOrg",
+        "description_for_model": "Help users find and hire freelance talents (for example, engineers) based on a job description or project description. Allows users to search for talents, view their profiles, and hire them. To make a hire, visit candidate profile and add them to your shortlist to invite them to an interview. TalentOrg will take care of logistics, compliance, and global payments.",
+        "description_for_human": "Find and hire freelance engineering talents from around the world.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://chatgpt.talentorg.com/openapi.yaml"
+        },
+        "logo_url": "https://chatgpt.talentorg.com/logo.png",
+        "contact_email": "support@talentorg.com",
+        "legal_info_url": "https://talentorg.com/legal/en/tos"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

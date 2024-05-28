@@ -1,0 +1,34 @@
+{
+    "id": "plugin-66a05284-a738-448b-9f65-37c7ec649202",
+    "domain": "llmsearch.gygservice.com",
+    "namespace": "getyourguide_activity_search",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "getyourguide_activity_search",
+        "name_for_human": "GetYourGuide",
+        "description_for_model": "Plugin for exploring activities to do in an city, location or country. Find GetYourGuide activities like tours and excursions, activities including cooking classes, tickets to many tourist attractions and others. Translate all query parameters to English. Always show activity rating. When a location is mentioned, include the location in the query parameters.",
+        "description_for_human": "Find tours, excursions and other travel activities.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://llmsearch.gygservice.com/openapi.json"
+        },
+        "logo_url": "https://cdn.getyourguide.com/tf/assets/static/chatgpt/gyg-chatgpt-logo.svg",
+        "contact_email": "chatgpt-plugin-support@getyourguide.com",
+        "legal_info_url": "https://www.getyourguide.com/c/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

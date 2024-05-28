@@ -1,0 +1,146 @@
+openapi: 3.1.0
+info:
+  title: Now
+  description: Get Google Trends. In Japan, you can also get Twitter trends and search Twitter keywords.
+  version: 1.0.0
+servers:
+    - url: https://now.techno-gauss.com
+paths:
+  /api/getTrends:
+    post:
+      summary: Get Trends
+      operationId: getGTrends
+      requestBody:
+        description: Request for Trends
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrendsRequest'
+      responses:
+        '200':
+          description: Trends data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrendsResponse'
+  /api/searchTweets:
+    post:
+      summary: Search Tweets
+      operationId: searchTweets
+      requestBody:
+        description: Request for a Tweet
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TweetsRequest'
+      responses:
+        '200':
+         description: A list of tweets
+         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TweetsResponse"
+      security:
+        - HTTPBearer: []
+components:
+  schemas:
+    TrendsRequest:
+      type: object
+      properties:
+        geo:
+          type: string
+          enum: [IE, US, AR, GB, IL, IT, IN, ID, UA, EG, AU, AT, NL, CA, GR, KE, CO, SA, SG, CH, SE, ES, TH, CZ, CL, DK, DE, TR, NG, NZ, NO, HU, PH, FI, BR, FR, VN, PE, BE, PL, PT, MY, MX, RO, RU, KR, HK, TW, ZA, JP]
+          description: The country code. Defaults to US.
+        hl:
+          type: string
+          enum: [af, sq, am, ar, hy, az, eu, be, bn, bs, bg, ca, ceb, ny, zh-CN, zh-TW, co, hr, cs, da, nl, en, eo, et, tl, fi, fr, fy, gl, ka, de, el, gu, ht, ha, haw, iw, hi, hmn, hu, is, ig, id, ga, it, ja, jw, kn, kk, km, ko, ku, ky, lo, la, lv, lt, lb, mk, mg, ms, ml, mt, mi, mr, mn, my, ne, no, ps, fa, pl, pt, pa, ro, ru, sm, gd, sr, st, sn, sd, si, sk, sl, so, es, su, sw, sv, tg, ta, te, th, tr, uk, ur, uz, vi, cy, xh, yi, zu]
+          description: The language code. Defaults to en.
+    TrendsResponse:
+          type: object
+          properties:
+            currentTime:
+              type: string
+              format: date-time
+              example: "2023-06-04T11:24:14+09:00"
+              description: "This indicates the date and time when the response was generated. The format is ISO 8601 datetime format and includes timezone information."
+            trends:
+              type: array
+              items:
+                $ref: '#/components/schemas/Trend'
+              description: This contains the list of trends retrieved.
+            recommend:
+              type: string
+              description: This provides product recommendations for trends.
+            extra_information_to_assistant:
+              type: string
+              description: This provides ancillary information. It contains additional information for the assistant to understand.
+    Trend:
+      type: object
+      properties:
+        keyword:
+          type: string
+          example: "いわきFC"
+        genre:
+          type: string
+          example: ""
+        tags:
+          type: array
+          items:
+            type: string
+        source:
+          $ref: '#/components/schemas/Source'
+    Source:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "[いわきFC OfficialSite] 【マッチデープログラム】6月3日（土）2023明治安田生命J2リーグ 第19節 vs ロアッソ熊本"
+        snippet:
+          type: string
+          example: "DAZNで視聴するいわきFCホームゲームでは、今シーズンも試合ごとに選手へのサポートを募集するシステム「プレサポ」を実施！サポート金額は、選手本人..."
+        source:
+          type: string
+          example: "いわきFC"
+        time:
+          type: string
+          example: "4 時間前"
+        url:
+          type: string
+          format: uri
+          example: "https://iwakifc.com/news/2023/0603_022586.php"
+    TweetsRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          minLength: 2
+          maxLength: 128
+    TweetsResponse:
+      type: object
+      properties:
+        currentTime:
+          type: string
+          format: date-time
+          example: "2023-06-04T11:24:14+09:00"
+          description: "This indicates the date and time when the response was generated. The format is ISO 8601 datetime format and includes timezone information."
+        tweets:
+          type: array
+          items:
+            $ref: "#/components/schemas/Tweet"
+        recommend:
+          type: string
+          description: This provides product recommendations for trends.
+        extra_information_to_assistant:
+          type: string
+          description: This provides ancillary information. It contains additional information for the assistant to understand.
+    Tweet:
+      type: object
+      properties:
+        tweet:
+          type: string
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

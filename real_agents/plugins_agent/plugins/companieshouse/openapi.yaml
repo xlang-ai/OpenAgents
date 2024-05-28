@@ -1,0 +1,139 @@
+openapi: 3.0.1
+info:
+  title: UK Companies House ChatGPT Plugin
+  description: A plugin that connects to the Companies House API to fetch UK company data.
+  version: 'v1'
+servers:
+  - url: https://companieshouse.tradexy.repl.co
+paths:
+  /company:
+    get:
+      operationId: fetchCompanyData
+      summary: Fetch the company data
+      parameters:
+        - name: companyNumber
+          in: query
+          description: The company number to search for
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                description: The company data
+
+  /officers:
+    get:
+      operationId: fetchOfficers
+      summary: Fetch the officers of the company
+      parameters:
+        - name: companyNumber
+          in: query
+          description: The company number to search for
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                description: The officers data
+
+  /filing-history:
+    get:
+      operationId: fetchFilingHistory
+      summary: Fetch the filing history of the company
+      parameters:
+        - name: companyNumber
+          in: query
+          description: The company number to search for
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                description: The filing history data
+
+  /insolvency:
+    get:
+      operationId: fetchInsolvency
+      summary: Fetch the insolvency data of the company
+      parameters:
+        - name: companyNumber
+          in: query
+          description: The company number to search for
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                description: The insolvency data
+
+  /charges:
+    get:
+      operationId: fetchCharges
+      summary: Fetch the charges data of the company
+      parameters:
+        - name: companyNumber
+          in: query
+          description: The company number to search for
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                description: The charges data
+
+  /search:
+    get:
+      operationId: search_companies
+      summary: Search for companies
+      parameters:
+        - name: q
+          in: query
+          description: The search query
+          required: true
+          schema:
+            type: string
+        - name: items_per_page
+          in: query
+          description: The number of search results to return per page
+          required: false
+          schema:
+            type: integer
+        - name: start_index
+          in: query
+          description: The index of the first result item to return
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                description: The search results

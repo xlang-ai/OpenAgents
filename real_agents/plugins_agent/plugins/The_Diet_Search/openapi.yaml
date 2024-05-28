@@ -1,0 +1,192 @@
+---
+openapi: 3.0.2
+info:
+    title: Japanese Diet Proceedings Search API
+    version: 0.1.0
+    description: You can search the Japanese Diet Proceedings by request, news, or other text.
+servers:
+    -
+        url: 'https://the-diet-record.automation.jp'
+        description: production environment
+paths:
+    /query:
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/QueryRequest'
+                required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/QueryResponse'
+                    description: Successful Response
+                '422':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HTTPValidationError'
+                    description: Validation Error
+            operationId: query_main_query_post
+            summary: Query Main
+components:
+    schemas:
+        DocumentChunkMetadata:
+            title: DocumentChunkMetadata
+            type: object
+            properties:
+                source:
+                    $ref: '#/components/schemas/Source'
+                source_id:
+                    title: Source Id
+                    type: string
+                url:
+                    title: Url
+                    type: string
+                creation_date:
+                    title: Creation Date
+                    type: string
+                the_Diet_member:
+                    title: The Diet Member
+                    type: string
+                id:
+                    title: Id
+                    type: string
+        DocumentChunkWithScore:
+            title: DocumentChunkWithScore
+            required:
+                - text
+                - metadata
+                - score
+            type: object
+            properties:
+                id:
+                    title: Id
+                    type: string
+                text:
+                    title: Text
+                    type: string
+                metadata:
+                    $ref: '#/components/schemas/DocumentChunkMetadata'
+                score:
+                    title: Score
+                    type: number
+        HTTPValidationError:
+            title: HTTPValidationError
+            type: object
+            properties:
+                detail:
+                    title: Detail
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ValidationError'
+        Query:
+            title: Query
+            required:
+                - topic
+            type: object
+            properties:
+                topic:
+                    title: Topic
+                    type: string
+                top_k:
+                    title: Top K
+                    default: 5
+                    type: integer
+                start_date:
+                    title: Start Date
+                    type: string
+                end_date:
+                    title: End Date
+                    type: string
+                the_Diet_member:
+                    title: The Diet Member
+                    type: string
+        QueryRequest:
+            title: QueryRequest
+            required:
+                - topic
+            type: object
+            properties:
+                topic:
+                    title: Topic
+                    description: Sentence to be searched
+                    type: string
+                top_k:
+                    title: Top K
+                    description: Number of returns
+                    default: 5
+                    type: integer
+                start_date:
+                    title: Start Date
+                    type: string
+                end_date:
+                    title: End Date
+                    type: string
+                the_Diet_member:
+                    title: The Diet Member
+                    description: Diet member
+                    type: string
+            example:
+                topic: "最近、私たちの生活費は急激に上昇しています。食品、交通費、光熱費など、日々の生活に必要なもの全てが値上がりしているのです。これは私たちの生活を大きく圧迫し、生活の質を低下させています。特に低所得者や高齢者にとっては、生活が困難になる可能性があります。この問題は、私たち一人一人だけでなく、国全体が直面している課題です。\r\nこのような状況を受けて、国会でも生活費の高騰についての議論が活発に行われています。政府はこの問題にどのように対応するのか、また、私たちの生活を守るために何をするべきなのか、その方策が模索されています。私たちは、国会の議論を注視し、適切な対策が講じられることを期待しています。"
+                top_k: 5
+                start_date: '2021-04-30'
+                end_date: '2023-04-30'
+                the_Diet_member: 岸田文雄
+        QueryResponse:
+            title: QueryResponse
+            required:
+                - results
+            type: object
+            properties:
+                results:
+                    title: Results
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/QueryResult'
+        QueryResult:
+            title: QueryResult
+            required:
+                - results
+            type: object
+            properties:
+                query:
+                    $ref: '#/components/schemas/Query'
+                    description: Sentence retrieved
+                results:
+                    title: Results
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/DocumentChunkWithScore'
+        Source:
+            title: Source
+            description: An enumeration.
+            enum:
+                - outside
+            type: string
+        ValidationError:
+            title: ValidationError
+            required:
+                - loc
+                - msg
+                - type
+            type: object
+            properties:
+                loc:
+                    title: Location
+                    type: array
+                    items:
+                        anyOf:
+                            -
+                                type: string
+                            -
+                                type: integer
+                msg:
+                    title: Message
+                    type: string
+                type:
+                    title: Error Type
+                    type: string

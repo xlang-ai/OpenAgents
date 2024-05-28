@@ -1,0 +1,34 @@
+{
+    "id": "plugin-6d43ac1c-4f26-40ae-8458-cfec3211a95b",
+    "domain": "crypto-news.replit.app",
+    "namespace": "cryptoPriceAndNews",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "cryptoPriceAndNews",
+        "name_for_human": "Crypto Market News",
+        "description_for_model": "Plugin for get Crypto Coin's news and price; e.g. bitcoin ethereum.",
+        "description_for_human": "It's your go-to solution for real-time cryptocurrency price updates, market insights, and the latest news.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://crypto-news.replit.app/openapi.yaml"
+        },
+        "logo_url": "https://crypto-news.replit.app/logo.png",
+        "contact_email": "zhongxin123456@gmail.com",
+        "legal_info_url": "https://nextjstwox.vercel.app"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

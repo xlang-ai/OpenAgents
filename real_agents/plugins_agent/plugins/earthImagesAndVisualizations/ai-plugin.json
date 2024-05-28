@@ -1,0 +1,34 @@
+{
+    "id": "plugin-2c7f4bbd-cd6d-472d-aef7-65dfbfa86785",
+    "domain": "api.earth-plugin.com",
+    "namespace": "earthImagesAndVisualizations",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "earthImagesAndVisualizations",
+        "name_for_human": "Earth",
+        "description_for_model": "Generates a map image based on provided coordinates or location, tilt and style, and even geoJson to provide markers, paths, and polygons. Responds with an image-link. For the styles choose one of these: [light, dark, streets, outdoors, satellite, satellite-streets]",
+        "description_for_human": "Generates a map image based on provided location, tilt and style.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://api.earth-plugin.com/openapi.yaml"
+        },
+        "logo_url": "https://api.earth-plugin.com/logo.png",
+        "contact_email": "contact@earth-plugin.com",
+        "legal_info_url": "https://api.earth-plugin.com/legal.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

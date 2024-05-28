@@ -1,0 +1,34 @@
+{
+  "id": "plugin-49f4e28b-57e0-45be-9826-11fa995d4a33",
+  "domain": "plugin.tabor.ai",
+  "namespace": "Tabor",
+  "status": "approved",
+  "manifest": {
+    "schema_version": "v1",
+    "name_for_model": "Tabor",
+    "name_for_human": "Tabor AI",
+    "description_for_model": "Single source for senior living market research, data and analytics including amenities, pricing, and reputation for all communities and operators in the USA.",
+    "description_for_human": "Trusted source for senior living market research, data, and analytics. 35K communities, 9K operators in the USA.",
+    "auth": {
+      "type": "none"
+    },
+    "api": {
+      "type": "openapi",
+      "url": "https://plugin.tabor.ai/swagger/v1/swagger.json"
+    },
+    "logo_url": "https://plugin.tabor.ai/.well-known/logo.png",
+    "contact_email": "info@tabor.ai",
+    "legal_info_url": "https://tabor.ai/terms-of-use/"
+  },
+  "oauth_client_id": null,
+  "user_settings": {
+    "is_installed": false,
+    "is_authenticated": true
+  },
+  "categories": [
+    {
+      "id": "newly_added",
+      "title": "New"
+    }
+  ]
+}

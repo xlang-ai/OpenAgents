@@ -1,0 +1,34 @@
+{
+    "id": "plugin-509538a6-3af2-40d2-a308-0cd3a8d28a93",
+    "domain": "chabadplugin.reshapecreative.com",
+    "namespace": "chabadCenters",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "chabadCenters",
+        "name_for_human": "Chabad Centers",
+        "description_for_model": "This tool is used for finding and getting information about Chabad Centers worldwide and their events.",
+        "description_for_human": "Find information about Chabad Centers worldwide and their events.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://chabadplugin.reshapecreative.com/openapi.yaml"
+        },
+        "logo_url": "https://chabadplugin.reshapecreative.com/logo.png",
+        "contact_email": "hello@reshapecreative.com",
+        "legal_info_url": "https://reshapecreative.com/chabad-centers-chatgpt-plugin-info"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

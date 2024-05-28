@@ -1,0 +1,378 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+      "title": "MixerBox OnePlayer Music Plugin",
+      "description": "Unlimited music, podcasts, and videos across various genres. Enjoy endless listening with our rich playlists!",
+      "version": "v1"
+    },
+    "servers": [
+      {
+        "url": "https://prod.mbplayer.com"
+      }
+    ],
+    "paths": {
+      "/gpt/getPlaylists": {
+        "get": {
+          "summary": "Enable users to query music playlists by type.",
+          "description": "Users can request music playlists by entering keywords related to specific moods, genres, rankings, popularity, and featured content.",
+          "operationId": "getPlaylistByType",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "locale",
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "zh-tw",
+                  "ja-jp",
+                  "en-us"
+                ]
+              },
+              "description": "Determine the parameter based on the user's language: `en-us (English)`, `zh-tw (Zhōngwén)` or `ja-jp (Japanese)`",
+              "required": true
+            },
+            {
+              "in": "query",
+              "name": "type",
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "latest",
+                  "top",
+                  "featured",
+                  "pop",
+                  "electronic_dance",
+                  "hiphop",
+                  "kpop",
+                  "soundtrack",
+                  "rock",
+                  "never_go_out",
+                  "cpop",
+                  "jpop",
+                  "relax",
+                  "country",
+                  "hk",
+                  "jazz",
+                  "workout",
+                  "chill",
+                  "themed",
+                  "romance",
+                  "mood",
+                  "dinner",
+                  "focus",
+                  "travel",
+                  "sleep",
+                  "party",
+                  "good_mood",
+                  "coummute"
+                ]
+              },
+              "description": "Determine the parameter based on the kind of music playlists which is user want to listen",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PlaylistsResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/gpt/searchMusic": {
+        "get": {
+          "summary": "Allow users to search for music.",
+          "description": "Users can search for music and receive an array of music URLs for streaming.",
+          "operationId": "searchMusic",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "q",
+              "schema": {
+                "type": "string"
+              },
+              "description": "The music name be searched",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/MusicsResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/gpt/getPodcastsByCategory": {
+        "get": {
+          "summary": "Enable users to query podcasts by type.",
+          "description": "Users can request a specific kind of podcast using relevant keywords related to music, comedy, news, crime, education, history, TV & film, government, society & culture, and religion & spirituality.",
+          "operationId": "getPodcastsByCategory",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "locale",
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "zh-tw",
+                  "ja-jp",
+                  "en-us"
+                ]
+              },
+              "description": "Determine the parameter based on the user's language: `en-us (English)`, `zh-tw (Zhōngwén)` or `ja-jp (Japanese)`",
+              "required": true
+            },
+            {
+              "in": "query",
+              "name": "categoryId",
+              "description": "Type of podcast, 1310 for MUSIC, 1303 for COMEDY, 1489 for NEWS, 1488 for TRUE_CRIME, 1304 for EDUCATION, 1309 for TV_FILM, 1487 for HISTORY, 1314 for RELIGION_SPIRITUALITY, 1511 for GOVERNMENT, 1324 for SOCIETY_CULTURE",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "default": "1310",
+                "enum": [
+                  "1310",
+                  "1303",
+                  "1489",
+                  "1488",
+                  "1304",
+                  "1309",
+                  "1487",
+                  "1314",
+                  "1511",
+                  "1324"
+                ]
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PodcastsResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/gpt/searchPodcast": {
+        "get": {
+          "summary": "Allow users to search for podcast.",
+          "description": "Users can search for podcast and receive an array of podcast URLs for streaming.",
+          "operationId": "searchPodcast",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "q",
+              "schema": {
+                "type": "string"
+              },
+              "description": "The podcast name be searched",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PodcastsResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "PlaylistsResponse": {
+          "title": "PlaylistsResponse",
+          "required": [
+            "gpt"
+          ],
+          "type": "object",
+          "properties": {
+            "gpt": {
+              "title": "GPTResponse",
+              "type": "object",
+              "properties": {
+                "items": {
+                  "title": "Result of Music Playlists",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlaylistItem"
+                  },
+                  "description": "The playlists of musics."
+                }
+              }
+            }
+          }
+        },
+        "MusicsResponse": {
+          "title": "MusicsResponse",
+          "required": [
+            "gpt"
+          ],
+          "type": "object",
+          "properties": {
+            "gpt": {
+              "title": "GPTResponse",
+              "type": "object",
+              "properties": {
+                "items": {
+                  "title": "Result of Musics",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MusicItem"
+                  },
+                  "description": "The array of musics."
+                }
+              }
+            }
+          }
+        },
+        "PodcastsResponse": {
+          "title": "PodcastsResponse",
+          "required": [
+            "gpt"
+          ],
+          "type": "object",
+          "properties": {
+            "gpt": {
+              "title": "GPTResponse",
+              "type": "object",
+              "properties": {
+                "items": {
+                  "title": "Result of Podcasts",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PodcastItem"
+                  },
+                  "description": "The array of Podcasts."
+                }
+              }
+            }
+          }
+        },
+        "PlaylistItem": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "title": "Playlist Title",
+              "type": "string"
+            },
+            "thumbnail": {
+              "title": "Playlist thumbnail",
+              "type": "string"
+            },
+            "ref": {
+              "title": "Playlist Id",
+              "type": "string"
+            },
+            "size": {
+              "title": "The number of musics in playlist",
+              "type": "number"
+            },
+            "releaseDate": {
+              "title": "Release date of playlist",
+              "type": "string"
+            },
+            "owner": {
+              "title": "Owner of playlist",
+              "type": "string"
+            },
+            "url": {
+              "title": "Playlist Url",
+              "type": "string"
+            }
+          }
+        },
+        "MusicItem": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "title": "Music Title",
+              "type": "string"
+            },
+            "thumbnail": {
+              "title": "Music thumbnail",
+              "type": "string"
+            },
+            "ref": {
+              "title": "Music Id",
+              "type": "string"
+            },
+            "url": {
+              "title": "Music url",
+              "type": "string"
+            },
+            "owner": {
+              "title": "Owner of music",
+              "type": "string"
+            },
+            "releaseDate": {
+              "title": "Release date of music",
+              "type": "string"
+            },
+            "views": {
+              "title": "Music Views",
+              "type": "number"
+            },
+            "description": {
+              "title": "Music description",
+              "type": "string"
+            }
+          }
+        },
+        "PodcastItem": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "title": "Podcast Title",
+              "type": "string"
+            },
+            "image": {
+              "title": "Podcast image",
+              "type": "string"
+            },
+            "author": {
+              "title": "Podcast author",
+              "type": "string"
+            },
+            "language": {
+              "title": "Podcast language",
+              "type": "string"
+            },
+            "url": {
+              "title": "Podcast url",
+              "type": "string"
+            },
+            "id": {
+              "title": "Podcast id",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+}

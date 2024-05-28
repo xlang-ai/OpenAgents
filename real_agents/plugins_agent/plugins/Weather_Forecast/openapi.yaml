@@ -1,0 +1,38 @@
+openapi: 3.0.2
+info:
+  title: WeatherWhiz
+  description: Get weather information for a given location and time option.
+  version: 1.0.0
+servers:
+  - url: https://redantai.pythonanywhere.com/
+paths:
+  /weather/:
+    get:
+      operationId: getWeatherByLocation
+      summary: Get weather information for a given location and time option
+      parameters:
+        - in: query
+          name: location
+          schema:
+            type: string
+          required: true
+          description: The location for which to get the weather information
+        - in: query
+          name: time
+          schema:
+            type: string
+          required: true
+          description: The time option for the weather forecast ('current', 'minutely', 'hourly', 'daily')
+      responses:
+        '200':
+          description: A JSON object containing weather information for the specified location and time option
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid input. Please provide a valid location and time option."

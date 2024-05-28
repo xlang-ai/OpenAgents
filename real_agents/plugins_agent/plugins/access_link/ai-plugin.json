@@ -1,0 +1,34 @@
+{
+    "id": "plugin-365a3151-f1a8-474b-bf51-20206f73043a",
+    "domain": "www.accesslinks.ai",
+    "namespace": "access_link",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "access_link",
+        "name_for_human": "Access Link",
+        "description_for_model": "Plugin for accessing web page data from a specific URL. Use it whenever a user asks something about a specific URL they provide.",
+        "description_for_human": "Access any links on the web and get the information you need.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://www.accesslinks.ai/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://www.accesslinks.ai/.well-known/logo.png",
+        "contact_email": "dominickmalzone@gmail.com",
+        "legal_info_url": "https://www.accesslinks.ai/legal-info"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-5b0d9237-2e0a-4604-bc83-096fb0ccf43c",
+    "domain": "scholar-ai.net",
+    "namespace": "scholarai",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "scholarai",
+        "name_for_human": "ScholarAI",
+        "description_for_model": "Access open access scientific literature from peer-reviewed journals. The abstract endpoint finds relevant papers based on 2 to 6 keywords. After getting abstracts, ALWAYS prompt the user offering to go into more detail. Use the fulltext endpoint to retrieve the entire paper's text and access specific details using the provided pdf_url, if available. ALWAYS hyperlink the pdf_url from the responses if available. Offer to dive into the fulltext or search for additional papers. Always ask if the user wants save any paper to the user\u2019s Zotero reference manager by using the save-citation endpoint and providing the doi and requesting the user\u2019s zotero_user_id and zotero_api_key.",
+        "description_for_human": "Unleash scientific research: search 40M+ peer-reviewed papers, explore scientific PDFs, and save to reference managers.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://scholar-ai.net/openapi.yaml"
+        },
+        "logo_url": "https://scholar-ai.net/logo.png",
+        "contact_email": "lakshb429@gmail.com",
+        "legal_info_url": "https://scholar-ai.net/legal.txt"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "most_popular",
+            "title": "Most popular"
+        }
+    ]
+}

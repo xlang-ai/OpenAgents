@@ -1,0 +1,212 @@
+openapi: 3.0.1
+info:
+  title: Supercharger Plugin
+  description: "Awesome Tesla trips: find a route, including supercharger stops. Bonus: chat with the Tesla manual!"
+  version: 'v1'
+servers:
+  - url: https://supercharger-958358-jexkai4vea-uc.a.run.app
+paths:
+  /suggested_superchargers:
+    post:
+      operationId: suggested_superchargers
+      summary: Show the best route, including needed charging stops for your Tesla. Shows an image with a map with the route and superchargers plotted. Destination must be different than Origin unless at least one stopver is set. Make sure to display all the supercharger information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                origin:
+                  type: string
+                  description: The origin location string
+                destination:
+                  type: string
+                  description: The destination location string.
+                model:
+                  type: string
+                  description: The Tesla model.
+                  enum: [MX_2020_LongRange, MS_2020_LongRange, MS_2020_Performance - Plaid, MX_2020_Performance - Plaid, M3_2020_Performance, M3_2020_StandardRangePlus - Rear Wheel Drive, M3_2020_LongRange, MY_2020_Performance, MY_2020_LongRange]
+                stopover1:
+                  type: string
+                  description: An optional stopover point
+                stopover2:
+                  type: string
+                  description: An optional stopover point
+              required:
+                - origin
+                - destination
+                - model
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageUrls:
+                    type: array
+                    items:
+                      type: string
+                      description: URL to the image of the route map 
+                  superchargers:
+                    type: array
+                    items:
+                      type: string
+                    description: A list of superchargers along the route and associated information.
+                required:
+                  - imageUrls
+                  - superchargers
+        "400":
+          description: Bad Request - Invalid or missing input parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A message indicating the reason for the bad request.
+        "500":
+          description: Internal Server Error - An unexpected error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A message indicating that an unexpected error occurred.
+  /local_superchargers:
+    post:
+      operationId: local_superchargers
+      summary: Show superchargers in a radius around a given location. Shows an image with a map with the superchargers plotted. Make sure to display all the supercharger information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                location:
+                  type: string
+                  description: The location string
+              required:
+                - location
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageUrls:
+                    type: array
+                    items:
+                      type: string
+                      description: URL to the image of the map 
+                  superchargers:
+                    type: array
+                    items:
+                      type: string
+                    description: A list of superchargers around the location and associated information.
+                required:
+                  - imageUrls
+                  - superchargers
+        "400":
+          description: Bad Request - Invalid or missing input parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A message indicating the reason for the bad request.
+        "500":
+          description: Internal Server Error - An unexpected error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A message indicating that an unexpected error occurred.
+  /chat_with_manual:
+    post:
+      operationId: chat_with_manual
+      summary: Provide a semantic query and a car model to get back an array of string, link(s) to image pairs which correspond to text chunks and associated images with page references.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The semantic query string.
+                model:
+                  type: string
+                  description: The Tesla model.
+                  enum: [Model S, Model X, Model 3, Model Y]
+                year:
+                  type: integer
+                  description: The year of the model.
+                software_version:
+                  type: string
+                  description: The software version of the model. Optional.
+                language_country:
+                  type: string
+                  description: The language and country code of the user.
+                  default: "en_us"
+              required:
+                - query
+                - model
+                - year
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  responses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        text:
+                          type: string
+                          description: Text chunk from the manual.
+                        image_urls:
+                          type: array
+                          items:
+                            type: string
+                            description: URLs to the images of the manual pages.
+                required:
+                  - responses
+        "400":
+          description: Bad Request - Invalid or missing input parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A message indicating the reason for the bad request.
+        "500":
+          description: Internal Server Error - An unexpected error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A message indicating that an unexpected error occurred.

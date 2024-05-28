@@ -1,0 +1,156 @@
+---
+openapi: 3.0.1
+info:
+  title: Jopilot
+  description: A job search assistant to help you find the perfect career opportunity
+    in the US.
+  version: v1
+servers:
+- url: https://chat.jopilot.net
+paths:
+  "/api/chat/search":
+    post:
+      operationId: search
+      summary: Seek for jobs by job seeker's preferences.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/searchForJobs"
+      responses:
+        '200':
+          description: List of found jobs.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/searchResponse"
+components:
+  schemas:
+    searchForJobs:
+      type: object
+      properties:
+        jobTitlesPositive:
+          type: array
+          items:
+            type: string
+          description: List of job titles or positions that are considered desirable
+            or positive.
+        jobTitlesNegative:
+          type: array
+          items:
+            type: string
+          description: List of job titles or positions that are considered less desirable
+            or negative.
+        salaryMin:
+          type: number
+          description: Minimum salary amount that an employee is willing to accept
+            for a job position.
+        salaryMax:
+          type: number
+          description: Maximum salary amount that an employee is willing to accept
+            for a job position.
+        salaryPeriod:
+          type: string
+          description: Length of time over which an employee's salary is paid (e.g.
+            hour, day, week, month, year).
+        commuteTime:
+          type: integer
+          description: Amount of time user is ready to travel from the place of residence
+            to the place of work or study.
+        jobTypes:
+          type: array
+          items:
+            type: string
+          description: Different employment categories or types of job roles or positions(e.g.
+            full-time, part-time).
+        employersNegative:
+          type: array
+          items:
+            type: string
+          description: List of companies or organizations that employee would prefer
+            not to work for.
+        employersPositive:
+          type: array
+          items:
+            type: string
+          description: Names of companies or organizations employee would prefer to
+            work for.
+        locationsPositive:
+          type: array
+          items:
+            type: object
+            properties:
+              city:
+                type: string
+              state:
+                type: string
+              zipcode:
+                type: string
+              neighborhood:
+                type: string
+          description: Desirable job locations for user. May be represented either
+            as zipcode or combination of city and state.
+        locationsNegative:
+          type: array
+          items:
+            type: object
+            properties:
+              city:
+                type: string
+              state:
+                type: string
+              zipcode:
+                type: string
+              neighborhood:
+                type: string
+          description: Undesirable job locations for user. May be represented either
+            as zipcode or combination of city and state.
+        distance:
+          type: number
+          description: Maximum distance employee is willing to travel for work or
+            commute on a regular basis.
+        isRemote:
+          type: boolean
+          description: Refers to whether a job can be performed fully or partially
+            from a remote location.
+        ageOfJobsInDays:
+          type: integer
+          description: The number of days a job posting has been active on a job board
+            or company website.
+        order:
+          type: string
+          description: Parameter that helps the employee to sort and order the job
+            search results based on a specific criterion(e.g., salary, date).
+        resultNumber:
+          type: integer
+          description: Number of vacancies to display. By default, value is 20.
+    searchResponse:
+      type: object
+      properties:
+        responseInstructions:
+          type: string
+          description: Set of actions to be done.
+        chatLink:
+          type: string
+          description: Link to a newly created chat.
+        jobs:
+          type: array
+          items:
+            type: object
+            properties:
+              company:
+                type: string
+                description: Company or brand name.
+              title:
+                type: string
+                description: Job title.
+              location:
+                type: object
+                properties:
+                  city:
+                    type: string
+                    description: City name.
+                  state:
+                    type: string
+                    description: State name.

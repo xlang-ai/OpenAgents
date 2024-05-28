@@ -1,0 +1,34 @@
+{
+    "id": "plugin-a1a56127-e351-4529-8a55-54a7f268ba8d",
+    "domain": "ppc-optimizer.gcs.ai",
+    "namespace": "competitorppcads",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "competitorppcads",
+        "name_for_human": "Competitor PPC Ads",
+        "description_for_model": "Plugin for retrieving the latest PPC ad history of a domain.",
+        "description_for_human": "Discover your competitors' best PPC ads by entering their website address.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://ppc-optimizer.gcs.ai/openapi.yaml"
+        },
+        "logo_url": "https://ppc-optimizer.gcs.ai/PaidAdsOptimizer-logo.png",
+        "contact_email": "CompetitorPPCAds@gcs.ai",
+        "legal_info_url": "http://gcs.ai/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  title: CoinCap
+  description: Get cryptocurrency information from CoinCap.
+  version: 1.0.0
+servers:
+  - url: https://coincap.gptplug.chat
+paths:
+  /assets:
+    get:
+      operationId: getAssets
+      summary: Retrieve a list of cryptocurrencies
+      description: Retrieve a list of cryptocurrencies from the CoinCap API.
+      parameters:
+        - name: search
+          in: query
+          description: The search query for the assets
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing a list of cryptocurrencies.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        rank:
+                          type: string
+                        symbol:
+                          type: string
+                        name:
+                          type: string
+                        supply:
+                          type: string
+                        maxSupply:
+                          type: string
+                        marketCapUsd:
+                          type: string
+                        volumeUsd24Hr:
+                          type: string
+                        priceUsd:
+                          type: string
+                        changePercent24Hr:
+                          type: string
+                        vwap24Hr:
+                          type: string
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /asset/{id}:
+    get:
+      operationId: getAssetById
+      summary: Retrieve information about a specific cryptocurrency
+      description: Retrieve information about a specific cryptocurrency based on its ID.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the cryptocurrency to retrieve information for.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing information about the cryptocurrency.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      rank:
+                        type: string
+                      symbol:
+                        type: string
+                      name:
+                        type: string
+                      supply:
+                        type: string
+                      maxSupply:
+                        type: string
+                      marketCapUsd:
+                        type: string
+                      volumeUsd24Hr:
+                        type: string
+                      priceUsd:
+                        type: string
+                      changePercent24Hr:
+                        type: string
+                      vwap24Hr:
+                        type: string
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string

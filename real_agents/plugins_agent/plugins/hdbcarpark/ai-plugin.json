@@ -1,0 +1,34 @@
+{
+    "id": "plugin-2f8578f6-0a2b-4c54-88b7-683da6af3cc5",
+    "domain": "carpark.sausheong.com",
+    "namespace": "hdbcarpark",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "hdbcarpark",
+        "name_for_human": "HDB Car Park",
+        "description_for_model": "For checking availability of car park lots at various HDB car parks around Singapore.",
+        "description_for_human": "For checking availability of car park lots at various HDB car parks around Singapore.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://carpark.sausheong.com/openapi.yaml"
+        },
+        "logo_url": "https://carpark.sausheong.com/static/logo.png",
+        "contact_email": "sausheong@sausheong.com",
+        "legal_info_url": "https://carpark.sausheong.com/static/legal.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

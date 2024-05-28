@@ -1,0 +1,109 @@
+openapi: 3.0.1
+info:
+  title: HDB Car Park
+  description: For checking avaiability of car park lots at various HDB car parks around Singapore
+  version: 'v1'
+servers:
+  - url: https://carpark.sausheong.com
+paths:
+  /info?q={location}:
+    get:
+      operationId: getCarParkInfo
+      summary: Get information about HDB car parks at a location
+      parameters:
+      - in: path
+        name: location
+        schema:
+            type: string
+        required: true
+        description: location to search for HDB car parks
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCarParkInfo'
+  /availability?q={location}:
+    get:
+      operationId: getCarParkAvailability
+      summary: Get availability of HDB car parks in Singapore at this moment
+      parameters:
+      - in: path
+        name: location
+        schema:
+            type: string
+        required: true
+        description: location to search for HDB car parks      
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCarParkAvailability' 
+
+components:
+  schemas:
+    getCarParkInfo:
+      type: array
+      items: 
+        type: object
+        properties: 
+          _full_count: 
+            type: string
+          short_term_parking: 
+            type: string
+          car_park_type: 
+            type: string
+          y_coord: 
+            type: string
+          x_coord: 
+            type: string
+          rank: 
+            type: number
+          free_parking: 
+            type: string
+          gantry_height: 
+            type: string
+          car_park_basement: 
+            type: string
+          night_parking: 
+            type: string
+          address: 
+            type: string
+          car_park_decks: 
+            type: string
+          _id: 
+            type: integer
+            format: int
+          car_park_no: 
+            type: string
+          type_of_parking_system: 
+            type: string
+    getCarParkAvailability:
+      type: object
+      properties: 
+        timestamp: 
+          type: string
+          format: date-time
+        carpark_data: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              carpark_info: 
+                type: array
+                items: 
+                  type: object
+                  properties: 
+                    total_lots: 
+                      type: string
+                    lot_type: 
+                      type: string
+                    lots_available: 
+                      type: string
+              carpark_number: 
+                type: string
+              update_datetime: 
+                type: string

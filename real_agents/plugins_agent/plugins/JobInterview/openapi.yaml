@@ -1,0 +1,94 @@
+---
+openapi: 3.0.0
+info:
+  title: Job Interview Preparation
+  version: 1.0.0
+  description: API endpoints for retrieving job data.
+servers:
+- url: https://c-interview.copilot.us
+paths:
+  "/api/job/get":
+    get:
+      summary: Retrieve job data
+      parameters:
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The URL of the job data to retrieve
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ResponseInstructions:
+                    type: string
+                    description: Instructions for using the job content to generate
+                      job interview questions
+                  job:
+                    type: string
+                    description: The job content in JSON format
+        '400':
+          description: Bad request
+      operationId: retrieveJobData
+  "/api/answers/submit":
+    post:
+      summary: Submit an answer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Answer"
+      responses:
+        '200':
+          description: Successful response
+      operationId: submitAnswer
+  "/api/answers/submit-summary":
+    post:
+      summary: Submit a summary when all questions are answered by the user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Summary"
+      responses:
+        '200':
+          description: Successful response
+      operationId: submitSummary
+components:
+  schemas:
+    Answer:
+      type: object
+      properties:
+        totalQ:
+          type: integer
+          description: The total number of questions
+        score:
+          type: integer
+          description: The relevance score of the answer. 10 is the max value.
+        review:
+          type: string
+          description: A short review of the user's answer in addition to the score.
+            Use up to 20 words.
+        currentQ:
+          type: integer
+          description: The index of the current question
+        lastQ:
+          type: boolean
+          description: true if it's the last question; otherwise false.
+    Summary:
+      type: object
+      properties:
+        summary:
+          type: string
+          description: The summary text
+        score:
+          type: integer
+          description: The score of the summary
+        totalQ:
+          type: integer
+          description: The total number of questions

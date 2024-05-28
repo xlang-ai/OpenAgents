@@ -1,0 +1,55 @@
+openapi: 3.0.1
+info:
+  title: Your AI Council
+  description: The AI council assesses queries through various agents, offering insights from many perspectives.
+  version: 'v1'
+servers:
+  - url: https://my-plugin.arnasltlt.repl.co
+paths:
+  /ask:
+    post:
+      operationId: askQuestion
+      summary: Ask a question to the council
+      description: Sends a user's question to a virtual council of advisors that provides diversified opinions on the question. The council assesses the question from 5 different perspectives relevant to the context.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/askQuestionRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/askQuestionResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+components:
+  schemas:
+    askQuestionRequest:
+      type: object
+      properties:
+        question:
+          type: string
+          description: The question to be answered by the council. This could be any open-ended question seeking advice or opinion.
+        context:
+          type: string
+          description: Any context information that may be relevant to answer the question correctly.
+    askQuestionResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status message indicating the success or failure of the operation.
+    errorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message detailing the reason for a failed operation.

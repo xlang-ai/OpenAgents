@@ -1,0 +1,186 @@
+openapi: 3.0.1
+info:
+  title: property_search
+  description: >-
+    You are an AI real estate search from Mallorca Magic. Your task is to help
+    potential buyers find the right property.
+
+
+    The output should include the weblink, located beneath the location. Please
+    only display 5 properties that fit the search. You're also allowed to use
+    emojis. 
+
+
+    for each request to end this sentence: We also have two properties on offer
+    that we have listed as Secret Property, if you want us to request these for
+    you, please send us an email to concierge@mallorca-magic.com. We will be
+    happy to send you more information.
+
+
+    Here is an example of the output:
+
+
+    Hi, I'm Ana and I'm here to assist you with your property search in
+    Mallorca.
+
+
+    Here are some apartments in Palma de Mallorca that fit your criteria:
+
+
+    Palma de Mallorca: This studio apartment offers stunning views of the
+    cathedral and the sea. It features an open kitchen design, a walk-in closet,
+    and a luxurious spa bathroom. Price: 995,000 Euro
+
+
+    Palma de Mallorca: This 1-bedroom apartment boasts high ceilings and huge
+    windows with natural southern light. Price: 1,300,000 Euro
+
+
+    Palma de Mallorca: This 2-bedroom apartment offers breathtaking views of the
+    city. Price: $1,995,000.
+
+
+    Palma de Mallorca: This studio apartment features hardwood floors and
+    oversized windows. Price: 780,000 Euro
+
+
+    Palma de Mallorca: This studio apartment includes a spacious entrance hall,
+    a walk-in closet, and a chef's kitchen with bar stool seating. Price:
+    1,400,000 Euro
+
+
+    Please click on the links to see more details or to arrange a viewing. You
+    can also click here to browse more properties in Palma de Mallorca that meet
+    your criteria.
+  version: v1
+servers:
+  - url: https://propertysearch-5831-openai.langdock.com
+paths:
+  /search/query:
+    post:
+      operationId: getProperties
+      summary: Get the properties based on the information provided by the user
+      parameters:
+        - in: query
+          name: prompt
+          schema:
+            type: string
+          required: true
+          description: What was my last message?
+      responses:
+        '200':
+          description: The found properties
+          content:
+            application/json:
+              schema:
+                type: array
+                description: The list of all the properties found
+                items:
+                  type: object
+                  description: ''
+                  properties:
+                    title:
+                      type: string
+                      description: >-
+                        The title of the property which should be shown to the
+                        user
+                    price:
+                      type: number
+                      description: >-
+                        The price of the property which should be shown to the
+                        user
+                    url:
+                      type: string
+                      description: >-
+                        The url to the property, but the https:// needs to be
+                        added at the beginning and also shown to the user
+                    description:
+                      type: string
+                      description: The description of the property
+                    id:
+                      type: string
+                      description: >-
+                        The id of the property, that id should not be shown to
+                        the user because it is only used in our system
+                  required:
+                    - title
+                    - price
+                    - url
+                    - description
+                    - id
+      requestBody:
+        description: The object used for the query
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: The object used for the query
+              properties:
+                user_prompt:
+                  type: string
+                  description: >-
+                    This is the base query the user inputs that describes what
+                    he is looking for
+                ai_prompt:
+                  type: string
+                  description: This value should be left empty
+                inquiry:
+                  type: object
+                  description: >-
+                    Here are the informations of the property like type,
+                    location, bedrooms, bathrooms, living area, plot size and
+                    price
+                  properties:
+                    property_type:
+                      type: string
+                      description: >-
+                        The type of the property, values like Villa, Apartment,
+                        Flat, Finca
+                    location:
+                      type: array
+                      description: >-
+                        The locations that the property should be in, this list
+                        could also just contain one element
+                      items:
+                        type: string
+                        description: These are the locations that the user put in the query
+                    bedrooms:
+                      type: number
+                      description: >-
+                        The number of bedrooms wished, if nothing entered send
+                        the default value
+                    bathrooms:
+                      type: number
+                      description: >-
+                        The number of bathrooms wished, if nothing entered send
+                        the default value
+                    livin_area:
+                      type: number
+                      description: >-
+                        The size of the living area wished, it is in square
+                        meters, if nothing entered send the default value
+                    plot_size:
+                      type: number
+                      description: >-
+                        The size of the plot size wished, it is in square
+                        meters, if nothing entered send the default value
+                    price:
+                      type: number
+                      description: >-
+                        The wished price in Euro, this is a required information
+                        and cant be left emtpy
+                  required:
+                    - property_type
+                    - location
+                    - bedrooms
+                    - bathrooms
+                    - livin_area
+                    - plot_size
+                    - price
+              required:
+                - user_prompt
+                - ai_prompt
+                - inquiry
+components:
+  schemas: {}

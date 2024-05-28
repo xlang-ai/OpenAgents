@@ -1,0 +1,34 @@
+{
+    "id": "plugin-0a2d6b51-449a-41bd-b7c1-a2a60b22fa35",
+    "domain": "mtg-rules-chatgpt-plugin.fly.dev",
+    "namespace": "magi_codex",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "magi_codex",
+        "name_for_human": "MagiCodex",
+        "description_for_model": "Find answers to questions about Magic: The Gathering (MTG). Use it whenever a user asks something about MTG rules or cards. When you get results back that have a Scryfall URI, show it to the user.",
+        "description_for_human": "Ask about Magic: The Gathering cards, rules and interactions.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://mtg-rules-chatgpt-plugin.fly.dev/openapi.json"
+        },
+        "logo_url": "https://mtg-rules-chatgpt-plugin.fly.dev/logo.png",
+        "contact_email": "trevor@strieber.org",
+        "legal_info_url": "https://strieber.org"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "id": "plugin-0a16988c-c1e8-42ed-8a53-5cc8763229b7",
+    "domain": "dr-thoth-tarot.herokuapp.com",
+    "namespace": "Dr_Thoths_Tarot",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Dr_Thoths_Tarot",
+        "name_for_human": "Dr. Thoth's Tarot",
+        "description_for_model": "Intelligent analysis program for tarot card entertaiment, data, & prompts, by Mnemosyne Labs, a division of AzothCorp.",
+        "description_for_human": "Tarot card novelty entertainment & analysis, by Mnemosyne Labs.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://dr-thoth-tarot.herokuapp.com/openapi.yaml"
+        },
+        "logo_url": "https://dr-thoth-tarot.herokuapp.com/logo.png",
+        "contact_email": "legal@AzothCorp.com",
+        "legal_info_url": "http://AzothCorp.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": []
+}

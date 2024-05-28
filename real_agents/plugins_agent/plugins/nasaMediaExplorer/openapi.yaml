@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  title: NASA Media API
+  description: Retrieve images and videos from NASA's vast media library.
+  version: 1.0.0
+servers:
+  - url: 'https://nasa-media-prod.vercel.app/' # Base URL of the server
+paths:
+  /api/proxy/searchAssets: # Endpoint path for searching media assets
+    get:
+      summary: Search for media assets
+      operationId: searchMedia
+      parameters:
+        - name: q
+          in: query
+          description: Free text search terms to compare to all indexed metadata.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Search results returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: object
+                    description: The collection of search results.
+        '400':
+          description: Bad request, invalid input.
+  /api/proxy/getAsset: # Endpoint path for retrieving a media asset's manifest
+    get:
+      summary: Retrieve a media asset's manifest
+      operationId: getAsset
+      parameters:
+        - name: nasa_id
+          in: query
+          description: The media asset's NASA ID.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Media asset manifest returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: object
+                    description: The media asset's manifest.
+        '400':
+          description: Bad request, invalid input.
+        '404':
+          description: Media asset not found.

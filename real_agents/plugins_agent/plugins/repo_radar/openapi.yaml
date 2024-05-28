@@ -1,0 +1,135 @@
+openapi: "3.0.0"
+info:
+  title: Repo radar
+  version: "1.0.0"
+  description: Your one-stop shop for up to date Github repo information. Find repos by topic, language, or name.
+paths:
+  /api/topics:
+    get:
+      operationId: searchForRepoByTopic
+      parameters:
+        - name: topic
+          in: query
+          required: true
+          description: Topic to search for
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        avatar:
+                          type: string
+                          format: uri
+                        description:
+                          type: string
+                        languages:
+                          type: array
+                          items:
+                            type: string
+                        name:
+                          type: string
+                        stars:
+                          type: integer
+                        updated_at:
+                          type: string
+                          format: date-time
+                        url:
+                          type: string
+                          format: uri
+                        user:
+                          type: string
+  /api/search:
+    get:
+      operationId: searchForRepo
+      parameters:
+        - name: language
+          in: query
+          required: true
+          description: The language the repo should be written in
+          schema:
+            type: string
+        - name: q
+          in: query
+          required: true
+          description: Query string to search for
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        avatar:
+                          type: string
+                          format: uri
+                        description:
+                          type: string
+                        languages:
+                          type: array
+                          items:
+                            type: string
+                        name:
+                          type: string
+                        stars:
+                          type: integer
+                        updated_at:
+                          type: string
+                          format: date-time
+                        url:
+                          type: string
+                          format: uri
+                        user:
+                          type: string
+  /api/readme:
+    get:
+      operationId: getRepoReadmeByOwnerAndRepo
+      parameters:
+        - name: owner
+          in: query
+          required: true
+          description: Owner of the repository
+          schema:
+            type: string
+        - name: repo
+          in: query
+          required: true
+          description: Name of the repository
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  readme:
+                    type: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string

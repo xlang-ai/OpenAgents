@@ -1,0 +1,34 @@
+{
+    "id": "plugin-0f574019-fbd4-40d4-9ae1-1d54f4cce3d6",
+    "domain": "glarity.app",
+    "namespace": "Video_summary",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Video_summary",
+        "name_for_human": "Video Summary",
+        "description_for_model": "Summarize YouTube video highlights. Generate summaries from YouTube video URLs.",
+        "description_for_human": "Summarize YouTube video highlights. Generate summaries from YouTube video URLs.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://glarity.app/openapi.yaml"
+        },
+        "logo_url": "https://glarity.app/img/logo.png",
+        "contact_email": "support@sparticle.com",
+        "legal_info_url": "https://docs.google.com/document/d/1xKwpHEjmUCmiaP07yDBKhxeXFjODzcV9zmxFx3944BY/edit"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

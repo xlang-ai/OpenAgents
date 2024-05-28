@@ -1,0 +1,34 @@
+{
+    "id": "plugin-63214587-ccde-4838-803a-3aac8c7b7579",
+    "domain": "propertysearch-5831-openai.langdock.com",
+    "namespace": "property_search",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "property_search",
+        "name_for_human": "Mallorca Magic Property Search",
+        "description_for_model": "property searcher",
+        "description_for_human": "Discover your dream property in Mallorca with our AI-Power. Find the perfect match from over 75,000 listings!",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://propertysearch-5831-openai.langdock.com/openapi.yaml"
+        },
+        "logo_url": "https://firebasestorage.googleapis.com/v0/b/security-web-app-e4217.appspot.com/o/90fe06ad-e2a5-479e-98dd-8b7812c3d2c9%2Ficonlogo.png?alt=media&token=f065f33b-419e-4c09-b8cd-71e38312874d",
+        "contact_email": "contact@langdock.com",
+        "legal_info_url": "https://www.langdock.com/terms-and-conditions"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

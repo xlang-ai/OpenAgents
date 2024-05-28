@@ -1,0 +1,459 @@
+openapi: 3.0.0
+info:
+  version: '2.00'
+  title: Litmaps API
+  description: "Get help exploring the scientific literature. Find relevant papers and generate mindmaps of the literature."
+paths:
+  /health:
+    get:
+      tags:
+        - General
+      summary: Health Check
+      description: Determine if the server is available.
+      operationId: healthCheck
+      responses:
+        200:
+          description: Healthy response from the server
+          content:
+            text:
+              example: Everything's great.
+  /articles:
+    post:
+      tags:
+        - Articles
+      summary: Fetch articles by ID
+      operationId: fetchArticles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleBulkFetch"
+      responses:
+        '200':
+          description: Array of articles.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/ArticlesWithPageMetadataAndIds"
+                  - $ref: "#/components/schemas/IdsWithPageMetadata"
+  /keywordSearch:
+    get:
+      tags:
+        - KeywordSearch
+      summary: Get Keyword Search Result
+      operationId: keywordSearch
+      parameters:
+        - name: query
+          description: Query string
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          description: Which page to fetch
+          schema:
+            type: integer
+        - name: per
+          in: query
+          required: false
+          description: Size of page to fetch
+          schema:
+            type: integer
+        - name: useReranker
+          in: query
+          required: true
+          description: Use reranker. Always set this property to false.
+          schema:
+            type: boolean
+            example: false
+        - name: showArticleDetails
+          description: Decide whether to show article details
+          required: false
+          in: query
+          schema:
+            type: boolean
+            default: false
+        - name: searchEngine
+          description: Which search engine to use, litmaps or semantic_scholar
+          required: false
+          in: query
+          schema: 
+            type: string
+            enum: [litmaps, semantic_scholar]
+      responses:
+        200:
+          description: Page of keyword search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeywordSearchResults'
+  /article/{id}:
+    get:
+      tags:
+        - Article
+      summary: Fetch article by ID
+      operationId: getArticleById
+      parameters:
+        - name: id
+          description: Identifier
+          required: true
+          in: path
+          schema:
+            type: integer
+            default: 123
+      responses:
+        '200':
+          description: Article object
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+tags:
+  - name: General
+  - name: Article
+  - name: Articles
+  - name: Search
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Error:
+      type: object
+      required:
+        - reason
+        - error
+      properties:
+        reason:
+          type: string
+        error:
+          type: boolean
+    ArticlesWithPageMetadata:
+      type: object
+      properties:
+        items: 
+          $ref: "#/components/schemas/Articles"
+        metadata:
+          $ref: "#/components/schemas/PageMetadata"
+    ArticlesWithPageMetadataAndIds:
+      type: object
+      properties:
+        items: 
+          $ref: "#/components/schemas/Articles"
+        ids:
+          type: array
+          items:
+            type: integer
+        metadata:
+          $ref: "#/components/schemas/PageMetadata"
+    IdsWithPageMetadata:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+        metadata:
+          $ref: "#/components/schemas/PageMetadata"
+    Articles:
+      type: array
+      items:
+        $ref: "#/components/schemas/Article"
+    Search:
+      type: object
+      properties: 
+        id:
+          type: string
+        type: 
+          type: string
+        savedSearchId: 
+          type: string
+        articleIds:
+          type: array
+          items:
+            type: integer
+        collectionIds:
+          type: array
+          items:
+            type: integer
+        collectionArticleIds:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              aid:
+                type: integer
+              cid: 
+                type: string
+        hiddenArticleIds:
+          type: array
+          items:
+            type: integer
+        workspaceHiddenArticleIds:
+          type: array
+          items:
+            type: integer
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    Searches:
+      type: array
+      items:
+        $ref: '#/components/schemas/Search'
+    SearchesWithPagination:
+      type: object
+      properties:
+        items:
+          $ref: '#/components/schemas/Searches'
+        metadata:
+          $ref: '#/components/schemas/PageMetadata'
+    SearchInput:
+      type: object
+      properties:
+        type: 
+          type: string
+          enum: [deep, shallow, seed]
+        articleIds:
+          type: array
+          items:
+            type: integer
+        collectionIds:
+          type: array
+          items:
+            type: integer
+        hiddenArticleIds:
+          type: array
+          items:
+            type: integer
+        filters:
+          type: array
+          items: 
+            $ref: '#/components/schemas/SearchFilter'
+    SearchResult:
+      type: object
+      properties:
+        id:
+          type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkSearchResult'
+        estimatedDuration:
+          type: number
+        duration:
+          type: number
+        progress:
+          type: number
+        state:
+          type: string
+          enum: [done, inprogress, created]
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        deletedAt:
+          type: string
+    SearchFilter:
+      type: object
+      properties:
+        date: 
+          $ref: '#/components/schemas/SearchDateFilter'
+        keywordFilterString:
+          type: string
+          example: "Human peroxiredoxin 3"
+    SearchDateFilter:
+      type: object
+      properties:
+        startDate:
+          type: string
+          example: '2001-01-01'
+        endDate: 
+          type: string
+          example: '2021-01-01'
+    SearchResultsWithPageMetadata:
+      type: object
+      properties:
+        results:
+          $ref:  "#/components/schemas/SearchResults"
+        resultItems:
+          oneOf:
+            - $ref: "#/components/schemas/SearchResultsArticles"
+            - $ref: "#/components/schemas/SearchResultsAuthors"
+        sortScores:
+          $ref: "#/components/schemas/SearchResultsSortScores"
+        metadata:
+          $ref:  "#/components/schemas/PageMetadata"
+    SearchResultsArticles:
+      type: array
+      items:
+        $ref: "#/components/schemas/Article"
+    SearchResultsAuthors:
+      type: string
+      description: JSON array string of article details
+    SearchResults:
+      type: array
+      items:
+        type: integer
+    SearchResultsSortScores:
+      type: array
+      items:
+        type: integer
+    NetworkSearchResult:
+      type: object
+      properties:
+        s:
+          description: 'Search result score'
+          type: integer
+          example: 20
+        i: 
+          description: 'Id of article'
+          type: integer
+          example: 470092
+    ArticleDOIs:
+      type: array
+      items:
+        type: string
+        example: 10.1038/nmat1390
+    ArticleBulkFetch:
+      type: object
+      description: 'Filter objects, can either be {"field": "field-name", "direction": "ascending/descending"} or {"search": "query"}'
+      properties:
+        ids:
+          type: array
+          items: 
+            type: integer
+        filters:
+          type: array
+          items:
+            anyOf:
+              - $ref: "#/components/schemas/ArticleFilter"
+              - $ref: "#/components/schemas/ArticleSearchFilter"
+              - $ref: "#/components/schemas/DateFilter"
+        showArticleDetails:
+          type: boolean
+          example: true
+        page:
+          type: number
+          example: 1
+        per: 
+          type: number  
+          example: 100
+    ArticleFilter:
+      type: object
+      properties:
+        field:
+          type: string
+          enum: [fedges, authors, title, bedges, date]
+        direction:
+          type: string
+          enum: [ascending, descending]
+    ArticleSearchFilter:
+      type: object
+      properties:
+        search:
+          type: string
+          example: Peroxiredoxin
+    DateFilter:
+      type: object
+      properties:
+        startDate:
+          type: string
+          example: '2010-01-01'
+        endDate: 
+          type: string
+          example: '2021-01-01'
+    ArticleIDArray:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+      example: 
+        ids: 
+          - 93992432
+          - 17934395
+          - 93992431
+          - 93992430
+    Article:
+      type: object
+      properties:
+        id:
+          type: integer
+        abstract:
+          type: string
+        authorString:
+          type: string
+        doi:
+          type: string
+        url:
+          type: string
+        title:
+          type: string
+        forwardEdges:
+          type: string
+        backwardEdges:
+          type: string
+        forwardEdgeCount:
+          type: integer
+        backwardEdgeCount:
+          type: integer
+        publicationDate:
+          type: string
+        publicationTitle:
+          type: string
+      example:
+        id: 1337
+        abstract: "The paper deals with a method of optimizing harmonically or dynamically excited structures which removes the frequency constraint (that specifies that the structure's first natural frequency of vibration must be greater than the excitation frequency), replaces the displacement constraint by an inequality constraint on the allowable stress and applies finite element approximations to the continuous one-dimensional structures. When the problem is posed in this manner, the feasible design space is disconnected or 'disjoint'."
+        authorString: Mojgan Afshari; Kamariah Abu Bakar; Wong Su Luan; Bahaman Abu Samah; Foo Say Fooi;
+        doi: 10.4161/oxim.2.2.8300
+        publicationDate: "2021-01-01T00:00:00Z"
+        title: Excitotoxic Insults Lead to Peroxiredoxin Hyperoxidation
+        url: "http://dx.doi.org/10.4161/oxim.2.2.8300"
+        forwardEdges: 7931700,86370975,37290888,59586775,25137115,54321521,4395779,69715154,32621102,80824849,36751613,37291226,36753599,36753676,26352909,26353889,38998989,315386,19715625,26354407,43675666,19715897,19716651,72443353,55773514,55774893
+        forwardEdgeCount: 26
+        backwardEdges: 63701153,56025463,56022841,17928033,91154308,33371499,29689192
+        backwardEdgeCount: 7
+    KeywordSearchResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: integer
+        resultItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/Articles'
+        sortScores:
+          type: array
+          items:
+            type: number
+        metadata:
+          $ref: '#/components/schemas/PageMetadata'
+    PageMetadata:
+      type: object
+      required:
+        - page
+        - total
+        - per
+      properties:
+        page:
+          type: integer
+        total:
+          type: integer
+        per:
+          type: integer
+      example: 
+        page: 1
+        total: 1000
+        per: 200  
+servers:
+  - description: Litmaps Production API Base URL
+    url: https://api.litmaps.com

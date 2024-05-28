@@ -1,0 +1,34 @@
+{
+    "id": "plugin-cb54e4dc-7242-49d2-bca7-9018695b62f7",
+    "domain": "plugin.themeparkhipster.com",
+    "namespace": "themeparkhipster",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "themeparkhipster",
+        "name_for_human": "ThemeParkHipster",
+        "description_for_model": "Find theme park waiting times around the world.",
+        "description_for_human": "Find theme park waiting times around the world.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://plugin.themeparkhipster.com/openapi.yaml"
+        },
+        "logo_url": "https://plugin.themeparkhipster.com/logo.png",
+        "contact_email": "themeparkhipster@gmail.com",
+        "legal_info_url": "https://www.themeparkhipster.com/terms-and-privacy/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

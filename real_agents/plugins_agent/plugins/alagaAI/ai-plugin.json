@@ -1,0 +1,34 @@
+{
+    "id": "plugin-7a37a0eb-ea48-405d-acf7-e953fb75a867",
+    "domain": "alaga-ai-h43cosb3ia-uc.a.run.app",
+    "namespace": "alagaAI",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "alagaAI",
+        "name_for_human": "alaga.ai_PH",
+        "description_for_model": "Provides a knowledge base of the programs and services from the Department of Health of the Philippines.",
+        "description_for_human": "Get the latest info about the health programs and services in the Philippines.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://alaga-ai-h43cosb3ia-uc.a.run.app/openapi.yaml"
+        },
+        "logo_url": "https://alaga-ai-h43cosb3ia-uc.a.run.app/logo.png",
+        "contact_email": "rogene@1024technologies.ca",
+        "legal_info_url": "https://1024technologies.ca/legal/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

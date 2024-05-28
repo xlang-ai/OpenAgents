@@ -1,0 +1,34 @@
+{
+    "id": "plugin-a38a1bd6-2993-4719-bb28-2fd1485f1c73",
+    "domain": "941p7w-5003.csb.app",
+    "namespace": "ApexMap",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "ApexMap",
+        "name_for_human": "APEX Map",
+        "description_for_model": "Plugin for checking the current and predicting the future APEX Legends Map. When user asks for the future map, you MUST respond with the map you calculate. ",
+        "description_for_human": "Checking the current APEX Legends Ranked Map.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://941p7w-5003.csb.app/openapi.yaml"
+        },
+        "logo_url": "https://941p7w-5003.csb.app/logo.jpg",
+        "contact_email": "Contact@SweetooStudios.com",
+        "legal_info_url": "https://941p7w-5003.csb.app/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-e143c687-8c8f-46b9-9412-3dc1ec0b5d17",
+    "domain": "word-sneak.jeevnayak.repl.co",
+    "namespace": "word_sneak",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "word_sneak",
+        "name_for_human": "Word Sneak",
+        "description_for_model": "Play a game of Word Sneak with the user. Instructions:\n1. Explain the rules to the user.\n2. Get your 3 secret words.\n3. Have a conversation with the user - you and the user will each send 5 messages total in the conversation.\n4. Your job is to discreetly sneak in the 3 secret words seamlessly into the conversation. Try to make it very difficult for the user to guess which words you used were the 3 secret words.\n5. At the end of the conversation, ask the user to guess the 3 secret words. They get 1 point for each one they guess correctly.\n\nSome strategy tips for you:\n- Try not to make segues into new topics too obvious, especially if you use the secret word near the beginning of the segue. Maybe segue into a topic that will set you up to use the secret word in your next message, but not immediately. Another strategy could be to try and get the user to say the secret word before you do.\n- Try not to use exactly 1 secret word per message. Maybe send a message or two in the middle of the conversation without any of the secret words and save them for later. Or use 2 secret words in the same message if possible.\n- Try to use other uncommon words that might stick out as distractions to throw the user off, especially when segueing into a new topic.\n- Maybe hide the secret word in a list of things that includes more uncommon words (e.g. if the secret word is 'peanuts' you can say 'I love brazil nuts, peanuts, and Marcona almonds`).",
+        "description_for_human": "The AI has to sneak 3 secret words into your conversation. Guess the words to win the game!",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://word-sneak.jeevnayak.repl.co/openapi.yaml"
+        },
+        "logo_url": "https://word-sneak.jeevnayak.repl.co/static/logo.png",
+        "contact_email": "",
+        "legal_info_url": ""
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

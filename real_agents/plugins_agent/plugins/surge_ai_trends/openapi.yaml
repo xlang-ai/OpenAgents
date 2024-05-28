@@ -1,0 +1,245 @@
+openapi: 3.0.1
+info:
+  title: "Surge AI"
+  description: "Explore trending searches, keywords, & hashtags by topic across YouTube, Instagram, Amazon, and Google."
+  version: "v1"
+servers:
+  - url: https://chatgpt.surge.ai
+paths:
+  /api/profiles:
+    get:
+      operationId: getProfile
+      summary: "Get an individual social media profile."
+      parameters:
+        - in: query
+          name: url
+          schema:
+            type: string
+          required: false
+          description: "URL of the profile (e.g. https://www.youtube.com/@MrBeast)."
+        - in: query
+          name: username
+          schema:
+            type: string
+          required: false
+          description: "Username of the profile (scoped to a given channel)."
+        - in: query
+          name: channel
+          schema:
+            type: string
+          required: false
+          description: "Channel on which profile exists (e.g. YOUTUBE, INSTAGRAM, TIKTOK)."
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/profileSearchResult"
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "501":
+          description: Not Implemented (Currently indexing data to match query)
+  /api/profiles/search:
+    get:
+      operationId: searchProfiles
+      summary: "Find top and trending social media profiles."
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          required: false
+          description: "Query to match against social media profile fields (e.g. username, biography, name, and tags)."
+        - in: query
+          name: channel
+          schema:
+            type: string
+          required: false
+          description: "Channel on which profiles exist (e.g. YOUTUBE, INSTAGRAM, TIKTOK)."
+        - in: query
+          name: count
+          schema:
+            type: integer
+          required: false
+          description: "The maximum number of results to return (by default 6 results are returned)."
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/profileSearchResults"
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "501":
+          description: Not Implemented (Currently indexing data to match query)
+  /api/trends/search:
+    get:
+      operationId: searchTrends
+      summary: "Find trending keywords and hashtags from across the Internet."
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: "Query to match against keyword searches and social media hashtags."
+          required: false
+        - in: query
+          name: channel
+          schema:
+            type: string
+          required: false
+          description: "Channel on which keywords or hashtags are used."
+        - in: query
+          name: count
+          schema:
+            type: integer
+          required: false
+          description: "The maximum number of results to return (by default 5 results are returned)."
+        - in: query
+          name: latest
+          schema:
+            type: boolean
+          required: false
+          description: "Only return metrics for the latest point in time."
+        - in: query
+          name: metric-min
+          schema:
+            type: number
+          required: false
+          description: "Include trends with searches or posts greater than or equal to this value."
+        - in: query
+          name: metric-max
+          schema:
+            type: number
+          required: false
+          description: "Include trends with searches or posts less than or equal to this value."
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/trendSearchResults"
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "501":
+          description: Not Implemented (Currently indexing data to match query)
+components:
+  schemas:
+    profileSearchResult:
+      type: object
+      properties:
+        url:
+          description: "The canonical URL of this social media profile."
+          type: string
+        channel:
+          description: "Channel on which profile exists (e.g. YOUTUBE, INSTAGRAM, TIKTOK)."
+          type: string
+        username:
+          description: "Unique username of the profile (scoped to a given channel)."
+          type: string
+        name:
+          description: "The human-readable display name of the profile."
+          type: string
+        biography:
+          description: "An extended description about the profile's purpose or owner."
+          type: string
+        countFollowers:
+          description: "The number of social media users on this channel who follow this profile."
+          type: integer
+        tags:
+          description: "Topics about which this profile has created content."
+          type: array
+          items:
+            type: string
+    profileSearchResults:
+      type: object
+      properties:
+        count:
+          description: "The number of relevant profiles that matched the search, up until the user-specified count parameter."
+          type: integer
+        query:
+          description: "The original search query provided by the user."
+          type: string
+        header:
+          description: "Instructions on how to display the results to a human."
+          type: string
+        items:
+          description: "The most relevant profiles that matched the search."
+          type: array
+          items:
+            $ref: "#/components/schemas/profileSearchResult"
+        footer:
+          description: "Should be displayed after the search results to guide the user to more information."
+          type: string
+    timeSeriesPoint:
+      type: object
+      properties:
+        timestamp:
+          type: number
+          description: "The point in time (milliseconds since UNIX epoch)"
+        metric:
+          type: number
+          description: "The number of searches or posts at the point in time"
+        changeAbs:
+          type: number
+          description: "The absolute change in the metric with respect to the previous point in time."
+        changeRel:
+          type: number
+          description: "The relative change in the metric with respect to the previous point in time."
+    trend:
+      type: object
+      properties:
+        channel:
+          type: string
+          description: "The channel on which the trend occurred."
+        name:
+          type: string
+          description: "The keyword search or hashtag representing the trend."
+        tags:
+          type: array
+          items:
+            type: string
+          description: "Tags to help categorize the trend."
+        timeseries:
+          type: array
+          items:
+            $ref: "#/components/schemas/timeSeriesPoint"
+          description: "The number of keyword searches or posts with hashtag over time."
+    trendSearchResults:
+      type: object
+      properties:
+        header:
+          description: "Instructions on how to display the results to a human."
+          type: string
+        channel:
+          type: string
+          description: "The channel parameter from the request."
+        query:
+          type: string
+          description: "The search query parameter from the request."
+        count:
+          type: number
+          description: "The count parameter from the request."
+        latest:
+          type: boolean
+          description: "The latest parameter from the request."
+        humanTimeRange:
+          type: string
+          description: "Human-readable dates over which the trend occurred in time."
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/trend"
+          description: "The trends matching the search query."
+        footer:
+          description: "Should be displayed after the search results to guide the user to more information."
+          type: string

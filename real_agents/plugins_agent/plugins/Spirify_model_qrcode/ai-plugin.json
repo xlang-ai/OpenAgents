@@ -1,0 +1,34 @@
+{
+    "id": "plugin-fd365f6a-6a72-4975-a7a1-e1ccb34a43ff",
+    "domain": "spirifyqrcode.azurewebsites.net",
+    "namespace": "Spirify_model_qrcode",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Spirify_model_qrcode",
+        "name_for_human": "Spirify QR Code",
+        "description_for_model": "'Spirify_model_qrcode' creates QR codes from text/URLs and enables AI puzzle games.",
+        "description_for_human": "QR Code generator for text or URLs. It's a general-purpose tool that also enables QR code puzzle games with AI.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://spirifyqrcode.azurewebsites.net/swagger/v1/swagger.json"
+        },
+        "logo_url": "https://spirifyqrcode.azurewebsites.net/icon-512.png",
+        "contact_email": "spwwj@whalejay.com",
+        "legal_info_url": "https://spirifyqrcode.azurewebsites.net/legalinfo"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+openapi: 3.0.1
+info:
+  title: Random Creature Generator
+  description: Returns a random creature with an image
+  version: 1.0.0
+servers:
+  - url: https://creaturegen.vercel.app
+paths:
+  /run-command:
+    post:
+      operationId: runCommand
+      summary: Create a random creature 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                command:
+                  type: string
+                  description: The creature environment that can only be one of these; grassland, desert, icy, forest, swamp, underwater, mountain, or underground caves
+              required:
+                - command
+      responses:
+        '200':
+          description: The creature was created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stdout:
+                    type: string
+                    description: The standard output of the command
+                  stderr:
+                    type: string
+                    description: The standard error of the command
+        '400':
+          description: Bad request - no command provided
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error - command execution failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message

@@ -1,0 +1,43 @@
+openapi: 3.0.3
+info:
+  title: Appy Pie App Builder
+  description: No-code AI App Generator to create apps from text
+  version: 1.0.0
+servers:
+  - url: https://www.appypie.com
+paths:
+  /v1:
+    get:
+      summary: Turn text into a mobile app without any coding
+      description: This AI-powered API processes the given text input and intelligently generates a bespoke native Android and iOS mobile app, specifically tailored to meet the user's requirements
+      operationId: getText
+      parameters:
+        - name: text
+          in: query
+          description: Provide a brief description of your desired app in a sentence or so, and the AI will effortlessly generate the app for you.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: App name
+                  title:
+                    type: string
+                    description: App title
+                  description:
+                    type: string
+                    description: App description
+                  image_url:
+                    type: string
+                    description: App image URL
+                  link_url:
+                    type: string
+                    description: App link URL

@@ -1,0 +1,66 @@
+openapi: 3.0.1
+info:
+  title: Crypto Insight
+  description: Decode the latest crypto news and its market impact.
+  version: 'v1'
+servers:
+  - url: https://crypto-pulse-top.vercel.app
+paths:
+  /cryptonews:
+    get:
+      operationId: cryptoNews
+      summary: Get last crypto news and its market impact
+      parameters:
+        - name: number
+          in: query
+          description: the number of news
+          required: false
+          schema:
+            type: number
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/topNewsResponse'
+components:
+  schemas:
+    topNewsResponse:
+      type: object
+      properties:
+        instructions:
+            type: string
+            description: instructions on how to format the output of crypto news
+        NEWS1:
+          type: string
+          description: The top 1 news
+        NEWS2:
+          type: string
+          description: The top 2 news
+        NEWS3:
+          type: string
+          description: The top 3 news
+        NEWS4:
+          type: string
+          description: The top 4 news
+        NEWS5:
+          type: string
+          description: The top 5 news
+        NEWS6:
+          type: string
+          description: The top 6 news
+        NEWS7:
+          type: string
+          description: The top 7 news
+        NEWS8:
+          type: string
+          description: The top 8 news
+        NEWS9:
+          type: string
+          description: The top 9 news
+        NEWS10:
+          type: string
+          description: The top 10 news
+

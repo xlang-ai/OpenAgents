@@ -1,0 +1,34 @@
+{
+    "id": "plugin-4c354b9a-13f5-4ed4-b4b7-de11350d2f99",
+    "domain": "artcollection--chao-gu-ge-lei.repl.co",
+    "namespace": "ArtCollection",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "ArtCollection",
+        "name_for_human": "ArtCollection",
+        "description_for_model": "Search through millions of art pieces from The Metropolitan Museum of Art.",
+        "description_for_human": "Search through millions of art pieces from The Metropolitan Museum of Art.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://artcollection--chao-gu-ge-lei.repl.co/openapi.yaml"
+        },
+        "logo_url": "https://artcollection--chao-gu-ge-lei.repl.co/logo.png",
+        "contact_email": "cpagym@gmail.com",
+        "legal_info_url": "http://www.cpanlp.com/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

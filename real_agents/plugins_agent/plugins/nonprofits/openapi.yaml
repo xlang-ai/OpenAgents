@@ -1,0 +1,211 @@
+openapi: 3.0.1
+info:
+  title: Change
+  description: Discover impactful nonprofits to support in your community and beyond.
+  version: 'v1'
+servers:
+  - url: https://api.getchange.io
+paths:
+  /api/v1/openai/nonprofits:
+    get:
+      operationId: getNonprofits
+      summary: Get a list of nonprofits
+      parameters:
+        - in: query
+          name: id
+          required: false
+          schema:
+            type: string
+          description: Used to filter nonprofits based on their id. For example, ?id=n_MUjmT5yhdf4smx1ykRwO2ovt will return the nonprofit with id "n_MUjmT5yhdf4smx1ykRwO2ovt".
+        - in: query
+          name: ein
+          required: false
+          schema:
+            type: string
+          description: Used to filter nonprofits based on their EIN. For example, ?ein=123456789 will return the nonprofit with EIN "123456789".
+        - in: query
+          name: search
+          required: false
+          schema:
+            type: string
+          description: Used to filter nonprofits based on a search. Can be a name or a search term. For example, ?search=one%20tree%20planted will return nonprofits that contain "one tree planted" in their name or mission. Similarly ?search=ocean%20conservation will return nonprofits that contain "ocean conservation" in their name or mission.
+        - in: query
+          name: category
+          required: false
+          schema:
+            type: string
+            enum: [Current Issues, Arts and Culture, Education, Environment and Climate, Animals, Healthcare, Human Services, International Relief, Religion, Female Empowerment, Gun Violence Prevention and Victim Support, Disaster Preparedness and Relief Services, Voting Rights and Election Laws, Black-Founded Nonprofits, LGBTQIA+, Mental Health Awareness, Immigration and Refugees, Racial Justice and Civil Rights, Public Benefit]
+          description: Used to filter nonprofits based on their category. For example, ?category=education will return nonprofits that are categorized as "Education".
+        - in: query
+          name: state
+          required: false
+          schema:
+            type: string
+          description: Used to filter nonprofits based on their state. For example, ?state=CA will return nonprofits that are located in California. Must be the abbreviated form of the state.
+        - in: query
+          name: zip_code
+          required: false
+          schema:
+            type: string
+          description: Used to filter nonprofits based on their zip code. If a user searches for nonprofits in a specific city, ALWAYS convert the city to its zip code and use as a parameter. For example, searching for nonprofits in San Francisco should look like ?zip_code=94103.
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: number
+          description: Used to limit the number of nonprofits returned. For example, ?limit=3 will return the first 3 nonprofits that match the search term. Defaults to 3 if not specified.
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: number
+          description: Used to specify the page of nonprofits to return. For example, ?page=2 will return the second page of nonprofits that match the search term. Defaults to 1 if not specified.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getNonprofitsResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+
+  /api/v1/openai/nonprofits/{nonprofit_id}:
+    get:
+      operationId: getNonprofit
+      summary: Get detailed information on a nonprofit.
+      parameters:
+        - in: path
+          name: nonprofit_id
+          required: true
+          schema:
+              type: string
+          description: Specifies the nonprofit to get more information on. For example, /api/v1/nonprofit/n_MUjmT5yhdf4smx1ykRwO2ovt will return information about nonprofit with id "n_MUjmT5yhdf4smx1ykRwO2ovt".
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getNonprofitResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+
+components:
+  schemas:
+    nonprofitBasic:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the nonprofit.
+        mission:
+          type: string
+          description: Mission of the nonprofit.
+        category:
+          type: string
+          description: Category of the nonprofit.
+        ein:
+          type: string
+          description: EIN of the nonprofit.
+        city:
+          type: string
+          description: City of the nonprofit.
+        state:
+          type: string
+          description: State of the nonprofit.
+        learn_more_and_donate_here:
+          type: string
+          description: Link to a webpage where users can learn more and donate to the nonprofit.
+
+    nonprofitDetailed:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the nonprofit.
+        mission:
+          type: string
+          description: Mission of the nonprofit.
+        categories:
+          type: array
+          items:
+            type: string
+          description: Categories of the nonprofit.
+        ein:
+          type: string
+          description: EIN of the nonprofit.
+        website:
+          type: string
+          description: Website of the nonprofit.
+        address_line:
+          type: string
+          description: Address line of the nonprofit.
+        city:
+          type: string
+          description: City of the nonprofit.
+        state:
+          type: string
+          description: State of the nonprofit.
+        zip_code:
+          type: string
+          description: Zip code of the nonprofit.
+        socials:
+          type: object
+          properties:
+            email:
+              type: string
+              description: Email of the nonprofit.
+            facebook:
+              type: string
+              description: Facebook of the nonprofit.
+            instagram:
+              type: string
+              description: Instagram of the nonprofit.
+            tiktok:
+              type: string
+              description: TikTok of the nonprofit.
+            twitter:
+              type: string
+              description: Twitter of the nonprofit.
+            youtube:
+              type: string
+              description: Youtube of the nonprofit.
+        learn_more_and_donate_here:
+          type: string
+          description: Link to a webpage where users can learn more and donate to the nonprofit.
+
+    getNonprofitResponse:
+      type: object
+      properties:
+        nonprofit:
+          $ref: '#/components/schemas/nonprofitDetailed'
+          description: Nonprofit searched.
+
+    getNonprofitsResponse:
+      type: object
+      properties:
+        nonprofits:
+          type: array
+          items:
+            $ref: '#/components/schemas/nonprofitBasic'
+          description: List of nonprofits searched.
+        EXTRA_INFORMATION_TO_ASSISTANT:
+          type: string
+          description: Extra information to assist the assistant in formatting responses.

@@ -1,0 +1,34 @@
+{
+    "id": "plugin-dfb8b231-aef9-4e85-a6ad-02e1f336cc18",
+    "domain": "api.litmaps.com",
+    "namespace": "litmaps",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "litmaps",
+        "name_for_human": "Litmaps",
+        "description_for_model": "Tool for exploring the scientific literature. View relevant papers to your searches and generate mindmaps of the literature. Discover new papers related to your work using the citation network. Use the Litmaps articleId with the application url like this: https://app.litmaps.com/seed/<articleId> to provide the user with a link to a seed map. A seed map in Litmaps, is an overview of the literature that is connected to a specific article. Do not provide a seed map link by providing the searchId like this: https://app.litmaps.com/seed/<searchId>",
+        "description_for_human": "Get help exploring the scientific literature. Find relevant papers and generate mindmaps of the literature.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://api.litmaps.com/openapi.yaml"
+        },
+        "logo_url": "https://api.litmaps.com/litmaps-icon.png",
+        "contact_email": "support@litmaps.com",
+        "legal_info_url": "https://www.litmaps.com/terms-of-service"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

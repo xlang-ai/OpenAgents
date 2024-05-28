@@ -1,0 +1,34 @@
+{
+    "id": "plugin-f412a803-a688-486e-8cef-8c0f5f1e36fb",
+    "domain": "nextpaperplugin--mengzhao1.repl.co",
+    "namespace": "nextpaper",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "nextpaper",
+        "name_for_human": "NextPaper.ai",
+        "description_for_model": "Plugin for fetching the latest research papers on a specific topic from PubMed. The user can ask for the latest paper on a particular topic and the model will return the paper details.",
+        "description_for_human": "Fetch the latest research papers on a specific topic from PubMed. More to come.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://nextpaperplugin--mengzhao1.repl.co/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://nextpaperplugin--mengzhao1.repl.co/logo.png",
+        "contact_email": "nonhelix@gmail.com",
+        "legal_info_url": "http://www.nextpaper.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

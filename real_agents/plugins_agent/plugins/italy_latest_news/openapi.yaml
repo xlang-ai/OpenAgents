@@ -1,0 +1,44 @@
+openapi: 3.0.1
+info:
+  title: Italy Latest News
+  description: Get the most recent news from Italy.
+  version: '0.1'
+servers:
+  - url: https://www.articoli-alternativi-gratis.it/italy-latest-news/api/0.1
+paths:
+  /get-latest-news/:
+    get:
+      operationId: getLatestNews
+      summary: Get latest news from Italy
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/News'
+
+components:
+  schemas:
+    News:
+      type: object
+      properties:
+        title:
+          type: string
+          description: 'The title of the news article'
+        link:
+          type: string
+          description: 'The URL to the news article'
+        pubDate:
+          type: string
+          description: 'The publication date and time of the news article'
+        description:
+          type: string
+          description: 'The description of the news article'
+      required:
+        - title
+        - link
+        - pubDate
+        - description

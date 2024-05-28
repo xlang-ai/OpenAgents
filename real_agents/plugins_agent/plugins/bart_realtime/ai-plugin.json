@@ -1,0 +1,34 @@
+{
+    "id": "plugin-8cb23b34-d6c8-473d-8e74-c890f41d453b",
+    "domain": "bart-plugin.onrender.com",
+    "namespace": "bart_realtime",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "bart_realtime",
+        "name_for_human": "BART Real-Time",
+        "description_for_model": "Getting real-time BART information for a specified origination station and direction.",
+        "description_for_human": "Getting real-time BART information for a specified origination station and direction.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://bart-plugin.onrender.com/openapi.yaml"
+        },
+        "logo_url": "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-original-577x577/s3/0016/4231/brand.gif?itok=cOeuUIp-",
+        "contact_email": "yiqun.cheng@gmail.com",
+        "legal_info_url": "https://bart-plugin.onrender.com/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

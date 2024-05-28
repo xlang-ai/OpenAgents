@@ -1,0 +1,172 @@
+openapi: 3.0.1
+info:
+  title: Message In A Bottle Plugin
+  description: Throw a message into the digital ocean, or grab one floating by. You are not alone.
+  version: 'v1'
+servers:
+  - url: "https://messagesinbottles.space"
+paths:
+  /send_message:
+    post:
+      operationId: sendMessage
+      summary: Send a message in a bottle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: The message to be sent in a bottle
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Note for ChatGPT:
+                    type: string
+                    description: Note for the AI
+                  Data:
+                    type: object
+                    properties:
+                      message_id:
+                        type: string
+                        description: The ID of the message
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+  /get_message:
+    get:
+      operationId: getMessage
+      summary: Retrieve a random message from a bottle
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Note for ChatGPT:
+                    type: string
+                    description: Note for the AI
+                  Data:
+                    type: object
+                    properties:
+                      message_id:
+                        type: string
+                        description: The ID of the message
+                      message:
+                        type: string
+                        description: The message from the bottle
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+  /update_message/{message_id}:
+    put:
+      operationId: addMessage
+      summary: Add to an existing message in a bottle
+      parameters:
+        - name: message_id
+          in: path
+          description: The ID of the message to add to
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: The additional message to be appended
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Note for ChatGPT:
+                    type: string
+                    description: Note for the AI
+                  Data:
+                    type: object
+                    properties:
+                      message_id:
+                        type: string
+                        description: The ID of the message
+                      message:
+                        type: string
+                        description: The updated message
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+  /keep_message/{message_id}:
+    delete:
+      operationId: keepMessage
+      summary: Delete a message from the bottle by its ID
+      parameters:
+        - name: message_id
+          in: path
+          description: The ID of the message to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Note for ChatGPT:
+                    type: string
+                    description: Note for the AI
+                  Data:
+                    type: object
+                    properties:
+                      message_id:
+                        type: string
+                        description: The ID of the message
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message

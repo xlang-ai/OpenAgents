@@ -1,0 +1,34 @@
+{
+    "id": "plugin-a69ced94-e2ae-4151-a3f0-0f00cb76ed52",
+    "domain": "app.filtir.com",
+    "namespace": "factcheck",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "factcheck",
+        "name_for_human": "Filtir",
+        "description_for_model": "Fact-check a given text. Given the text, it is your job to extract all the discrete factual claims or logical assertions. Each claim should be represented as a short concise sentence. Make sure that each sentence is very short and contains only one claim. Call the api one claim at a time. The api will return a list of evidences found for the claim. Your task is to assess whether a claim is correct based on the given pieces of evidence. Make sure that you read each piece of evidence found and asses if the claim is fully supported, partially supported or unsupported. For example, if the claim is \u201cLondon is a city in France\u201d and the evidence is \u201cLondon is a city in the UK\u201d then the claim is unsupported. If the claim is \u201cLondon is a city in France\u201d and the evidence is \u201cParis is a city in France\u201d then the claim is unsupported. Report back the decision for each claim along with a justification and with the references. If the link repeats for different claims, cite it only once.",
+        "description_for_human": "Verify the provided text using external sources.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://app.filtir.com/.well-known/openapi.yml"
+        },
+        "logo_url": "https://app.filtir.com/static/filtir-logo.png",
+        "contact_email": "contact@filtir.com",
+        "legal_info_url": "https://app.filtir.com/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

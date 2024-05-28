@@ -1,0 +1,69 @@
+openapi: 3.0.1
+info:
+  title: CompetitorPPCAds
+  description: Discover your competitors' best PPC ads by entering their website address.
+  version: 'v1'
+servers:
+  - url: https://ppc-optimizer.gcs.ai
+paths:
+  /api/optimize:
+    get:
+      operationId: getOptimizedAdHistory
+      summary: Get the PPC ad history of a domain
+      description: Returns the latest competitor ads data for the given domain.
+      parameters:
+        - in: query
+          name: domain
+          schema:
+            type: string
+          required: true
+          description: The domain for which to retrieve the PPC ad history.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getOptimizedAdHistoryResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+components:
+  schemas:
+    getOptimizedAdHistoryResponse:
+      type: object
+      properties:
+        keywords:
+          type: array
+          items:
+            type: object
+            properties:
+              keyword:
+                type: string
+              ads:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    url:
+                      type: string
+                    body:
+                      type: string
+          description: The latest PPC ad history of the requested domain.
+    errorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.

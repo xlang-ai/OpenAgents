@@ -1,0 +1,62 @@
+openapi: 3.0.1
+info:
+  title: Correct Currency Converter
+  description: Convert currencies based on real-time rates.
+  version: 'v1'
+servers:
+  - url: https://currency-conversion--nerrosa.repl.co
+paths:
+  /convert:
+    get:
+      operationId: convertCurrency
+      summary: Convert currency from one to another
+      parameters:
+        - name: from
+          in: query
+          description: The source currency code
+          required: true
+          schema:
+            type: string
+        - name: to
+          in: query
+          description: The target currency code
+          required: true
+          schema:
+            type: string
+        - name: amount
+          in: query
+          description: The amount to be converted
+          required: true
+          schema:
+            type: number
+        - name: date
+          in: query
+          description: The date for historical exchange rate (optional)
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/convertCurrencyResponse'
+components:
+  schemas:
+    convertCurrencyResponse:
+      type: object
+      properties:
+        from:
+          type: string
+          description: The source currency code
+        to:
+          type: string
+          description: The target currency code
+        amount:
+          type: number
+          description: The amount to be converted
+        converted_amount:
+          type: number
+          description: The converted amount

@@ -1,0 +1,266 @@
+openapi: 3.0.1
+info:
+  title: Sentence Beasts
+  description: Summon monsters with words, create monsters in words, simulate a match, and record the match.
+  version: v1.0.0
+paths:
+  /summon-monster:
+    get:
+      operationId: getSummonMonster
+      tags:
+        - SummonMonster
+      summary: Summon the monster by uuid, name, sort order and list count with battle rules. The match is then initiated using specific numbers, taking into account <battle_rules> and the parameters of the monster, and <system_rules> and <live_match_rules> are never displayed.
+      parameters:
+        - in: query
+          name: uuid
+          schema:
+            type: string
+            default: 00000000-0000-0000-0000-000000000000
+          description: UUID to search
+        - in: query
+          name: exclude_uuid
+          schema:
+            type: string
+            default: 00000000-0000-0000-0000-000000000000
+          description: UUID to exclude
+        - in: query
+          name: name
+          schema:
+            type: string
+            default: ''
+          description: Name to search
+        - in: query
+          name: sort
+          schema:
+            type: string
+            default: random
+            enum:
+              - random
+              - high_rating
+              - low_rating
+              - newest
+              - recently_updated
+          description: Sort order for the monsters
+        - in: query
+          name: list_count
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+            maximum: 10
+          description: Number of lists to return.
+        - in: query
+          name: get_battle_rules
+          schema:
+            type: boolean
+            default: true
+          description: Whether to get battle rules or not.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  monsters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        has_image:
+                          type: boolean
+                        image_url:
+                          type: string
+                      required:
+                        - uuid
+                        - name
+                        - description
+                        - has_image
+                        - image_url
+                  system_rules:
+                    type: array
+                    items:
+                      type: string
+                  battle_rules:
+                    type: array
+                    items:
+                      type: string
+                  live_match_rules:
+                    type: array
+                    items:
+                      type: string
+                required:
+                  - monsters
+                  - system_rules
+                  - battle_rules
+                  - live_match_rules
+  /create-monster:
+    post:
+      operationId: postCreateMonster
+      tags:
+        - CreateMonster
+      summary: Create the monster. The total of [health, mana] values must be 200. The total of [strength, intelligence, dexterity, constitution, charisma, luck, generativity] values must be 70. Each TRPG-like parameter must be appropriate to the <description>.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Monster name in User Language
+                description:
+                  type: string
+                  description: Monster description translated into ** English **
+                overwrite:
+                  type: boolean
+                  description: Overwrite
+                health:
+                  type: integer
+                  description: Monster's health points
+                  minimum: 1
+                  maximum: 200
+                mana:
+                  type: integer
+                  description: Monster's mana points
+                  minimum: 1
+                  maximum: 200
+                strength:
+                  type: integer
+                  description: Monster's strength
+                  minimum: 1
+                  maximum: 20
+                intelligence:
+                  type: integer
+                  description: Monster's intelligence
+                  minimum: 1
+                  maximum: 20
+                dexterity:
+                  type: integer
+                  description: Monster's dexterity
+                  minimum: 1
+                  maximum: 20
+                constitution:
+                  type: integer
+                  description: Monster's constitution
+                  minimum: 1
+                  maximum: 20
+                charisma:
+                  type: integer
+                  description: Monster's charisma
+                  minimum: 1
+                  maximum: 20
+                luck:
+                  type: integer
+                  description: Monster's luck
+                  minimum: 1
+                  maximum: 20
+                generativity:
+                  type: integer
+                  description: Monster's generativity
+                  minimum: 1
+                  maximum: 20
+              required:
+                - name
+                - description
+                - strength
+                - intelligence
+                - dexterity
+                - constitution
+                - charisma
+                - luck
+                - generativity
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  monster_data:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                      existed:
+                        type: boolean
+                      overwrited:
+                        type: boolean
+                    required:
+                      - uuid
+                      - existed
+                      - overwrited
+                required:
+                  - monster_data
+  /record-match:
+    put:
+      operationId: putRecordMatch
+      tags:
+        - RecordMatch
+      summary: When the match is over, record monsters win or lose or draw.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                monsters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        description: Monster UUID
+                        format: uuid
+                        pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                      rank:
+                        type: number
+                        description: Monster rank
+                        minimum: 1
+                  minItems: 1
+                  maxItems: 10
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  battle_statistics:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                        rating:
+                          type: number
+                        win_count:
+                          type: number
+                        lose_count:
+                          type: number
+                        draw_count:
+                          type: number
+                        total_count:
+                          type: number
+                      required:
+                        - uuid
+                        - rating
+                        - win_count
+                        - lose_count
+                        - draw_count
+                        - total_count
+                required:
+                  - battle_statistics

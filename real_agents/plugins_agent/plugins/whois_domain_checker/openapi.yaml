@@ -1,0 +1,39 @@
+---
+openapi: 3.0.1
+info:
+  title: Whois Domain Checker
+  description: A Whois app that takes a list of space-separated domain names, performs the Whois for each domain.
+  version: v1.0
+servers:
+- url: https://whois.smoothplugins.com
+paths:
+  "/":
+    get:
+      operationId: check_domains
+      summary: Checks the availability of a list of space-separated domain names and
+        returns their availability status
+      description: Checks the availability of a list of space-separated domain names
+        and returns their availability status
+      parameters:
+      - name: domains
+        in: query
+        description: The list of domain names to check the availability of
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/check_domains_response"
+components:
+  schemas:
+    check_domains_response:
+      type: object
+      properties:
+        result:
+          type: string
+          description: A list of domain names with each one's availability status
+            indicated by a utf8 icon (✅ for available, ❌ for unavailable)

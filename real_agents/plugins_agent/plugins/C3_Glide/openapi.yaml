@@ -1,0 +1,67 @@
+openapi: 3.0.1
+info:
+  title: C3 Glide
+  description: Get live aviation data for pilots. Ask questions about METARs, TAFs, NOTAMs for flight planning.
+  version: 1.1.0
+servers:
+- url: https://c3glide-d9g5.boldstratus.com/c3glide-api
+paths:
+  /openAIPlugin:
+    post:
+      description: Endpoint that retrieves METAR, TAF, and NOTAM live aviation data products.
+      operationId: openAIPlugin
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              type: object
+              properties:
+                locationRoute:
+                  type: string
+                  description: One or more geographic locations, or reporting stations represented by points that must be ICAO station identifications, IATA airport identifications, and/or latitude and longitude coordinates.
+                  example: CYYZ;CYUL
+                notamLetterCode:
+                  type: string
+                  description: 'The letter representing the subject, purpose, or topic of the NOTAM. Only applies when NOTAM is called in aviationDataProduct. Must be specified as X, A, C, F, I or O.'
+                aviationDataProducts:
+                  type: array
+                  items:
+                    type: string
+                  description: 'Specifies the name of the live aviation data product(s) to be retrieved in an array of one or more of the following: METAR, TAF, and/or NOTAM.'
+                  example: '["METAR"]'
+                startDateTime:
+                  type: string
+                  description: 'The user supplied start date and time period for their request, which must be converted to UTC time using the following format: 2021-12-07T16:37:00Z'
+                endDateTime:
+                  type: string
+                  description: 'The user supplied end date and time period for their request, which must be converted to UTC time using the following format: 2021-12-07T16:37:00Z'
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  metars:
+                    type: array
+                    items:
+                      type: string
+                    description: The raw METAR outputs used for interpretation and analysis to the user.
+                  tafs:
+                    type: array
+                    items:
+                      type: string
+                    description: The raw TAF outputs used for interpretation and analysis to the user.
+                  notams:
+                    type: array
+                    items:
+                      type: string
+                    description: The raw NOTAM outputs used for interpretation and analysis to the user.
+        400:
+          description: Bad Request
+          content: {}
+      x-codegen-request-body-name: body 

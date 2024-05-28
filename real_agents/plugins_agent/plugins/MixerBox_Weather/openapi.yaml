@@ -1,0 +1,126 @@
+---
+openapi: 3.0.1
+info:
+  title: MixerBox Weather
+  description: Get real-time worldwide weather updates & forecasts, instantly!
+  version: v1
+servers:
+- url: https://weather.mixerbox.com
+paths:
+  "/services?funcs=GetWeatherInfo&mobile=0":
+    get:
+      operationId: getWeatherInfo
+      summary: Get current or forecast weather data based on given locations,  including
+        over 200,000 cities around the world.
+      description: With a simple weather query, the plugin delivers weather details,
+        including a description of the weather conditions, temperature, humidity,
+        rain probability, wind speed, and atmospheric pressure.
+      parameters:
+      - in: query
+        name: longitude
+        schema:
+          type: string
+        description: The longitude of location you want to query for
+      - in: query
+        name: latitude
+        schema:
+          type: string
+        description: The latitude of location you want to query for
+      - in: query
+        name: dataType
+        schema:
+          type: string
+          enum:
+          - current
+          - daily
+          - 5day_3hour
+        description: Parameter to specify weather data type. "daily" support 1-day
+          step for up to 16 days weather data, which is useful for long-term forecast.
+          "forecast_5day_3hour" support 3-hour step for 5 days weather data, which
+          is useful for short-term forecast
+      - in: query
+        name: count
+        schema:
+          type: string
+        description: The count of weather item want to return. Only works when data
+          type is "daily" or "5day_3hour"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/WeatherInfoResponse"
+components:
+  schemas:
+    WeatherInfoResponse:
+      required:
+      - getWeatherInfo
+      type: object
+      properties:
+        getWeatherInfo:
+          type: object
+          properties:
+            items:
+              type: array
+              title: Result Of Weather Item List
+              description: Result of weather item list.
+              items:
+                "$ref": "#/components/schemas/WeatherItem"
+            rules:
+              type: array
+              title: The array of rules which recommend gpt to follow.
+              description: The array of rules which recommend gpt to follow.
+              items:
+                type: string
+    WeatherItem:
+      type: object
+      properties:
+        timestamp:
+          type: integer
+          title: Data Timestamp
+        description:
+          type: string
+          title: Description Text
+        temperature:
+          type: object
+          title: Temperature Metrics
+          properties:
+            average:
+              type: number
+              title: Average Temperature
+            max:
+              type: number
+              title: Max Temperature
+            min:
+              type: number
+              title: Min Temperature
+            feels_like:
+              type: number
+              title: Feels Like Temperature
+        clouds:
+          type: number
+          title: Cloudiness
+        wind:
+          type: object
+          title: Wind Metrics
+          properties:
+            speed:
+              type: number
+              title: Wind Speed
+            deg:
+              type: number
+              title: Wind Direction in Degrees
+            gust:
+              type: number
+              title: Wind Gust
+        humidity:
+          type: number
+          title: Humidity
+          description: Humidity in %
+        pressure:
+          type: number
+          title: Atmospheric Pressure
+        pop:
+          type: number
+          title: Probability of Precipitation

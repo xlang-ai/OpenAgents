@@ -1,0 +1,62 @@
+openapi: 3.0.1
+info:
+  title: Father's Day Deals
+  description: Find the best daily deals on the internet.
+  version: v1
+servers:
+  - url: https://shimmer-payments.vercel.app
+paths:
+  /api/daily:
+    post:
+      operationId: postDaily
+      summary: >-
+        ask for daily deals and father's day recommendations and we will return
+        a list of deals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: string
+                  description: An Amazon category ex) "Electronics"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Bad Request
+components:
+  schemas:
+    Response:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Deal'
+        url:
+          type: string
+          description: The url of the deals page (e.g., "https://amzn.to/429vK92")
+      required:
+        - items
+    Deal:
+      type: object
+      properties:
+        discount:
+          type: string
+          description: The discount of the item (e.g., "50%")
+        price:
+          type: string
+          description: The price of the item (e.g., "$19.99")
+        title:
+          type: string
+          description: The title of the item (e.g., "Harry Potter Book")
+        url:
+          type: string
+          description: The url of the item (e.g., "https://amzn.to/429vK92")

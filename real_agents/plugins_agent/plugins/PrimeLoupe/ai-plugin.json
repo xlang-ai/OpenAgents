@@ -1,0 +1,34 @@
+{
+    "id": "plugin-a1724ed7-6f92-4bca-a5c1-3af31566efba",
+    "domain": "primeloupe.com",
+    "namespace": "PrimeLoupe",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "PrimeLoupe",
+        "name_for_human": "PrimeLoupe",
+        "description_for_model": "Simplify your decision-making process by summarizing Amazon product reviews for you.",
+        "description_for_human": "Simplify your decision-making process by summarizing Amazon product reviews for you.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://primeloupe.com/openapi.json"
+        },
+        "logo_url": "https://primeloupe.com/static/img/logo512-bg.png",
+        "contact_email": "justmisam@gmail.com",
+        "legal_info_url": "https://primeloupe.com/terms/"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

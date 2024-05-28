@@ -1,0 +1,34 @@
+{
+    "id": "plugin-2e1d90ec-2ce4-4930-9cf1-22403209ed87",
+    "domain": "tryspree.com",
+    "namespace": "TrySpree",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "TrySpree",
+        "name_for_human": "TrySpree",
+        "description_for_model": "Help the user find free samples to try. You can search and view different free samples that you are interested in.",
+        "description_for_human": "TrySpree is a website that finds free samples for you to try.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://www.tryspree.com/openapi.yaml"
+        },
+        "logo_url": "https://www.tryspree.com/logo-512.png",
+        "contact_email": "info@tryspree.com",
+        "legal_info_url": "http://www.tryspree.com/terms-of-service"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

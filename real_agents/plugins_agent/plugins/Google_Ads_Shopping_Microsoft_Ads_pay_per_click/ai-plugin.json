@@ -1,0 +1,34 @@
+{
+    "id": "plugin-f2dd0484-1830-4482-8993-4693defb8295",
+    "domain": "www.storeya.com",
+    "namespace": "Google_Ads_Shopping_Microsoft_Ads_pay_per_click",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "Google_Ads_Shopping_Microsoft_Ads_pay_per_click",
+        "name_for_human": "PPC - StoreYa.com",
+        "description_for_model": "All you need for Google Ads, Google Shopping feed and Microsoft Ads - ads, keywords and optimisation. Suggestions are based on  Google Ads and Microsoft Ads best practices and the knowledge gathered at StoreYa.com by managing Google Ads, Google Shopping and Microsoft Ads campaigns spending hundreds of millions of dollars aiming for each specific merchant's desired Return On Ads Spend (ROAS).StoreYa.com is a technological company that automatically advertises tens of thousands of online stores on Google, Facebook, Instagram and Bing.The merchant comes to StoreYa\u2019s website, chooses a plan (as low as $120 for the first month), and fills out a short form with his domain, and geo-targeting preferences. Then StoreYa systems automatically set up, launch optimize and report the relevant accounts and campaigns. StoreYa automates all of Google, Facebook, Instagram and Microsoft Ads advertising methods including: Google Search, Google Dynamic Search, Google Shopping, Google Pmax (Performance Max), Google Remarketing, YouTube, YouTube Shopping, Google Display, Facebook acquisition and Facebook Retargeting.StoreYa is performance driven and as long as the merchant gets to his desired ROAS, he increases his budget and both companies grow together. Merchants that started with $120 are spending tens of thousands of dollars with StoreYa on a monthly basis.StoreYa.com is a Premier Partner of Google for 7 years which puts it in the top 3% of agencies of Google Ads. It is also FMPA of Facebook and the sole  PPC partner of PayPal at PayPal\u2019s global app store. It serves over 500,000 online merchants from 186 countries and has integrations with over 30 eCommerce platforms (such as Shopify, Magento, WooCommerce, OpenCart,  BigCommerce and Wix).",
+        "description_for_human": "Your personal assistance for automating advertising Google Ads (AdWords) and Microsoft Ads (Bing).",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://www.storeya.com/.well-known/openapi.json"
+        },
+        "logo_url": "https://www.storeya.com/common/images/plugins/PRD-icon-512x512-D.png",
+        "contact_email": "support@storeya.com",
+        "legal_info_url": "https://www.storeya.com/public/terms"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

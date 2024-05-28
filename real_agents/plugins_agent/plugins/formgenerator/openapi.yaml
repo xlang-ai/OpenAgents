@@ -1,0 +1,34 @@
+openapi: 3.0.1
+info:
+  title: Generate form, survey or quiz with AI | forms.app
+  description: A plugin that allows the user generate form, survey or quiz
+  version: "v1"
+servers:
+  - url: https://ai.forms.app
+paths:
+  /generate:
+    get:
+      operationId: generateForm
+      summary: Generate form, survey or quiz with AI
+      parameters:
+        - name: query
+          in: query
+          description: The form, survey or quiz type
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/generateUrlResponse"
+components:
+  schemas:
+    generateUrlResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The form genereted url

@@ -1,0 +1,106 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Ask My First Million Podcast Chatbot API",
+    "version": "1.0.0",
+    "description": "Ask the hosts of the My First Million questions about business, tech, entrepreneurship, and life."
+  },
+  "servers": [
+    {
+      "url": "https://askmfm.writelikeshaan.com"
+    }
+  ],
+  "paths": {
+    "/relevant-info": {
+      "post": {
+        "summary": "Ask a question to the podcast chatbot and get relevant info from the MFM podcast",
+        "operationId": "askPodcastChatbot",
+        "requestBody": {
+          "description": "The question to ask",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Question"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input or exception occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Question": {
+        "type": "object",
+        "required": ["question"],
+        "properties": {
+          "question": {
+            "type": "string",
+            "description": "The question to be asked"
+          }
+        }
+      },
+      "RelevantInfo": {
+        "type": "object",
+        "properties": {
+          "snippet": {
+            "type": "string",
+            "description": "The relevant snippet from the podcast"
+          },
+          "podcast_title": {
+            "type": "string",
+            "description": "The title of the podcast episode"
+          },
+          "link": {
+            "type": "string",
+            "description": "The link to the podcast episode"
+          }
+        }
+      },
+      "Response": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "The status of the request"
+          },
+          "relevant_info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelevantInfo"
+            },
+            "description": "The relevant information in response to the question"
+          },
+          "message": {
+            "type": "string",
+            "description": "The error message, if any"
+          }
+        }
+      }
+    }
+  }
+}

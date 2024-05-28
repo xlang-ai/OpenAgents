@@ -1,0 +1,34 @@
+{
+    "id": "plugin-c5ad0029-6d66-4d0b-8dce-6d59cc5b88af",
+    "domain": "keyword-explorer.maila.ai",
+    "namespace": "keywordexplorer",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "keywordexplorer",
+        "name_for_human": "Keyword Explorer",
+        "description_for_model": "Keyword Explorer suggests the top related keywords to amplify your content optimization. You can then use these keywords to incorporate them into your next marketing content.",
+        "description_for_human": "Keyword Explorer provides popular related keywords to amplify your content optimization.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://keyword-explorer.maila.ai/.well-known/openapi.yaml"
+        },
+        "logo_url": "https://keyword-explorer.maila.ai/.well-known/logo.png",
+        "contact_email": "kevin@maila.ai",
+        "legal_info_url": "https://keyword-explorer.maila.ai/legal"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

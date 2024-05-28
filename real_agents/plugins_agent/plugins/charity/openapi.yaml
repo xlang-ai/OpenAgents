@@ -1,0 +1,277 @@
+openapi: 3.0.1
+info:
+  title: Charity API
+  description: Get data on US-based non-profits including mission, key people, governance, ratings and financial data.
+  version: 'v1'
+servers:
+  - url: https://api.charitysense.com
+paths:
+  /charity/{ein}:
+    get:
+      operationId: getCharityByEin
+      summary: Get detailed information about a charity
+      parameters:
+        - name: ein
+          in: path
+          description: The EIN of the charity
+          required: true
+          schema:
+            type: string
+        - name: year
+          in: query
+          description: Retrieve charity data from given year. If omitted, "latest" is assumed.
+          schema:
+            type: string
+            default: "latest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Organization:
+                    type: object
+                    properties:
+                      Person:
+                        type: array
+                        items:
+                          type: string
+                      Title:
+                        type: array
+                        items:
+                          type: string
+                      Hours:
+                        type: array
+                        items:
+                          type: number
+                      Total Compensation:
+                        type: array
+                        items:
+                          type: number
+                  Basic:
+                    type: object
+                    properties:
+                      mission:
+                        type: string
+                      year:
+                        type: integer
+                      name:
+                        type: string
+                      phone:
+                        type: integer
+                      website:
+                        type: string
+                      type:
+                        type: string
+                      address:
+                        type: string
+                      city:
+                        type: string
+                      state:
+                        type: string
+                      country:
+                        type: string
+                      zip_code:
+                        type: integer
+                  Governance:
+                    type: object
+                  Revenues:
+                    type: object
+                  Expenses:
+                    type: object
+                  Assets:
+                    type: object
+                  Liabilities:
+                    type: object
+                  Fund balance:
+                    type: number
+                  Ratings:
+                    type: object
+                  Trends:
+                    type: object
+                  Sankey:
+                    type: object
+  /charities:
+    get:
+      summary: Get a list of charities
+      parameters:
+        - name: search
+          in: query
+          description: Please specify the search terms.
+          schema:
+            type: string
+          example: foo
+        - name: limit
+          in: query
+          description: Please specify how many charities you want to retrieve.
+          schema:
+            type: integer
+        - name: skip
+          in: query
+          description: Please specify how many charities to skip.
+          schema:
+            type: integer
+        - name: sort_by
+          in: query
+          description: Please specify the parameter to sort the charities by.
+          schema:
+            type: string
+            enum: [rating, name, expenses, revenues, assets, liabilities]
+        - name: rating_gt
+          in: query
+          description: Please specify how much higher the charities' ratings should be.
+          schema:
+            type: integer
+        - name: assets_gt
+          in: query
+          description: Please specify how much greater the assets should be.
+          schema:
+            type: integer
+        - name: assets_lt
+          in: query
+          description: Filter charities with assets less than a specified value.
+          schema:
+            type: integer
+        - name: liabilities_gt
+          in: query
+          description: Filter charities with liabilities greater than a specified value.
+          schema:
+            type: integer
+        - name: liabilities_lt
+          in: query
+          description: Filter charities with liabilities less than a specified value.
+          schema:
+            type: integer
+        - name: expenses_gt
+          in: query
+          description: Filter charities with expenses greater than a specified value.
+          schema:
+            type: integer
+        - name: expenses_lt
+          in: query
+          description: Filter charities with expenses less than a specified value.
+          schema:
+            type: integer
+        - name: eins
+          in: query
+          description: Filter charities by a list of EINs.
+          schema:
+            type: array
+            items:
+              type: string
+        - name: affiliation
+          in: query
+          description: Filter charities by religious affiliation.
+          schema:
+            type: string
+            enum: [Christianity, Islam, Buddhism, Judaism]
+        - name: nonprofit
+          in: query
+          description: Only return entities that are charitable.
+          schema:
+            type: boolean
+            default: true
+      description: This endpoint returns a list of charities.
+      operationId: getCharityList
+      responses:
+        '200':
+          description: A list of charities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: integer
+                      description: The IRS Employer Identification Number (EIN) for the charity.
+                    Basic:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          description: Value associated with the charity.
+                        mission:
+                          type: string
+                          description: Mission statement of the charity.
+                        year:
+                          type: integer
+                          description: Founding year of the charity.
+                        name:
+                          type: string
+                          description: Name of the charity.
+                        phone:
+                          type: string
+                          description: Phone number of the charity.
+                        website:
+                          type: string
+                          description: Website URL of the charity.
+                        type:
+                          type: string
+                          description: Type of filing.
+                        affiliation:
+                          type: string
+                          description: Religious affiliation, if any.
+                        foreign_countries:
+                          type: array
+                          items:
+                            type: string
+                          description: List of countries where the charity operates.
+                        address:
+                          type: string
+                          description: Physical address of the charity.
+                        city:
+                          type: string
+                          description: City where the charity is located.
+                        state:
+                          type: string
+                          description: State where the charity is located.
+                        country:
+                          type: string
+                          description: Country where the charity is located.
+                        zip_code:
+                          type: string
+                          description: Zip code of the charity.
+                    Latest:
+                      type: object
+                      properties:
+                        filings:
+                          type: object
+                          properties:
+                            Revenues:
+                              type: object
+                              properties:
+                                value:
+                                  type: integer
+                                  description: Revenue amount of the charity.
+                            Expenses:
+                              type: object
+                              properties:
+                                value:
+                                  type: integer
+                                  description: Expense amount of the charity.
+                            Assets:
+                              type: object
+                              properties:
+                                value:
+                                  type: integer
+                                  description: Asset value of the charity.
+                            Liabilities:
+                              type: object
+                              properties:
+                                value:
+                                  type: integer
+                                  description: Liabilities amount of the charity.
+                            Ratings:
+                              type: object
+                              properties:
+                                Overall Score:
+                                  type: object
+                                  properties:
+                                    percentile:
+                                      type: number
+                                      format: float
+                                      description: Percentile ranking of the charity's performance.

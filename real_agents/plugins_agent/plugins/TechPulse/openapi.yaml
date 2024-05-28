@@ -1,0 +1,122 @@
+openapi: 3.0.1
+info:
+  title: Display top/new/ask/show/job stories from HackerNews
+  description: Get top/new/ask/show/job stories from HackerNews.
+  version: 'v1'
+servers:
+  - url: https://techpulse.aigenprompt.com/
+paths:
+  /topstories:
+    get:
+      operationId: fetchTopStories
+      summary: Get the top stories from Hacker News
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fetchStoriesResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+  /newstories:
+    get:
+      operationId: fetchNewStories
+      summary: Get the new stories from Hacker News
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fetchStoriesResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'                
+  /askstories:
+    get:
+      operationId: fetchAskStories
+      summary: Get the ask stories from Hacker News
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fetchStoriesResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'      
+  /showstories:
+    get:
+      operationId: fetchShowStories
+      summary: Get the show stories from Hacker News
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fetchStoriesResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'     
+  /jobstories:
+    get:
+      operationId: fetchJobStories
+      summary: Get the job stories from Hacker News
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fetchStoriesResponse'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'                
+components:
+  schemas:
+    fetchStoriesResponse:
+      type: object
+      properties:
+        generate_image_url:
+          type: string
+          description: The generate image URL
+        stories:
+          type: array
+          description: stories
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: The unique id of the news item
+              title:
+                type: string
+                description: The title of the news item
+              url:
+                type: string
+                description: The URL of the news item
+    errorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: An error message describing the issue

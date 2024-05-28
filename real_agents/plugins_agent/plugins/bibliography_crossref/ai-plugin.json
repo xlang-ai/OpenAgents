@@ -1,0 +1,34 @@
+{
+    "id": "plugin-a40b76f5-2ca9-405a-8e89-f492129b82a8",
+    "domain": "bibliography-1-f6795465.deta.app",
+    "namespace": "bibliography_crossref",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "bibliography_crossref",
+        "name_for_human": "Bibliography Crossref",
+        "description_for_model": "A plugin to suggest multiple research prompts and generate the top 3 bibtex bibliographies for each in Markdown tabular output. Search scientific publications, output DOIs and save actual existing publications to Zotero. Fail silently and generate valid bibtex from API responses. Guide user to integrate into Zotero collection with API key.",
+        "description_for_human": "Search publications and generate bibtex bibliographies using Crossref and Zotero.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://bibliography-1-f6795465.deta.app/openapi.yaml"
+        },
+        "logo_url": "https://bibliography-1-f6795465.deta.app/static/logo.jpg",
+        "contact_email": "bibliography_generator@proton.me",
+        "legal_info_url": "https://bibliography-1-f6795465.deta.app/static/legal.html"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

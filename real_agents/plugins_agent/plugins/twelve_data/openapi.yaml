@@ -1,0 +1,288 @@
+openapi: 3.0.0
+info:
+  title: Twelve Data API
+  version: 1.0.0
+  description: You can use this API to access world financial markets including stocks, forex, ETFs, indices, and cryptocurrencies. Most of the exchanges are available in real-time, while others have some delays. Over 20+ years of end-of-day data and a couple of years for intraday historical data.
+servers:
+  - url: https://api.twelvedata.com
+paths:
+  /stocks:
+    get:
+      summary: Get a list of stocks
+      description: This API call returns an array of symbols available at Twelve Data API. This list is updated daily.
+      operationId: getStocksList
+      parameters:
+        - name: symbol
+          in: query
+          description: Filter by symbol
+          schema:
+            type: string
+          required: false
+        - name: exchange
+          in: query
+          description: Filter by exchange name or mic code
+          schema:
+            type: string
+          required: false
+        - name: mic_code
+          in: query
+          description: Filter by market identifier code (MIC) under ISO 10383 standard
+          schema:
+            type: string
+          required: false
+        - name: country
+          in: query
+          description: Filter by country name or alpha code
+          schema:
+            type: string
+          required: false
+        - name: type
+          in: query
+          description: Filter by instrument type
+          schema:
+            type: string
+          required: false
+        - name: format
+          in: query
+          description: Value can be JSON or CSV; Default JSON
+          schema:
+            type: string
+          required: false
+        - name: delimiter
+          in: query
+          description: Specify the delimiter used when downloading the CSV file; Default semicolon ;
+          schema:
+            type: string
+          required: false
+        - name: show_plan
+          in: query
+          description: Adds info on which plan symbol is available; Boolean; Default false
+          schema:
+            type: boolean
+          required: false
+        - name: include_delisted
+          in: query
+          description: Include delisted identifiers; Boolean; Default false
+          schema:
+            type: boolean
+          required: false
+      responses:
+        200:
+          description: A list of stocks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    symbol:
+                      type: string
+                      description: instrument symbol (ticker)
+                    name:
+                      type: string
+                      description: full name of instrument
+                    currency:
+                      type: string
+                      description: currency of the instrument according to the ISO 4217 standard
+                    exchange:
+                      type: string
+                      description: exchange where instrument is traded
+                    mic_code:
+                      type: string
+                      description: market identifier code (MIC) under ISO 10383 standard
+                    country:
+                      type: string
+                      description: country where exchange is located
+                    type:
+                      type: string
+                      description: common issue type
+  /forex_pairs:
+    get:
+      summary: Get a list of forex pairs
+      description: This API call returns an array of forex pairs available at Twelve Data API. This list is updated daily.
+      operationId: getForexPairsList
+      parameters:
+        - name: symbol
+          in: query
+          description: Filter by symbol
+          schema:
+            type: string
+          required: false
+        - name: currency_base
+          in: query
+          description: Filter by currency base
+          schema:
+            type: string
+          required: false
+        - name: currency_quote
+          in: query
+          description: Filter by currency quote
+          schema:
+            type: string
+          required: false
+        - name: format
+          in: query
+          description: Value can be CSV or JSON; Default JSON
+          schema:
+            type: string
+          required: false
+        - name: delimiter
+          in: query
+          description: Specify the delimiter used when downloading the CSV file; Default semicolon ;
+          schema:
+            type: string
+          required: false
+      responses:
+        200:
+          description: A list of forex pairs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    symbol:
+                      type: string
+                      description: currency pair according to ISO 4217 standard codes with slash(/) delimiter
+                    currency_group:
+                      type: string
+                      description: "group to which currency pair belongs to, could be: Major, Minor, Exotic and Exotic-Cross"
+                    currency_base:
+                      type: string
+                      description: base currency name according to ISO 4217 standard
+                    currency_quote:
+                      type: string
+                      description: quote currency name according to ISO 4217 standard
+  /symbol_search:
+    get:
+      summary: Search for symbols
+      description: This method helps to find the best matching symbol. It can be used as the base for custom lookups. The response is returned in descending order, with the most relevant instrument at the beginning.
+      operationId: getSymbolSearch
+      parameters:
+        - name: symbol
+          in: query
+          description: Symbol to search
+          schema:
+            type: string
+          required: true
+        - name: outputsize
+          in: query
+          description: Number of matches in response; Default 30, Max 120
+          schema:
+            type: integer
+          required: false
+        - name: show_plan
+          in: query
+          description: Adds info on which plan symbol is available; Boolean; Default false
+          schema:
+            type: boolean
+          required: false
+      responses:
+        200:
+          description: A list of matching symbols
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          type: string
+                          description: ticker symbol of instrument
+                        instrument_name:
+                          type: string
+                          description: name of exchange
+                        exchange:
+                          type: string
+                          description: exchange where instrument is traded
+                        mic_code:
+                          type: string
+                          description: market identifier code (MIC) under ISO 10383 standard
+                        exchange_timezone:
+                          type: string
+                          description: time zone where exchange is located
+                        instrument_type:
+                          type: string
+                          description: type of instrument
+                        country:
+                          type: string
+                          description: country to which stock exchange belongs to
+                  status:
+                    type: string
+                    description: status of the request
+  /exchanges:
+    get:
+      summary: Get a list of exchanges
+      description: This API call returns an array of stock, ETF, or index exchanges available at Twelve Data API. This list is updated daily.
+      operationId: getExchangesList
+      parameters:
+        - name: type
+          in: query
+          description: Value can be stock, etf, or index; Default stock
+          schema:
+            type: string
+          required: false
+        - name: name
+          in: query
+          description: Filter by exchange name
+          schema:
+            type: string
+          required: false
+        - name: code
+          in: query
+          description: Filter by market identifier code (MIC) under ISO 10383 standard
+          schema:
+            type: string
+          required: false
+        - name: country
+          in: query
+          description: Filter by country name or alpha code
+          schema:
+            type: string
+          required: false
+        - name: format
+          in: query
+          description: Value can be CSV or JSON; Default JSON
+          schema:
+            type: string
+          required: false
+        - name: delimiter
+          in: query
+          description: Specify the delimiter used when downloading the CSV file; Default semicolon ;
+          schema:
+            type: string
+          required: false
+        - name: show_plan
+          in: query
+          description: Adds info on which plan symbol is available; Boolean; Default false
+          schema:
+            type: boolean
+          required: false
+      responses:
+        200:
+          description: A list of exchanges
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: name of exchange
+                    code:
+                      type: string
+                      description: market identifier code (MIC) under ISO 10383 standard
+                    country:
+                      type: string
+                      description: country to which stock exchange belongs to
+                    timezone:
+                      type: string
+                      description: time zone where exchange is located

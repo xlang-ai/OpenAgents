@@ -1,0 +1,34 @@
+{
+    "id": "plugin-cdb574b0-10a7-4cc6-a998-d2ad32df80f1",
+    "domain": "ai.toreris.com",
+    "namespace": "ptcg_price_research",
+    "status": "approved",
+    "manifest": {
+        "schema_version": "v1",
+        "name_for_model": "ptcg_price_research",
+        "name_for_human": "PTCG price research",
+        "description_for_model": "Retrieving the current prices of Pok\u00e9mon Trading Cards within Japan.",
+        "description_for_human": "It fetches the latest prices of Pok\u00e9mon Cards within Japan.",
+        "auth": {
+            "type": "none"
+        },
+        "api": {
+            "type": "openapi",
+            "url": "https://ai.toreris.com/openapi.yaml"
+        },
+        "logo_url": "https://ai.toreris.com/logo.png",
+        "contact_email": "contact@toreris.com",
+        "legal_info_url": "https://toreris.com/term"
+    },
+    "oauth_client_id": null,
+    "user_settings": {
+        "is_installed": false,
+        "is_authenticated": true
+    },
+    "categories": [
+        {
+            "id": "newly_added",
+            "title": "New"
+        }
+    ]
+}

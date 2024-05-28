@@ -1,0 +1,74 @@
+openapi: 3.0.1
+info:
+  title: Video Highlight
+  description: Explore, research, and interact with YouTube videos and personal videos.
+  version: 'v1'
+servers:
+  - url: https://videohighlight.com
+paths:
+  /api/chat-gpt/transcript/get:
+    post:
+      operationId: getTranscript
+      summary: Get the transcript for a given Video ID
+      requestBody:
+        required: true
+        content:
+          application/json:  # The content type
+            schema:  # Schema for the request body
+              type: object
+              required: # Required properties
+                - video_id
+              properties:
+                video_id:
+                  type: string
+                  description: The video id of the video to get the transcript for.
+                preferred_language_code:
+                  type: string
+                  description: Preferred language code for the transcript. If the language code is not available, the "en" language, or the first available language code will be returned.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getTranscriptResponse'
+components:
+  schemas:
+    getTranscriptResponse:
+      type: object
+      properties:
+        transcriptVideoId:
+          type: string
+          description: The ID of the video transcript.
+        videoId:
+          type: string
+          description: The ID of the video.
+        videoTitle:
+          type: string
+          description: The title of the video.
+        languageCode:
+          type: string
+          description: The language code of the transcript.
+        asr:
+          type: boolean
+          description: Automatic Speech Recognition flag.
+        transcript:
+          type: object
+          properties:
+            progress:
+              type: number
+              description: The progress of the transcript.
+            transcriptSegments:
+              type: array
+              items:
+                type: object
+                properties:
+                  start:
+                    type: number
+                    description: The start time of the transcript segment in seconds.
+                  end:
+                    type: number
+                    description: The end time of the transcript segment in seconds.
+                  segment:
+                    type: string
+                    description: The content of the transcript segment.
