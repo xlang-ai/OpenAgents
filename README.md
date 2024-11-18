@@ -1,5 +1,6 @@
 # [OpenAgents: An Open Platform for Language Agents in the Wild](https://arxiv.org/abs/2310.10634)
 
+
  <a href="https://arxiv.org/abs/2310.10634" target="_blank">
     <img alt="OpenAgents Paper" src="https://img.shields.io/badge/📑-OpenAgents_Paper-blue" />
  </a>
@@ -30,6 +31,11 @@
    <a href="https://discord.gg/4Gnw7eTEZR" target="_blank">
       <img alt="Discord" src="https://dcbadge.vercel.app/api/server/4Gnw7eTEZR?compact=true&style=flat" />
    </a>
+
+<div align="center">
+    <a href="https://trendshift.io/repositories/3834" target="_blank"><img src="https://trendshift.io/api/badge/repositories/3834" alt="xlang-ai%2FOpenAgents | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+</div>
+
 <div align="center">
     <img src="pics/openagents_overview.png"/>
 </div>
