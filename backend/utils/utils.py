@@ -10,6 +10,7 @@ from flask import Request
 from sqlalchemy import create_engine
 from PIL import Image
 from loguru import logger
+from PyPDF2 import PdfReader
 
 from real_agents.adapters.data_model import (
     DatabaseDataModel,
@@ -17,6 +18,7 @@ from real_agents.adapters.data_model import (
     ImageDataModel,
     TableDataModel,
     KaggleDataModel,
+    DocumentDataModel,
 )
 from real_agents.data_agent import (
     DataSummaryExecutor,
@@ -32,7 +34,8 @@ TABLE_EXTENSIONS = {"csv", "xls", "xlsx", "tsv"}
 DOCUMENT_EXTENSIONS = {"pdf", "doc", "docx", "txt"}
 DATABASE_EXTENSIONS = {"sqlite", "db"}
 IMAGE_EXTENSIONS = {"jpg", "png", "jpeg"}
-ALLOW_EXTENSIONS = TABLE_EXTENSIONS | DOCUMENT_EXTENSIONS | DATABASE_EXTENSIONS | IMAGE_EXTENSIONS
+PDF_EXTENSIONS = {"pdf"}
+ALLOW_EXTENSIONS = TABLE_EXTENSIONS | DOCUMENT_EXTENSIONS | DATABASE_EXTENSIONS | IMAGE_EXTENSIONS | PDF_EXTENSIONS
 
 LOCAL = "local"
 REDIS = "redis"
@@ -127,6 +130,18 @@ def load_grounding_source(file_path: str) -> Any:
             "size": img.size,
             "mode": img.mode,
         }
+    elif suffix == ".pdf":
+        brut_doc = PdfReader(file_path)
+        grounding_source = {
+            "plain_text": "".join(f'-PAGE_{str(i)}-{page.extract_text()}' for i, page in enumerate(brut_doc.pages)),
+            "num_pages": len(brut_doc.pages),
+            "metadata": {
+                'author': brut_doc.metadata.author,
+                'year': brut_doc.metadata.creation_date.year,
+                'title': brut_doc.metadata.title,
+                'subject': brut_doc.metadata.subject,
+            }
+        }
     else:
         raise ValueError("File type not allowed to be set as grounding source")
     return grounding_source
@@ -146,6 +161,8 @@ def get_data_model_cls(file_path: str) -> DataModel:
         data_model_cls = DatabaseDataModel
     elif suffix == ".jpeg" or suffix == ".png" or suffix == ".jpg":
         data_model_cls = ImageDataModel
+    elif suffix == ".pdf":
+        data_model_cls = DocumentDataModel    
     else:
         raise ValueError("File type not allowed to be set as grounding source")
     return data_model_cls

@@ -46,3 +46,4 @@ tqdm~=4.65.0
 types-requests==0.1.13
 typing-inspect==0.8.0
 typing_extensions==4.5.0
+PyPDF2
