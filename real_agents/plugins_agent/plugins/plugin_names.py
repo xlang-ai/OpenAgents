@@ -237,3 +237,4 @@ class PluginName(str, Enum):
     SUPERCHARGEMYEV = "SuperchargeMyEV"
     DR_THOTHS_TAROT = "Dr_Thoths_Tarot"
     WISHBUCKET = "wishbucket"
+    BOCHASEARCH = "BoChaSearch"
