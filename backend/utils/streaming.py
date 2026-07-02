@@ -1,8 +1,11 @@
+import ipaddress
 import json
 import re
+import socket
 import struct
 import time
 from typing import Any, Dict, List, Optional, Literal
+from urllib.parse import urlparse
 import multiprocess
 import requests
 from bs4 import BeautifulSoup
@@ -43,8 +46,48 @@ def extract_links(text: str) -> list[Any]:
     return links
 
 
+# Blocked networks for SSRF prevention
+_BLOCKED_NETWORKS = [
+    ipaddress.ip_network('10.0.0.0/8'),
+    ipaddress.ip_network('172.16.0.0/12'),
+    ipaddress.ip_network('192.168.0.0/16'),
+    ipaddress.ip_network('169.254.0.0/16'),
+    ipaddress.ip_network('127.0.0.0/8'),
+    ipaddress.ip_network('::1/128'),
+    ipaddress.ip_network('fc00::/7'),
+    ipaddress.ip_network('fe80::/10'),
+    ipaddress.ip_network('fd00:ec2::/128'),
+]
+_BLOCKED_HOSTNAMES = {'metadata.google.internal', 'metadata.azure.com'}
+
+
+def _is_url_safe(url: str) -> bool:
+    """Check if a URL points to a non-private, non-metadata destination."""
+    try:
+        parsed = urlparse(url)
+        hostname = parsed.hostname
+        if not hostname:
+            return False
+        if hostname in _BLOCKED_HOSTNAMES:
+            return False
+        try:
+            resolved = socket.getaddrinfo(hostname, None, socket.AF_UNSPEC, socket.SOCK_STREAM)
+        except socket.gaierror:
+            return False
+        for family, _, _, _, sockaddr in resolved:
+            ip = ipaddress.ip_address(sockaddr[0])
+            for network in _BLOCKED_NETWORKS:
+                if ip in network:
+                    return False
+        return True
+    except Exception:
+        return False
+
+
 # function to extract image links from a webpage
 def extract_title_and_image_links(url: str) -> (tuple[Literal[''], list] | tuple[Any, list]):
+    if not _is_url_safe(url):
+        return "", []
     try:
         res = requests.get(url, timeout=3)
         if res.status_code != 200:
