@@ -168,29 +168,9 @@ pip install InstructorEmbedding
 cd ..
 ```
 
-**5.3 Code Execution Docker (Necessary if you want the code executed in sandbox)**
+**5.3 Python execution configuration**
 
-If you want to start sandbox docker instead of on local OS to execute Python programs safely and avoid co-current conflicts caused by multi-users/kernels, follow the instructions below.
-
-First, start the Python code interpreter docker we built for the data agent(see instructions under [code-interpreter-docker](https://github.com/xlang-ai/xlang-code-interpreter)) repository. The default docker port is `localhost:8100`.
-```bash
-docker pull xlanglab/xlang-code-interpreter-python
-docker run -d --rm \
-    --name codeint \
-    --env-file real_agents/data_agent/.code_interpreter_docker_env \
-    --mount type=bind,source=<PATH_TO_PROJECT>/backend/data,target=/home \
-    -p 8100:8100 \
-    --ip=10.1.1.2 \
-    --cap-add SYS_RESOURCE \
-    --cap-add SYS_PTRACE \
-    --cap-add NET_ADMIN \
-    xlanglab/xlang-code-interpreter-python
-```
-
-Next, set code execution mode to docker ("local" by default):
-```bash
-export CODE_EXECUTION_MODE="docker"
-```
+See [Python execution trust boundary](#python-execution-trust-boundary) below before enabling generated Python. The default is now `disabled`, including when using the setup script.
 </details>
 
 
@@ -204,3 +184,124 @@ Now you feel free to start the platform on default port 8000, using the followin
 export FLASK_APP=backend.main.py
 flask run -p 8000
 ```
+
+## Python execution trust boundary
+
+**Migration:** Python execution is now **disabled by default**, both from source and in
+Compose. Existing deployments that explicitly set `CODE_EXECUTION_MODE=local` must
+also acknowledge the risk with `ALLOW_UNSAFE_LOCAL_CODE_EXECUTION=true`; otherwise
+startup fails with an explanation. Unknown or empty modes are rejected.
+
+This is a demo/development platform. Neither local mode nor the legacy remote
+interpreter is a supported security boundary for hostile, multi-tenant use.
+A trusted user can still submit untrusted documents or receive malicious model
+output. Treat generated code and every data source that can influence it as code
+running with the selected interpreter's privileges.
+
+| Mode | Behavior | Intended use |
+| --- | --- | --- |
+| `disabled` (default) | Returns a clear tool error without executing generated Python or contacting the interpreter | Start the platform without granting generated Python execution privileges |
+| `local` + explicit acknowledgement | Runs IPython inside the Flask process | Trusted, single-user development only |
+| `docker` | Sends code to the separately configured interpreter service; never falls back to local execution | Existing operator-managed installations after reviewing isolation |
+
+Disabling generated Python disables PythonCodeBuilder analysis and Python-generated
+Echarts/plots. It does not disable the entire Data Agent or certify other features
+as safe: SQL execution, file parsing/uploads, plugin tools and web actions retain
+their existing behavior and require separate review. A tool failure is returned
+through the existing result format so the UI can show why Python is unavailable.
+
+### Trusted local development
+
+From the project root, after the normal dependency/database setup:
+
+```bash
+export CODE_EXECUTION_MODE=local
+export ALLOW_UNSAFE_LOCAL_CODE_EXECUTION=true
+export FLASK_APP=backend.main.py
+flask run --host=127.0.0.1 -p 8000
+```
+
+Or for Compose (the variables are explicitly forwarded to the backend container):
+
+```bash
+CODE_EXECUTION_MODE=local ALLOW_UNSAFE_LOCAL_CODE_EXECUTION=true docker compose up -d
+```
+
+Local execution retains imports, uploaded-file access, dataframe analysis and chart
+outputs. It also has access to backend credentials, the whole data volume, the
+network and a shared IPython namespace. It changes the process working directory
+and is not thread-safe. The acknowledgement and startup warning are safeguards
+against accidental configuration, **not** restrictions on already-running code.
+Do not expose this mode to untrusted users, even if the backend itself is in Docker.
+
+To turn Python execution off again, set `CODE_EXECUTION_MODE=disabled` and restart
+(or recreate the Compose backend). Environment changes require a restart.
+
+### Existing remote interpreter deployments
+
+`docker` is the historical name for the HTTP/Jupyter interpreter integration.
+It separates generated Python from the Flask process, but is not automatically a
+secure sandbox. The legacy example shares the entire `backend-data` volume,
+uses a shared service/network, and asks for `SYS_RESOURCE`, `SYS_PTRACE` and
+`NET_ADMIN`. The interpreter's own README documents Linux/x86 architecture
+constraints in its resource limiter. Do not enable it blindly on macOS/ARM or
+assume different kernels provide tenant isolation.
+
+For an existing, reviewed interpreter, configure the backend with:
+
+```bash
+export CODE_EXECUTION_MODE=docker
+export CODE_INTER_SERVER=127.0.0.1  # hostname only; the client uses HTTP port 8100
+export REDIS_SERVER=127.0.0.1
+```
+
+When the backend is in Compose, use the service hostname `code_interpreter`
+instead of `127.0.0.1`, and deliberately enable/provision that service (the legacy
+example remains commented out in `docker-compose.yml`). Mount the intended data
+at `/home` as required by that service, and ensure Redis and the backend kernel
+publisher are running. Do not pass backend API keys or mount the Docker socket
+into the interpreter. Keep port 8100 private. A failed remote execution is an
+error; the application does not retry it in the Flask process. Existing remote
+queue/HTTP waits are not hardened by this change.
+
+The legacy interpreter and deployment instructions live in
+[xlang-code-interpreter](https://github.com/xlang-ai/xlang-code-interpreter).
+Its source was reviewed for this change, but its image and OS-level isolation
+have not been certified. This is why this patch defaults to **disabled**, rather
+than automatically enabling that service or adding an unverified new runtime.
+
+### Before accepting untrusted users or content
+
+The shipped Compose configuration binds frontend and backend ports to
+`127.0.0.1`. Loopback binding reduces accidental exposure; it is not authentication,
+and local programs, browsers, proxies or tunnels can still reach these ports.
+Changing a frontend endpoint does not itself secure a network deployment.
+
+A future supported untrusted execution service needs authenticated/authorized
+requests and tenant ownership checks; separate per-tenant/job files and lifetimes;
+no backend secrets or shared sensitive mounts; restricted egress and access to
+metadata/internal services; enforced CPU, memory, process, disk and time limits;
+and a reviewed container/VM security boundary with appropriate kernel controls.
+The current shared interpreter should not be advertised as satisfying these
+requirements without independent verification.
+
+`check_python_syntax()` only reports syntax errors (skipping IPython line magics).
+It does not restrict imports or calls, and AST parsing, deny-lists and model
+refusals are not substitutes for isolation. The previous `check_danger_code()`
+name and always-safe flag have been removed to avoid implying otherwise.
+
+### Targeted regression checks
+
+The focused suite runs without an LLM key, database or Docker daemon. It loads
+the actual evaluator and Flask configuration without their packages' eager
+imports of unrelated integrations. Local smoke checks execute real IPython in a
+temporary data directory; remote protocol tests mock only Redis/HTTP.
+
+```bash
+python -m pip install -r tests/requirements-execution.txt
+python -m pytest -q tests/test_python_execution_policy.py
+```
+
+These checks cover opt-in/denial, direct evaluator entry points, no local fallback,
+arithmetic, CSV/dataframe operations, chart outputs and failure cleanup. They do
+not replace a live full-stack Docker/LLM test or an isolation assessment.

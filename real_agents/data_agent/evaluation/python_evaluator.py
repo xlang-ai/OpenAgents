@@ -13,6 +13,12 @@ from loguru import logger
 from IPython.core.interactiveshell import InteractiveShell
 from IPython.core.getipython import get_ipython
 from IPython.utils.capture import capture_output
+from real_agents.execution_policy import (
+    DEFAULT_CODE_EXECUTION_MODE,
+    DISABLED_EXECUTION_MESSAGE,
+    LOCAL_EXECUTION_WARNING,
+    validate_code_execution_mode,
+)
 
 
 # subscribed channels
@@ -23,24 +29,23 @@ COMPLETE_EVENT = "job_completed"
 ERROR_PREFIX = "[ERROR]: "
 
 
-def check_danger_code(code):
+def check_python_syntax(code):
+    """Return a syntax error, if any. This does NOT check safety or restrict Python.
+
+    IPython line magics are skipped for parsing only; imports, calls and magics
+    remain unrestricted when execution has been explicitly enabled.
+    """
     code_line = []
     for line in code.split("\n"):
         if not line.startswith("%"):
             code_line.append(line)
     code = "\n".join(code_line)
 
-    def check_imports(code):
-        ast_failed = False
-        try:
-            tree = ast.parse(code)
-        except Exception as e:
-            ast_failed = str(e)
-            return ast_failed
-        return ast_failed
-
-    ast_failed = check_imports(code)
-    return True, ast_failed, []
+    try:
+        ast.parse(code)
+    except SyntaxError as e:
+        return str(e)
+    return None
 
 
 class DisplayData(BaseModel):
@@ -69,9 +74,23 @@ class PythonEvaluator:
     base_url = "http://{0}:8100".format(os.getenv("CODE_INTER_SERVER"))
     r: redis.Redis = redis.Redis(host=os.getenv("REDIS_SERVER"), port=6379, decode_responses=True)
 
-    def __init__(self, code_execution_mode: str = "local", jupyter_kernel_pool: Optional[Any] = None):
-        self.code_execution_mode = code_execution_mode
+    def __init__(self, code_execution_mode: str = DEFAULT_CODE_EXECUTION_MODE, jupyter_kernel_pool: Optional[Any] = None):
+        self.code_execution_mode = validate_code_execution_mode(code_execution_mode)
         self.jupyter_kernel_pool = jupyter_kernel_pool
+        if self.code_execution_mode == "local":
+            logger.warning(LOCAL_EXECUTION_WARNING)
+
+    def _execution_error(self, required_mode: str):
+        """Guard direct method calls as well as run(); never fall back to local."""
+        try:
+            mode = validate_code_execution_mode(self.code_execution_mode)
+        except ValueError as e:
+            return {"success": False, "error_message": f"{ERROR_PREFIX}{e}"}
+        if mode == "disabled":
+            return {"success": False, "error_message": f"{ERROR_PREFIX}{DISABLED_EXECUTION_MESSAGE}"}
+        if mode != required_mode:
+            return {"success": False, "error_message": f"{ERROR_PREFIX}{required_mode} execution is not enabled"}
+        return None
 
     @staticmethod
     def parse_command(program: str) -> List[str]:
@@ -80,13 +99,17 @@ class PythonEvaluator:
         return program_lines
 
     def run_program_local(self, program: str, user_id: Optional[str] = "u" * 24):
-        """Run python program on the local machine using Ipython shell."""
-        is_safe, ast_failed, danger_pcks = check_danger_code(program)
-        if ast_failed != False:
+        """Run unrestricted Python in-process, for explicitly trusted local use."""
+        policy_error = self._execution_error("local")
+        if policy_error is not None:
+            return policy_error
+        ast_failed = check_python_syntax(program)
+        if ast_failed is not None:
             return {
                 "success": False,
                 "error_message": f"{ERROR_PREFIX}Error Code Parsing, please check code grammar!\n{ast_failed}",
             }
+        previous_directory = os.getcwd()
         try:
             # Run code using local ipython shell
             # Change working dir to data directory to load from pretty path
@@ -99,9 +122,6 @@ class PythonEvaluator:
                 ip = get_ipython()
                 code = "%matplotlib inline\n" + program  # magic command to display matplotlib plots
                 result = ip.run_cell(code)
-
-            # Change working dir to project root
-            os.chdir("../../../")
 
             if result.success:
                 return {
@@ -133,6 +153,8 @@ class PythonEvaluator:
                 "success": False,
                 "error_message": f"{ERROR_PREFIX}{str(e)}",
             }
+        finally:
+            os.chdir(previous_directory)
 
     def _apply_for_kernel(self, kernel_id: Optional[str], user_id: str, chat_id: str):
         """Apply for a kernel in docker to run program."""
@@ -188,14 +210,12 @@ class PythonEvaluator:
         user_id: Optional[str] = "u" * 24,
         chat_id: Optional[str] = "c" * 24,
     ):
-        """Run python program on the docker container(jupyter client)."""
-        is_safe, ast_failed, danger_pcks = check_danger_code(program)
-        if not is_safe:
-            return {
-                "success": False,
-                "error_message": f"{ERROR_PREFIX}Unsafe Code Detected {str(danger_pcks)}, Execution Denied!",
-            }
-        elif ast_failed != False:
+        """Run Python through the operator-configured remote interpreter."""
+        policy_error = self._execution_error("docker")
+        if policy_error is not None:
+            return policy_error
+        ast_failed = check_python_syntax(program)
+        if ast_failed is not None:
             return {
                 "success": False,
                 "error_message": f"{ERROR_PREFIX}Error Code Parsing, please check code grammar!\n{ast_failed}",
@@ -309,6 +329,10 @@ class PythonEvaluator:
         chat_id: Optional[str] = "c" * 24,
     ) -> Any:
         """run generated code in certain environment"""
+
+        policy_error = self._execution_error(self.code_execution_mode)
+        if policy_error is not None:
+            return policy_error
 
         lines_code = self.parse_command(program)
         program = "\n".join(lines_code)

@@ -7,6 +7,7 @@ from real_agents.adapters.memory import ReadOnlySharedStringMemory
 from real_agents.adapters.schema import SQLDatabase
 from real_agents.data_agent.python.base import PythonChain
 from real_agents.data_agent.sql.base import SQLDatabaseChain
+from real_agents.execution_policy import DEFAULT_CODE_EXECUTION_MODE
 
 
 class CodeGenerationExecutor:
@@ -54,7 +55,7 @@ class CodeGenerationExecutor:
         grounding_source: Optional[Union[List[TableDataModel], DatabaseDataModel, ImageDataModel]] = None,
         user_id: str = None,
         chat_id: str = None,
-        code_execution_mode: str = "local",
+        code_execution_mode: str = DEFAULT_CODE_EXECUTION_MODE,
         jupyter_kernel_pool: Any = None,
         return_intermediate_steps: bool = True,
         return_direct: bool = True,

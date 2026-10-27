@@ -31,6 +31,7 @@ from real_agents.adapters.interactive_executor import initialize_agent
 from real_agents.data_agent import CodeGenerationExecutor, KaggleDataLoadingExecutor
 from real_agents.adapters.memory import ConversationReActBufferMemory, \
     ReadOnlySharedStringMemory
+from real_agents.execution_policy import DEFAULT_CODE_EXECUTION_MODE
 
 
 def create_interaction_executor(
@@ -41,7 +42,7 @@ def create_interaction_executor(
         llm_name: str,
         user_id: str = None,
         chat_id: str = None,
-        code_execution_mode: str = "local",
+        code_execution_mode: str = DEFAULT_CODE_EXECUTION_MODE,
 ) -> AgentExecutor:
     """Creates an agent executor for interaction.
 

@@ -17,13 +17,15 @@ services:
     build: ./frontend
     image: openagents-frontend
     ports:
-      - 3000:3000
+      - "127.0.0.1:3000:3000"
     depends_on:
       - redis
       - mongodb
       - backend
 
-# Necessary if you want the code executed in sandbox
+# Legacy remote interpreter, opt-in only. This is NOT a verified untrusted-user
+# sandbox: it shares backend-data and requires extra privileges. Read
+# backend/README.md#python-execution-trust-boundary before enabling it.
   # code_interpreter:
   #   image: xlanglab/xlang-code-interpreter-python
   #   env_file:
@@ -39,7 +41,7 @@ services:
     build: ./
     image: openagents-backend
     ports:
-      - 8000:8000
+      - "127.0.0.1:8000:8000"
     depends_on:
       - redis
       - mongodb
@@ -51,7 +53,8 @@ services:
       - REDIS_SERVER=redis
       - MONGO_SERVER=mongodb
       - CODE_INTER_SERVER=code_interpreter
-      - CODE_EXECUTION_MODE=local #if code_interpreter running set docker,else local
+      - CODE_EXECUTION_MODE=${CODE_EXECUTION_MODE:-disabled}
+      - ALLOW_UNSAFE_LOCAL_CODE_EXECUTION=${ALLOW_UNSAFE_LOCAL_CODE_EXECUTION:-false}
     # if you want to use gpu, uncomment the following lines
     # deploy:
     #   resources:

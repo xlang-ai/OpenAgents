@@ -168,6 +168,14 @@ Witness the full potential of Web Agent in these [use cases](https://docs.xlang.
 
 We've released the OpenAgents platform code. Feel free to deploy on your own localhost!
 
+> **Execution safety / migration:** Generated Python is disabled by default.
+> Trusted single-user development requires both `CODE_EXECUTION_MODE=local` and
+> `ALLOW_UNSAFE_LOCAL_CODE_EXECUTION=true`. The legacy Docker interpreter is not a
+> verified sandbox for untrusted users. Read the [execution trust boundary and
+> migration guide](backend/README.md#python-execution-trust-boundary) before enabling
+> Python analysis or charts. Compose ports bind to localhost by default.
+
+
 Here is a brief system design of OpenAgents:
 <div align="center">
     <img src="pics/system_design.png"/>
@@ -193,7 +201,7 @@ Please follow the following steps to use the docker-compose to deploy the OpenAg
 ENV KAGGLE_USER="" \
     KAGGLE_KEY="" 
 ```
-2. If you are not running locally, you need to modify the accessible IP to the backend service in [frontend/Dockerfile](frontend/Dockerfile#L15)
+2. The default deployment is localhost-only. Before any network deployment, review the [security requirements](backend/README.md#before-accepting-untrusted-users-or-content). A changed frontend endpoint alone is insufficient; if you deliberately configure a protected deployment, update the backend endpoint in [frontend/Dockerfile](frontend/Dockerfile#L15) as appropriate.
 ```
 ENV NEXT_PUBLIC_BACKEND_ENDPOINT http://x.x.x.x:8000
 ``` 
