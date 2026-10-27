@@ -24,6 +24,7 @@ from real_agents.data_agent.python.echarts_prompt import E_SYSTEM_PROMPT, ECHART
 from real_agents.data_agent.python.system_prompt import SYSTEM_PROMPT
 from real_agents.data_agent.python.python_prompt import USER_PROMPT
 from real_agents.adapters.llm import LLMChain
+from real_agents.execution_policy import DEFAULT_CODE_EXECUTION_MODE
 
 
 class PythonChain(Chain, BaseModel):
@@ -38,7 +39,7 @@ class PythonChain(Chain, BaseModel):
     python_locals: Optional[Dict[str, Any]] = None
     output_key: str = "result"  #: :meta private:
     return_intermediate_steps: bool = False
-    code_execution_mode: str = "local"
+    code_execution_mode: str = DEFAULT_CODE_EXECUTION_MODE
     jupyter_kernel_pool: Optional[Any] = None
     reference_code: str = ""
 

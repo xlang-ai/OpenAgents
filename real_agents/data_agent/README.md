@@ -12,3 +12,11 @@
 - 📊 **Visualize**: Represent data in a clear and insightful manner.
 
 With its proficiency in writing and executing code, Data Agent simplifies a wide range of data-centric tasks. Discover its potential through various [use cases](https://docs.xlang.ai/use-cases/data-agent).
+
+
+Generated Python execution is **disabled by default**, including when constructing
+`PythonEvaluator`, `PythonChain` or `CodeGenerationExecutor` directly. Python analysis
+and Python-generated charts require an operator-selected mode. Local execution
+runs with backend privileges and requires explicit acknowledgement; the legacy
+Docker interpreter is not a verified untrusted-user sandbox. See the
+[execution trust boundary and migration guide](../../backend/README.md#python-execution-trust-boundary).
